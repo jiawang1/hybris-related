@@ -1,0 +1,52 @@
+
+# virtual machine crash logs #
+**/hs_err_pid*
+
+# hybris installation #
+hybris/
+
+# local files #
+local/
+
+# auto generated files #
+ext/**/build.xml
+ext/**/extensioninfo.xsd
+ext/**/platformhome.properties
+ext/**/classes/
+ext/**/eclipsebin/
+ext/**/gensrc/
+ext/**/hmc/bin/
+ext/**/hmc/classes/
+ext/**/hmc/resources/hmc.xsd
+ext/**/resources/*.build.number
+ext/**/resources/beans.xsd
+ext/**/resources/items.xsd
+ext/**/web/addonsrc/
+ext/**/web/commonwebsrc/
+ext/**/web/testclasses/
+ext/**/web/webroot/WEB_INF/classes/
+ext/**/.settings/
+ext/**/.externalToolBuilders/
+ext/**/*-testclasses.xml
+ext/**/*-webtestclasses.xml
+
+# multiple languages files #
+ext/**/*_de.properties
+ext/**/*_en.properties
+ext/**/*_es.properties
+ext/**/*_es_CO.properties
+ext/**/*_fr.properties
+ext/**/*_hi.properties
+ext/**/*_id.properties
+ext/**/*_it.properties
+ext/**/*_ja.properties
+ext/**/*_ko.properties
+ext/**/*_pt.properties
+ext/**/*_ru.properties
+
+ext/**/*_de.impex
+ext/**/*_en.impex
+ext/**/*_ja.impex
+
+# other #
+velocity.log
