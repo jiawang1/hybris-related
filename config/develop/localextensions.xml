@@ -53,6 +53,16 @@
         <extension name="cscockpit" />
         
         
+        <!-- ext-anguo -->
+        <extension name="anguofulfilmentprocess" />
+        <extension name="anguocore" />
+        <extension name="anguoinitialdata" />
+        <extension name="anguofacades" />
+        <extension name="anguotest" />
+        <extension name="anguostorefront" />
+        <extension name="anguocockpits" />
+        
+
         <!-- ext-addon -->
         <extension name="addonsupport" />
         
