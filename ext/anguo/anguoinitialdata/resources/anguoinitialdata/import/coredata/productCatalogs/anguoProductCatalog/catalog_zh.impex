@@ -7,3 +7,4 @@ $lang=zh
 
 # Create Catalog
 UPDATE Catalog;id[unique=true];name[lang=$lang]
+;anguoProductCatalog;安国药材目录
