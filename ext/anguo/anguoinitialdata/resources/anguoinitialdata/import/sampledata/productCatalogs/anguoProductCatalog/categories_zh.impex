@@ -1,0 +1,41 @@
+# ImpEx for Importing Categories
+
+# Macros / Replacement Parameter definitions
+$productCatalog=anguoProductCatalog
+$productCatalogName=安国药材目录
+
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Online'])[unique=true,default=$productCatalog:Online]
+
+# Language
+$lang=zh
+
+
+# Create Categories
+UPDATE Category;code[unique=true];$catalogVersion;name[lang=$lang]
+#LV1
+;药材;;药材
+#LV2
+;根茎类;;根茎类
+;果实籽仁类;;果实籽仁类
+;花类;;花类
+;全草类;;全草类
+;叶类;;叶类
+;树皮类;;树皮类
+;藤木类;;藤木类
+;树脂类;;树脂类
+;菌藻类;;菌藻类
+;动物类;;动物类
+;矿物类;;矿物类
+#LV3
+;人参;;人参
+;白芍;;白芍
+;川贝母;;川贝母
+;王不留行;;王不留行
+;莲子;;莲子
+;陈皮;;陈皮
+;艾叶;;艾叶
+;满山红;;满山红
+;荷叶;;荷叶
+
+
+ 
