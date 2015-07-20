@@ -16,15 +16,22 @@ package com.tasly.anguo.initialdata.setup;
 import de.hybris.platform.commerceservices.dataimport.impl.CoreDataImportService;
 import de.hybris.platform.commerceservices.dataimport.impl.SampleDataImportService;
 import de.hybris.platform.commerceservices.setup.AbstractSystemSetup;
+import de.hybris.platform.commerceservices.setup.data.ImportData;
+import de.hybris.platform.commerceservices.setup.events.CoreDataImportedEvent;
+import de.hybris.platform.commerceservices.setup.events.SampleDataImportedEvent;
 import de.hybris.platform.core.initialization.SystemSetup;
 import de.hybris.platform.core.initialization.SystemSetup.Process;
 import de.hybris.platform.core.initialization.SystemSetup.Type;
 import de.hybris.platform.core.initialization.SystemSetupContext;
 import de.hybris.platform.core.initialization.SystemSetupParameter;
 import de.hybris.platform.core.initialization.SystemSetupParameterMethod;
+
 import com.tasly.anguo.initialdata.constants.AnguoInitialDataConstants;
+import com.tasly.anguo.initialdata.service.AnguoCoreDataImportService;
+import com.tasly.anguo.initialdata.service.AnguoSampleDataImportService;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -45,9 +52,10 @@ public class InitialDataSystemSetup extends AbstractSystemSetup
 	private static final String IMPORT_CORE_DATA = "importCoreData";
 	private static final String IMPORT_SAMPLE_DATA = "importSampleData";
 	private static final String ACTIVATE_SOLR_CRON_JOBS = "activateSolrCronJobs";
+	private static final String PRODUCT_CATALOG_NAME = "anguo";
 
-	private CoreDataImportService coreDataImportService;
-	private SampleDataImportService sampleDataImportService;
+	private AnguoCoreDataImportService coreDataImportService;
+	private AnguoSampleDataImportService sampleDataImportService;
 
 	/**
 	 * Generates the Dropdown and Multi-select boxes for the project data import
@@ -89,43 +97,45 @@ public class InitialDataSystemSetup extends AbstractSystemSetup
 	@SystemSetup(type = Type.PROJECT, process = Process.ALL)
 	public void createProjectData(final SystemSetupContext context)
 	{
-		/*
-		 * Add import data for each site you have configured
-		 * 
-		 * final List<ImportData> importData = new ArrayList<ImportData>();
-		 *
-		 * final ImportData sampleImportData = new ImportData();
-		 * sampleImportData.setProductCatalogName(SAMPLE_PRODUCT_CATALOG_NAME);
-		 * sampleImportData.setContentCatalogNames(Arrays.asList(SAMPLE_CONTENT_CATALOG_NAME));
-		 * sampleImportData.setStoreNames(Arrays.asList(SAMPLE_STORE_NAME));
-		 * importData.add(sampleImportData);
-		 * 
-		 * getCoreDataImportService().execute(this, context, importData);
-		 * getEventService().publishEvent(new CoreDataImportedEvent(context, importData));
-		 *
-		 * getSampleDataImportService().execute(this, context, importData);
-		 * getEventService().publishEvent(new SampleDataImportedEvent(context, importData));
-		 */
+		
+		  //Add import data for each site you have configured
+
+		  final List<ImportData> importData = new ArrayList<ImportData>();
+		  final ImportData sampleImportData = new ImportData();
+		  sampleImportData.setProductCatalogName(PRODUCT_CATALOG_NAME);
+		  sampleImportData.setContentCatalogNames(Arrays.asList("SAMPLE_CONTENT_CATALOG_NAME"));
+		  sampleImportData.setStoreNames(Arrays.asList("SAMPLE_STORE_NAME"));
+		  importData.add(sampleImportData);
+		  
+		  LOG.info("import core data for anguo------------");
+		  getCoreDataImportService().execute(this, context, importData);
+		  LOG.info("end of import core data for anguo-----------------");
+		  getEventService().publishEvent(new CoreDataImportedEvent(context, importData));
+		  LOG.info("import sample data for anguo+++++++++++++++");
+		  getSampleDataImportService().execute(this, context, importData);
+		  LOG.info("end of import sample data for anguo+++++");
+		  getEventService().publishEvent(new SampleDataImportedEvent(context, importData));
+		  
 	}
 
-	public CoreDataImportService getCoreDataImportService()
+	public AnguoCoreDataImportService getCoreDataImportService()
 	{
 		return coreDataImportService;
 	}
 
 	@Required
-	public void setCoreDataImportService(final CoreDataImportService coreDataImportService)
+	public void setCoreDataImportService(final AnguoCoreDataImportService coreDataImportService)
 	{
 		this.coreDataImportService = coreDataImportService;
 	}
 
-	public SampleDataImportService getSampleDataImportService()
+	public AnguoSampleDataImportService getSampleDataImportService()
 	{
 		return sampleDataImportService;
 	}
 
 	@Required
-	public void setSampleDataImportService(final SampleDataImportService sampleDataImportService)
+	public void setSampleDataImportService(final AnguoSampleDataImportService sampleDataImportService)
 	{
 		this.sampleDataImportService = sampleDataImportService;
 	}

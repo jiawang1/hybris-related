@@ -22,7 +22,14 @@
     <context:annotation-config/>
 
 	<!-- System Setup -->
-
+    <bean id="anguoCoreDataImportService" 
+    	  class="com.tasly.anguo.initialdata.service.AnguoCoreDataImportService" parent="defaultCoreDataImportService"></bean>
+    <alias name="anguoCoreDataImportService" alias="coreDataImportService"/>
+    
+    <bean id="anguoSampleDataImportService" 
+    	  class="com.tasly.anguo.initialdata.service.AnguoSampleDataImportService" parent="defaultSampleDataImportService"></bean>
+	<alias name="anguoSampleDataImportService" alias="sampleDataImportService"/>
+	
 	<bean id="yAcceleratorInitialDataSystemSetup"
 	      class="com.tasly.anguo.initialdata.setup.InitialDataSystemSetup"
 	      parent="abstractCoreSystemSetup">

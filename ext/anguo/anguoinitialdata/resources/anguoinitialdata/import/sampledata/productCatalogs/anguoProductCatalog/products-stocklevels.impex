@@ -1,15 +1,12 @@
 # ImpEx for Importing Products Stock Levels and Warehouses
 
 # Macros / Replacement Parameter definitions
-$productCatalog=__PRODUCT_CATALOG_NAME__
-$productCatalogName=__PRODUCT_CATALOG_FULL_NAME__
-$vendor=__VENDOR_NAME__
+$productCatalog=anguoProductCatalog
+$productCatalogName=安国药材目录
 
-$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Online'])[unique=true,default=$productCatalog:Online]
 
 
-INSERT_UPDATE Vendor;code[unique=true]
-#;$vendor
 
 INSERT_UPDATE Warehouse;code[unique=true];vendor(code);default[default=true]
 
