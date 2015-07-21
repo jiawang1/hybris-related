@@ -16,8 +16,10 @@
 		</c:forEach>
 	</select>
 	<select name="citySelector" id="citySelector">
+		<option>--</option>
 	</select>
 	<select name="districtSelector" id="districtSelector">
+		<option>--</option>
 	</select>
 </body>
 </html>
