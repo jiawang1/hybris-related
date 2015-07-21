@@ -112,6 +112,42 @@
 					</attribute>
 				</attributes>
 			</itemtype>
+			<itemtype code="Customer" autocreate="false" generate="false">
+				<description>Extending Customer type with additional attributes.</description>
+				<attributes>
+					<attribute qualifier="gender" type="Gender">
+						<modifiers read="true" write="true" search="true"
+							optional="true" />
+						<persistence type="property" />
+						<description>It holds information about customer gender (i.e. Male, Female, Unknown.)</description>
+					</attribute>
+					<attribute qualifier="companyName" type="localized:java.lang.String">
+						<description>Company name of customer.</description>
+						<modifiers/>
+						<persistence type="property"/>
+					</attribute>
+					<attribute qualifier="position" type="localized:java.lang.String">
+						<description>The position of customer in company.</description>
+						<modifiers/>
+						<persistence type="property"/>
+					</attribute>
+					<attribute qualifier="idNumber" type="localized:java.lang.String">
+						<description>ID Number.</description>
+						<modifiers encrypted="true"/>
+						<persistence type="property"/>
+					</attribute>
+					<attribute qualifier="idName" type="localized:java.lang.String">
+						<description>ID Name.</description>
+						<modifiers/>
+						<persistence type="property"/>
+					</attribute>
+					<attribute qualifier="identified" type="localized:java.lang.Boolean">
+						<description>Whether pass the identification.</description>
+						<modifiers/>
+						<persistence type="property"/>
+					</attribute>										
+				</attributes>
+			</itemtype>
 		</typegroup>
 
 	</itemtypes>

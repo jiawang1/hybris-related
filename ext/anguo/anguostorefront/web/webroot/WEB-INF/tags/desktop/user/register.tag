@@ -14,14 +14,17 @@
 	<div class="description"><spring:theme code="register.description"/></div>
 
 
-	<form:form method="post" commandName="registerForm" action="${action}">
+	<form:form method="post" commandName="individualRegisterForm" action="${action}">
 		<div class="form_field-elements js-recaptcha-captchaaddon">
-			<formElement:formSelectBox idKey="register.title" labelKey="register.title" path="titleCode" mandatory="true" skipBlank="false" skipBlankMessageKey="form.select.empty" items="${titles}"/>
-			<formElement:formInputBox idKey="register.firstName" labelKey="register.firstName" path="firstName" inputCSS="text" mandatory="true"/>
-			<formElement:formInputBox idKey="register.lastName" labelKey="register.lastName" path="lastName" inputCSS="text" mandatory="true"/>
-			<formElement:formInputBox idKey="register.email" labelKey="register.email" path="email" inputCSS="text" mandatory="true"/>
+			<!--<formElement:formSelectBox idKey="register.title" labelKey="register.title" path="titleCode" mandatory="true" skipBlank="false" skipBlankMessageKey="form.select.empty" items="${titles}"/>-->
+			<!--<formElement:formInputBox idKey="register.firstName" labelKey="register.firstName" path="firstName" inputCSS="text" mandatory="true"/>
+			<formElement:formInputBox idKey="register.lastName" labelKey="register.lastName" path="lastName" inputCSS="text" mandatory="true"/>-->
+			<formElement:formInputBox idKey="register.username" labelKey="register.username" path="userId" inputCSS="text" mandatory="true"/>
 			<formElement:formPasswordBox idKey="password" labelKey="register.pwd" path="pwd" inputCSS="text password strength" mandatory="true"/>
 			<formElement:formPasswordBox idKey="register.checkPwd" labelKey="register.checkPwd" path="checkPwd" inputCSS="text password" mandatory="true"/>
+			<formElement:formInputBox idKey="register.mobile" labelKey="register.mobile" path="mobileNumber" inputCSS="text" mandatory="true"/>
+			<formElement:formInputBox idKey="register.captcha" labelKey="register.captcha" path="captcha" inputCSS="text" mandatory="true"/>
+			
 			<input type="hidden" id="recaptchaChallangeAnswered" value="${requestScope.recaptchaChallangeAnswered}"/>
 
 		</div>
