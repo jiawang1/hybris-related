@@ -45,4 +45,22 @@ public class CityDaoImplTest extends ServicelayerTransactionalTest
 		List<CityModel> citiesOfJiangsu = cityDao.getCitiesByRegion("CN-32");
 		assertEquals(citiesOfJiangsu.size(), 3);
 	}
+	
+	@Test
+	public void getZeroCityByRegion()
+	{
+		List<CityModel> cities = cityDao.getCitiesByRegion("CN-XX");
+		assertEquals(cities.size(), 0);
+	}
+	
+	@Test
+	public void getCityByCode()
+	{
+		CityModel cityBeijing = cityDao.getCityByCode("110100");
+		assertNotNull(cityBeijing);
+		assertEquals(cityBeijing.getName(), "Beijing");
+		
+		CityModel cityNull = cityDao.getCityByCode("XXXXXX");
+		assertNull(cityNull);
+	}
 }

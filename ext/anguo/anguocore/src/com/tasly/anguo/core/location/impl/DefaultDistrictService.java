@@ -26,12 +26,27 @@ public class DefaultDistrictService implements DistrictService {
 		return districtDao.getDistrictsByCityCode(cityCode);
 	}
 
+	/* (non-Javadoc)
+	 * @see com.tasly.anguo.core.location.DistrictService#getDistrictByCode(java.lang.String)
+	 */
+	@Override
+	public DistrictModel getDistrictByCode(String code) {
+		return districtDao.getDistrictByCode(code);
+	}
+
+	/**
+	 * getter
+	 * @return
+	 */
 	public DistrictDao getDistrictDao() {
 		return districtDao;
 	}
 
+	/**
+	 * setter
+	 * @param districtDao
+	 */
 	public void setDistrictDao(DistrictDao districtDao) {
 		this.districtDao = districtDao;
 	}
-
 }

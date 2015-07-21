@@ -1,6 +1,8 @@
 package com.tasly.anguo.core.location.service.impl;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 import java.util.List;
 
@@ -34,5 +36,23 @@ public class CityServiceImplTest extends ServicelayerTransactionalTest {
 		
 		List<CityModel> citiesOfJiangsu = cityService.getCitiesByRegion("CN-32");
 		assertEquals(citiesOfJiangsu.size(), 3);
+	}
+	
+	@Test
+	public void getZeroCityByRegion()
+	{
+		List<CityModel> cities = cityService.getCitiesByRegion("CN-XX");
+		assertEquals(cities.size(), 0);
+	}
+	
+	@Test
+	public void getCityByCode()
+	{
+		CityModel cityBeijing = cityService.getCityByCode("110100");
+		assertNotNull(cityBeijing);
+		assertEquals(cityBeijing.getName(), "Beijing");
+		
+		CityModel cityNull = cityService.getCityByCode("XXXXXX");
+		assertNull(cityNull);
 	}
 }
