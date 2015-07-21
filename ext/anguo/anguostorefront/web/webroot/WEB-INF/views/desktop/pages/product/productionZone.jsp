@@ -12,7 +12,7 @@
 <body>
 	<select name="regionSelector" id="regionSelector">
 		<c:forEach items="${regions}" var="region">
-			<option>${region.isocode }</option>
+			<option value="${region.isocode }">${region.name }</option>
 		</c:forEach>
 	</select>
 	<select name="citySelector" id="citySelector">

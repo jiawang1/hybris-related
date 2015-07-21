@@ -12,8 +12,21 @@ import de.hybris.platform.core.model.c2l.RegionModel;
  *
  */
 public interface RegionService {
-	
-		RegionModel getRegionByCountryAndCode(final String countryCode, final String regionCode);
+	/**
+	 * Find a region under a country and a given code
+	 * 
+	 * @param countryCode
+	 * @param regionCode
+	 * @return
+	 */
+	RegionModel getRegionByCountryAndCode(final String countryCode,
+			final String regionCode);
 
-		List<RegionModel> getRegionsForCountryCode(final String countryCode);
+	/**
+	 * Find all regions under a country
+	 * 
+	 * @param countryCode
+	 * @return
+	 */
+	List<RegionModel> getRegionsForCountryCode(final String countryCode);
 }

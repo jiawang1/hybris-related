@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import org.jboss.logging.Param;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,7 +24,7 @@ import de.hybris.platform.commercefacades.user.data.RegionData;
 import de.hybris.platform.jalo.ConsistencyCheckException;
 
 /**
- * Controller for product details page
+ * Controller for product zone page
  */
 @Controller
 @Scope("tenant")

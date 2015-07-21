@@ -3,7 +3,7 @@
  */
 package com.tasly.anguo.core.location.dao.impl;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import java.util.List;
 
@@ -33,12 +33,30 @@ public class DistrictDaoImplTest extends ServicelayerTransactionalTest {
 	}
 
 	@Test
-	public void getCityByRegion()
+	public void getDistrictByCity()
 	{
-		List<DistrictModel> districtsOfNanjing = districtDao.getDistrictsByCityCode("Nanjing");
+		List<DistrictModel> districtsOfNanjing = districtDao.getDistrictsByCityCode("320100");
 		assertEquals(districtsOfNanjing.size(), 1);
 		
-		List<DistrictModel> districtsOfBeijing = districtDao.getDistrictsByCityCode("Beijing");
+		List<DistrictModel> districtsOfBeijing = districtDao.getDistrictsByCityCode("110100");
 		assertEquals(districtsOfBeijing.size(), 3);
+	}
+	
+	@Test
+	public void getZeroDistrictByCity()
+	{
+		List<DistrictModel> districts = districtDao.getDistrictsByCityCode("XXXXX");
+		assertEquals(districts.size(), 0);
+	}
+	
+	@Test
+	public void getDistrictByCode()
+	{
+		DistrictModel districtHaidian = districtDao.getDistrictByCode("110108");
+		assertNotNull(districtHaidian);
+		assertEquals(districtHaidian.getName(), "Haidian");
+		
+		DistrictModel districtNull = districtDao.getDistrictByCode("XXXXXX");
+		assertNull(districtNull);
 	}
 }

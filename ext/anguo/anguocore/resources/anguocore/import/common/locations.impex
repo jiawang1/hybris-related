@@ -1,9 +1,6 @@
-INSERT_UPDATE Country;isocode[unique=true];active[default=true]
-;CN;true;
-
-INSERT_UPDATE Region;isocode[unique=true];country(isocode);name;active[default=true]
-;CN-11;CN;Beijing;true;
-;CN-32;CN;Jiangsu;true;
+#
+# Import Cities and Districts for China
+#
 
 INSERT_UPDATE City;code[unique=true];region(isocode);name;active[default=true]
 ;110100;CN-11;Beijing;true;

@@ -4,6 +4,7 @@
 package com.tasly.anguo.core.location;
 
 import de.hybris.platform.chinaaccelerator.services.model.location.CityModel;
+
 import java.util.List;
 
 /**
@@ -12,5 +13,17 @@ import java.util.List;
  */
 public interface CityService {
 
+	/**
+	 * Find all cities under a region
+	 * @param regionCode
+	 * @return
+	 */
 	public List<CityModel> getCitiesByRegion(String regionCode);
+
+	/**
+	 * Find city with given code
+	 * @param code
+	 * @return
+	 */
+	public CityModel getCityByCode(String code);
 }
