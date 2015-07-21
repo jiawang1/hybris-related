@@ -118,8 +118,6 @@ public class InitialDataSystemSetup extends AbstractSystemSetup
 		  LOG.info("end of import sample data for anguo+++++");
 		  getEventService().publishEvent(new SampleDataImportedEvent(context, importData));
 		  
-		  executeCatalogSyncJob(context, String.format("%sContentCatalog", CONTENT_CATALOG_NAME));
-		  
 	}
 
 	public AnguoCoreDataImportService getCoreDataImportService()

@@ -15,5 +15,4 @@
 			<cms:component component="${feature}"/>
 		</cms:pageSlot>
 	</div>
-	<div>!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!</div>
 </template:page>

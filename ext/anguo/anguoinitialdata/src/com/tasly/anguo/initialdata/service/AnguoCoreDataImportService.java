@@ -37,6 +37,17 @@ public class AnguoCoreDataImportService extends CoreDataImportService {
 			  for(int i=0; i<contentCatalogList.size();i++){
 				  this.importContentCatalog(extensionName, contentCatalogList.get(i));
 			  }
+			  			  
+			  for (Iterator localIterator = data.getContentCatalogNames().iterator(); localIterator.hasNext();) 
+			  {
+				  String contentCatalogName = (String) localIterator.next();
+
+					systemSetup.logInfo(context, String.format(
+							"Synchronizing content catalog for [%s]",
+							new Object[] { contentCatalogName }));
+					synchronizeContentCatalog(systemSetup, context,
+							(String) contentCatalogName, true);
+			  }
 			  
 			  List<String> storeNameList = data.getStoreNames();			  
 			  for(int i = 0; i < storeNameList.size();i++)
