@@ -69,6 +69,7 @@
         <extension name="anguofacades" />
         <extension name="anguotest" />
         <extension name="anguostorefront" />
+        <extension name="anguoadmin" />
         <extension name="anguocockpits" />
 
 
