@@ -20,4 +20,22 @@
 		<property name="code" type="String"/>
 		<property name="name" type="String"/>
 	</bean>
+	
+	<bean class="com.tasly.anguo.facades.data.CityData" >
+		<property name="storeCount" type="Integer"/>
+		<property name="cityPK" type="Long"/>
+		<property name="cityName" type="String"/>
+		<property name="geoPoint" type="de.hybris.platform.commerceservices.store.data.GeoPoint"/>
+		<property name="code" type="String"/>
+		<property name="name" type="String"/>
+	</bean>
+	
+	<bean class="com.tasly.anguo.facades.data.DistrictData" >
+		<property name="storeCount" type="Integer"/>
+		<property name="districtPK" type="Long"/>
+		<property name="districtName" type="String"/>
+		<property name="geoPoint" type="de.hybris.platform.commerceservices.store.data.GeoPoint"/>
+		<property name="code" type="String"/>
+		<property name="name" type="String"/>
+	</bean>
 </beans>

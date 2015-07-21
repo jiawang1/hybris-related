@@ -36,10 +36,90 @@
 			<value code="YELLOW"/>
 		</enumtype>
 	</enumtypes>
-
+	
+	<relations>
+		<relation code="Region2CitiesRelation" autocreate="true" generate="true" localized="false">
+			<description>This relation links a region (province) with one or more cities.</description>
+			<sourceElement qualifier="region" type="Region" cardinality="one">
+				<modifiers read="true" write="true" optional="true" />
+			</sourceElement>
+			<targetElement qualifier="cities" type="City" cardinality="many" collectiontype="list" ordered="true">
+				<modifiers read="true" write="true" optional="true" />
+			</targetElement>
+		</relation>
+		<relation code="City2DistrictsRelation" autocreate="true" generate="true" localized="false">
+			<description>This relation links a city with one or more districts.</description>
+			<sourceElement qualifier="city" type="City" cardinality="one">
+				<modifiers read="true" write="true" optional="true" />
+			</sourceElement>
+			<targetElement qualifier="districts" type="District" cardinality="many" collectiontype="list" ordered="true">
+				<modifiers read="true" write="true" optional="true" />
+			</targetElement>
+		</relation>
+	</relations>
+	
 	<itemtypes>
 
 		<!-- Add your item definitions here -->
+		<typegroup name="Locations">
+			<itemtype code="AbstractLocationItem" extends="GenericItem"
+				jaloclass="de.hybris.platform.chinaaccelerator.services.jalo.location.AbstractLocationItem" autocreate="true" generate="true"
+				abstract="true">
+				<description>Generic location item to be used for being extended into City and District item types.
+                </description>
+				<deployment table="AbstractLocationItem" typecode="30019" />
+				<attributes>
+					<attribute qualifier="code" type="java.lang.String" autocreate="true">
+						<description>Unique identifier.</description>
+						<persistence type="property" />
+						<modifiers read="true" write="true" optional="false" unique="true" />
+					</attribute>
+					<attribute qualifier="name" type="localized:java.lang.String" autocreate="true">
+						<description>Name of the location.</description>
+						<persistence type="property" />
+						<modifiers read="true" write="true" optional="true" />
+					</attribute>
+					<attribute qualifier="sortOrder" type="java.lang.Integer" autocreate="true">
+						<description>SortOrder allows for defining an ordering. For example used on StoreLocator page
+                            displaying cities in specific order.
+                        </description>
+						<persistence type="property" />
+						<modifiers read="true" write="true" optional="true" />
+						<defaultvalue>Integer.valueOf(0)</defaultvalue>
+					</attribute>
+					<attribute qualifier="latitude" type="java.lang.Double" autocreate="true">
+						<description>Latitude of the location item.</description>
+						<persistence type="property" />
+						<modifiers read="true" write="true" optional="true" />
+					</attribute>
+					<attribute qualifier="longitude" type="java.lang.Double" autocreate="true">
+						<description>Longitude of the location item.</description>
+						<persistence type="property" />
+						<modifiers read="true" write="true" optional="true" />
+					</attribute>
+					<attribute qualifier="active" type="java.lang.Boolean" autocreate="true">
+						<description>Flags if the location item is active or not. Usable as condition.</description>
+						<persistence type="property" qualifier="ActiveFlag" />
+						<modifiers read="true" write="true" optional="false" />
+						<defaultvalue>java.lang.Boolean.TRUE</defaultvalue>
+					</attribute>
+				</attributes>
+				<indexes>
+					<index name="IDX_LOC_CODE">
+						<key attribute="code" />
+					</index>
+				</indexes>
+			</itemtype>
+
+			<itemtype code="City" extends="AbstractLocationItem" jaloclass="de.hybris.platform.chinaaccelerator.services.jalo.location.City"
+				autocreate="true" generate="true" abstract="false">
+			</itemtype>
+			
+			<itemtype code="District" extends="AbstractLocationItem" jaloclass="de.hybris.platform.chinaaccelerator.services.jalo.location.Zone"
+				autocreate="true" generate="true" abstract="false">
+			</itemtype>
+
+		</typegroup>
 
 
 		<!-- TypeGroups are for structure of this file only -->

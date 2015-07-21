@@ -1,0 +1,18 @@
+INSERT_UPDATE Country;isocode[unique=true];active[default=true]
+;CN;true;
+
+INSERT_UPDATE Region;isocode[unique=true];country(isocode);active[default=true]
+;CN-11;CN;true;
+;CN-32;CN;true;
+
+INSERT_UPDATE City;code[unique=true];region(isocode);active[default=true]
+;Beijing;CN-11;true;
+;Nanjing;CN-32;true;
+;Wuxi;CN-32;true;
+;Suzhou;CN-32;true;
+
+INSERT_UPDATE District;code[unique=true];city(code);active[default=true]
+;Haidian;Beijing;true;
+;Chaoyang;Beijing;true;
+;Xicheng;Beijing;true;
+;Qinhuai;Nanjing;true;
