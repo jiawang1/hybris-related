@@ -16,7 +16,8 @@ ACC.selector = {
 					slaveselector.append("<option>--</option>");
 					slaveselectorDistrict.append("<option>--</option>");
 					for (var int = 0; int < data.length; int++) {
-						slaveselector.append("<option>"+data[int].code+"</option>");
+						slaveselector.append("<option value=" + data[int].code
+								+ ">" + data[int].code + "</option>");
 					}
 				}
 			});
@@ -37,7 +38,7 @@ ACC.selector = {
 					slaveselector.html("");
 					slaveselector.append("<option>--</option>");
 					for (var int = 0; int < data.length; int++) {
-						slaveselector.append("<option>"+data[int].code+"</option>");
+						slaveselector.append("<option value="+ data[int].code +">" +data[int].code + "</option>");
 					}
 				}
 			});
