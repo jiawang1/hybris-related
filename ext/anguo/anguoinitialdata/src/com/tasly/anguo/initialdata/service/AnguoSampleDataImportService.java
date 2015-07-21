@@ -32,8 +32,12 @@ public class AnguoSampleDataImportService extends SampleDataImportService {
 			  
 			  importProductCatalog(extensionName, data.getProductCatalogName());
 			  
-			  List<String> storeNameList = data.getStoreNames();
+			  List<String> contentCatalogList = data.getContentCatalogNames();
+			  for(int i=0; i<contentCatalogList.size();i++){
+				  this.importContentCatalog(extensionName, contentCatalogList.get(i));
+			  }
 			  
+			  List<String> storeNameList = data.getStoreNames();			  
 			  for(int i = 0; i < storeNameList.size();i++)
 			      this.importStore(extensionName, storeNameList.get(i), data.getProductCatalogName()); 
 			  

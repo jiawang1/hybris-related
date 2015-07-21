@@ -1,13 +1,13 @@
 #
 # Import the CMS Site configuration for the store
 #
-$productCatalog=__PRODUCT_CATALOG_NAME__
-$contentCatalog=__CONTENT_CATALOG_NAME__
+$productCatalog=anguoProductCatalog
+$contentCatalog=anguoContentCatalog
 $contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
 $defaultLanguage=en
-$storeUid=__STORE_UID__
-$siteUid=__STORE_UID__
-$promoGrp=__DEFAULT_PROMO_GRP__
+$storeUid=anguo
+$siteUid=anguo
+$promoGrp=anguoPromoGrp
 $siteMapUrlLimitPerFile=50000
 
 $siteMapLangCur=enEur
