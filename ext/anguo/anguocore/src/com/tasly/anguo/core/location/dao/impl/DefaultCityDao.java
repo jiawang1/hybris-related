@@ -9,7 +9,6 @@ import com.tasly.anguo.core.location.dao.CityDao;
 
 import de.hybris.platform.chinaaccelerator.services.model.location.CityModel;
 import de.hybris.platform.core.model.c2l.RegionModel;
-import de.hybris.platform.servicelayer.internal.dao.AbstractItemDao;
 import de.hybris.platform.servicelayer.search.FlexibleSearchQuery;
 import de.hybris.platform.servicelayer.search.FlexibleSearchService;
 import de.hybris.platform.servicelayer.search.SearchResult;
