@@ -36,8 +36,7 @@ public class DefaultAnguoCategoryFacade implements AnguoCategoryFacade {
 			return getRootCategory();
 		
 		CategoryModel category = categoryService.getCategoryForCode(categoryCode);
-	
-		Collection<CategoryModel> categorys = category.getAllSubcategories();// categoryService.getAllSubcategoriesForCategory(category);
+		Collection<CategoryModel> categorys = category.getCategories();
 	
 		List<CategoryNodeData> childrenCategoryNodeDataList = new ArrayList<CategoryNodeData>();
 		CategoryNodeData parentCategoryNode = new CategoryNodeData();
@@ -47,6 +46,7 @@ public class DefaultAnguoCategoryFacade implements AnguoCategoryFacade {
 			CategoryModel categoryModel = null;
 			
 			Iterator<CategoryModel> categoryIterator = categorys.iterator();
+			
 			while(categoryIterator.hasNext()){
 				categoryModel = categoryIterator.next();
 		        CategoryNodeData childrenCategoryNodeData = new CategoryNodeData();
@@ -68,7 +68,6 @@ public class DefaultAnguoCategoryFacade implements AnguoCategoryFacade {
 		Collection<CategoryModel> categorys = categoryService.getCategoriesForCode("药材");
 		Iterator<CategoryModel> categoryIterator = categorys.iterator();
 		while(categoryIterator.hasNext()){
-			LOG.info("here it is");
 			CategoryModel category = categoryIterator.next();
 			CategoryNodeData categoryNodeData = new CategoryNodeData();
 			categoryNodePopulator.populate(category,categoryNodeData);
