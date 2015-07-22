@@ -11,7 +11,6 @@ import org.apache.log4j.Logger;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.alibaba.fastjson.JSON;
 import com.tasly.anguo.facades.category.AnguoCategoryFacade;
 import com.tasly.anguo.facades.product.data.CategoryNodeData;
 
@@ -51,30 +50,9 @@ public class DefaultAnguoCategoryFacadeTest extends ServicelayerTransactionalTes
 	public void testGetSubCategory(){
 		String categoryCode="药材";
 		List<CategoryNodeData> categoryNodeDataList = anguoCategoryFacade.getSubCategoryByCode(categoryCode);
-		
-//		CategoryModel category = categoryService.getCategoryForCode(categoryCode);
-//		Collection<CategoryModel> categorys= categoryService.getAllSubcategoriesForCategory(category);
-//		
-//		CategoryNodeData categoryNode = new CategoryNodeData();
-//		Collection<CategoryNodeData> categoryNodeDatas = new ArrayList<CategoryNodeData>();
-//		categoryNode.setId(category.getCode());
-//		categoryNode.setText(category.getName());
-//		
-//		Iterator<CategoryModel> itr = categorys.iterator();
-//		while (itr.hasNext()) {
-//			CategoryNodeData childrenCategoryNode = new CategoryNodeData();
-//			CategoryModel subCategory = itr.next();
-//			childrenCategoryNode.setId(subCategory.getCode());
-//			childrenCategoryNode.setText(subCategory.getName());
-//			categoryNodeDatas.add(childrenCategoryNode);
-//		}
-//		
-//		//category.
-//		categoryNode.setChildren(categoryNodeDatas);
 
-		LOG.info(JSON.toJSONString(categoryNodeDataList));
+		//LOG.info(JSON.toJSONString(categoryNodeDataList));
 
-	
 	}
 	
 	
