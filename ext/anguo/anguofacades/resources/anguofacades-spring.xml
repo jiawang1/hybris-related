@@ -186,4 +186,15 @@
 	</bean>
 
 	<bean id="genderData" class="com.tasly.anguo.facades.product.data.GenderData" scope="prototype"/>
+	
+	<alias name="anguoCategoryFacade" alias="categoryFacade"/>
+	<bean id="anguoCategoryFacade" class="com.tasly.anguo.facades.category.impl.DefaultAnguoCategoryFacade">
+		<property name="categoryService" ref="categoryService"></property>
+		<property name="categoryNodePopulator" ref="categoryNodePopulator"></property>
+		<property name="mgmtCategoryPopulator" ref="mgmtCategoryPopulator"></property>
+	</bean>
+	
+	<bean id="categoryNodePopulator" class="com.tasly.anguo.facades.populators.CategoryNodePopulator"></bean>
+	<bean id="mgmtCategoryPopulator" class="com.tasly.anguo.facades.populators.MgmtCategoryPopulator"></bean>
+	
 </beans>

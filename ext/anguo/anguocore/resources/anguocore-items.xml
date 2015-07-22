@@ -18,8 +18,7 @@
 		<collectiontype code="SwatchColorSet" elementtype="SwatchColorEnum" autocreate="true" generate="true"
 		                type="set"/>
 	</collectiontypes>
-
-
+	
 	<enumtypes>
 		<enumtype generate="true" code="SwatchColorEnum" autocreate="true" dynamic="true">
 			<value code="BLACK"/>
@@ -36,7 +35,16 @@
 			<value code="YELLOW"/>
 		</enumtype>
 	</enumtypes>
-
+	
+	<relations>
+		<relation code="cat2alias" autocreate="true" generate="true" localized="false" >
+			<sourceElement qualifier="alias" type="CategoryAlias" cardinality="many" collectiontype="list">
+				<modifiers write="true" partof="true" />
+			</sourceElement>
+			<targetElement qualifier="category" type="Category" cardinality="one"></targetElement>
+		</relation>
+	</relations>
+	
 	<itemtypes>
 
 		<!-- Add your item definitions here -->
@@ -109,6 +117,18 @@
 						<description>Color of the product.</description>
 						<modifiers/>
 						<persistence type="property"/>
+					</attribute>
+				</attributes>
+			</itemtype>
+		</typegroup>
+		
+		<typegroup name="AnguoProduct">
+			<itemtype code="CategoryAlias" generate="true" autocreate="true">
+				<deployment table="CategoryAlias" typecode="10000"/>
+				<attributes>
+					<attribute type="localized:java.lang.String" autocreate="true" generate="true" qualifier="alias">
+						<persistence type="property"></persistence>
+						<description>category alias name</description>
 					</attribute>
 				</attributes>
 			</itemtype>
