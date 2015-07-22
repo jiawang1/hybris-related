@@ -38,14 +38,14 @@
 	</enumtypes>
 
 	<relations>
-		<relation code="B2BUser2Contact" generate="true" autocreate="true" localized="false">
-			<sourceElement qualifier="b2bUser" type="B2BUser" cardinality="one" />
-			<targetElement qualifier="contacts" type="Contact" cardinality="many" />
+		<relation code="BUser2Contact" generate="true" autocreate="true" localized="false">
+			<sourceElement qualifier="b2bUser" type="BUser" cardinality="one" />
+			<targetElement qualifier="contacts" type="Contact" cardinality="many" collectiontype="set"/>
 		</relation>
 		
-		<relation code="B2BUser2Media" generate="true" autocreate="true" localized="false">
-			<sourceElement qualifier="b2bUser" type="B2BUser" cardinality="one" />
-			<targetElement qualifier="medias" type="Media" cardinality="many" />
+		<relation code="BUser2Media" generate="true" autocreate="true" localized="false">
+			<sourceElement qualifier="b2bUser" type="BUser" cardinality="one" />
+			<targetElement qualifier="medias" type="Media" cardinality="many" collectiontype="set"/>
 		</relation>
 	</relations>
 	
@@ -124,19 +124,23 @@
 					</attribute>
 				</attributes>
 			</itemtype>
-			<itemtype code="Customer" autocreate="false" generate="false" >
+			<itemtype code="Customer" autocreate="false" generate="false">
 				<description>Extending Customer type with additional attributes.</description>
+				<attributes>
+					<attribute qualifier="companyName" type="java.lang.String">
+						<description>Company name of customer.</description>
+						<modifiers/>
+						<persistence type="property"/>
+					</attribute>
+				</attributes>
+			</itemtype>
+			<itemtype code="CUser" extends="Customer">
 				<attributes>
 					<attribute qualifier="gender" type="Gender">
 						<modifiers read="true" write="true" search="true"
 							optional="true" />
 						<persistence type="property" />
 						<description>It holds information about customer gender (i.e. Male, Female, Unknown.)</description>
-					</attribute>
-					<attribute qualifier="companyName" type="java.lang.String">
-						<description>Company name of customer.</description>
-						<modifiers/>
-						<persistence type="property"/>
 					</attribute>
 					<attribute qualifier="position" type="java.lang.String">
 						<description>The position of customer in company.</description>
@@ -161,8 +165,8 @@
 				</attributes>
 			</itemtype>
 			
-			<itemtype code="B2BUser" extends="Customer">
-				<description>B2BUser extend from customer used for Enterprise .</description>
+			<itemtype code="BUser" extends="Customer">
+				<description>BUser extend from customer used for Enterprise .</description>
 				<attributes>
 					<attribute qualifier="registeredNo" type="java.lang.Integer">
 						<persistence type="property" />
@@ -229,11 +233,6 @@
 						<persistence type="property" />
 						<modifiers read="true" write="true" search="true"
 							optional="true" />
-					</attribute>
-					<attribute qualifier="baseWarrantyFormat" type="localized:java.lang.String"
-						generate="true">
-						<persistence type="property" />
-						<modifiers read="true" write="true" optional="true" />
 					</attribute>
 				</attributes>
 			</itemtype>
