@@ -10,7 +10,7 @@
 
 <div class="userRegister">
 	<div class="headline"><spring:theme code="register.new.customer" /></div>
-	<div class="required right"><spring:theme code="form.required"/></div>
+	<div class="required right"><a><spring:theme code="register.change.to.individualUser"/></a></div>
 	<div class="description"><spring:theme code="register.description"/></div>
 
 

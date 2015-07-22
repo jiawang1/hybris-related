@@ -188,7 +188,7 @@
 	<bean id="genderData" class="com.tasly.anguo.facades.product.data.GenderData" scope="prototype"/>
 	
 		<alias name="anguoCustomerFacade" alias="customerFacade"/>
-	<bean id="anguoCustomerFacade" class="de.hybris.platform.anguofacades.customer.impl.AnguoCustomerFacade"
+	<bean id="anguoCustomerFacade" class="com.tasly.anguo.facades.customer.impl.AnguoCustomerFacade"
 			>
 		<property name="userService" ref="userService"/>
 		<property name="customerAccountService" ref="customerAccountService"/>
