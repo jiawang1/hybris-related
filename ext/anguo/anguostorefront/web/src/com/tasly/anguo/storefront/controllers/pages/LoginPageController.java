@@ -45,6 +45,8 @@ import de.hybris.platform.acceleratorstorefrontcommons.forms.RegisterForm;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.cms2.model.pages.AbstractPageModel;
 import de.hybris.platform.cms2.model.pages.ContentPageModel;
+import de.hybris.platform.commercefacades.user.data.RegisterData;
+import de.hybris.platform.commerceservices.customer.DuplicateUidException;
 
 /**
  * Login Controller. Handles login and register for the account flow.
@@ -147,9 +149,52 @@ public class LoginPageController extends AbstractLoginPageController
 		getRegistrationValidator().validate(form, bindingResult);
 		return processRegisterUserRequest(referer, form, bindingResult, model, request, response, redirectModel);
 	}
+	
 	@Override
 	protected Validator getRegistrationValidator()
 	{
 		return this.registrationValidator;
+	}
+	
+	@Override
+	protected String processRegisterUserRequest(final String referer, final RegisterForm form, final BindingResult bindingResult,
+			final Model model, final HttpServletRequest request, final HttpServletResponse response,
+			final RedirectAttributes redirectModel) throws CMSItemNotFoundException
+	{
+		if (bindingResult.hasErrors())
+		{
+			model.addAttribute(form);
+			model.addAttribute(new LoginForm());
+			model.addAttribute(new GuestForm());
+			GlobalMessages.addErrorMessage(model, "form.global.error");
+			return handleRegistrationError(model);
+		}
+
+		final RegisterData data = new RegisterData();
+		IndividualRegisterForm iForm = (IndividualRegisterForm) form;
+		data.setCaptcha(iForm.getCaptcha());
+		data.setLogin(iForm.getUserId());
+		data.setPassword(form.getPwd());
+		data.setMobile(iForm.getMobileNumber());;
+		try
+		{
+			getCustomerFacade().register(data);
+			getAutoLoginStrategy().login(iForm.getUserId().toLowerCase(), form.getPwd(), request, response);
+
+			GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.CONF_MESSAGES_HOLDER,
+					"registration.confirmation.message.title");
+		}
+		catch (final DuplicateUidException e)
+		{
+			LOG.warn("registration failed: " + e);
+			model.addAttribute(form);
+			model.addAttribute(new LoginForm());
+			model.addAttribute(new GuestForm());
+			bindingResult.rejectValue("email", "registration.error.account.exists.title");
+			GlobalMessages.addErrorMessage(model, "form.global.error");
+			return handleRegistrationError(model);
+		}
+
+		return REDIRECT_PREFIX + getSuccessRedirect(request, response);
 	}
 }
