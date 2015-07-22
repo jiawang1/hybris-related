@@ -18,8 +18,8 @@
 		<collectiontype code="SwatchColorSet" elementtype="SwatchColorEnum" autocreate="true" generate="true"
 		                type="set"/>
 	</collectiontypes>
-
-
+	
+	
 	<enumtypes>
 		<enumtype generate="true" code="SwatchColorEnum" autocreate="true" dynamic="true">
 			<value code="BLACK"/>
@@ -37,6 +37,18 @@
 		</enumtype>
 	</enumtypes>
 
+	<relations>
+		<relation code="B2BUser2Contact" generate="true" autocreate="true" localized="false">
+			<sourceElement qualifier="b2bUser" type="B2BUser" cardinality="one" />
+			<targetElement qualifier="contacts" type="Contact" cardinality="many" />
+		</relation>
+		
+		<relation code="B2BUser2Media" generate="true" autocreate="true" localized="false">
+			<sourceElement qualifier="b2bUser" type="B2BUser" cardinality="one" />
+			<targetElement qualifier="medias" type="Media" cardinality="many" />
+		</relation>
+	</relations>
+	
 	<itemtypes>
 
 		<!-- Add your item definitions here -->
@@ -148,7 +160,85 @@
 					</attribute>										
 				</attributes>
 			</itemtype>
+			
+			<itemtype code="B2BUser" extends="Customer">
+				<description>B2BUser extend from customer used for Enterprise .</description>
+				<attributes>
+					<attribute qualifier="registeredNo" type="java.lang.Integer">
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="status" type="java.lang.String">
+						<persistence type="property"/>
+					</attribute>
+				</attributes>
+			</itemtype>
+			
+			<itemtype code="DebitPaymentInfo" autocreate="false" generate="false">
+				<attributes>
+					<attribute qualifier="isValid" type="java.lang.Boolean">
+						<modifiers read="true" write="true" search="true"
+							optional="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="legalRepr" type="java.lang.String">
+						<persistence type="property"/>
+					</attribute>
+				</attributes>
+			</itemtype>
+			
+			<itemtype code="Contact">
+				<deployment table="Contact" typecode="30000" />
+				<attributes>
+					<attribute qualifier="name" type="java.lang.String">
+						<modifiers read="true" write="true" search="true"
+							optional="false" unique="true" />
+						<persistence type="property">
+							 <columntype database="oracle">
+								<value>varchar(30)</value>
+							</columntype>
+							<columntype database="sap">
+								<value>varchar(30)</value>
+							</columntype>
+							<columntype database="mysql">
+								<value>varchar(30)</value>
+							</columntype>
+							<columntype>
+								<value>HYBRIS.LONG_STRING</value>
+							</columntype>
+						</persistence>
+					</attribute>
+					<attribute qualifier="posistion" type="java.lang.String">
+						<persistence type="property" >
+							 <columntype database="oracle">
+								<value>varchar(100)</value>
+							</columntype>
+							<columntype database="sap">
+								<value>varchar(100)</value>
+							</columntype>
+							<columntype database="mysql">
+								<value>varchar(100)</value>
+							</columntype>
+							<columntype>
+								<value>HYBRIS.LONG_STRING</value>
+							</columntype>
+						</persistence>
+						<modifiers read="true" write="true" search="true"
+							optional="false" unique="true" />
+					</attribute>
+					<attribute qualifier="contactInfo" type="java.lang.String">
+						<persistence type="property" />
+						<modifiers read="true" write="true" search="true"
+							optional="true" />
+					</attribute>
+					<attribute qualifier="baseWarrantyFormat" type="localized:java.lang.String"
+						generate="true">
+						<persistence type="property" />
+						<modifiers read="true" write="true" optional="true" />
+					</attribute>
+				</attributes>
+			</itemtype>
+			
 		</typegroup>
-
+	
 	</itemtypes>
 </items>
