@@ -354,12 +354,18 @@ INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;c
 # ContentSlot
 INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef);;;
 
-##### Customer Login #####
-# ContentSlot
+INSERT_UPDATE JspIncludeComponent;$contentCV[unique=true];uid[unique=true];name;page;actions(uid,$contentCV);&componentRef
+;;NewCustomerLoginComponent;New Customer Login Component;accountNewCustomerLogin.jsp;;NewCustomerLoginComponent
+;;ReturningCustomerLoginComponent;Returning Customer Login Component;accountReturningCustomerLogin.jsp;;ReturningCustomerLoginComponent
+ 
+### Customer Login
 INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef);;;
-
-# ContentSlotForPage
+;;LeftContentSlot-login;Left Content Slot for Customer Login;true;ReturningCustomerLoginComponent;;;
+;;RightContentSlot-login;Right Content Slot for Customer Login;true;NewCustomerLoginComponent;;;
+ 
 INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='login'];contentSlot(uid,$contentCV)[unique=true];;;
+;;LeftContentSlot-login;LeftContentSlot;;LeftContentSlot-login;;;
+;;RightContentSlot-login;RightContentSlot;;RightContentSlot-login;;;
 
 ##### Checkout Login #####
 # ContentSlot
