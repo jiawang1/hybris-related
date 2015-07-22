@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.alibaba.fastjson.JSON;
 import com.tasly.anguo.facades.category.AnguoCategoryFacade;
 import com.tasly.anguo.storefront.controllers.ControllerConstants;
 
