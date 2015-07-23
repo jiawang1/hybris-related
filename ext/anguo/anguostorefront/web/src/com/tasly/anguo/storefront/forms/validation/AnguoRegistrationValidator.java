@@ -29,17 +29,19 @@ public class AnguoRegistrationValidator extends RegistrationValidator
 		final String userId = registerForm.getUserId();
 		final String pwd = registerForm.getPwd();
 		final String checkPwd = registerForm.getCheckPwd();
-		final String mobile = registerForm.getMobileNumber();
+		final String mobileNumber = registerForm.getMobileNumber();
 		final String captcha = registerForm.getCaptcha();
 
 		if (StringUtils.isEmpty(userId))
 		{
-			errors.rejectValue("userId", "register.username.invalid");
+			errors.rejectValue("userId", "register.username.isBlank");
 		}
 		else if (StringUtils.length(userId) > 255)
 		{
-			errors.rejectValue("titleCode", "register.username.invalid");
+			errors.rejectValue("userId", "register.username.overLength");
 		}
+		
+		//TODO check whether userId contains companyName or stock
 
 		if (StringUtils.isEmpty(pwd))
 		{
@@ -62,15 +64,16 @@ public class AnguoRegistrationValidator extends RegistrationValidator
 			}
 		}
 		
-		if (StringUtils.isEmpty(mobile))
+		if (StringUtils.isEmpty(mobileNumber))
 		{
-			errors.rejectValue("mobile", "register.mobile.invalid");
+			errors.rejectValue("mobileNumber", "register.mobile.invalid");
 		}
-		else if (StringUtils.length(mobile) != 11)
+		else if (StringUtils.length(mobileNumber) != 11)
 		{
-			errors.rejectValue("mobile", "register.mobile.invalid");			
+			errors.rejectValue("mobileNumber", "register.mobile.invalid");			
 		}
 		
+		//TODO check whether the input captcha is the same with the captcha you received on your cellphone
 		if (StringUtils.isEmpty(captcha))
 		{
 			errors.rejectValue("captcha", "register.captcha.invalid");			
