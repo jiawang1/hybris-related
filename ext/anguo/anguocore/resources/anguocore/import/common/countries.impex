@@ -366,8 +366,8 @@ INSERT_UPDATE Region;country(isocode);isocode[unique=true];isocodeShort;name[lan
 ;CN;CN-64;64;"Ningxia"
 ;CN;CN-65;65;"Xinjiang"
 ;CN;CN-54;54;"Xizang"
-;CN;CN-91;91;"Xianggang"
-;CN;CN-92;92;"Aomen"
+;CN;CN-81;81;"Xianggang"
+;CN;CN-82;82;"Aomen"
 
 #
 # ISO 3166-2:JP

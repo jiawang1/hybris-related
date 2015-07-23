@@ -290,5 +290,5 @@ UPDATE Region;isocode[unique=true];name[lang=$lang]
 ;CN-64;"宁夏"
 ;CN-65;"新疆"
 ;CN-54;"西藏"
-;CN-91;"香港"
-;CN-92;"澳门"
+;CN-81;"香港"
+;CN-82;"澳门"
