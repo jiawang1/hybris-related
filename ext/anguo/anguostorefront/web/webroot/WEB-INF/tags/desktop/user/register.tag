@@ -15,7 +15,6 @@
 		$("#"+hiddenDiv).hide();
 	}
 </script>
-
 <div class="userRegister">
 	<div id="divPersonal">
 		<div class="headline"><spring:theme code="register.new.account.personal" /></div>
@@ -27,7 +26,7 @@
 		<div class="required right"><a href="javascript:personalEnterpriseSwitch('divPersonal', 'divEnterprise')"><spring:theme code="register.change.to.personal.account"/></a></div>
 		<div class="description"><spring:theme code="register.description.enterprise"/></div>
 	</div>
-	<form:form method="post" commandName="individualRegisterForm" action="${action}">
+	<form:form method="post" commandName="anguoRegisterForm" action="${action}">
 		<div class="form_field-elements js-recaptcha-captchaaddon">
 			<!--<formElement:formSelectBox idKey="register.title" labelKey="register.title" path="titleCode" mandatory="true" skipBlank="false" skipBlankMessageKey="form.select.empty" items="${titles}"/>-->
 			<!--<formElement:formInputBox idKey="register.firstName" labelKey="register.firstName" path="firstName" inputCSS="text" mandatory="true"/>
