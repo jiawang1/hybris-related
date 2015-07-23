@@ -1,0 +1,102 @@
+# Create Categories
+# ImpEx for Importing Categories
+
+# Macros / Replacement Parameter definitions
+$productCatalog=anguoProductCatalog
+$productCatalogName=安国药材目录
+
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Online'])[unique=true,default=$productCatalog:Online]
+$supercategories=source(code, $catalogVersion)[unique=true]
+$categories=target(code, $catalogVersion)[unique=true]
+
+# Language
+$lang=zh
+
+# Insert Categories lv1
+INSERT_UPDATE Category;code[unique=true];allowedPrincipals(uid)[default='customergroup'];$catalogVersion
+;药材;
+
+# Insert Categories lv2
+INSERT_UPDATE Category;code[unique=true];allowedPrincipals(uid)[default='customergroup'];$catalogVersion
+;根茎类;
+;果实籽仁类;
+;花类;
+;全草类;
+;叶类;
+;树皮类;
+;藤木类;
+;树脂类;
+;菌藻类;
+;动物类;
+;矿物类;
+
+
+# Insert Categories lv3
+INSERT_UPDATE Category;code[unique=true];allowedPrincipals(uid)[default='customergroup'];$catalogVersion
+;人参;
+;白芍;
+;川贝母;
+;王不留行;
+;莲子;
+;陈皮;
+;艾叶;
+;满山红;
+;荷叶;
+;甘草;
+
+# Insert Category Structure
+INSERT_UPDATE CategoryCategoryRelation;$categories;$supercategories
+;人参;根茎类
+;甘草;根茎类
+;白芍;根茎类
+;川贝母;根茎类
+;王不留行;果实籽仁类
+;莲子;果实籽仁类
+;陈皮;果实籽仁类
+;艾叶;叶类
+;满山红;叶类
+;荷叶;叶类
+;根茎类;药材
+;果实籽仁类;药材
+;花类;药材
+;全草类;药材
+;叶类;药材;
+;树皮类;药材
+;藤木类;药材
+;树脂类;药材
+;菌藻类;药材
+;动物类;药材
+;矿物类;药材
+
+UPDATE Category;code[unique=true];$catalogVersion;name[lang=$lang]
+#LV1
+;药材;;药材
+#LV2
+;根茎类;;根茎类
+;果实籽仁类;;果实籽仁类
+;花类;;花类
+;全草类;;全草类
+;叶类;;叶类
+;树皮类;;树皮类
+;藤木类;;藤木类
+;树脂类;;树脂类
+;菌藻类;;菌藻类
+;动物类;;动物类
+;矿物类;;矿物类
+#LV3
+;人参;;人参
+;白芍;;白芍
+;川贝母;;川贝母
+;王不留行;;王不留行
+;莲子;;莲子
+;陈皮;;陈皮
+;艾叶;;艾叶
+;满山红;;满山红
+;荷叶;;荷叶
+;甘草;;甘草
+
+INSERT_UPDATE CategoryAlias;alias[unique=true][lang=$lang];category(code)
+;鬼盖;人参
+;地精;人参
+;母龙精;川贝母
+;空草;川贝母
