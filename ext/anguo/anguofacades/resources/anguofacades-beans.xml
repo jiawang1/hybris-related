@@ -21,6 +21,30 @@
 		<property name="name" type="String"/>
 	</bean>
 	
+	<bean class="de.hybris.platform.commercefacades.user.data.RegisterData">
+		<property name="userId" type="String"/>
+		<property name="mobile" type="String"/>
+		<property name="captcha" type="String"/>
+	</bean>
+
+	<bean class="com.tasly.anguo.facades.product.data.CategoryNodeData">
+		<property name="id" type="String"></property>
+		<property name="text" type="String"></property>
+		<property name="children" type="boolean"></property>
+	</bean>
+	
+	<bean class="com.tasly.anguo.facades.product.data.MgmtCatAliasData">
+		<property name="pk" type="String"></property>
+		<property name="categoryCode" type="String"></property>
+		<property name="description" type="String"></property>
+	</bean>
+	
+	<bean class="com.tasly.anguo.facades.product.data.MgmtCategoryData">
+		<property name="categoryCode" type="String"></property>
+		<property name="name" type="String"></property>
+		<property name="alias" type="java.util.List&lt;com.tasly.anguo.facades.product.data.MgmtCatAliasData>"></property>
+	</bean>
+
 	<bean class="com.tasly.anguo.facades.data.CityData" >
 		<property name="storeCount" type="Integer"/>
 		<property name="cityPK" type="Long"/>

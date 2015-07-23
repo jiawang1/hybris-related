@@ -140,6 +140,11 @@ public interface ControllerConstants
 				String WriteReview = "pages/product/writeReview";
 				String ProductionZone = "pages/product/productionZone";
 			}
+			
+			interface ProductManagement
+			{
+				String CategoryManagement = "pages/productManagement/categoryManagement";
+			}
 		}
 
 		interface Fragments
