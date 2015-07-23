@@ -6,6 +6,10 @@ import java.util.ArrayList;
 import org.apache.log4j.Logger;
 import org.springframework.util.Assert;
 
+import com.tasly.anguo.core.enums.UserType;
+import com.tasly.anguo.core.jalo.EnterpriseUser;
+import com.tasly.anguo.core.jalo.PersonalUser;
+
 import de.hybris.platform.commercefacades.customer.impl.DefaultCustomerFacade;
 import de.hybris.platform.commercefacades.user.data.RegisterData;
 import de.hybris.platform.commerceservices.customer.DuplicateUidException;
@@ -27,8 +31,13 @@ public class AnguoCustomerFacade extends DefaultCustomerFacade
 		Assert.hasText(registerData.getLogin(),
 				"The field [Login] cannot be empty");
 
-		final CustomerModel newCustomer = getModelService().create(
-				CustomerModel.class);
+		CustomerModel newCustomer = null;
+		if (registerData.getUserType() == UserType.PERSONAL)
+		{
+			newCustomer = getModelService().create(PersonalUser.class);
+		} else if(registerData.getUserType() == UserType.ENTERPRISE){
+			newCustomer = getModelService().create(EnterpriseUser.class);			
+		}
 
 		newCustomer.setName(registerData.getLogin());
 

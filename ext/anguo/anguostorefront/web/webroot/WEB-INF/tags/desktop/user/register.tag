@@ -13,6 +13,7 @@
 	{
 		$("#"+displayDiv).show();
 		$("#"+hiddenDiv).hide();
+		$("#userType").val((displayDiv=="divPersonal")? "PERSONAL" : "ENTERPRISE");
 	}
 </script>
 <div class="userRegister">
@@ -39,7 +40,7 @@
 			
 			<input type="hidden" id="recaptchaChallangeAnswered" value="${requestScope.recaptchaChallangeAnswered}"/>
 			<input type="hidden" id="accountType" value="${requestScope.recaptchaChallangeAnswered}"/>
-
+			<form:hidden path="userType" id="userType" value="PERSONAL"/>
 		</div>
 		<div class="form-actions clearfix">
 			<ycommerce:testId code="register_Register_button">

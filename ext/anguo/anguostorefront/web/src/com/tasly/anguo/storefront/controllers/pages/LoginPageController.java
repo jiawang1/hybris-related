@@ -140,7 +140,8 @@ public class LoginPageController extends AbstractLoginPageController
 		data.setCaptcha(iForm.getCaptcha());
 		data.setLogin(iForm.getUserId());
 		data.setPassword(form.getPwd());
-		data.setMobile(iForm.getMobileNumber());;
+		data.setMobile(iForm.getMobileNumber());
+		data.setUserType(iForm.getUserType());
 		try
 		{
 			getCustomerFacade().register(data);
