@@ -13,8 +13,6 @@
  */
 package com.tasly.anguo.storefront.controllers.pages;
 
-import java.util.Collections;
-
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -34,9 +32,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.tasly.anguo.storefront.controllers.ControllerConstants;
-import com.tasly.anguo.storefront.forms.IndividualRegisterForm;
+import com.tasly.anguo.storefront.forms.AnguoRegisterForm;
 
-import de.hybris.platform.acceleratorstorefrontcommons.breadcrumb.Breadcrumb;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractLoginPageController;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
 import de.hybris.platform.acceleratorstorefrontcommons.forms.GuestForm;
@@ -44,7 +41,6 @@ import de.hybris.platform.acceleratorstorefrontcommons.forms.LoginForm;
 import de.hybris.platform.acceleratorstorefrontcommons.forms.RegisterForm;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.cms2.model.pages.AbstractPageModel;
-import de.hybris.platform.cms2.model.pages.ContentPageModel;
 import de.hybris.platform.commercefacades.user.data.RegisterData;
 import de.hybris.platform.commerceservices.customer.DuplicateUidException;
 
@@ -57,7 +53,7 @@ import de.hybris.platform.commerceservices.customer.DuplicateUidException;
 public class LoginPageController extends AbstractLoginPageController
 {
 	private HttpSessionRequestCache httpSessionRequestCache;
-	@Resource(name = "individualRegisterValidator")
+	@Resource(name = "anguoRegistrationValidator")
 	private Validator registrationValidator;
 
 	@Override
@@ -99,39 +95,8 @@ public class LoginPageController extends AbstractLoginPageController
 		{
 			storeReferer(referer, request, response);
 		}
+		model.addAttribute(new AnguoRegisterForm());
 		return getDefaultLoginPage(loginError, session, model);
-	}
-	@Override
-	protected String getDefaultLoginPage(final boolean loginError, final HttpSession session, final Model model)
-			throws CMSItemNotFoundException
-	{
-		final LoginForm loginForm = new LoginForm();
-		model.addAttribute(loginForm);
-		model.addAttribute(new IndividualRegisterForm());
-		model.addAttribute(new GuestForm());
-
-		final String username = (String) session.getAttribute(SPRING_SECURITY_LAST_USERNAME);
-		if (username != null)
-		{
-			session.removeAttribute(SPRING_SECURITY_LAST_USERNAME);
-		}
-
-		loginForm.setJ_username(username);
-		storeCmsPageInModel(model, getCmsPage());
-		setUpMetaDataForContentPage(model, (ContentPageModel) getCmsPage());
-		model.addAttribute("metaRobots", "index,nofollow");
-
-		final Breadcrumb loginBreadcrumbEntry = new Breadcrumb("#", getMessageSource().getMessage("header.link.login", null,
-				"header.link.login", getI18nService().getCurrentLocale()), null);
-		model.addAttribute("breadcrumbs", Collections.singletonList(loginBreadcrumbEntry));
-
-		if (loginError)
-		{
-			model.addAttribute("loginError", Boolean.valueOf(loginError));
-			GlobalMessages.addErrorMessage(model, "login.error.account.not.found.title");
-		}
-
-		return getView();
 	}
 	protected void storeReferer(final String referer, final HttpServletRequest request, final HttpServletResponse response)
 	{
@@ -142,7 +107,7 @@ public class LoginPageController extends AbstractLoginPageController
 	}
 
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
-	public String doRegister(@RequestHeader(value = "referer", required = false) final String referer, final IndividualRegisterForm form,
+	public String doRegister(@RequestHeader(value = "referer", required = false) final String referer, final AnguoRegisterForm form,
 			final BindingResult bindingResult, final Model model, final HttpServletRequest request,
 			final HttpServletResponse response, final RedirectAttributes redirectModel) throws CMSItemNotFoundException
 	{
@@ -171,7 +136,7 @@ public class LoginPageController extends AbstractLoginPageController
 		}
 
 		final RegisterData data = new RegisterData();
-		IndividualRegisterForm iForm = (IndividualRegisterForm) form;
+		AnguoRegisterForm iForm = (AnguoRegisterForm) form;
 		data.setCaptcha(iForm.getCaptcha());
 		data.setLogin(iForm.getUserId());
 		data.setPassword(form.getPwd());

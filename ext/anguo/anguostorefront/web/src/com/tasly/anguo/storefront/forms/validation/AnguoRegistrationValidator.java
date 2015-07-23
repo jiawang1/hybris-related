@@ -6,25 +6,26 @@ import java.util.regex.Pattern;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
-import org.springframework.validation.Validator;
 
-import com.tasly.anguo.storefront.forms.IndividualRegisterForm;
+import com.tasly.anguo.storefront.forms.AnguoRegisterForm;
 
-@Component("individualRegisterValidator")
-public class IndividualRegisterValidator implements Validator
+import de.hybris.platform.acceleratorstorefrontcommons.forms.validation.RegistrationValidator;
+
+@Component("anguoRegistrationValidator")
+public class AnguoRegistrationValidator extends RegistrationValidator
 {
 	public static final String EMAIL_REGEX = "\\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}\\b";
 
 	@Override
 	public boolean supports(final Class<?> aClass)
 	{
-		return IndividualRegisterForm.class.equals(aClass);
+		return AnguoRegisterForm.class.equals(aClass);
 	}
 
 	@Override
 	public void validate(final Object object, final Errors errors)
 	{
-		final IndividualRegisterForm registerForm = (IndividualRegisterForm) object;
+		final AnguoRegisterForm registerForm = (AnguoRegisterForm) object;
 		final String userId = registerForm.getUserId();
 		final String pwd = registerForm.getPwd();
 		final String checkPwd = registerForm.getCheckPwd();
