@@ -415,8 +415,31 @@
 		<property name="commerceCategoryService" ref="commerceCategoryService"/>
 		<property name="rootCategoryCode" value="categories"/>
 	</bean>
+
+	<!-- beans for product start -->	
+	<alias alias="regionService" name="defaultRegionService" />
+    <bean id="defaultRegionService" class="com.tasly.anguo.core.location.impl.DefaultRegionService">
+        <property name="regionDao" ref="regionDao"/>
+        <property name="countryDao" ref="countryDao"/>
+    </bean>
 	
-	<alias name="anguoCategoryDao" alias="anguoCategoryDao"/>
+	<bean id="cityDao" class="com.tasly.anguo.core.location.dao.impl.DefaultCityDao">
+		<property name="flexibleSearchService" ref="flexibleSearchService" />
+	</bean>
+	
+	<bean id="districtDao" class="com.tasly.anguo.core.location.dao.impl.DefaultDistrictDao">
+		<property name="flexibleSearchService" ref="flexibleSearchService" />
+	</bean>
+	
+	<bean id="cityService" class="com.tasly.anguo.core.location.impl.DefaultCityService">
+		<property name="cityDao" ref="cityDao" />
+	</bean>
+	
+	<bean id="districtService" class="com.tasly.anguo.core.location.impl.DefaultDistrictService">
+		<property name="districtDao" ref="districtDao" />
+	</bean>
+	
+		<alias name="anguoCategoryDao" alias="anguoCategoryDao"/>
 	<bean id="anguoCategoryDao" class="com.tasly.anguo.core.category.dao.impl.DefaultAnguoCategoryDao" parent="categoryDao">
 		<property name="pagedFlexibleSearchService" ref="pagedFlexibleSearchService"></property>
 	</bean>
@@ -425,4 +448,5 @@
 	<bean id="anguoCategoryService" class="com.tasly.anguo.core.category.impl.DefaultAnguoCategoryService" parent="categoryService">
 		<property name="categoryDao" ref="anguoCategoryDao"></property>
 	</bean>	
+	<!-- beans for product end -->
 </beans>
