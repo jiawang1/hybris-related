@@ -292,3 +292,22 @@ UPDATE Region;isocode[unique=true];name[lang=$lang]
 ;CN-54;"西藏"
 ;CN-91;"香港"
 ;CN-92;"澳门"
+
+#
+# Import Cities and Districts for China
+#
+
+# Language
+$lang=zh
+
+UPDATE City;code[unique=true];name[lang=$lang]
+;110100;"北京"
+;320100;"南京"
+;320200;"无锡"
+;320500;"苏州"
+
+UPDATE District;code[unique=true];name[lang=$lang]
+;110108;"海淀"
+;110105;"朝阳"
+;110102;"西城"
+;320104;"秦淮"
