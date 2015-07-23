@@ -13,12 +13,6 @@
  */
 package com.tasly.anguo.storefront.controllers.pages;
 
-import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractRegisterPageController;
-import de.hybris.platform.acceleratorstorefrontcommons.forms.RegisterForm;
-import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
-import de.hybris.platform.cms2.model.pages.AbstractPageModel;
-import com.tasly.anguo.storefront.controllers.ControllerConstants;
-
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -31,6 +25,13 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.tasly.anguo.storefront.controllers.ControllerConstants;
+import com.tasly.anguo.storefront.forms.AnguoRegisterForm;
+
+import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractRegisterPageController;
+import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
+import de.hybris.platform.cms2.model.pages.AbstractPageModel;
 
 
 /**
@@ -74,11 +75,12 @@ public class RegisterPageController extends AbstractRegisterPageController
 	@RequestMapping(method = RequestMethod.GET)
 	public String doRegister(final Model model, final HttpServletRequest request) throws CMSItemNotFoundException
 	{
+		model.addAttribute(new AnguoRegisterForm());
 		return getDefaultRegistrationPage(model);
 	}
-
+	
 	@RequestMapping(value = "/newcustomer", method = RequestMethod.POST)
-	public String doRegister(final RegisterForm form, final BindingResult bindingResult, final Model model,
+	public String doRegister(final AnguoRegisterForm form, final BindingResult bindingResult, final Model model,
 			final HttpServletRequest request, final HttpServletResponse response, final RedirectAttributes redirectModel)
 			throws CMSItemNotFoundException
 	{

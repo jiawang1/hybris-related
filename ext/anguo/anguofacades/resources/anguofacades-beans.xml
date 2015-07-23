@@ -20,4 +20,10 @@
 		<property name="code" type="String"/>
 		<property name="name" type="String"/>
 	</bean>
+	
+	<bean class="de.hybris.platform.commercefacades.user.data.RegisterData">
+		<property name="userId" type="String"/>
+		<property name="mobile" type="String"/>
+		<property name="captcha" type="String"/>
+	</bean>
 </beans>

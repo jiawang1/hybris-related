@@ -186,4 +186,7 @@
 	</bean>
 
 	<bean id="genderData" class="com.tasly.anguo.facades.product.data.GenderData" scope="prototype"/>
+	
+		<alias name="anguoCustomerFacade" alias="customerFacade"/>
+	<bean id="anguoCustomerFacade" class="com.tasly.anguo.facades.customer.impl.AnguoCustomerFacade" parent= "defaultCustomerFacade"/>
 </beans>

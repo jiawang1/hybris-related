@@ -1,7 +1,7 @@
 #
 # Import the Content Catalog
 #
-$contentCatalog=__CONTENT_CATALOG_NAME__
+$contentCatalog=anguoContentCatalog
 $languages=ja,en,de,zh
 
 # Content catalog for CMS contents
