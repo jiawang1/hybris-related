@@ -366,8 +366,8 @@ INSERT_UPDATE Region;country(isocode);isocode[unique=true];isocodeShort;name[lan
 ;CN;CN-64;64;"Ningxia"
 ;CN;CN-65;65;"Xinjiang"
 ;CN;CN-54;54;"Xizang"
-;CN;CN-91;91;"Xianggang"
-;CN;CN-92;92;"Aomen"
+;CN;CN-81;81;"Xianggang"
+;CN;CN-82;82;"Aomen"
 
 #
 # ISO 3166-2:JP
@@ -419,19 +419,3 @@ INSERT_UPDATE Region;country(isocode);isocode[unique=true];isocodeShort;name[lan
 ;JP;JP-06;06;"Yamagata"
 ;JP;JP-35;35;"Yamaguchi"
 ;JP;JP-19;19;"Yamanashi"
-
-#
-# Import Cities and Districts for China
-#
-
-INSERT_UPDATE City;code[unique=true];region(isocode);name;active[default=true]
-;110100;CN-11;Beijing;true;
-;320100;CN-32;Nanjing;true;
-;320200;CN-32;Wuxi;true;
-;320500;CN-32;Suzhou;true;
-
-INSERT_UPDATE District;code[unique=true];city(code);name;active[default=true]
-;110108;110100;Haidian;true;
-;110105;110100;Chaoyang;true;
-;110102;110100;Xicheng;true;
-;320104;320100;Qinhuai;true;
