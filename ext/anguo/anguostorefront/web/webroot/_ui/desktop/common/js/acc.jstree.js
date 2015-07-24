@@ -8,7 +8,7 @@ ACC.jstree = {
 			
 			'core' : {
 				'data' : {
-					'url' : ACC.config.contextPath+'/productManagement/getSubCategory',
+					'url' : ACC.config.contextPath+'/categoryManagement/getSubCategory',
 					'data' : function (node) {
 						return { 'categoryCode' : node.id };
 					}
@@ -22,7 +22,7 @@ ACC.jstree = {
 			var selected_node_id = data.selected[0];
 			$.ajax({
 				type:'GET',
-				url:ACC.config.contextPath + '/productManagement/getCategoryDetail',
+				url:ACC.config.contextPath + '/categoryManagement/getCategoryDetail',
 				data:{'categoryCode':selected_node_id},
 				success:function(data){
 					$(':input','#category-detail-form').not(':button,:submit,:reset,:hidden').val('')  
@@ -103,7 +103,33 @@ ACC.jstree = {
 	},
 	initCategoryControl:function(){
 		$('#saveCat').on('click',function(){
-		   alert('sss');
+			
+			var aliasRow = $('#aliasGrid').DataTable().rows().data();
+			var aliasArray = new Array();
+			//get alias array data
+            for(var i = 0;i<aliasRow.length;i++){
+	        	aliasArray.push({'description':aliasRow[i][0]});
+	        	
+	        }
+	        //categoryDetail will be transfered to backend
+			var categoryDetail = 
+				{
+					'categoryCode':	$('input[name="categoryCode"]').val(),
+					'name':$('input[name="categoryName"]').val(),
+					'alias':aliasArray
+				};
+			
+			$.ajax({
+	    		type:'POST',
+	    		url:ACC.config.contextPath + '/categoryManagement/saveCategory',
+	    		data:{'categoryDetail':JSON.stringify(categoryDetail)},
+				dataType:"json",
+				async:true,
+	    		success:function(data){
+	    			alert('更新成功');
+	    		}
+	    	});
+	    	
 		});
 		
 	}
@@ -165,7 +191,7 @@ function getCustomMenu(node) {
         'action': function (node) {
         	$.ajax({
         		type:'POST',
-        		url:ACC.config.contextPath + '/productManagement/deleteCategoryByCode',
+        		url:ACC.config.contextPath + '/categoryManagement/deleteCategory',
 				data:{'categoryCode':categoryCode},
         		success:function(data){
         			var categoryTree= $('#category-tree-div').jstree();

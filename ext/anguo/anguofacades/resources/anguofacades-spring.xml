@@ -192,6 +192,7 @@
 		<property name="categoryService" ref="categoryService"></property>
 		<property name="categoryNodePopulator" ref="categoryNodePopulator"></property>
 		<property name="mgmtCategoryPopulator" ref="mgmtCategoryPopulator"></property>
+		<property name="modelService" ref="modelService"></property>
 	</bean>
 	
 	<bean id="categoryNodePopulator" class="com.tasly.anguo.facades.populators.CategoryNodePopulator"></bean>

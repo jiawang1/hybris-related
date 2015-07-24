@@ -22,12 +22,12 @@
 <body>
 	<div style="float:left;overflow-y:scroll;overflow:auto;width:400px;height:300px;border:1px solid" id="category-tree-div"></div>
 	<div style="float:none;clear:both;margin:10px;padding:10px">
-		<form id="category-detail-form">
-			<div>
+	    	<div>
 				<button id="createCat">新增</button>
 				<button id="saveCat">保存</button>
 				<button id="deleteCat">删除</button>
 			</div>
+		<form id="category-detail-form">
 			<label for="categoryCode">目录编码</label> 
 			<input type="text" id="categoryCode" name="categoryCode"></input> 
 			<label for="categoryCode">目录名称</label>
