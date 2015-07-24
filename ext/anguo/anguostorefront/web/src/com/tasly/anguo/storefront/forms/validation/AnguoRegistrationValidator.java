@@ -70,7 +70,7 @@ public class AnguoRegistrationValidator extends RegistrationValidator
 		}
 		else
 		{
-			Pattern patter = Pattern.compile("^((13[0-9])|(15[^4,\\D])|(18[0,5-9]))\\d{8}$"); 
+			Pattern patter = Pattern.compile("^1\\d{10}$"); 
 			Matcher matcher = patter.matcher(mobileNumber); 
 			if(!matcher.find()) {
 				errors.rejectValue("mobileNumber", "register.mobile.invalid");		
