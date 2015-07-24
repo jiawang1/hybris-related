@@ -31,6 +31,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.tasly.anguo.core.enums.UserType;
 import com.tasly.anguo.storefront.controllers.ControllerConstants;
 import com.tasly.anguo.storefront.forms.AnguoRegisterForm;
 
@@ -141,7 +142,7 @@ public class LoginPageController extends AbstractLoginPageController
 		data.setLogin(iForm.getUserId());
 		data.setPassword(form.getPwd());
 		data.setMobile(iForm.getMobileNumber());
-		data.setUserType(iForm.getUserType());
+		data.setUserType(UserType.valueOf(iForm.getUserType()));
 		try
 		{
 			getCustomerFacade().register(data);
