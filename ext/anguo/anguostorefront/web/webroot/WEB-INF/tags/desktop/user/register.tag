@@ -36,8 +36,7 @@
 			<formElement:formPasswordBox idKey="password" labelKey="register.pwd" path="pwd" inputCSS="text password strength" mandatory="true"/>
 			<formElement:formPasswordBox idKey="register.checkPwd" labelKey="register.checkPwd" path="checkPwd" inputCSS="text password" mandatory="true"/>
 			<formElement:formInputBox idKey="register.mobile" labelKey="register.mobile" path="mobileNumber" inputCSS="text" mandatory="true"/>
-			<formElement:formInputBox idKey="register.captcha" labelKey="register.captcha" path="captcha" inputCSS="text" mandatory="true"/>
-			
+			<formElement:formInputBox idKey="register.captcha" labelKey="register.captcha" path="captcha" inputCSS="text" mandatory="true"/><button type="button"><spring:theme code="register.captcha"></spring:theme></button>
 			<input type="hidden" id="recaptchaChallangeAnswered" value="${requestScope.recaptchaChallangeAnswered}"/>
 			<input type="hidden" id="accountType" value="${requestScope.recaptchaChallangeAnswered}"/>
 			<form:hidden path="userType" id="userType" value="PERSONAL"/>
