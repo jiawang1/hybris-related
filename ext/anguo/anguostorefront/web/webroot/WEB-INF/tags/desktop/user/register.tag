@@ -7,15 +7,6 @@
 <%@ taglib prefix="formElement" tagdir="/WEB-INF/tags/desktop/formElement" %>
 <%@ taglib prefix="theme" tagdir="/WEB-INF/tags/shared/theme" %>
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags" %>
-
-<script type="text/javascript">
-	function personalEnterpriseSwitch(displayDiv, hiddenDiv)
-	{
-		$("#"+displayDiv).show();
-		$("#"+hiddenDiv).hide();
-		$("#userType").val((displayDiv=="divPersonal")? "PERSONAL" : "ENTERPRISE");
-	}
-</script>
 <div class="userRegister">
 	<div id="divPersonal">
 		<div class="headline"><spring:theme code="register.new.account.personal" /></div>
@@ -37,17 +28,29 @@
 			<formElement:formPasswordBox idKey="register.checkPwd" labelKey="register.checkPwd" path="checkPwd" inputCSS="text password" mandatory="true"/>
 			<formElement:formInputBox idKey="register.mobile" labelKey="register.mobile" path="mobileNumber" inputCSS="text" mandatory="true"/>
 			<formElement:formInputBox idKey="register.captcha" labelKey="register.captcha" path="captcha" inputCSS="text" mandatory="true"/><button type="button"><spring:theme code="register.captcha"></spring:theme></button>
+			<formElement:formCheckbox idKey="cbIsAgreeTerms" labelKey="register.agree.terms" path="isAgreeTerms"/>
 			<input type="hidden" id="recaptchaChallangeAnswered" value="${requestScope.recaptchaChallangeAnswered}"/>
 			<input type="hidden" id="accountType" value="${requestScope.recaptchaChallangeAnswered}"/>
 			<form:hidden path="userType" id="userType" value="PERSONAL"/>
 		</div>
 		<div class="form-actions clearfix">
 			<ycommerce:testId code="register_Register_button">
-				<button type="submit" class="positive"><spring:theme code='${actionNameKey}'/></button>
+				<button id="registerButton" type="submit" class="positive" disabled><spring:theme code='${actionNameKey}'/></button>
 			</ycommerce:testId>
 		</div>
 	</form:form>
 </div>
+<script type="text/javascript">
+	document.getElementById("cbIsAgreeTerms").onclick = function() {
+		$("#registerButton").enable($("#cbIsAgreeTerms").attr("checked")? true :false);			
+	};
+	function personalEnterpriseSwitch(displayDiv, hiddenDiv)
+	{
+		$("#"+displayDiv).show();
+		$("#"+hiddenDiv).hide();
+		$("#userType").val((displayDiv=="divPersonal")? "PERSONAL" : "ENTERPRISE");
+	}
+</script>
 
 
 

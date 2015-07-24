@@ -416,4 +416,27 @@
 		<property name="rootCategoryCode" value="categories"/>
 	</bean>
 	
+	<!-- beans for product start -->	
+	<alias alias="regionService" name="defaultRegionService" />
+    <bean id="defaultRegionService" class="com.tasly.anguo.core.location.impl.DefaultRegionService">
+        <property name="regionDao" ref="regionDao"/>
+        <property name="countryDao" ref="countryDao"/>
+    </bean>
+	
+	<bean id="cityDao" class="com.tasly.anguo.core.location.dao.impl.DefaultCityDao">
+		<property name="flexibleSearchService" ref="flexibleSearchService" />
+	</bean>
+	
+	<bean id="districtDao" class="com.tasly.anguo.core.location.dao.impl.DefaultDistrictDao">
+		<property name="flexibleSearchService" ref="flexibleSearchService" />
+	</bean>
+	
+	<bean id="cityService" class="com.tasly.anguo.core.location.impl.DefaultCityService">
+		<property name="cityDao" ref="cityDao" />
+	</bean>
+	
+	<bean id="districtService" class="com.tasly.anguo.core.location.impl.DefaultDistrictService">
+		<property name="districtDao" ref="districtDao" />
+	</bean>
+	<!-- beans for product end -->
 </beans>

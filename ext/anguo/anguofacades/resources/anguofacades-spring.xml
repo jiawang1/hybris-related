@@ -187,6 +187,42 @@
 
 	<bean id="genderData" class="com.tasly.anguo.facades.product.data.GenderData" scope="prototype"/>
 	
-		<alias name="anguoCustomerFacade" alias="customerFacade"/>
+	<alias name="anguoCustomerFacade" alias="customerFacade"/>
 	<bean id="anguoCustomerFacade" class="com.tasly.anguo.facades.customer.impl.AnguoCustomerFacade" parent= "defaultCustomerFacade"/>
+	
+	<!-- beans for product start -->
+	<alias name="anguoCategoryFacade" alias="categoryFacade"/>
+	<bean id="anguoCategoryFacade" class="com.tasly.anguo.facades.category.impl.DefaultAnguoCategoryFacade">
+		<property name="categoryService" ref="categoryService"></property>
+		<property name="categoryNodePopulator" ref="categoryNodePopulator"></property>
+		<property name="mgmtCategoryPopulator" ref="mgmtCategoryPopulator"></property>
+	</bean>
+	
+	<bean id="categoryNodePopulator" class="com.tasly.anguo.facades.populators.CategoryNodePopulator"></bean>
+	<bean id="mgmtCategoryPopulator" class="com.tasly.anguo.facades.populators.MgmtCategoryPopulator"></bean>
+
+	<alias alias="regionFacade" name="defaultRegionFacade" />
+	<bean id="defaultRegionFacade" class="com.tasly.anguo.facades.location.impl.DefaultRegionFacade">
+	  <property name="regionService" ref="regionService"></property>
+	  <property name="regionPopulator" ref="regionPopulator"></property>
+	</bean>
+	
+	<alias alias="cityFacade" name="defaultCityFacade" />
+	<bean id="defaultCityFacade" class="com.tasly.anguo.facades.location.impl.DefaultCityFacade">
+	  <property name="cityService" ref="cityService"></property>
+	  <property name="cityPopulator" ref="cityPopulator"></property>
+	</bean>
+
+	<alias alias="cityPopulator" name="defaultCityPopulator" />
+	<bean id="defaultCityPopulator" class="com.tasly.anguo.facades.populators.CityPopulator" />
+	
+	<alias alias="districtFacade" name="defaultDistrictFacade" />
+	<bean id="defaultDistrictFacade" class="com.tasly.anguo.facades.location.impl.DefaultDistrictFacade">
+	  <property name="districtService" ref="districtService"></property>
+	  <property name="districtPopulator" ref="districtPopulator"></property>
+	</bean>
+	
+	<alias alias="districtPopulator" name="defaultDistrictPopulator" />
+	<bean id="defaultDistrictPopulator" class="com.tasly.anguo.facades.populators.DistrictPopulator" />
+	<!-- beans for product end -->
 </beans>

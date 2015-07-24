@@ -138,6 +138,12 @@ public interface ControllerConstants
 			interface Product
 			{
 				String WriteReview = "pages/product/writeReview";
+				String ProductionZone = "pages/product/productionZone";
+			}
+			
+			interface ProductManagement
+			{
+				String CategoryManagement = "pages/productManagement/categoryManagement";
 			}
 		}
 
