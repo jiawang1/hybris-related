@@ -6,7 +6,7 @@ import de.hybris.platform.acceleratorstorefrontcommons.forms.RegisterForm;
 
 public class AnguoRegisterForm extends RegisterForm {
 	private String userId;
-	private UserType userType;
+	private UserType userType = UserType.PERSONAL;
 	private Boolean isAgreeTerms = false;
 
 
@@ -19,8 +19,8 @@ public class AnguoRegisterForm extends RegisterForm {
 		this.isAgreeTerms = isAgreeTerms;
 	}
 
-	public UserType getUserType() {
-		return userType;
+	public String getUserType() {
+		return userType.toString();
 	}
 
 	public void setUserType(String userTypeValue) {
