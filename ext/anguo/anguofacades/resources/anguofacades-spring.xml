@@ -190,12 +190,20 @@
 	<alias name="anguoCategoryFacade" alias="categoryFacade"/>
 	<bean id="anguoCategoryFacade" class="com.tasly.anguo.facades.category.impl.DefaultAnguoCategoryFacade">
 		<property name="categoryService" ref="categoryService"></property>
+		<property name="modelService" ref="modelService"></property>
+		<property name="catalogVersionService" ref="catalogVersionService"></property>
 		<property name="categoryNodePopulator" ref="categoryNodePopulator"></property>
 		<property name="mgmtCategoryPopulator" ref="mgmtCategoryPopulator"></property>
-		<property name="modelService" ref="modelService"></property>
+		<property name="categoryCodeGenerator" ref="categoryCodeGenerator"></property>
 	</bean>
 	
 	<bean id="categoryNodePopulator" class="com.tasly.anguo.facades.populators.CategoryNodePopulator"></bean>
 	<bean id="mgmtCategoryPopulator" class="com.tasly.anguo.facades.populators.MgmtCategoryPopulator"></bean>
-	
+	<bean id="categoryCodeGenerator"  class="de.hybris.platform.servicelayer.keygenerator.impl.PersistentKeyGenerator" init-method="init" scope="tenant">
+		<property name="key" value="luckynumberseries"/>
+		<property name="digits" value="4"/>
+		<property name="start" value="0000"/>
+		<property name="numeric" value="false"/> 
+    </bean>
+    
 </beans>

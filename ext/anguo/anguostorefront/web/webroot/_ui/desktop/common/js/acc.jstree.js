@@ -15,7 +15,7 @@ ACC.jstree = {
 				},
 				'check_callback' : true
 			},
-			'plugins' : ['contextmenu'],
+			'plugins' : ['contextmenu','crrm'],
 			'contextmenu':{'items':getCustomMenu}
 			
 		}).bind("select_node.jstree", function (event, data) {  
@@ -116,6 +116,7 @@ ACC.jstree = {
 				{
 					'categoryCode':	$('input[name="categoryCode"]').val(),
 					'name':$('input[name="categoryName"]').val(),
+					'superCategory':$('input[name="superCategory"]').val(),
 					'alias':aliasArray
 				};
 			
@@ -126,6 +127,7 @@ ACC.jstree = {
 				dataType:"json",
 				async:true,
 	    		success:function(data){
+	    			$("#category-tree-div").jstree().set_text(data.categoryCode , data.name);
 	    			alert('更新成功');
 	    		}
 	    	});
@@ -180,22 +182,33 @@ function getCustomMenu(node) {
         'separator_before': false,
         'separator_after': true,
         'label': '添加子类目',
-        'action': function (node) {
-        	alert('d');
+        'action': function (obj) {
+        	$(':input','#category-detail-form').not(':button,:submit,:reset,:hidden').val('')  
+			.removeAttr('checked').removeAttr('selected');
+			$('#aliasGrid').dataTable().fnClearTable();
+        	$('input[name="superCategory"]').attr("value",node.id);
+        	
+        	$.ajax({
+        		type:'POST',
+        		url:ACC.config.contextPath + '/categoryManagement/createCategory',
+				data: {'superCategory':node.id},
+        		success:function(data){
+        	       $("#category-tree-div").jstree().create_node(node,{'id':data.categoryCode,'text':data.name});
+        		}
+        	});
         }
       },
       'delete': {
         'separator_before': false,
         'separator_after': false,
         'label': '删除该类目',
-        'action': function (node) {
+        'action': function (obj) {
         	$.ajax({
         		type:'POST',
         		url:ACC.config.contextPath + '/categoryManagement/deleteCategory',
 				data:{'categoryCode':categoryCode},
         		success:function(data){
-        			var categoryTree= $('#category-tree-div').jstree();
-        	        categoryTree.delete_node(categoryTree.get_selected());
+        	        $('#category-tree-div').jstree().delete_node(node);
         		}
         	});
         	

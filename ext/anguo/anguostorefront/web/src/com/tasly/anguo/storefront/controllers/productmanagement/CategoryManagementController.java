@@ -28,6 +28,7 @@ public class CategoryManagementController {
     private static final String GET_CATEGORY_DETAIL = "/getCategoryDetail";
     private static final String DELETE_CATEGORY = "/deleteCategory";
     private static final String SAVE_CATEGORY = "/saveCategory";
+    private static final String CREATE_CATEGORY = "/createCategory";
     
     @Resource
 	private AnguoCategoryFacade anguoCategoryFacade;
@@ -57,8 +58,12 @@ public class CategoryManagementController {
 	public 	@ResponseBody Object saveCategory(String categoryDetail,final HttpServletRequest request, final HttpServletResponse response){
 		final MgmtCategoryData categoryData = JSON.parseObject(categoryDetail,new TypeReference<MgmtCategoryData>(){});
 		anguoCategoryFacade.saveCategory(categoryData);
-		return null;
+		return categoryData;
 	}
 	
+	@RequestMapping(value=CREATE_CATEGORY)
+	public 	@ResponseBody Object createCategory(String superCategory){
+		return anguoCategoryFacade.createCategory(superCategory);
+	}
 	
 }

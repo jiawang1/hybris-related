@@ -36,4 +36,11 @@ public interface AnguoCategoryFacade{
 	 * @param categoryCode
 	 */
 	public void saveCategory(MgmtCategoryData categoryData);
+	
+	/**
+	 * @param superCategory
+	 * @return
+	 */
+	public MgmtCategoryData createCategory(String superCategory);
+	
 }
