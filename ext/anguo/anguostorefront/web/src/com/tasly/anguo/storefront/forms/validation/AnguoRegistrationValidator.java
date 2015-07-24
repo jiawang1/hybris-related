@@ -68,9 +68,13 @@ public class AnguoRegistrationValidator extends RegistrationValidator
 		{
 			errors.rejectValue("mobileNumber", "register.mobile.invalid");
 		}
-		else if (StringUtils.length(mobileNumber) != 11)
+		else
 		{
-			errors.rejectValue("mobileNumber", "register.mobile.invalid");			
+			Pattern patter = Pattern.compile("^((13[0-9])|(15[^4,\\D])|(18[0,5-9]))\\d{8}$"); 
+			Matcher matcher = patter.matcher(mobileNumber); 
+			if(!matcher.find()) {
+				errors.rejectValue("mobileNumber", "register.mobile.invalid");		
+			}
 		}
 		
 		//TODO check whether the input captcha is the same with the captcha you received on your cellphone
