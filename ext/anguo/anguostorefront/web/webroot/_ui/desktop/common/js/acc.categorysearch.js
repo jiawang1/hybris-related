@@ -1,21 +1,31 @@
 ACC.categorysearch = {
 	catSelected : '',
+	catLv2Selected : '',
 
 	resultSave : function(catSearchResItem) {
 		var resultItem = $("." + catSearchResItem);
 		resultItem.click(function() {
-			resultItem.css('background','#ffffff');
-			$(this).css('background','#e0ffff');
+			resultItem.css('background', '#ffffff');
+			$(this).css('background', '#e0ffff');
 			ACC.categorysearch.catSelectd = $(this).attr("catCode");
+			$("#createCatP").remove();
 		})
 	},
 
-	categorySelectLev1 : function(catSelectClass) {
+	catUnsave : function(catUnsave) {
+		var categoryUnsave = $("." + catUnsave);
+		categoryUnsave.click(function() {
+			$(".categorySelectorlv3").css('background', '#ffffff');
+			$(this).parent().append('<p id="createCatP" style="margin-left : 10px">新建类目: <input type="text" id="newCatInput" /></p>');
+		})
+	},
+
+	categorySelectlv1 : function(catSelectClass) {
 		var categorySelect = $("." + catSelectClass);
 		categorySelect
 				.click(function() {
-					categorySelect.css('backgroud','#ffffff');
-					$(this).css('background','#e0ffff');
+					categorySelect.css('backgroud', '#ffffff');
+					$(this).css('background', '#e0ffff');
 					var catCode = $(this).attr("catCode");
 					$
 							.ajax({
@@ -27,29 +37,30 @@ ACC.categorysearch = {
 									categoryCode : catCode
 								},
 								success : function(data) {
-									$("#categoryTreeDivLev2").empty();
+									$("#categoryTreeDivlv2").empty();
 									for (var int = 0; int < data.length; int++) {
-										$("#categoryTreeDivLev2")
+										$("#categoryTreeDivlv2")
 												.append(
-														'<li style="list-style:none; margin: 10px" class="categorySelectorLev2" catCode="'
+														'<li style="list-style:none; margin: 10px" class="categorySelectorlv2" catCode="'
 																+ data[int].id
 																+ '">'
 																+ data[int].text
 																+ '</li>');
 									}
 									ACC.categorysearch
-											.categorySelectLev2("categorySelectorLev2");
+											.categorySelectlv2("categorySelectorlv2");
 								}
 							});
 				})
 	},
 
-	categorySelectLev2 : function(catSelectClass) {
+	categorySelectlv2 : function(catSelectClass) {
 		var categorySelect = $("." + catSelectClass);
 		categorySelect
 				.click(function() {
-					categorySelect.css('backgroud','#ffffff');
-					$(this).css('background','#e0ffff');
+					ACC.categorysearch.catLv2Selectd = $(this).attr("catCode");
+					categorySelect.css('background', '#ffffff');
+					$(this).css('background', '#e0ffff');
 					var catCode = $(this).attr("catCode");
 					$
 							.ajax({
@@ -61,18 +72,22 @@ ACC.categorysearch = {
 									categoryCode : catCode
 								},
 								success : function(data) {
-									$("#categoryTreeDivLev3").empty();
+									$("#categoryTreeDivlv3").empty();
 									for (var int = 0; int < data.length; int++) {
-										$("#categoryTreeDivLev3")
+										$("#categoryTreeDivlv3")
 												.append(
-														'<li style="list-style:none; margin: 10px" class="categorySelectorLev3" catCode="'
+														'<li style="list-style:none; margin: 10px" class="categorySelectorlv3" catCode="'
 																+ data[int].id
 																+ '">'
 																+ data[int].text
 																+ '</li>');
 									}
 									ACC.categorysearch
-											.resultSave("categorySelectorLev3");
+									.resultSave("categorySelectorlv3");
+									$("#categoryTreeDivlv3")
+											.append(
+													'<li style="list-style:none; margin: 10px" class="unsavedCat" catCode="unsaved">未收录</li>');
+									ACC.categorysearch.catUnsave("unsavedCat");
 								}
 							});
 				})
@@ -128,13 +143,18 @@ ACC.categorysearch = {
 	setCategory : function(button) {
 		var selectButton = $("#" + button);
 		selectButton.click(function() {
+			if ($("#newCatInput").val() != null)
+			{
+				ACC.categorysearch.catSelectd = $("#newCatInput").val();
+			}
 			$.ajax({
 				type : "GET",
 				url : ACC.config.contextPath
 						+ "/selectcategory/getCategorySelected",
 				async : true,
 				data : {
-					categoryCode : ACC.categorysearch.catSelectd
+					categoryCode : ACC.categorysearch.catSelectd,
+					categoryLv2Code : ACC.categorysearch.catLv2Selectd
 				},
 				success : function(data) {
 					alert(data);
@@ -150,6 +170,6 @@ $(document).ready(
 					"resultDiv", "categoryTreeDiv", "searchCatResDiv");
 			ACC.categorysearch.displayTree("backToCatTreeBtn",
 					"categoryTreeDiv", "searchCatResDiv");
-			ACC.categorysearch.categorySelectLev1("categorySelectorLev1");
+			ACC.categorysearch.categorySelectlv1("categorySelectorlv1");
 			ACC.categorysearch.setCategory("catDefineBtn");
 		});

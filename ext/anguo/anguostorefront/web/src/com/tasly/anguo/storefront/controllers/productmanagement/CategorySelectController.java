@@ -52,8 +52,9 @@ public class CategorySelectController {
 	
 	@RequestMapping(value=GET_CATEGORY_SELECTED)
 	@ResponseBody
-	public String getCategorySelected(String categoryCode){
+	public String getCategorySelected(String categoryCode, String categoryLv2Code){
+	    LOG.info("Category Lv2 Selected : " + categoryLv2Code);
 	    LOG.info("Category Selected : " + categoryCode);
-	    return categoryCode;
+	    return categoryLv2Code + " >> " + categoryCode;
 	}
 }

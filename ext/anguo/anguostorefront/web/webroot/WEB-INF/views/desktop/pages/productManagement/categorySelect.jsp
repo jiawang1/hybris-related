@@ -39,15 +39,15 @@
 		<input type="button" id="catSearchBtn" value="快速找到类目" />
 	</div>
 	<div id="categoryTreeDiv"
-		style="display: block; background-color: #87cefa; height: 300px; width: 600px">
-		<div id="categoryTreeDivLev1" class="categoryTree">
+		style="display: block; background-color: #f0f8ff; height: 300px; width: 600px">
+		<div id="categoryTreeDivlv1" class="categoryTree">
 			<c:forEach items="${categoryRoots }" var="categoryRoot">
-				<li catCode="${categoryRoot.id}" class="categorySelectorLev1"
+				<li catCode="${categoryRoot.id}" class="categorySelectorlv1"
 					style="list-style: none; margin: 10px">${categoryRoot.text }</li>
 			</c:forEach>
 		</div>
-		<div id="categoryTreeDivLev2" class="categoryTree"></div>
-		<div id="categoryTreeDivLev3" class="categoryTree"></div>
+		<div id="categoryTreeDivlv2" class="categoryTree"></div>
+		<div id="categoryTreeDivlv3" class="categoryTree"></div>
 	</div>
 	<div id="searchCatResDiv" style="display: none">
 		<b>搜索到的结果：</b> <input type="button" id="backToCatTreeBtn"
