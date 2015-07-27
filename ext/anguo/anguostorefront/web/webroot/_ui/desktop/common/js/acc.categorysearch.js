@@ -4,6 +4,8 @@ ACC.categorysearch = {
 	resultSave : function(catSearchResItem) {
 		var resultItem = $("." + catSearchResItem);
 		resultItem.click(function() {
+			resultItem.css('background','#ffffff');
+			$(this).css('background','#e0ffff');
 			ACC.categorysearch.catSelectd = $(this).attr("catCode");
 		})
 	},
@@ -12,6 +14,8 @@ ACC.categorysearch = {
 		var categorySelect = $("." + catSelectClass);
 		categorySelect
 				.click(function() {
+					categorySelect.css('backgroud','#ffffff');
+					$(this).css('background','#e0ffff');
 					var catCode = $(this).attr("catCode");
 					$
 							.ajax({
@@ -44,6 +48,8 @@ ACC.categorysearch = {
 		var categorySelect = $("." + catSelectClass);
 		categorySelect
 				.click(function() {
+					categorySelect.css('backgroud','#ffffff');
+					$(this).css('background','#e0ffff');
 					var catCode = $(this).attr("catCode");
 					$
 							.ajax({
