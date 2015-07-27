@@ -7,8 +7,8 @@ import org.apache.log4j.Logger;
 import org.springframework.util.Assert;
 
 import com.tasly.anguo.core.enums.UserType;
-import com.tasly.anguo.core.model.EnterpriseUserModel;
-import com.tasly.anguo.core.model.PersonalUserModel;
+import com.tasly.anguo.core.model.EnterpriseAccountModel;
+import com.tasly.anguo.core.model.PersonalAccountModel;
 
 import de.hybris.platform.commercefacades.customer.impl.DefaultCustomerFacade;
 import de.hybris.platform.commercefacades.user.data.RegisterData;
@@ -34,9 +34,9 @@ public class AnguoCustomerFacade extends DefaultCustomerFacade
 		CustomerModel newCustomer = null;
 		if (registerData.getUserType() == UserType.PERSONAL)
 		{
-			newCustomer = getModelService().create(PersonalUserModel.class);
+			newCustomer = getModelService().create(PersonalAccountModel.class);
 		} else if(registerData.getUserType() == UserType.ENTERPRISE){
-			newCustomer = getModelService().create(EnterpriseUserModel.class);			
+			newCustomer = getModelService().create(EnterpriseAccountModel.class);			
 		}
 
 		newCustomer.setName(registerData.getLogin());
