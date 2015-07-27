@@ -19,7 +19,6 @@
 		<div class="description"><spring:theme code="register.description.enterprise"/></div>
 	</div>
 	<form:form method="post" commandName="anguoRegisterForm" action="${action}">
-	<input type="hidden" id="recaptcha" value="<spring:theme code="register.recaptcha"/>">
 		<div class="form_field-elements js-recaptcha-captchaaddon">
 			<!--<formElement:formSelectBox idKey="register.title" labelKey="register.title" path="titleCode" mandatory="true" skipBlank="false" skipBlankMessageKey="form.select.empty" items="${titles}"/>-->
 			<!--<formElement:formInputBox idKey="register.firstName" labelKey="register.firstName" path="firstName" inputCSS="text" mandatory="true"/>
@@ -46,12 +45,12 @@
 	function settime(obj) {
 	     if (countdown == 0) { 
 	        obj.removeAttribute("disabled");    
-	        obj.innerText=$("#recaptcha").val();
+	        obj.innerText=<spring:theme code="register.recaptcha" />;
 	        countdown = 60;
 	        return;
 	    } else { 
 	        obj.setAttribute("disabled", true); 
-	        obj.innerText=$("#recaptcha").val()+"(" + countdown + ")"; 
+	        obj.innerText=<spring:theme code="register.recaptcha" />+"(" + countdown + ")"; 
 	        countdown--; 
 	    } 
 	setTimeout(function() { 
