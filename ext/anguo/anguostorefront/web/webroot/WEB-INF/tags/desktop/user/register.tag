@@ -7,14 +7,6 @@
 <%@ taglib prefix="formElement" tagdir="/WEB-INF/tags/desktop/formElement" %>
 <%@ taglib prefix="theme" tagdir="/WEB-INF/tags/shared/theme" %>
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags" %>
-
-<script type="text/javascript">
-	function personalEnterpriseSwitch(displayDiv, hiddenDiv)
-	{
-		$("#"+displayDiv).show();
-		$("#"+hiddenDiv).hide();
-	}
-</script>
 <div class="userRegister">
 	<div id="divPersonal">
 		<div class="headline"><spring:theme code="register.new.account.personal" /></div>
@@ -27,6 +19,7 @@
 		<div class="description"><spring:theme code="register.description.enterprise"/></div>
 	</div>
 	<form:form method="post" commandName="anguoRegisterForm" action="${action}">
+	<input type="hidden" id="recaptcha" value="<spring:theme code="register.recaptcha"/>">
 		<div class="form_field-elements js-recaptcha-captchaaddon">
 			<!--<formElement:formSelectBox idKey="register.title" labelKey="register.title" path="titleCode" mandatory="true" skipBlank="false" skipBlankMessageKey="form.select.empty" items="${titles}"/>-->
 			<!--<formElement:formInputBox idKey="register.firstName" labelKey="register.firstName" path="firstName" inputCSS="text" mandatory="true"/>
@@ -35,19 +28,49 @@
 			<formElement:formPasswordBox idKey="password" labelKey="register.pwd" path="pwd" inputCSS="text password strength" mandatory="true"/>
 			<formElement:formPasswordBox idKey="register.checkPwd" labelKey="register.checkPwd" path="checkPwd" inputCSS="text password" mandatory="true"/>
 			<formElement:formInputBox idKey="register.mobile" labelKey="register.mobile" path="mobileNumber" inputCSS="text" mandatory="true"/>
-			<formElement:formInputBox idKey="register.captcha" labelKey="register.captcha" path="captcha" inputCSS="text" mandatory="true"/>
-			
+			<formElement:formInputBox idKey="register.captcha" labelKey="register.captcha" path="captcha" inputCSS="text" mandatory="true"/><button type="button" onclick="settime(this)"><spring:theme code="register.captcha"></spring:theme></button>
+			<formElement:formCheckbox idKey="cbIsAgreeTerms" labelKey="register.agree.terms" path="isAgreeTerms"/>
 			<input type="hidden" id="recaptchaChallangeAnswered" value="${requestScope.recaptchaChallangeAnswered}"/>
 			<input type="hidden" id="accountType" value="${requestScope.recaptchaChallangeAnswered}"/>
-
+			<form:hidden path="userType" id="userType" value="PERSONAL"/>
 		</div>
 		<div class="form-actions clearfix">
 			<ycommerce:testId code="register_Register_button">
-				<button type="submit" class="positive"><spring:theme code='${actionNameKey}'/></button>
+				<button id="registerButton" type="submit" class="positive" disabled><spring:theme code='${actionNameKey}'/></button>
 			</ycommerce:testId>
 		</div>
 	</form:form>
 </div>
+<script type="text/javascript">
+	var countdown=60; 
+	function settime(obj) {
+	     if (countdown == 0) { 
+	        obj.removeAttribute("disabled");    
+	        obj.innerText=$("#recaptcha").val();
+	        countdown = 60;
+	        return;
+	    } else { 
+	        obj.setAttribute("disabled", true); 
+	        obj.innerText=$("#recaptcha").val()+"(" + countdown + ")"; 
+	        countdown--; 
+	    } 
+	setTimeout(function() { 
+	             			settime(obj)
+	              		 }
+	         ,1000)  
+	}
+   
+	document.getElementById("cbIsAgreeTerms").onclick = function() {
+		$("#registerButton").enable($("#cbIsAgreeTerms").attr("checked")? true :false);			
+	};
+	function personalEnterpriseSwitch(displayDiv, hiddenDiv)
+	{
+		$("#name").contain()
+		$("#"+displayDiv).show();
+		$("#"+hiddenDiv).hide();
+		$("#userType").val((displayDiv=="divPersonal")? "PERSONAL" : "ENTERPRISE");
+	}
+</script>
 
 
 

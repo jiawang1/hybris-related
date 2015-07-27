@@ -40,12 +40,12 @@
 
 	<relations>
 		<relation code="enterpriseUser2Contact" generate="true" autocreate="true" localized="false">
-			<sourceElement qualifier="enterpriseUserUser" type="EnterpriseUser" cardinality="one" />
+			<sourceElement qualifier="enterpriseAccount" type="EnterpriseAccount" cardinality="one" />
 			<targetElement qualifier="contacts" type="Contact" cardinality="many" collectiontype="set"/>
 		</relation>
 		
 		<relation code="enterpriseUser2Media" generate="true" autocreate="true" localized="false">
-			<sourceElement qualifier="enterpriseUser" type="EnterpriseUser" cardinality="one" />
+			<sourceElement qualifier="enterpriseAccount" type="EnterpriseAccount" cardinality="one" />
 			<targetElement qualifier="medias" type="Media" cardinality="many" collectiontype="set"/>
 		</relation>
 	
@@ -222,7 +222,7 @@
 					</attribute>
 				</attributes>
 			</itemtype>
-			<itemtype code="PersonalUser" extends="Customer">
+			<itemtype code="PersonalAccount" extends="Customer">
 				<attributes>
 					<attribute qualifier="gender" type="Gender">
 						<modifiers read="true" write="true" search="true"
@@ -253,7 +253,7 @@
 				</attributes>
 			</itemtype>
 			
-			<itemtype code="EnterpriseUser" extends="Customer">
+			<itemtype code="EnterpriseAccount" extends="Customer">
 				<description>EnterpriseUser extend from customer used for Enterprise .</description>
 				<attributes>
 					<attribute qualifier="registeredNo" type="java.lang.Integer">
