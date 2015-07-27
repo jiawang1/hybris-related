@@ -23,6 +23,7 @@ public class AnguoFacadesConstants extends GeneratedAnguoFacadesConstants
 	public static final String ACTIVECATALOG = "anguoProductCatalog";
 	public static final String ACTIVECATALOGVERSION = "Online";
 	public static final String DEFAULTCATEGORYNAME = "unknown";
+	public static final String ROOTCATEGORY ="药材";
 	
 	private AnguoFacadesConstants()
 	{

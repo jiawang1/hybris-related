@@ -41,7 +41,6 @@ ACC.jstree = {
 					  '<a class="edit" href="">修改</a>', '<a class="delete" href="">删除</a>' ]);
 					  
 				//	$('#aliasGrid').dataTable().fnAddData(data.alias);
-
 				}
 			});
         });  	
@@ -177,7 +176,9 @@ function getCustomMenu(node) {
 
     var categoryCode = node.li_attr.id;
     
-    var items = {
+    var items;
+    
+    items = {
       'add': {
         'separator_before': false,
         'separator_after': true,
@@ -214,13 +215,12 @@ function getCustomMenu(node) {
         	
         }
       }
-     };
-
-    //  If this is a jsTree node for a Folder (rather than a Report) then 
-    //  just show the "Refresh" ContextMenu item
-    if (node.li_attr.ReportID == null)
+     }
+   
+    // cat level 3 not show add button
+    if(node.parents.length > 2)
     {
-        delete items.Run;
+        delete items.add;
     }
 
     return items;
