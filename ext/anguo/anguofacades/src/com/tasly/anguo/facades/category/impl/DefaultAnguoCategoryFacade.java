@@ -134,6 +134,10 @@ public class DefaultAnguoCategoryFacade implements AnguoCategoryFacade {
 			category.setCode((String)categoryCodeGenerator.generate());
 			category.setSupercategories(Arrays.asList(parentCategory));
 			category.setName(AnguoFacadesConstants.DEFAULTCATEGORYNAME);
+			if(CollectionUtils.isNotEmpty(parentCategory.getSupercategories()))
+				category.setLevel(3);
+			else
+                category.setLevel(2);
 			
 			modelService.save(category);
 			
