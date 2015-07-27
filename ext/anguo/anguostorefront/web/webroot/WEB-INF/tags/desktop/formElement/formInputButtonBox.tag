@@ -5,7 +5,8 @@
 <%@ attribute name="mandatory" required="false" type="java.lang.Boolean" %>
 <%@ attribute name="labelCSS" required="false" type="java.lang.String" %>
 <%@ attribute name="inputCSS" required="false" type="java.lang.String" %>
-<%@ attribute name="buttonLabel" required="false" type="java.lang.String" %>
+<%@ attribute name="buttonLabel" required="true" type="java.lang.String" %>
+<%@ attribute name="buttonId" required="false" type="java.lang.String" %>
 <%@ attribute name="tabindex" required="false" rtexprvalue="true" %>
 <%@ attribute name="autocomplete" required="false" type="java.lang.String" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
@@ -35,7 +36,7 @@
 	<div class="controls">
 		<div style="float:left;width:220px;margin-right:20px;"><form:input id="${idKey}" cssClass="${inputCSS}"  path="${path}" tabindex="${tabindex}" autocomplete="${autocomplete}"/>&nbsp;&nbsp;&nbsp;</div>
 		
-		<button Style="float:center;"><spring:theme code="${buttonLabel}"/></button>
+		<button id = "${buttonId}" Style="float:center;"><spring:theme code="${buttonLabel}"/></button>
 		&nbsp;
 	</div>
 
