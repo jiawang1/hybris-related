@@ -19,6 +19,7 @@ INSERT_UPDATE PageTemplate;$contentCV[unique=true];uid[unique=true];name;fronten
 ;;SearchResultsListPageTemplate;Search Results List Page Template;search/searchListPage;ContentPage
 ;;SearchResultsGridPageTemplate;Search Results Grid Page Template;search/searchGridPage;ContentPage
 ;;SearchResultsEmptyPageTemplate;Search Results Empty Page Template;search/searchEmptyPage;ContentPage
+;;SearchAdvancedResultsEmptyPageTemplate;Advanced Search Results Empty Page Template;search/searchAdvancedEmptyPage;ContentPage
 ;;CategoryPageTemplate;Category Page Template;category/categoryPage;CategoryPage
 ;;LandingPage1Template;Landing Page 1 Template;layout/landingLayout1Page;CategoryPage,ContentPage
 ;;LandingPage2Template;Landing Page 2 Template;layout/landingLayout2Page;CategoryPage,ContentPage
@@ -26,7 +27,10 @@ INSERT_UPDATE PageTemplate;$contentCV[unique=true];uid[unique=true];name;fronten
 ;;LandingPage4Template;Landing Page 4 Template;layout/landingLayout4Page;CategoryPage,ContentPage
 ;;LandingPage5Template;Landing Page 5 Template;layout/landingLayout5Page;CategoryPage,ContentPage
 ;;LandingPage6Template;Landing Page 6 Template;layout/landingLayout6Page;CategoryPage,ContentPage
+;;newsInfoTemplate;newsInfo Template;layout/newsInfo;CategoryPage,ContentPage
+
 ;;ContentPage1Template;Content Page 1 Template;layout/contentLayout1Page;ContentPage
+;;CompanyPageTemplate;Company Page Template;account/accountLayoutPage;ContentPage;false;
 ;;AccountPageTemplate;Account Page Template;account/accountLayoutPage;ContentPage;false;
 ;;StoreFinderPageTemplate;Store Finder Page Template;storeFinder/storeFinderSearchPage;ContentPage;false;
 
@@ -37,7 +41,8 @@ INSERT_UPDATE PageTemplate;$contentCV[unique=true];uid[unique=true];name;fronten
 ;;MultiStepCheckoutSummaryPageTemplate;Multi Step Checkout Summary Page Template;;ContentPage;false;
 ;;OrderConfirmationPageTemplate;Order Confirmation Page Template;;ContentPage;false;
 ;;ErrorPageTemplate;Error Page Template;;ContentPage;false;
-
+# newsInfo Template   ming add it in 2015/07/24
+;;newsInfoTemplate;structure_newsInfoTemplate.vm
 # Add Velocity templates that are in the CMS Cockpit. These give a better layout for editing pages
 # The FileLoaderValueTranslator loads a File into a String property. The templates could also be inserted in-line in this file.
 UPDATE PageTemplate;$contentCV[unique=true];uid[unique=true];velocityTemplate[translator=de.hybris.platform.commerceservices.impex.impl.FileLoaderValueTranslator]
@@ -51,6 +56,7 @@ UPDATE PageTemplate;$contentCV[unique=true];uid[unique=true];velocityTemplate[tr
 ;;LandingPage4Template      ;$jarResourceCms/structure-view/structure_landingPage4Template.vm
 ;;LandingPage5Template      ;$jarResourceCms/structure-view/structure_landingPage5Template.vm
 ;;LandingPage6Template      ;$jarResourceCms/structure-view/structure_landingPage6Template.vm
+;;newsInfoTemplate      ;$jarResourceCms/structure-view/structure_newsInfoTemplate.vm
 ;;ContentPage1Template      ;$jarResourceCms/structure-view/structure_contentPage1Template.vm
 ;;SearchResultsListPageTemplate ;$jarResourceCms/structure-view/structure_searchResultsPageTemplate.vm
 ;;SearchResultsGridPageTemplate ;$jarResourceCms/structure-view/structure_searchResultsPageTemplate.vm
@@ -63,7 +69,8 @@ UPDATE PageTemplate;$contentCV[unique=true];uid[unique=true];velocityTemplate[tr
 ;;OrderConfirmationPageTemplate;$jarResourceCms/structure-view/structure_orderConfirmationPageTemplate.vm
 ;;LoginPageTemplate         ;$jarResourceCms/structure-view/structure_loginPageTemplate.vm
 ;;CheckoutLoginPageTemplate ;$jarResourceCms/structure-view/structure_checkoutLoginPageTemplate.vm
-
+# newsInfo Template    ming add it in 2015/07/24
+;;newsInfoTemplate 		;$jarResourceCms/structure-view/structure_newsInfoTemplate.vm
 # Create ContentSlotNames
 # Each PageTemplate has a number of ContentSlotNames, with a list of valid components for the slot.
 # There are a standard set of slots and a number of specific slots for each template.
@@ -215,6 +222,79 @@ INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=
 ;Section3;;;wide
 ;Section4;;;narrow
 ;Section5;;;wide
+
+;SectionA;;;narrow
+;SectionB;;;narrow
+;SectionC;;;narrow
+;SectionD;;;narrow
+;SectionE;;;narrow
+;SectionF;;;narrow
+;SectionG;;;narrow
+;SectionH;;;narrow
+;SectionI;;;narrow
+;SectionJ;;;narrow
+;SectionK;;;narrow
+;SectionL;;;narrow
+;SectionM;;;narrow
+;SectionN;;;narrow
+;SectionO;;;narrow
+;SectionP;;;narrow
+
+;SectionLeftNav1;;;narrow
+;SectionLeftNav2;;;narrow
+;SectionLeftNav3;;;narrow
+;SectionLeftNav4;;;narrow
+;SectionLeftNav5;;;narrow
+;SectionLeftNav6;;;narrow
+;SectionLeftNav7;;;narrow
+;SectionLeftNav8;;;narrow
+;SectionLeftNav9;;;narrow
+;SectionLeftNav10;;;narrow
+;SectionLeftNavDivRoot1;;;narrow
+;SectionLeftNavDivRoot2;;;narrow
+;SectionLeftNavDivRoot3;;;narrow
+;SectionLeftNavDivRoot4;;;narrow
+;SectionLeftNavDivRoot5;;;narrow
+;SectionLeftNavDivRoot6;;;narrow
+;SectionLeftNavDivRoot7;;;narrow
+;SectionLeftNavDivRoot8;;;narrow
+;SectionLeftNavDivRoot9;;;narrow
+;SectionLeftNavDivRoot10;;;narrow
+;SectionLeftNavDiv1;;;narrow
+;SectionLeftNavDiv2;;;narrow
+;SectionLeftNavDiv3;;;narrow
+;SectionLeftNavDiv4;;;narrow
+;SectionLeftNavDiv5;;;narrow
+;SectionLeftNavDiv6;;;narrow
+;SectionLeftNavDiv7;;;narrow
+;SectionLeftNavDiv8;;;narrow
+;SectionLeftNavDiv9;;;narrow
+;SectionLeftNavDiv10;;;narrow
+;SectionImg1;;;narrow
+;SectionImg2;;;narrow
+;SectionImg3;;;narrow
+;SectionImg4;;;narrow
+;SectionImg5;;;narrow
+;SectionImg6;;;narrow
+;SectionImg7;;;narrow
+;SectionImg8;;;narrow
+;SectionImg9;;;narrow
+;SectionImg10;;;narrow
+;SectionImg11;;;narrow
+;SectionImg12;;;narrow
+;SectionText1;;;narrow
+;SectionText2;;;narrow
+;SectionText3;;;narrow
+;SectionText4;;;narrow
+;SectionText5;;;narrow
+;SectionText6;;;narrow
+;SectionText7;;;narrow
+;SectionText8;;;narrow
+;SectionText9;;;narrow
+;SectionText10;;;narrow
+;SectionText11;;;narrow
+;SectionText12;;;narrow
+
 ;Footer;;;footer
 ;TopHeaderSlot;;;wide
 ;BottomHeaderSlot;;;wide
@@ -407,12 +487,45 @@ INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=
 ;NavigationBar;;;navigation
 ;TopContent;;;wide
 ;SideContent;;;narrow
+;Footer;;;footer
+;TopHeaderSlot;;;wide
+;BottomHeaderSlot;;;wide
+
+# Company Page Template
+# Template used for all of the Company pages
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='CompanyPageTemplate'];validComponentTypes(code);compTypeGroup(code)
+;SiteLogo;;;logo
+;HeaderLinks;;;headerlinks
+;SearchBox;;;searchbox
+;MiniCart;;;minicart
+;NavigationBar;;;navigation
+;TopContent;;;wide
+;SideContent;;;narrow
 ;BodyContent;;;wide
 ;BottomContent;;;wide
 ;Footer;;;footer
 ;TopHeaderSlot;;;wide
 ;BottomHeaderSlot;;;wide
-;PlaceholderContentSlot;;;
+;TopHeaderSlot;;;wide
+;BottomHeaderSlot;;;wide
+
+# Company Page Template
+# Template used for all of the Account pages
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='AccountPageTemplate'];validComponentTypes(code);compTypeGroup(code)
+;SiteLogo;;;logo
+;HeaderLinks;;;headerlinks
+;SearchBox;;;searchbox
+;MiniCart;;;minicart
+;NavigationBar;;;navigation
+;TopContent;;;wide
+;SideContent;;;narrow
+;BodyContent;;;wide
+;BottomContent;;;wide
+;Footer;;;footer
+;TopHeaderSlot;;;wide
+;BottomHeaderSlot;;;wide
+;TopHeaderSlot;;;wide
+;BottomHeaderSlot;;;wide
 
 # Store Finder/Locator Page Template
 INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='StoreFinderPageTemplate'];validComponentTypes(code);compTypeGroup(code)
@@ -462,6 +575,18 @@ INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active
 ;;CenterRightContentSlot;Center Right Content Slot;true
 ;;EmptyCartMiddleContent;Empty CartMiddle Content Slot;true
 ;;PlaceholderContentSlot;Placeholder for Addon tag files;true
+
+# newsInfo Template    ming add it in 2015/07/24
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='newsInfoTemplate'];validComponentTypes(code);compTypeGroup(code)
+;SiteLogo;;;logo
+;HeaderLinks;;;headerlinks
+;SearchBox;;;searchbox
+;MiniCart;;;minicart
+;NavigationBar;;;navigation
+;SectionNews;;;wide
+;Footer;;;footer
+;TopHeaderSlot;;;wide
+;BottomHeaderSlot;;;wide
 
 # Bind Content Slots to Page Templates
 INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='ProductDetailsPageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
@@ -751,7 +876,17 @@ INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];po
 ;;TopHeaderSlot-ErrorPage;TopHeaderSlot;;TopHeaderSlot;true
 ;;BottomHeaderSlot-ErrorPage;BottomHeaderSlot;;BottomHeaderSlot;true
 ;;PlaceholderContentSlot-ErrorPage;PlaceholderContentSlot;;PlaceholderContentSlot;true
-
+# newsInfo Template    ming add it in 2015/07/24
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='newsInfoTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;SiteLogo-newsInfo;SiteLogo;;SiteLogoSlot;true
+;;HomepageLink-newsInfo;HomepageNavLink;;HomepageNavLinkSlot;true
+;;HeaderLinks-newsInfo;HeaderLinks;;HeaderLinksSlot;true
+;;SearchBox-newsInfo;SearchBox;;SearchBoxSlot;true
+;;MiniCart-newsInfo;MiniCart;;MiniCartSlot;true
+;;NavigationBar-newsInfo;NavigationBar;;NavigationBarSlot;true
+;;Footer-newsInfo;Footer;;FooterSlot;true
+;;TopHeaderSlot-newsInfo;TopHeaderSlot;;TopHeaderSlot;true
+;;BottomHeaderSlot-newsInfo;BottomHeaderSlot;;BottomHeaderSlot;true
 # Create Content Pages
 
 # Site-wide Homepage
@@ -803,3 +938,62 @@ INSERT_UPDATE CategoryPage;$contentCV[unique=true];uid[unique=true];name;masterT
 ;;productList;Product List;ProductListPageTemplate;true;
 ;;productGrid;Product Grid;ProductGridPageTemplate;false;
 ;;category;Default Category Page;CategoryPageTemplate;false;
+
+
+
+INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);label;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false'];
+;;homePageNotice1-ContentPage;homePage Notice1 Link;newsInfoTemplate;homePageNotice1-ContentPage
+;;homePageNotice2-ContentPage;homePage Notice2 Link;newsInfoTemplate;homePageNotice2-ContentPage
+;;homePageNotice3-ContentPage;homePage Notice3 Link;newsInfoTemplate;homePageNotice3-ContentPage
+;;homePageNotice4-ContentPage;homePage Notice4 Link;newsInfoTemplate;homePageNotice4-ContentPage
+;;homePageNotice5-ContentPage;homePage Notice5 Link;newsInfoTemplate;homePageNotice5-ContentPage
+;;homePageNotice6-ContentPage;homePage Notice6 Link;newsInfoTemplate;homePageNotice6-ContentPage
+;;homePageNotice7-ContentPage;homePage Notice7 Link;newsInfoTemplate;homePageNotice7-ContentPage
+;;homePageNotice8-ContentPage;homePage Notice8 Link;newsInfoTemplate;homePageNotice8-ContentPage
+;;homePageNotice9-ContentPage;homePage Notice9 Link;newsInfoTemplate;homePageNotice9-ContentPage
+
+;;homePageRule1-ContentPage;homePage Rule1 Link;newsInfoTemplate;homePageRule1-ContentPage
+;;homePageRule2-ContentPage;homePage Rule2 Link;newsInfoTemplate;homePageRule2-ContentPage
+;;homePageRule3-ContentPage;homePage Rule3 Link;newsInfoTemplate;homePageRule3-ContentPage
+;;homePageRule4-ContentPage;homePage Rule4 Link;newsInfoTemplate;homePageRule4-ContentPage
+
+;;homePageLetters1-ContentPage;homePage Letters1 Link;newsInfoTemplate;homePageLetters1-ContentPage
+;;homePageLetters2-ContentPage;homePage Letters2 Link;newsInfoTemplate;homePageLetters2-ContentPage
+;;homePageLetters3-ContentPage;homePage Letters3 Link;newsInfoTemplate;homePageLetters3-ContentPage
+;;homePageLetters4-ContentPage;homePage Letters4 Link;newsInfoTemplate;homePageLetters4-ContentPage
+;;homePageLetters5-ContentPage;homePage Letters5 Link;newsInfoTemplate;homePageLetters5-ContentPage
+;;homePageLetters6-ContentPage;homePage Letters6 Link;newsInfoTemplate;homePageLetters6-ContentPage
+;;homePageLetters7-ContentPage;homePage Letters7 Link;newsInfoTemplate;homePageLetters7-ContentPage
+;;homePageLetters8-ContentPage;homePage Letters8 Link;newsInfoTemplate;homePageLetters8-ContentPage
+;;homePageLetters9-ContentPage;homePage Letters9 Link;newsInfoTemplate;homePageLetters9-ContentPage
+;;homePageLetters10-ContentPage;homePage Letters10 Link;newsInfoTemplate;homePageLetters10-ContentPage
+
+;;homePageConvention1-ContentPage;homePage Convention1 Link;newsInfoTemplate;homePageConvention1-ContentPage
+;;homePageConvention2-ContentPage;homePage Convention2 Link;newsInfoTemplate;homePageConvention2-ContentPage
+;;homePageConvention3-ContentPage;homePage Convention3 Link;newsInfoTemplate;homePageConvention3-ContentPage
+;;homePageConvention4-ContentPage;homePage Convention4 Link;newsInfoTemplate;homePageConvention4-ContentPage
+;;homePageConvention5-ContentPage;homePage Convention5 Link;newsInfoTemplate;homePageConvention5-ContentPage
+
+;;homePageCompany1-ContentPage;homePage Company1 Link;newsInfoTemplate;homePageCompany1-ContentPage
+;;homePageCompany2-ContentPage;homePage Company2 Link;newsInfoTemplate;homePageCompany2-ContentPage
+;;homePageCompany3-ContentPage;homePage Company3 Link;newsInfoTemplate;homePageCompany3-ContentPage
+;;homePageCompany4-ContentPage;homePage Company4 Link;newsInfoTemplate;homePageCompany4-ContentPage
+;;homePageCompany5-ContentPage;homePage Company5 Link;newsInfoTemplate;homePageCompany5-ContentPage
+
+;;homePageBidding1-ContentPage;homePage Bidding1 Link;newsInfoTemplate;homePageBidding1-ContentPage
+;;homePageBidding2-ContentPage;homePage Bidding2 Link;newsInfoTemplate;homePageBidding2-ContentPage
+;;homePageBidding3-ContentPage;homePage Bidding3 Link;newsInfoTemplate;homePageBidding3-ContentPage
+;;homePageBidding4-ContentPage;homePage Bidding4 Link;newsInfoTemplate;homePageBidding4-ContentPage
+;;homePageBidding5-ContentPage;homePage Bidding5 Link;newsInfoTemplate;homePageBidding5-ContentPage
+
+;;homePageNewsPeople1-ContentPage;homePage NewsPeople1 Link;newsInfoTemplate;homePageNewsPeople1-ContentPage
+;;homePageNewsPeople2-ContentPage;homePage NewsPeople2 Link;newsInfoTemplate;homePageNewsPeople2-ContentPage
+;;homePageNewsPeople3-ContentPage;homePage NewsPeople3 Link;newsInfoTemplate;homePageNewsPeople3-ContentPage
+
+;;homePageNewsList1-ContentPage;homePage NewsList1 Link;newsInfoTemplate;homePageNewsList1-ContentPage
+;;homePageNewsList2-ContentPage;homePage NewsList2 Link;newsInfoTemplate;homePageNewsList2-ContentPage
+;;homePageNewsList3-ContentPage;homePage NewsList3 Link;newsInfoTemplate;homePageNewsList3-ContentPage
+
+
+
+

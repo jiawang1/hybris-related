@@ -2,13 +2,12 @@
 ## Navigation
 ********************************************************************/
 
-.navigationbarcollectioncomponent{
+#nav_main{
 	border:1px dotted #a5a5a5;
 	border-width:1px 0 ;
 
 	position:relative;
 	z-index:100;
-	clear: both;
 }
 
 
@@ -16,25 +15,25 @@
 #### 1. Navigation Level
 ********************************************************************/
 
-.navigationbarcollectioncomponent  li.La{
+#nav_main  li.La{
 	float:left;
 	text-align:center;
 
 }
 
 
-.navigationbarcollectioncomponent  li.La > a{
+#nav_main  li.La > a{
 	display:block;
 	line-height:2.750em;
 	padding: 0 12px;
 }
 
 
-.navigationbarcollectioncomponent li.La:hover{
+#nav_main li.La:hover{
 
 }
 
-.navigationbarcollectioncomponent li.parent:hover > a{ 
+#nav_main li.parent:hover > a{ 
 
 	background:#eee ;
 	margin:0 0 -1px 0;
@@ -42,7 +41,7 @@
 	box-shadow: 4px 4px 4px rgba(0,0,0,0.4);
 }
 
-.navigationbarcollectioncomponent li.parent:hover > a{ 
+#nav_main li.parent:hover > a{ 
 	border-left:1px dotted #a5a5a5;
 	border-right:1px dotted #a5a5a5;
 	padding-left:11px;
@@ -52,44 +51,43 @@
 /*
 #### 2. Navigation Level
 ********************************************************************/
-.navigationbarcollectioncomponent ul.Lb{
+#nav_main ul.Lb{
 	display:none;
 }
 
 
-.navigationbarcollectioncomponent li.La:hover ul.Lb,
-.navigationbarcollectioncomponent li.La a:focus + ul.Lb{
+#nav_main li.La:hover ul.Lb,
+#nav_main li.La a:focus + ul.Lb{
 	display:block;
 }
 
 
 
 
-.navigationbarcollectioncomponent ul.Lb{
+#nav_main ul.Lb{
 	position:absolute;
 	background:#eee;
-	left:0;
-	right: 0;
+	left: auto;
+	right: auto;
 	text-align:left;
 	padding:20px;
 	border:1px dotted #a5a5a5;
 	z-index:99;
 	border-top:0;
-	width: 908px;
+	width: 160px;
 	top:34px;
 	box-shadow: 4px 4px 4px rgba(0,0,0,0.4);
-	
 }
 
 
 
-.navigationbarcollectioncomponent ul.Lb li.Lb{
+#nav_main ul.Lb li.Lb{
 	float:left;
 
 }
 
 
-.navigationbarcollectioncomponent ul.Lb li.Lb span.nav-submenu-title{
+#nav_main ul.Lb li.Lb span.nav-submenu-title{
 	display:block;
 	font-weight:bold;
 	text-transform:uppercase;
@@ -100,20 +98,42 @@
 
 
 
-.navigationbarcollectioncomponent ul.Lb li.Lb .Lc{
+#nav_main ul.Lb li.Lb .Lc{
 	float:left;
 	width:181px;
+}
+
+
+/*
+#### Facet Block
+********************************************************************/
+
+.nav_column .item li.nav_selected {
+    background-color: #E3E3E3;
+}
+
+.facet_block li{
+	padding-left: 3px;
+}
+
+.facet_block li:hover a{
+	color: #2D95C8;
+	text-decoration: underline;
+}
+
+/*
+#### Special Offer
+********************************************************************/
+
+#nav_main > ul > li:last-child{
+	float:right;	
 }
 
 
 
 
 
-/*
-#### Special Offer
-********************************************************************/
-
-.navigationbarcollectioncomponent .La.special_offer{
+#nav_main .La.special_offer{
 	background:#eee;
-	float:right;
+	
 }

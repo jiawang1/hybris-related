@@ -1,17 +1,36 @@
 <%@ page trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="template" tagdir="/WEB-INF/tags/desktop/template" %>
+<%@ taglib prefix="theme" tagdir="/WEB-INF/tags/shared/theme" %>
+<%@ taglib prefix="nav" tagdir="/WEB-INF/tags/desktop/nav" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="cms" uri="http://hybris.com/tld/cmstags" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="common" tagdir="/WEB-INF/tags/desktop/common" %>
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags" %>
+<%@ taglib prefix="breadcrumb" tagdir="/WEB-INF/tags/desktop/nav/breadcrumb" %>
 
-<div class="span-20 last">
-	<div class="accountContentPane clearfix">
+<template:page pageTitle="${pageTitle}">
+
+	<div id="breadcrumb" class="breadcrumb">
+		<breadcrumb:breadcrumb breadcrumbs="${breadcrumbs}"/>
+	</div>
+	<div id="globalMessages">
+		<common:globalMessages/>
+	</div>
+	<nav:accountNav selected="address-book"/>
+
+	<div class="column accountContentPane clearfix">
 		<div class="headline">
 			<spring:theme code="text.account.addressBook" text="Address Book"/>
 		</div>
 		<div class="description">
 			<spring:theme code="text.account.addressBook.manageYourAddresses" text="Manage your address book"/>
 		</div>
+
+
 		<c:choose>
 			<c:when test="${not empty addressData}">
 				<c:forEach items="${addressData}" var="address">
@@ -27,6 +46,8 @@
 								<li>${fn:escapeXml(address.country.name)}</li>
 							</ul>
 						</ycommerce:testId>
+
+
 						<div class="buttons">
 							<ycommerce:testId code="addressBook_addressOptions_label">
 								<c:if test="${not address.defaultAddress}">
@@ -45,13 +66,15 @@
 									</a>
 								</ycommerce:testId>
 								<ycommerce:testId code="addressBook_removeAddress_button">
-									<a class="button removeAddressButton" data-address-id="${address.id}"><spring:theme code="text.remove" text="Remove"/></a>
+									<a class="button removeAddressButton" data-address-id="${address.id}" href="remove-address/${address.id}" />
+										<spring:theme code="text.remove" text="Remove"/>
+									</a>
 								</ycommerce:testId>
 							</ycommerce:testId>
 						</div>
 					</div>
 					<div style="display:none">
-						<div id="popup_confirm_address_removal_${address.id}">
+						<div id="popup_confirm_address_removal_${address.id}" class="address-removal-confirm-popup">
 							<div class="addressItem">
 								<ul>
 									<li>${fn:escapeXml(address.title)}&nbsp;${fn:escapeXml(address.firstName)}&nbsp;${fn:escapeXml(address.lastName)}</li>
@@ -62,19 +85,21 @@
 									<li>${fn:escapeXml(address.postalCode)}</li>
 									<li>${fn:escapeXml(address.country.name)}</li>
 								</ul>
-								<spring:theme code="text.adress.remove.confirmation" text="Are you sure you would like to delete this address?"/>
-								<div class="buttons">
-									<a class="button removeAddressButton" data-address-id="${address.id}" href="remove-address/${address.id}">
-										<spring:theme code="text.yes" text="Yes"/>
-									</a>
-									<a class="button closeColorBox" data-address-id="${address.id}">
-										<spring:theme code="text.no" text="No"/>
-									</a>
-								</div>
 							</div>
+							<spring:theme code="text.adress.remove.confirmation" text="Are you sure you would like to delete this address?"/></a>
+
+							<div class="buttons clearfix">
+								<a class="button" data-address-id="${address.id}" href="remove-address/${address.id}">
+									<spring:theme code="text.yes" text="Yes"/>
+								</a>
+								<a class="button closeColorBox" data-address-id="${address.id}">
+									<spring:theme code="text.no" text="No"/></a>
+							</div>
+							
 						</div>
 					</div>
 				</c:forEach>
+
 			</c:when>
 			<c:otherwise>
 				<p class="emptyMessage">
@@ -82,10 +107,14 @@
 				</p>
 			</c:otherwise>
 		</c:choose>
+
+
 		<ycommerce:testId code="addressBook_addNewAddress_button">
 			<a href="add-address" class="button positive">
 				<spring:theme code="text.account.addressBook.addAddress" text="Add new address"/>
 			</a>
 		</ycommerce:testId>
+
 	</div>
-</div>
+
+</template:page>

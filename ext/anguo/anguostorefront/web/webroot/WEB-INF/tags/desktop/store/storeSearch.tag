@@ -17,7 +17,7 @@
 	
 	<form:form action="${storeFinderFormAction}" method="get" commandName="storeFinderForm">
 		<ycommerce:testId code="storeFinder_search_box">
-			<formElement:formInputBox idKey="storelocator-query" labelKey="storelocator.query" path="q" inputCSS="text" mandatory="true" />
+			<formElement:formInputBox idKey="storelocator-query" labelKey="storeFinder.postcode.town" path="q" inputCSS="text" mandatory="true" />
 			<button class="positive" type="submit"><spring:theme code="storeFinder.search" /></button>
 		</ycommerce:testId>
 	</form:form>

@@ -7,7 +7,7 @@
 <%@ attribute name="product" required="true" type="de.hybris.platform.commercefacades.product.data.ProductData" %>
 <%@ taglib prefix="product" tagdir="/WEB-INF/tags/desktop/product" %>
 
-<div class="prodReview clearfix">
+<div class="prodReview right">
 			<product:productStars rating="${product.averageRating}" />
 			
 			<c:if test="${not empty product.reviews}">

@@ -12,9 +12,9 @@
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags" %>
 
 <c:if test="${not empty cartData.potentialOrderPromotions}">
-	<div class="item_container_holder promo">
+	<div class="item_container_holder promo_top">
 		<div class="title_holder">
-			<h2><spring:theme code="basket.potential.promotions" /></h2>
+			<div class="headline"><spring:theme code="basket.potential.promotions" /></div>
 		</div>
 		<div class="item_container">
 			<ycommerce:testId code="potentialPromotions_promotions_labels">

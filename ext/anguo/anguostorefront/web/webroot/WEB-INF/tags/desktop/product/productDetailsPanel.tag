@@ -21,30 +21,98 @@
 
 	<div class="span-10 productDescription last">
 		<ycommerce:testId code="productDetails_productNamePrice_label_${product.code}">
-			<product:productPricePanel product="${product}"/>
-		</ycommerce:testId>
-		<ycommerce:testId code="productDetails_productNamePrice_label_${product.code}">
 			<h1>
-				${product.name}
+					${fn:escapeXml(product.name)}
 			</h1>
 		</ycommerce:testId>
 
+        <ycommerce:testId code="productDetails_productNamePrice_label_${product.code}">
+            <product:productPricePanel product="${product}"  table="false" />
+        </ycommerce:testId>
+
 		<product:productReviewSummary product="${product}"/>
-
-
+        <!--
 		<div class="summary">
-			${product.summary}
+			${fn:escapeXml(product.summary)}
+		</div>-->
+        <!--界面所带的三种属性-->
+        <div class="maijia">
+        <ul>
+		<li class="norm">
+			<c:forEach items="${product.classifications}" var="classification">
+				<c:forEach items="${classification.features}" var="feature">
+				<c:if test="${feature.code eq 'PowertoolsClassification/1.0/4593.motor diameter, 6752'}">
+						${feature.name}
+				</c:if>
+				</c:forEach>
+			</c:forEach> :
+		</li>
+		<li>
+			<c:forEach items="${product.classifications}" var="classification">
+				<c:forEach items="${classification.features}" var="feature">
+				<c:if test="${feature.code eq 'PowertoolsClassification/1.0/4593.motor diameter, 6752'}">
+					<c:forEach items="${feature.featureValues}" var="value" varStatus="status">
+						${value.value}
+					</c:forEach>
+				</c:if>
+				</c:forEach>
+			</c:forEach>
+		</li>
+		<li class="norm">
+			<c:forEach items="${product.classifications}" var="classification">
+				<c:forEach items="${classification.features}" var="feature">
+				<c:if test="${feature.code eq 'PowertoolsClassification/1.0/4593.chuck type, 6751'}">
+						${feature.name}
+				</c:if>
+				</c:forEach>
+			</c:forEach> :
+		</li>
+		<li>
+			<c:forEach items="${product.classifications}" var="classification">
+				<c:forEach items="${classification.features}" var="feature">
+				<c:if test="${feature.code eq 'PowertoolsClassification/1.0/4593.chuck type, 6751'}">
+					<c:forEach items="${feature.featureValues}" var="value" varStatus="status">
+						${value.value}
+					</c:forEach>
+				</c:if>
+				</c:forEach>
+			</c:forEach>
+		</li>
+		<li class="norm">
+			<c:forEach items="${product.classifications}" var="classification">
+				<c:forEach items="${classification.features}" var="feature">
+				<c:if test="${feature.code eq 'PowertoolsClassification/1.0/4593.impact energy, 6782'}">
+						${feature.name}
+				</c:if>
+				</c:forEach>
+			</c:forEach> :
+		</li>
+		<li>
+			<c:forEach items="${product.classifications}" var="classification">
+				<c:forEach items="${classification.features}" var="feature">
+				<c:if test="${feature.code eq 'PowertoolsClassification/1.0/4593.impact energy, 6782'}">
+					<c:forEach items="${feature.featureValues}" var="value" varStatus="status">
+						${value.value}
+					</c:forEach>
+				</c:if>
+				</c:forEach>
+			</c:forEach>
+		</li>
+		</ul>
 		</div>
-
+		<!--界面所带的三种属性-->
+		
 		<product:productPromotionSection product="${product}"/>
 
 		<cms:pageSlot position="VariantSelector" var="component" element="div">
 			<cms:component component="${component}"/>
 		</cms:pageSlot>
 
-		<cms:pageSlot position="AddToCart" var="component" element="div" class="span-10 last add-to-cart">
+		<cms:pageSlot position="AddToCart" var="component" element="div">
 			<cms:component component="${component}"/>
 		</cms:pageSlot>
+
+		<product:productShareTag/>
 	</div>
 
 	<cms:pageSlot position="Section2" var="feature" element="div" class="span-8 section2 cms_disp-img_slot last">

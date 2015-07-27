@@ -10,9 +10,6 @@
 <%@ taglib prefix="cart" tagdir="/WEB-INF/tags/desktop/cart" %>
 
 <div class="userLogin">
-	<div class="headline"><spring:theme code="login.title"/></div>
-	<div class="required right"><spring:theme code="form.required"/></div>
-	<div class="description"><spring:theme code="login.description"/></div>
 
 	<form:form action="${action}" method="post" commandName="loginForm">
 		<c:if test="${not empty message}">
@@ -24,7 +21,7 @@
 			<div class="form_field_error">
 		</c:if>
 		<div class="form_field-elements">
-			<formElement:formInputBox idKey="j_username" labelKey="login.userId" path="j_username" inputCSS="text" mandatory="true"/>
+			<formElement:formInputBox idKey="j_username" labelKey="login.username" path="j_username" inputCSS="text" mandatory="true"/>
 			<formElement:formPasswordBox idKey="j_password" labelKey="login.password" path="j_password" inputCSS="text password" mandatory="true"/>
 			<div class="form_field_error-message">
 				<a href="javascript:void(0)" data-url="<c:url value='/login/pw/request'/>" class="password-forgotten"><spring:theme code="login.link.forgottenPwd"/></a>
