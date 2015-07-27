@@ -439,14 +439,14 @@
 		<property name="districtDao" ref="districtDao" />
 	</bean>
 	
-		<alias name="anguoCategoryDao" alias="anguoCategoryDao"/>
+	<alias name="anguoCategoryDao" alias="anguoCategoryDao"/>
 	<bean id="anguoCategoryDao" class="com.tasly.anguo.core.category.dao.impl.DefaultAnguoCategoryDao" parent="categoryDao">
 		<property name="pagedFlexibleSearchService" ref="pagedFlexibleSearchService"></property>
 	</bean>
 	
 	<alias name="anguoCategoryService" alias="anguoCategoryService"/>
 	<bean id="anguoCategoryService" class="com.tasly.anguo.core.category.impl.DefaultAnguoCategoryService" parent="categoryService">
-		<property name="categoryDao" ref="anguoCategoryDao"></property>
+		<property name="anguoCategoryDao" ref="anguoCategoryDao"></property>
 	</bean>	
 	<!-- beans for product end -->
 </beans>

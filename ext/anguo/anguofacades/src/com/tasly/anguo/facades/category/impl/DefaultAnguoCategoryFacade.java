@@ -10,9 +10,12 @@ import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
+import com.tasly.anguo.core.category.AnguoCategoryService;
 import com.tasly.anguo.facades.category.AnguoCategoryFacade;
+import com.tasly.anguo.facades.populators.AnguoCategoryPopulator;
 import com.tasly.anguo.facades.populators.CategoryNodePopulator;
 import com.tasly.anguo.facades.populators.MgmtCategoryPopulator;
+import com.tasly.anguo.facades.product.data.CategoryData;
 import com.tasly.anguo.facades.product.data.CategoryNodeData;
 import com.tasly.anguo.facades.product.data.MgmtCategoryData;
 
@@ -20,21 +23,19 @@ import de.hybris.platform.category.CategoryService;
 import de.hybris.platform.category.daos.CategoryDao;
 import de.hybris.platform.category.model.CategoryModel;
 import de.hybris.platform.commercefacades.product.converters.populator.CategoryPopulator;
-import de.hybris.platform.commercefacades.product.data.CategoryData;
 
 public class DefaultAnguoCategoryFacade implements AnguoCategoryFacade {
     
 	private Logger LOG = Logger.getLogger(DefaultAnguoCategoryFacade.class);
-	private CategoryService categoryService;
+	private AnguoCategoryService categoryService;
 	private CategoryNodePopulator categoryNodePopulator;
 	private MgmtCategoryPopulator mgmtCategoryPopulator;
+	private AnguoCategoryPopulator categoryPopulator;
 	
 	@Override
 	public List<CategoryNodeData> getSubCategoryByCode(String categoryCode) {
-		
 		if(StringUtils.isEmpty(categoryCode))
 			return getRootCategory();
-		
 		CategoryModel category = categoryService.getCategoryForCode(categoryCode);
 		Collection<CategoryModel> categorys = category.getCategories();
 	
@@ -88,7 +89,20 @@ public class DefaultAnguoCategoryFacade implements AnguoCategoryFacade {
 		return mgmtCategoryData;
 	}
 
-	public void setCategoryService(CategoryService categoryService) {
+	@Override
+	public List<CategoryData> getCategoriesByKeyword(String keyword,
+			int totalCount) {
+		List<CategoryModel> categoryModels = categoryService.getCategoriesByKeyword(keyword, totalCount);
+		List<CategoryData> result = new ArrayList<CategoryData>();
+		for (CategoryModel categoryModel : categoryModels) {
+			CategoryData category = new CategoryData();
+			categoryPopulator.populate(categoryModel, category);
+			result.add(category);
+		}
+		return result;
+	}
+	
+	public void setCategoryService(AnguoCategoryService categoryService) {
 		this.categoryService = categoryService;
 	}
 
@@ -98,5 +112,17 @@ public class DefaultAnguoCategoryFacade implements AnguoCategoryFacade {
 	
 	public void setMgmtCategoryPopulator(MgmtCategoryPopulator mgmtCategoryPopulator) {
 		this.mgmtCategoryPopulator = mgmtCategoryPopulator;
+	}
+	/**
+	 * @return the categoryPopulator
+	 */
+	public AnguoCategoryPopulator getCategoryPopulator() {
+		return categoryPopulator;
+	}
+	/**
+	 * @param categoryPopulator the categoryPopulator to set
+	 */
+	public void setCategoryPopulator(AnguoCategoryPopulator categoryPopulator) {
+		this.categoryPopulator = categoryPopulator;
 	}
 }

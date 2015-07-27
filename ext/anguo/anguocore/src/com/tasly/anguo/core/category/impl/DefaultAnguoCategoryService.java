@@ -17,7 +17,7 @@ import de.hybris.platform.category.model.CategoryModel;
  */
 public class DefaultAnguoCategoryService extends DefaultCategoryService implements AnguoCategoryService {
 	
-	private AnguoCategoryDao categoryDao;
+    private AnguoCategoryDao anguoCategoryDao;
 
 	/* (non-Javadoc)
 	 * @see com.tasly.anguo.core.category.AnguoCategoryService#getCategoriesByKeyword(java.lang.String, int)
@@ -25,21 +25,17 @@ public class DefaultAnguoCategoryService extends DefaultCategoryService implemen
 	@Override
 	public List<CategoryModel> getCategoriesByKeyword(String keyword,
 			int totalCount) {
-		return categoryDao.getCategoriesByKeyword(keyword, totalCount);
+		return anguoCategoryDao.getCategoriesByKeyword(keyword, totalCount);
 	}
 
 	/**
-	 * @return the categoryDao
+	 * @param anguoCategoryDao the anguoCategoryDao to set
 	 */
-	public AnguoCategoryDao getCategoryDao() {
-		return categoryDao;
+	public void setAnguoCategoryDao(AnguoCategoryDao anguoCategoryDao) {
+		this.anguoCategoryDao = anguoCategoryDao;
 	}
-
-	/**
-	 * @param categoryDao the categoryDao to set
-	 */
-	public void setCategoryDao(AnguoCategoryDao categoryDao) {
-		this.categoryDao = categoryDao;
-	}
-
+	
 }
+	
+
+	

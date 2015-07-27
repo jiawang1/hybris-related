@@ -193,13 +193,17 @@
 	<!-- beans for product start -->
 	<alias name="anguoCategoryFacade" alias="categoryFacade"/>
 	<bean id="anguoCategoryFacade" class="com.tasly.anguo.facades.category.impl.DefaultAnguoCategoryFacade">
-		<property name="categoryService" ref="categoryService"></property>
+		<property name="categoryService" ref="anguoCategoryService"></property>
 		<property name="categoryNodePopulator" ref="categoryNodePopulator"></property>
 		<property name="mgmtCategoryPopulator" ref="mgmtCategoryPopulator"></property>
+		<property name="categoryPopulator" ref="anguoCategoryPopulator"></property>
 	</bean>
 	
 	<bean id="categoryNodePopulator" class="com.tasly.anguo.facades.populators.CategoryNodePopulator"></bean>
 	<bean id="mgmtCategoryPopulator" class="com.tasly.anguo.facades.populators.MgmtCategoryPopulator"></bean>
+	
+	<bean id="anguoCategoryPopulator" class="com.tasly.anguo.facades.populators.AnguoCategoryPopulator" parent="categoryPopulator">
+	</bean>
 
 	<alias alias="regionFacade" name="defaultRegionFacade" />
 	<bean id="defaultRegionFacade" class="com.tasly.anguo.facades.location.impl.DefaultRegionFacade">

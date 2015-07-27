@@ -61,4 +61,11 @@ INSERT_UPDATE CategoryCategoryRelation;$categories;$supercategories
 ;动物类;药材
 ;矿物类;药材
 
+# Language
+$lang=zh
 
+INSERT_UPDATE CategoryAlias;alias[unique=true][lang=$lang];category(code)
+;鬼盖;人参
+;地精;人参
+;母龙精;川贝母
+;空草;川贝母

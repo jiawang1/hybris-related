@@ -44,6 +44,10 @@
 		<property name="name" type="String"></property>
 		<property name="alias" type="java.util.List&lt;com.tasly.anguo.facades.product.data.MgmtCatAliasData>"></property>
 	</bean>
+	
+	<bean class="com.tasly.anguo.facades.product.data.CategoryData" extends="de.hybris.platform.commercefacades.product.data.CategoryData"> 
+		<property name="categoryPath" type="String"></property>
+	</bean>
 
 	<bean class="com.tasly.anguo.facades.data.CityData" >
 		<property name="storeCount" type="Integer"/>
