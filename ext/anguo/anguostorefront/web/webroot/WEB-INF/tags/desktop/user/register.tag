@@ -26,7 +26,7 @@
 			<formElement:formInputBox idKey="userId" labelKey="register.username" path="userId" inputCSS="text" mandatory="true"/>
 			<formElement:formPasswordBox idKey="password" labelKey="register.pwd" path="pwd" inputCSS="text password strength" mandatory="true"/>
 			<formElement:formPasswordBox idKey="register.checkPwd" labelKey="register.checkPwd" path="checkPwd" inputCSS="text password" mandatory="true"/>
-			<formElement:formInputBox idKey="register.mobile" labelKey="register.mobile" path="mobileNumber" inputCSS="text" mandatory="true"/>
+			<formElement:formInputBox idKey="mobile" labelKey="register.mobile" path="mobileNumber" inputCSS="text" mandatory="true"/>
 			<formElement:formInputButtonBox labelKey="register.captcha" idKey="captcha" path="captcha" buttonLabel="register.captcha" buttonId="btCaptcha"/>
 			<formElement:formCheckbox idKey="cbIsAgreeTerms" labelKey="register.agree.terms" path="isAgreeTerms"/>
 			<input type="hidden" id="recaptchaChallangeAnswered" value="${requestScope.recaptchaChallangeAnswered}"/>
@@ -50,7 +50,7 @@
 	        return;
 	    } else { 
 	        obj.setAttribute("disabled", true); 
-	        obj.innerText=<spring:theme code="register.recaptcha" />+"(" + countdown + ")"; 
+	        obj.innerText='<spring:theme code="register.recaptcha" />'+"(" + countdown + ")"; 
 	        countdown--; 
 	    } 
 	setTimeout(function() { 
@@ -74,6 +74,23 @@
 		$("#"+displayDiv).show();
 		$("#"+hiddenDiv).hide();
 		$("#userType").val((displayDiv=="divPersonal")? "PERSONAL" : "ENTERPRISE");
+	}
+	document.getElementById("mobile").onblur=function() {
+		var str = $("#mobile").val();
+	    if(str==""){
+	        alert('<spring:theme code="register.mobile.invalid" />');
+	        $("#mobile").focus();
+	    }
+	    else{
+	        var re = /^1\d{10}$/;
+	        if (!re.test(str)) {
+	        {
+		        alert('<spring:theme code="register.mobile.invalid" />');
+		        $("#mobile").focus();
+
+	        }
+	    }
+		}	
 	}
 </script>
 
