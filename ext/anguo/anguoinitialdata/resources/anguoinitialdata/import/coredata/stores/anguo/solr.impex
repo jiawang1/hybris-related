@@ -83,7 +83,7 @@ INSERT_UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[
 
 # Category fields
 INSERT_UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[unique=true];type(code);localized[default=false];multiValue[default=true];categoryField[default=true];useForSpellchecking[default=false];useForAutocomplete[default=false];fieldValueProvider
-;$solrIndexedType; categoryName     ;text   ;true;;;true;true;anguosCategoryNameValueProvider
+;$solrIndexedType; categoryName     ;text   ;true;;;true;true;anguoCategoryNameValueProvider
 ;$solrIndexedType; brandName        ;text   ;true;;;    ;    ;anguoBrandCategoryNameValueProvider
 
 # Category facets

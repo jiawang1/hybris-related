@@ -32,6 +32,23 @@
 
 	<!-- Solr field value providers -->
 
+    <bean id="volumeAwareProductPriceValueProvider" class="tasly.anguo.core.solr.provider.VolumeAwareProductPriceValueProvider"  parent="abstractPropertyFieldValueProvider">
+        <property name="fieldNameProvider" ref="solrFieldNameProvider"/>
+        <property name="priceService" ref="priceService"/>
+        <property name="commonI18NService" ref="commonI18NService"/>
+        <property name="sessionService" ref="sessionService"/>
+        <property name="userService" ref="userService"/>
+        <property name="priceComparator" ref="volumePriceComparator"/>
+        <property name="catalogVersionService" ref="catalogVersionService"/>
+    </bean>
+
+    <bean id="volumePriceComparator" class="tasly.anguo.core.VolumeAwarePriceInformationComparator" scope="singleton"/>
+
+    <bean id="productVolumePricesProvider" class="tasly.anguo.core.solr.provider.ProductVolumePricesProvider"  parent="abstractPropertyFieldValueProvider">
+        <property name="fieldNameProvider" ref="solrFieldNameProvider"/>
+        <property name="priceService" ref="priceService"/>
+    </bean>
+
 	<bean id="electronicsCategorySource" parent="abstractCategorySource">
 		<property name="rootCategory" value="1"/>
 		<!-- '1' is the root icecat category -->
