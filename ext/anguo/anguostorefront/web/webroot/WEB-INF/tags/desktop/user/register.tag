@@ -19,16 +19,15 @@
 		<div class="description"><spring:theme code="register.description.enterprise"/></div>
 	</div>
 	<form:form method="post" commandName="anguoRegisterForm" action="${action}">
-	<input type="hidden" id="recaptcha" value="<spring:theme code="register.recaptcha"/>">
 		<div class="form_field-elements js-recaptcha-captchaaddon">
 			<!--<formElement:formSelectBox idKey="register.title" labelKey="register.title" path="titleCode" mandatory="true" skipBlank="false" skipBlankMessageKey="form.select.empty" items="${titles}"/>-->
 			<!--<formElement:formInputBox idKey="register.firstName" labelKey="register.firstName" path="firstName" inputCSS="text" mandatory="true"/>
 			<formElement:formInputBox idKey="register.lastName" labelKey="register.lastName" path="lastName" inputCSS="text" mandatory="true"/>-->
-			<formElement:formInputBox idKey="register.username" labelKey="register.username" path="userId" inputCSS="text" mandatory="true"/>
+			<formElement:formInputBox idKey="userId" labelKey="register.username" path="userId" inputCSS="text" mandatory="true"/>
 			<formElement:formPasswordBox idKey="password" labelKey="register.pwd" path="pwd" inputCSS="text password strength" mandatory="true"/>
 			<formElement:formPasswordBox idKey="register.checkPwd" labelKey="register.checkPwd" path="checkPwd" inputCSS="text password" mandatory="true"/>
 			<formElement:formInputBox idKey="register.mobile" labelKey="register.mobile" path="mobileNumber" inputCSS="text" mandatory="true"/>
-			<formElement:formInputBox idKey="register.captcha" labelKey="register.captcha" path="captcha" inputCSS="text" mandatory="true"/><button type="button" onclick="settime(this)"><spring:theme code="register.captcha"></spring:theme></button>
+			<formElement:formInputButtonBox labelKey="register.captcha" idKey="captcha" path="captcha" buttonLabel="register.captcha" buttonId="btCaptcha"/>
 			<formElement:formCheckbox idKey="cbIsAgreeTerms" labelKey="register.agree.terms" path="isAgreeTerms"/>
 			<input type="hidden" id="recaptchaChallangeAnswered" value="${requestScope.recaptchaChallangeAnswered}"/>
 			<input type="hidden" id="accountType" value="${requestScope.recaptchaChallangeAnswered}"/>
@@ -36,7 +35,7 @@
 		</div>
 		<div class="form-actions clearfix">
 			<ycommerce:testId code="register_Register_button">
-				<button id="registerButton" type="submit" class="positive" disabled><spring:theme code='${actionNameKey}'/></button>
+				<button id="registerButton" type="submit" class="positive"><spring:theme code='${actionNameKey}'/></button>
 			</ycommerce:testId>
 		</div>
 	</form:form>
@@ -46,26 +45,32 @@
 	function settime(obj) {
 	     if (countdown == 0) { 
 	        obj.removeAttribute("disabled");    
-	        obj.innerText=$("#recaptcha").val();
+	        obj.innerText=<spring:theme code="register.recaptcha" />;
 	        countdown = 60;
 	        return;
 	    } else { 
 	        obj.setAttribute("disabled", true); 
-	        obj.innerText=$("#recaptcha").val()+"(" + countdown + ")"; 
+	        obj.innerText=<spring:theme code="register.recaptcha" />+"(" + countdown + ")"; 
 	        countdown--; 
 	    } 
 	setTimeout(function() { 
 	             			settime(obj)
 	              		 }
-	         ,1000)  
+	         ,1000);  
 	}
-   
-	document.getElementById("cbIsAgreeTerms").onclick = function() {
+    var cbIsAgreeTerms = document.getElementById("cbIsAgreeTerms");
+    var btCaptcha = document.getElementById("btCaptcha");
+    btCaptcha.onclick = function(){settime(btCaptcha);}
+    cbIsAgreeTerms.onclick = function() {
 		$("#registerButton").enable($("#cbIsAgreeTerms").attr("checked")? true :false);			
 	};
+	if (cbIsAgreeTerms.checked) {
+		document.getElementById("registerButton").disabled = false;
+	} else {
+		document.getElementById("registerButton").disabled = true;		
+	}
 	function personalEnterpriseSwitch(displayDiv, hiddenDiv)
 	{
-		$("#name").contain()
 		$("#"+displayDiv).show();
 		$("#"+hiddenDiv).hide();
 		$("#userType").val((displayDiv=="divPersonal")? "PERSONAL" : "ENTERPRISE");

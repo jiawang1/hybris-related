@@ -157,7 +157,7 @@ public class LoginPageController extends AbstractLoginPageController
 			model.addAttribute(form);
 			model.addAttribute(new LoginForm());
 			model.addAttribute(new GuestForm());
-			bindingResult.rejectValue("email", "registration.error.account.exists.title");
+			bindingResult.rejectValue("userId", "registration.error.account.exists.title");
 			GlobalMessages.addErrorMessage(model, "form.global.error");
 			return handleRegistrationError(model);
 		}
