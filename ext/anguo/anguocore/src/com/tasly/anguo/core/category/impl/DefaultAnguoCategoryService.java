@@ -25,7 +25,7 @@ public class DefaultAnguoCategoryService extends DefaultCategoryService implemen
 	@Override
 	public List<CategoryModel> getCategoriesByKeyword(String keyword,
 			int totalCount) {
-		return anguoCategoryDao.getCategoriesByKeyword(keyword, totalCount);
+		return anguoCategoryDao.findCategoriesByKeyword(keyword, totalCount);
 	}
 
 	/**

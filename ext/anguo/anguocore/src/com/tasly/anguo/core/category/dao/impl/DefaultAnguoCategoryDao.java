@@ -29,7 +29,7 @@ public class DefaultAnguoCategoryDao extends DefaultCategoryDao implements Anguo
 	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
-	public List<CategoryModel> getCategoriesByKeyword(String keyword,
+	public List<CategoryModel> findCategoriesByKeyword(String keyword,
 			int totalCount) {
 //		search query
 //		select * from {category as c}

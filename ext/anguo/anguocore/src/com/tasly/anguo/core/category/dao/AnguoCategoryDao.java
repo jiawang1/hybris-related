@@ -21,5 +21,5 @@ public interface AnguoCategoryDao extends CategoryDao {
 	 * @param totalCount
 	 * @return
 	 */
-	public List<CategoryModel> getCategoriesByKeyword(String keyword, int totalCount);
+	public List<CategoryModel> findCategoriesByKeyword(String keyword, int totalCount);
 }
