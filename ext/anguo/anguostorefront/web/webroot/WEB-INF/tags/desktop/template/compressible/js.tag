@@ -4,24 +4,21 @@
 
 
 <%-- j query 1.5.1 --%>
-<script type="text/javascript" src="${commonResourcePath}/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="${commonResourcePath}/js/jquery-1.11.2.min.js"></script>
+<script type="text/javascript" src="${commonResourcePath}/js/jquery-migrate-1.2.1.min.js"></script>
 
 <template:javaScriptVariables/>
-<script type="text/javascript" src="${commonResourcePath}/js/waypoints.min.js"></script>
 
-
-<%-- j query query 2.1.7 --%>
-<script type="text/javascript" src="${commonResourcePath}/js/jquery.query-2.1.7.js"></script>
 <%-- jquery tabs dependencies --%>
-<script type="text/javascript" src="${commonResourcePath}/js/jquery-ui-1.8.24.min.js"></script>
+<script type="text/javascript" src="${commonResourcePath}/js/jquery-ui-1.11.2.min.js"></script>
 <%-- j carousel --%>
 <script type="text/javascript" src="${commonResourcePath}/js/jquery.jcarousel-0.2.8.min.js"></script>
 <%-- j query templates --%>
 <script type="text/javascript" src="${commonResourcePath}/js/jquery.tmpl-1.0.0pre.min.js"></script>
 <%-- j query block UI --%>
-<script type="text/javascript" src="${commonResourcePath}/js/jquery.blockUI-2.39.js"></script>
+<script type="text/javascript" src="${commonResourcePath}/js/jquery.blockUI-2.70.js"></script>
 <%-- colorbox --%>
-<script type="text/javascript" src="${commonResourcePath}/js/jquery.colorbox.custom-1.3.16.js"></script>
+<script type="text/javascript" src="${commonResourcePath}/js/jquery.colorbox-min.js"></script>
 <%-- Slide Viewer --%>
 <script type="text/javascript" src="${commonResourcePath}/js/jquery.slideviewer.custom.1.2.js"></script>
 <script type="text/javascript" src="${commonResourcePath}/js/jquery.easing.1.3.js"></script>
@@ -38,6 +35,7 @@
 <%-- PasswordStrength  --%>
 <script type="text/javascript" src="${commonResourcePath}/js/jquery.pstrength.custom-1.2.0.js"></script>
 
+<script type="text/javascript" src="${commonResourcePath}/js/waypoints.min.1.1.5.js"></script>
 
 
 
@@ -87,7 +85,7 @@
 <script type="text/javascript" src="${themeResourcePath}/js/acc.mycompany.js"></script>
 <script type="text/javascript" src="${themeResourcePath}/js/acc.futurelink.js"></script>
 <script type="text/javascript" src="${themeResourcePath}/js/acc.search.js"></script>
-<script type="text/javascript" src="${commonResourcePath}/js/acc.productorderform.js"></script>
+<script type="text/javascript" src="${themeResourcePath}/js/acc.productorderform.js"></script>
 
 <script type="text/javascript" src="${themeResourcePath}/js/acc.checkoutB2B.js"></script>
 

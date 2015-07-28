@@ -79,6 +79,11 @@
 	</relations>
 	
 	<itemtypes>
+	
+	        <itemtype code="HeaderNavigationComponent" autocreate="true" generate="true" extends="NavigationBarComponent"
+                  jaloclass="de.hybris.platform.acceleratorcms.jalo.components.HeaderNavigationComponent">
+            <description>It represents navigation bar component that contains cms navigation node. Nodes structure can be built in a hierarchical way.</description>
+        </itemtype>
 
 		<!-- Add your item definitions here -->
 		<typegroup name="Locations">
