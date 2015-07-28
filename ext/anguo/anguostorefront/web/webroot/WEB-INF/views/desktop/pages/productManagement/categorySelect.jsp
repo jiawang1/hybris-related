@@ -24,7 +24,7 @@
 	float: left;
 	margin: 10px;
 	height: 280px;
-	width: 175px;
+	width: 275px;
 	border: 1px solid #000000;
 	background: #ffffff;
 	overflow: auto
@@ -36,24 +36,23 @@
 		<p>
 			类目搜索: <input type="text" id="keywordInput" />
 		</p>
-		<input type="button" id="catSearchBtn" value="快速找到类目" />
+		<input type="button" id="catSearchBtn" value="快速找到类目" style="display:none"/>
 	</div>
 	<div id="categoryTreeDiv"
 		style="display: block; background-color: #f0f8ff; height: 300px; width: 600px">
-		<div id="categoryTreeDivlv1" class="categoryTree">
+		<div id="categoryTreeDivlv2" class="categoryTree">
 			<c:forEach items="${categoryRoots }" var="categoryRoot">
-				<li catCode="${categoryRoot.id}" class="categorySelectorlv1"
+				<li catCode="${categoryRoot.id}" class="categorySelectorlv2"
 					style="list-style: none; margin: 10px">${categoryRoot.text }</li>
 			</c:forEach>
 		</div>
-		<div id="categoryTreeDivlv2" class="categoryTree"></div>
 		<div id="categoryTreeDivlv3" class="categoryTree"></div>
 	</div>
 	<div id="searchCatResDiv" style="display: none">
 		<b>搜索到的结果：</b> <input type="button" id="backToCatTreeBtn"
 			value="关闭，返回类目" />
 		<div
-			style="background-color: #87cefa; margin-top: 10px; height: 300px; width: 600px; overflow: hidden">
+			style="background-color: #f0f8ff; margin-top: 10px; height: 300px; width: 600px; overflow: hidden">
 			<div id="resultDiv"
 				style="margin: 10px; height: 280px; width: 580px; border: 1px solid #000000; background: #ffffff; overflow: auto">
 			</div>

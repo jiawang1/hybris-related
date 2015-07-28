@@ -14,43 +14,13 @@ ACC.categorysearch = {
 
 	catUnsave : function(catUnsave) {
 		var categoryUnsave = $("." + catUnsave);
-		categoryUnsave.click(function() {
-			$(".categorySelectorlv3").css('background', '#ffffff');
-			$(this).parent().append('<p id="createCatP" style="margin-left : 10px">新建类目: <input type="text" id="newCatInput" /></p>');
-		})
-	},
-
-	categorySelectlv1 : function(catSelectClass) {
-		var categorySelect = $("." + catSelectClass);
-		categorySelect
+		categoryUnsave
 				.click(function() {
-					categorySelect.css('backgroud', '#ffffff');
-					$(this).css('background', '#e0ffff');
-					var catCode = $(this).attr("catCode");
-					$
-							.ajax({
-								type : "GET",
-								url : ACC.config.contextPath
-										+ "/selectcategory/getSubCategory",
-								async : true,
-								data : {
-									categoryCode : catCode
-								},
-								success : function(data) {
-									$("#categoryTreeDivlv2").empty();
-									for (var int = 0; int < data.length; int++) {
-										$("#categoryTreeDivlv2")
-												.append(
-														'<li style="list-style:none; margin: 10px" class="categorySelectorlv2" catCode="'
-																+ data[int].id
-																+ '">'
-																+ data[int].text
-																+ '</li>');
-									}
-									ACC.categorysearch
-											.categorySelectlv2("categorySelectorlv2");
-								}
-							});
+					$(".categorySelectorlv3").css('background', '#ffffff');
+					$(this)
+							.parent()
+							.append(
+									'<p id="createCatP" style="margin-left : 10px">新建类目: <input type="text" id="newCatInput" /></p>');
 				})
 	},
 
@@ -83,7 +53,7 @@ ACC.categorysearch = {
 																+ '</li>');
 									}
 									ACC.categorysearch
-									.resultSave("categorySelectorlv3");
+											.resultSave("categorySelectorlv3");
 									$("#categoryTreeDivlv3")
 											.append(
 													'<li style="list-style:none; margin: 10px" class="unsavedCat" catCode="unsaved">未收录</li>');
@@ -99,34 +69,41 @@ ACC.categorysearch = {
 		var resultDiv = $("#" + resdiv);
 		var catTreeDiv = $("#" + treediv);
 		var searchDiv = $("#" + searchdiv);
-		searchButton
-				.click(function() {
+//		searchButton
+//				.click(function() {
+		searchInput.keyup(function() {
 					var keyword = searchInput.val();
-					$
-							.ajax({
-								type : "GET",
-								url : ACC.config.contextPath
-										+ "/selectcategory/searchCategory",
-								async : true,
-								data : {
-									keyword : keyword
-								},
-								success : function(data) {
-									resultDiv.empty();
-									for (var int = 0; int < data.length; int++) {
-										resultDiv
-												.append('<li class="catSearchResItem" style="list-style:none; margin: 10px" catCode="'
-														+ data[int].code
-														+ '">'
-														+ data[int].categoryPath
-														+ '</li>');
+//					if (keyword.length == 0) {
+//						alert("请输入搜索关键字，如人参");
+//					} else {
+					if (keyword.length != 0)
+					{
+						$
+								.ajax({
+									type : "GET",
+									url : ACC.config.contextPath
+											+ "/selectcategory/searchCategory",
+									async : true,
+									data : {
+										keyword : keyword
+									},
+									success : function(data) {
+										resultDiv.empty();
+										for (var int = 0; int < data.length; int++) {
+											resultDiv
+													.append('<li class="catSearchResItem" style="list-style:none; margin: 10px" catCode="'
+															+ data[int].code
+															+ '">'
+															+ data[int].categoryPath
+															+ '</li>');
+										}
+										ACC.categorysearch
+												.resultSave("catSearchResItem");
 									}
-									ACC.categorysearch
-											.resultSave("catSearchResItem");
-								}
-							});
-					catTreeDiv.css('display', 'none');
-					searchDiv.css('display', 'block');
+								});
+						catTreeDiv.css('display', 'none');
+						searchDiv.css('display', 'block');
+					}
 				});
 	},
 
@@ -143,8 +120,7 @@ ACC.categorysearch = {
 	setCategory : function(button) {
 		var selectButton = $("#" + button);
 		selectButton.click(function() {
-			if ($("#newCatInput").val() != null)
-			{
+			if ($("#newCatInput").val() != null) {
 				ACC.categorysearch.catSelectd = $("#newCatInput").val();
 			}
 			$.ajax({
@@ -170,6 +146,6 @@ $(document).ready(
 					"resultDiv", "categoryTreeDiv", "searchCatResDiv");
 			ACC.categorysearch.displayTree("backToCatTreeBtn",
 					"categoryTreeDiv", "searchCatResDiv");
-			ACC.categorysearch.categorySelectlv1("categorySelectorlv1");
+			ACC.categorysearch.categorySelectlv2("categorySelectorlv2");
 			ACC.categorysearch.setCategory("catDefineBtn");
 		});

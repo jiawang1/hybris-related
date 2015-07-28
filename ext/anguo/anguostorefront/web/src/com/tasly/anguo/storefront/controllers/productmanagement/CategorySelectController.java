@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.tasly.anguo.facades.category.AnguoCategoryFacade;
+import com.tasly.anguo.facades.constants.AnguoFacadesConstants;
 import com.tasly.anguo.facades.product.data.CategoryNodeData;
 import com.tasly.anguo.storefront.controllers.ControllerConstants;
 
@@ -33,7 +34,7 @@ public class CategorySelectController {
     
 	@RequestMapping(value=GET_CATEGORY_TREE)
 	public String renderPage(Model model){
-		List<CategoryNodeData> categoryRoots = anguoCategoryFacade.getSubCategoryByCode("");
+		List<CategoryNodeData> categoryRoots = anguoCategoryFacade.getSubCategoryByCode(AnguoFacadesConstants.ROOTCATEGORY);
 		model.addAttribute("categoryRoots", categoryRoots);
 		return ControllerConstants.Views.Pages.ProductManagement.CategorySelect;
 	}
@@ -41,7 +42,7 @@ public class CategorySelectController {
 	@RequestMapping(value=GET_SUB_CATEGORY )
 	@ResponseBody 
 	public Object getSubCategory(String categoryCode){
-		return anguoCategoryFacade.getSubCategoryByCode(categoryCode.equals("#") ? "":categoryCode);
+		return anguoCategoryFacade.getSubCategoryByCode(categoryCode.equals("") || categoryCode.equals("#") ? AnguoFacadesConstants.ROOTCATEGORY:categoryCode);
 	}
 	
 	@RequestMapping(value=FIND_CATEGORY)
