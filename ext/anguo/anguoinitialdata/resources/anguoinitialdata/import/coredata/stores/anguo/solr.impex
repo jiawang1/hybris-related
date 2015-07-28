@@ -83,18 +83,18 @@ INSERT_UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[
 
 # Category fields
 INSERT_UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[unique=true];type(code);localized[default=false];multiValue[default=true];categoryField[default=true];useForSpellchecking[default=false];useForAutocomplete[default=false];fieldValueProvider
-;$solrIndexedType; categoryName     ;text   ;true;;;true;true;powertoolsCategoryNameValueProvider
-;$solrIndexedType; brandName        ;text   ;true;;;    ;    ;powertoolsBrandCategoryNameValueProvider
+;$solrIndexedType; categoryName     ;text   ;true;;;true;true;anguosCategoryNameValueProvider
+;$solrIndexedType; brandName        ;text   ;true;;;    ;    ;anguoBrandCategoryNameValueProvider
 
 # Category facets
 INSERT_UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[unique=true];type(code);multiValue[default=true];facet[default=true];facetType(code);facetSort(code);priority;visible;categoryField[default=true];fieldValueProvider;facetDisplayNameProvider;topValuesProvider
 ;$solrIndexedType; allCategories ;string;;;Refine;Alpha;-9999;false;;categoryCodeValueProvider;
 ;$solrIndexedType; categoryPath  ;string;;;Refine;Alpha;-9999;false;false;categoryPathValueProvider;
-;$solrIndexedType; category      ;string;;;Refine;Alpha; 6000;true;;powertoolsCategoryCodeValueProvider;categoryFacetDisplayNameProvider;defaultTopValuesProvider
-;$solrIndexedType; brand         ;string;;;Refine;Alpha; 5000;true;;powertoolsBrandCategoryCodeValueProvider;categoryFacetDisplayNameProvider;defaultTopValuesProvider
-;$solrIndexedType; color	     ;string;;;Refine;Alpha; 4000;true;;powertoolsVariantCategoryCodeValueProvider;categoryFacetDisplayNameProvider;defaultTopValuesProvider
-;$solrIndexedType; fit		     ;string;;;Refine;Alpha; 3000;true;;powertoolsVariantCategoryCodeValueProvider;categoryFacetDisplayNameProvider;defaultTopValuesProvider
-;$solrIndexedType; size		     ;string;;;Refine;Alpha; 2000;true;;powertoolsVariantCategoryCodeValueProvider;categoryFacetDisplayNameProvider;defaultTopValuesProvider
+;$solrIndexedType; category      ;string;;;Refine;Alpha; 6000;true;;anguoCategoryCodeValueProvider;categoryFacetDisplayNameProvider;defaultTopValuesProvider
+;$solrIndexedType; brand         ;string;;;Refine;Alpha; 5000;true;;anguoBrandCategoryCodeValueProvider;categoryFacetDisplayNameProvider;defaultTopValuesProvider
+;$solrIndexedType; color	     ;string;;;Refine;Alpha; 4000;true;;anguoVariantCategoryCodeValueProvider;categoryFacetDisplayNameProvider;defaultTopValuesProvider
+;$solrIndexedType; fit		     ;string;;;Refine;Alpha; 3000;true;;anguoVariantCategoryCodeValueProvider;categoryFacetDisplayNameProvider;defaultTopValuesProvider
+;$solrIndexedType; size		     ;string;;;Refine;Alpha; 2000;true;;anguoVariantCategoryCodeValueProvider;categoryFacetDisplayNameProvider;defaultTopValuesProvider
 
 
 

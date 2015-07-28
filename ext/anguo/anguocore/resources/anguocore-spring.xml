@@ -36,6 +36,35 @@
 		<property name="rootCategory" value="1"/>
 		<!-- '1' is the root icecat category -->
 	</bean>
+	
+	    <bean id="anguoCategoryCodeValueProvider" parent="abstractCategoryCodeValueProvider">
+        <property name="categorySource" ref="anguoCategorySource"/>
+    </bean>
+    <bean id="anguoBrandCategoryCodeValueProvider" parent="abstractCategoryCodeValueProvider">
+        <property name="categorySource" ref="anguoBrandCategorySource"/>
+    </bean>
+    <bean id="anguoVariantCategoryCodeValueProvider" parent="abstractCategoryCodeValueProvider">
+        <property name="categorySource" ref="anguoVariantCategorySource"/>
+    </bean>
+
+
+    <bean id="anguoCategoryNameValueProvider" parent="abstractCategoryNameValueProvider">
+        <property name="categorySource" ref="anguoCategorySource"/>
+    </bean>
+    <bean id="anguoBrandCategoryNameValueProvider" parent="abstractCategoryNameValueProvider">
+        <property name="categorySource" ref="anguoBrandCategorySource"/>
+    </bean>
+    
+    <bean id="anguoCategorySource" parent="variantCategorySource">
+        <property name="rootCategory" value="1"/> <!-- '1' is the root icecat category -->
+    </bean>
+    <bean id="anguoVariantCategorySource" parent="variantCategorySource"/>
+
+    <bean id="anguoBrandCategorySource" parent="defaultCategorySource">
+        <property name="rootCategory" value="brands"/> <!-- 'brands' is the root of the brands hierarchy -->
+    </bean>
+    
+    
 	<bean id="electronicsBrandCategorySource" parent="abstractCategorySource">
 		<property name="rootCategory" value="brands"/>
 		<!-- 'brands' is the root of the brands hierarchy -->
