@@ -22,18 +22,15 @@
 <body>
 	<div style="float:left;overflow-y:scroll;overflow:auto;width:400px;height:300px;border:1px solid" id="category-tree-div"></div>
 	<div style="float:none;clear:both;margin:10px;padding:10px">
+    	<div>
+			<button id="saveCat">保存类目</button>
+		</div>
 		<form id="category-detail-form">
-			<div>
-				<button id="createCat">新增</button>
-				<button id="saveCat">保存</button>
-				<button id="deleteCat">删除</button>
-			</div>
-			<label for="categoryCode">目录编码</label> 
-			<input type="text" id="categoryCode" name="categoryCode"></input> 
+			<input type="hidden" id="categoryCode" name="categoryCode"></input> 
 			<label for="categoryCode">目录名称</label>
 			<input type="text" name="categoryName"></input>
 		</form>
-		<button id="new">新建</button>
+		<button id="new">新建别名</button>
 		<table id="aliasGrid" style="float:left" class="display" cellspacing="0" width="40%">
 		<thead>
 			<tr>

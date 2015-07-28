@@ -47,6 +47,7 @@
 	
 	<bean class="com.tasly.anguo.facades.product.data.MgmtCategoryData">
 		<property name="categoryCode" type="String"></property>
+		<property name="superCategory" type="String"></property>
 		<property name="name" type="String"></property>
 		<property name="alias" type="java.util.List&lt;com.tasly.anguo.facades.product.data.MgmtCatAliasData>"></property>
 	</bean>
