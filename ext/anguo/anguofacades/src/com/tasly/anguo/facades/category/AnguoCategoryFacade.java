@@ -5,7 +5,7 @@ import java.util.List;
 import com.tasly.anguo.facades.product.data.CategoryData;
 import com.tasly.anguo.facades.product.data.CategoryNodeData;
 import com.tasly.anguo.facades.product.data.MgmtCategoryData;
-
+import de.hybris.platform.servicelayer.interceptor.InterceptorException;
 
 /**
  * @author Jack
@@ -29,8 +29,9 @@ public interface AnguoCategoryFacade{
 	/**
 	 * delete category by code,not delete sub category
 	 * @param categoryCode
+	 * @throws InterceptorException 
 	 */
-	public void deleteCategory(String categoryCode);
+	public void deleteCategory(String categoryCode) throws InterceptorException;
 	
 	/**
 	 * @param categoryCode

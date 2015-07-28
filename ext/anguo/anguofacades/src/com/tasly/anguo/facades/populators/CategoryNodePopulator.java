@@ -18,7 +18,7 @@ public class CategoryNodePopulator implements Populator<CategoryModel, CategoryN
 		target.setId(source.getCode());
 		target.setText(source.getName());
 		//to decide if there is expand button before every node
-		target.setChildren(Collections.isEmpty(source.getCategories())?Boolean.FALSE:Boolean.TRUE);
+		target.setChildren(source.getCategories().size()>0?Boolean.TRUE:Boolean.FALSE);
 	}
 
 }

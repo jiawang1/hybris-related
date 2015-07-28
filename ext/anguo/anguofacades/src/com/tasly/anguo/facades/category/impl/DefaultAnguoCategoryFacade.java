@@ -3,21 +3,18 @@ package com.tasly.anguo.facades.category.impl;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
-
-import javax.annotation.Resource;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
 import com.tasly.anguo.core.category.AnguoCategoryService;
-import com.tasly.anguo.facades.category.AnguoCategoryFacade;
-import com.tasly.anguo.facades.populators.AnguoCategoryPopulator;
 import com.tasly.anguo.core.model.CategoryAliasModel;
+import com.tasly.anguo.facades.category.AnguoCategoryFacade;
 import com.tasly.anguo.facades.constants.AnguoFacadesConstants;
+import com.tasly.anguo.facades.populators.AnguoCategoryPopulator;
 import com.tasly.anguo.facades.populators.CategoryNodePopulator;
 import com.tasly.anguo.facades.populators.MgmtCategoryPopulator;
 import com.tasly.anguo.facades.product.data.CategoryData;
@@ -25,9 +22,10 @@ import com.tasly.anguo.facades.product.data.CategoryNodeData;
 import com.tasly.anguo.facades.product.data.MgmtCategoryData;
 
 import de.hybris.platform.catalog.CatalogVersionService;
-import de.hybris.platform.category.CategoryService;
 import de.hybris.platform.category.model.CategoryModel;
+import de.hybris.platform.servicelayer.exceptions.ModelRemovalException;
 import de.hybris.platform.servicelayer.exceptions.UnknownIdentifierException;
+import de.hybris.platform.servicelayer.interceptor.InterceptorException;
 import de.hybris.platform.servicelayer.keygenerator.KeyGenerator;
 import de.hybris.platform.servicelayer.model.ModelService;
 
@@ -158,10 +156,18 @@ public class DefaultAnguoCategoryFacade implements AnguoCategoryFacade {
 	}
 	
 	@Override
-	public void deleteCategory(String categoryCode) {
+	public void deleteCategory(String categoryCode) throws InterceptorException {
 		
 		CategoryModel categoryModel = categoryService.getCategoryForCode(categoryCode);
-		modelService.remove(categoryModel);		
+		
+		try{
+		    modelService.remove(categoryModel);
+		}catch(ModelRemovalException ex)
+		{  
+			LOG.error("remove was not allowed for " + categoryCode);
+			//TODO:need a framework to handle the exception,current handle it in a simple way
+			throw new InterceptorException(ex.getLocalizedMessage());
+		}
 	}
 
 	@Override

@@ -448,5 +448,13 @@
 	<bean id="anguoCategoryService" class="com.tasly.anguo.core.category.impl.DefaultAnguoCategoryService" parent="categoryService">
 		<property name="anguoCategoryDao" ref="anguoCategoryDao"></property>
 	</bean>	
+
+	<bean id="anguoCategoryRemovalValidator" class="com.tasly.anguo.core.category.interceptors.AnguoCategoryRemovalValidator">
+	</bean>
+
+	<bean id="categoryRemovalValidatorMapping" class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
+		<property name="interceptor" ref="anguoCategoryRemovalValidator" />
+		<property name="typeCode" value="Category" />
+	</bean>
 	<!-- beans for product end -->
 </beans>
