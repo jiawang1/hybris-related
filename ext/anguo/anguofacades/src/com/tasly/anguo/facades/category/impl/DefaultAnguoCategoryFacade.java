@@ -25,7 +25,9 @@ import de.hybris.platform.catalog.CatalogVersionService;
 import de.hybris.platform.category.CategoryService;
 import de.hybris.platform.category.model.CategoryModel;
 import de.hybris.platform.commercefacades.product.data.CategoryData;
+import de.hybris.platform.servicelayer.exceptions.ModelRemovalException;
 import de.hybris.platform.servicelayer.exceptions.UnknownIdentifierException;
+import de.hybris.platform.servicelayer.interceptor.InterceptorException;
 import de.hybris.platform.servicelayer.keygenerator.KeyGenerator;
 import de.hybris.platform.servicelayer.model.ModelService;
 
@@ -157,10 +159,18 @@ public class DefaultAnguoCategoryFacade implements AnguoCategoryFacade {
 	}
 	
 	@Override
-	public void deleteCategory(String categoryCode) {
+	public void deleteCategory(String categoryCode) throws InterceptorException {
 		
 		CategoryModel categoryModel = categoryService.getCategoryForCode(categoryCode);
-		modelService.remove(categoryModel);		
+		
+		try{
+		    modelService.remove(categoryModel);
+		}catch(ModelRemovalException ex)
+		{  
+			LOG.error("remove was not allowed for " + categoryCode);
+			//TODO:need a framework to handle the exception,current handle it in a simple way
+			throw new InterceptorException(ex.getLocalizedMessage());
+		}
 	}
 
 	public void setCategoryService(CategoryService categoryService) {

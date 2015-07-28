@@ -69,4 +69,9 @@
 		<property name="code" type="String"/>
 		<property name="name" type="String"/>
 	</bean>
+	
+	<bean class="com.tasly.anguo.facades.data.AjaxMessageData" >
+		<property name="isSuccessFlag" type="Boolean"/>
+		<property name="message" type="String"/>
+	</bean>
 </beans>
