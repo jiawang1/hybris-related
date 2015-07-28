@@ -3,34 +3,31 @@ package com.tasly.anguo.facades.category.impl;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
-
-import javax.annotation.Resource;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
+import com.tasly.anguo.core.category.AnguoCategoryService;
 import com.tasly.anguo.core.model.CategoryAliasModel;
 import com.tasly.anguo.facades.category.AnguoCategoryFacade;
 import com.tasly.anguo.facades.constants.AnguoFacadesConstants;
+import com.tasly.anguo.facades.populators.AnguoCategoryPopulator;
 import com.tasly.anguo.facades.populators.CategoryNodePopulator;
 import com.tasly.anguo.facades.populators.MgmtCategoryPopulator;
+import com.tasly.anguo.facades.product.data.CategoryData;
 import com.tasly.anguo.facades.product.data.CategoryNodeData;
 import com.tasly.anguo.facades.product.data.MgmtCategoryData;
 
 import de.hybris.platform.catalog.CatalogVersionService;
-import de.hybris.platform.category.CategoryService;
 import de.hybris.platform.category.model.CategoryModel;
-import de.hybris.platform.commercefacades.product.data.CategoryData;
 import de.hybris.platform.servicelayer.exceptions.ModelRemovalException;
 import de.hybris.platform.servicelayer.exceptions.UnknownIdentifierException;
 import de.hybris.platform.servicelayer.interceptor.InterceptorException;
 import de.hybris.platform.servicelayer.keygenerator.KeyGenerator;
 import de.hybris.platform.servicelayer.model.ModelService;
-
 
 /**
  * @author Jack
@@ -39,19 +36,18 @@ import de.hybris.platform.servicelayer.model.ModelService;
 public class DefaultAnguoCategoryFacade implements AnguoCategoryFacade {
     
 	private Logger LOG = Logger.getLogger(DefaultAnguoCategoryFacade.class);
-	private CategoryService categoryService;
+	private AnguoCategoryService categoryService;
 	private ModelService modelService;
 	private CategoryNodePopulator categoryNodePopulator;
 	private MgmtCategoryPopulator mgmtCategoryPopulator;
+	private AnguoCategoryPopulator categoryPopulator;
 	private CatalogVersionService catalogVersionService;
 	private KeyGenerator categoryCodeGenerator;
 	
 	@Override
 	public List<CategoryNodeData> getSubCategoryByCode(String categoryCode) {
-		
 		if(StringUtils.isEmpty(categoryCode))
 			return getRootCategory();
-		
 		CategoryModel category = categoryService.getCategoryForCode(categoryCode);
 		Collection<CategoryModel> categorys = category.getCategories();
 	
@@ -73,6 +69,7 @@ public class DefaultAnguoCategoryFacade implements AnguoCategoryFacade {
 		
 		return subCategoryNodeDataList;
 	}
+	
 	/**
 	 * get root category
 	 * @return
@@ -173,7 +170,20 @@ public class DefaultAnguoCategoryFacade implements AnguoCategoryFacade {
 		}
 	}
 
-	public void setCategoryService(CategoryService categoryService) {
+	@Override
+	public List<CategoryData> getCategoriesByKeyword(String keyword,
+			int totalCount) {
+		List<CategoryModel> categoryModels = categoryService.getCategoriesByKeyword(keyword, totalCount);
+		List<CategoryData> result = new ArrayList<CategoryData>();
+		for (CategoryModel categoryModel : categoryModels) {
+			CategoryData category = new CategoryData();
+			categoryPopulator.populate(categoryModel, category);
+			result.add(category);
+		}
+		return result;
+	}
+	
+	public void setCategoryService(AnguoCategoryService categoryService) {
 		this.categoryService = categoryService;
 	}
 
@@ -183,6 +193,19 @@ public class DefaultAnguoCategoryFacade implements AnguoCategoryFacade {
 	
 	public void setMgmtCategoryPopulator(MgmtCategoryPopulator mgmtCategoryPopulator) {
 		this.mgmtCategoryPopulator = mgmtCategoryPopulator;
+	}
+
+	/**
+	 * @return the categoryPopulator
+	 */
+	public AnguoCategoryPopulator getCategoryPopulator() {
+		return categoryPopulator;
+	}
+	/**
+	 * @param categoryPopulator the categoryPopulator to set
+	 */
+	public void setCategoryPopulator(AnguoCategoryPopulator categoryPopulator) {
+		this.categoryPopulator = categoryPopulator;
 	}
 	
 	public void setModelService(ModelService modelService) {
@@ -196,5 +219,5 @@ public class DefaultAnguoCategoryFacade implements AnguoCategoryFacade {
 	public void setCategoryCodeGenerator(KeyGenerator categoryCodeGenerator) {
 		this.categoryCodeGenerator = categoryCodeGenerator;
 	}
-	
+
 }
