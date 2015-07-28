@@ -13,11 +13,11 @@ $categories=target(code, $catalogVersion)[unique=true]
 $lang=zh
 
 # Insert Categories lv1
-INSERT_UPDATE Category;code[unique=true];allowedPrincipals(uid)[default='customergroup'];$catalogVersion
+INSERT_UPDATE Category;code[unique=true];level[default=1];allowedPrincipals(uid)[default='customergroup'];$catalogVersion
 ;药材;
 
 # Insert Categories lv2
-INSERT_UPDATE Category;code[unique=true];allowedPrincipals(uid)[default='customergroup'];$catalogVersion
+INSERT_UPDATE Category;code[unique=true];level[default=2];allowedPrincipals(uid)[default='customergroup'];$catalogVersion
 ;根茎类;
 ;果实籽仁类;
 ;花类;
@@ -32,7 +32,7 @@ INSERT_UPDATE Category;code[unique=true];allowedPrincipals(uid)[default='custome
 
 
 # Insert Categories lv3
-INSERT_UPDATE Category;code[unique=true];allowedPrincipals(uid)[default='customergroup'];$catalogVersion
+INSERT_UPDATE Category;code[unique=true];level[default=3];allowedPrincipals(uid)[default='customergroup'];$catalogVersion
 ;人参;
 ;白芍;
 ;川贝母;
