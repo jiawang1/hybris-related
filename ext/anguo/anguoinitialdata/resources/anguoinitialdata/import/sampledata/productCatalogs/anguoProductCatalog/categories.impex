@@ -37,6 +37,7 @@ INSERT_UPDATE Category;code[unique=true];allowedPrincipals(uid)[default='custome
 ;艾叶;
 ;满山红;
 ;荷叶;
+;泽兰;
 
 # Insert Category Structure
 INSERT_UPDATE CategoryCategoryRelation;$categories;$supercategories
