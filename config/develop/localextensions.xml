@@ -37,13 +37,6 @@
         <extension name="commercefacades" />
 
 
-        <!-- ext-data -->
-        <extension name="commercesearchsampledata" />
-        <extension name="apparelstore" />
-        <extension name="electronicsstore" />
-        <extension name="instoresampledata" />
-
-
         <!-- ext-content -->
         <extension name="productcockpit" />
         <extension name="cms2" />
@@ -58,7 +51,6 @@
 
         <!-- ext-addon -->
         <extension name="addonsupport" />
-        <!-- <extension name="b2ccheckoutaddon" /> -->
         <extension name="assistedservicestorefront" />
 
 

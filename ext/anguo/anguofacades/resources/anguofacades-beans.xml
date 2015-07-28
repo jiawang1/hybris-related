@@ -11,7 +11,11 @@
  license agreement you entered into with hybris.
 -->
 <beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="beans.xsd">
-
+	<enum class="com.tasly.anguo.core.enums.UserType">
+		<value>PERSONAL</value>
+		<value>ENTERPRISE</value>
+	</enum>
+	
 	<bean class="de.hybris.platform.commercefacades.product.data.ProductData">
 		<property name="genders" type="java.util.List&lt;com.tasly.anguo.facades.product.data.GenderData>"/>
 	</bean>
@@ -25,6 +29,8 @@
 		<property name="userId" type="String"/>
 		<property name="mobile" type="String"/>
 		<property name="captcha" type="String"/>
+		<property name="userType" type="com.tasly.anguo.core.enums.UserType"></property>
+		
 	</bean>
 
 	<bean class="com.tasly.anguo.facades.product.data.CategoryNodeData">
@@ -41,6 +47,7 @@
 	
 	<bean class="com.tasly.anguo.facades.product.data.MgmtCategoryData">
 		<property name="categoryCode" type="String"></property>
+		<property name="superCategory" type="String"></property>
 		<property name="name" type="String"></property>
 		<property name="alias" type="java.util.List&lt;com.tasly.anguo.facades.product.data.MgmtCatAliasData>"></property>
 	</bean>

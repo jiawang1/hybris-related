@@ -7,10 +7,14 @@ import com.tasly.anguo.facades.product.data.CategoryNodeData;
 import com.tasly.anguo.facades.product.data.MgmtCategoryData;
 
 
+/**
+ * @author Jack
+ *
+ */
 public interface AnguoCategoryFacade{
 	
 	/**
-	 * 
+	 * return only son not grandson
 	 * @param categoryCode
 	 * @return first level sub category node list
 	 */
@@ -21,7 +25,24 @@ public interface AnguoCategoryFacade{
 	 * @return category data,contains category name,category code,category alias
 	 */
 	public MgmtCategoryData getCategoryDetail(String categoryCode);
+
+	/**
+	 * delete category by code,not delete sub category
+	 * @param categoryCode
+	 */
+	public void deleteCategory(String categoryCode);
 	
+	/**
+	 * @param categoryCode
+	 */
+	public void saveCategory(MgmtCategoryData categoryData);
+	
+	/**
+	 * @param superCategory
+	 * @return
+	 */
+	public MgmtCategoryData createCategory(String superCategory);
+
 	/**
 	 * @param keyword
 	 * @param totalCount

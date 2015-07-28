@@ -1,5 +1,7 @@
 package com.tasly.anguo.facades.populators;
 
+import org.fest.util.Collections;
+
 import com.tasly.anguo.facades.product.data.CategoryNodeData;
 import com.tasly.anguo.facades.product.data.GenderData;
 
@@ -15,7 +17,8 @@ public class CategoryNodePopulator implements Populator<CategoryModel, CategoryN
 			throws ConversionException {
 		target.setId(source.getCode());
 		target.setText(source.getName());
-		target.setChildren(Boolean.TRUE);
+		//to decide if there is expand button before every node
+		target.setChildren(Collections.isEmpty(source.getCategories())?Boolean.FALSE:Boolean.TRUE);
 	}
 
 }

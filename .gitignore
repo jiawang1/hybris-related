@@ -25,6 +25,7 @@ ext/**/web/addonsrc/
 ext/**/web/commonwebsrc/
 ext/**/web/testclasses/
 ext/**/web/webroot/WEB_INF/classes/
+ext/**/web/webroot/**/addons/
 ext/**/.settings/
 ext/**/.externalToolBuilders/
 ext/**/*-testclasses.xml
