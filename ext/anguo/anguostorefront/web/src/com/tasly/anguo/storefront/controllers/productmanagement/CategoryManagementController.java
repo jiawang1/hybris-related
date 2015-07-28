@@ -15,8 +15,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.tasly.anguo.facades.category.AnguoCategoryFacade;
+import com.tasly.anguo.facades.data.AjaxMessageData;
 import com.tasly.anguo.facades.product.data.MgmtCategoryData;
 import com.tasly.anguo.storefront.controllers.ControllerConstants;
+
+import de.hybris.platform.servicelayer.interceptor.InterceptorException;
 
 @Scope("tenant")
 @Controller
@@ -29,6 +32,7 @@ public class CategoryManagementController {
     private static final String DELETE_CATEGORY = "/deleteCategory";
     private static final String SAVE_CATEGORY = "/saveCategory";
     private static final String CREATE_CATEGORY = "/createCategory";
+    private static final String DELETE_CATEGORY_ERROR = "由于有子类目或者产品,类目 %s 无法删除";
     
     @Resource
 	private AnguoCategoryFacade anguoCategoryFacade;
@@ -50,8 +54,20 @@ public class CategoryManagementController {
 	
 	@RequestMapping(value=DELETE_CATEGORY)
 	public 	@ResponseBody Object deleteCategory(String categoryCode){
-	    anguoCategoryFacade.deleteCategory(categoryCode);
-	    return null;
+		AjaxMessageData message = new AjaxMessageData();
+		
+	    try {
+			anguoCategoryFacade.deleteCategory(categoryCode);
+		} catch (InterceptorException e) {
+			//TODO: just temp solution about exception handling,need to refact
+			LOG.error(e.getMessage());
+			message.setIsSuccessFlag(Boolean.FALSE);
+			message.setMessage(String.format(DELETE_CATEGORY_ERROR, categoryCode));
+			return message;
+		}
+	    
+	    message.setIsSuccessFlag(Boolean.TRUE);
+	    return message;
 	}
 	
 	@RequestMapping(value=SAVE_CATEGORY)

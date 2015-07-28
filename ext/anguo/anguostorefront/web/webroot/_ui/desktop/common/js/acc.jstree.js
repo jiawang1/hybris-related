@@ -209,7 +209,13 @@ function getCustomMenu(node) {
         		url:ACC.config.contextPath + '/categoryManagement/deleteCategory',
 				data:{'categoryCode':categoryCode},
         		success:function(data){
+        			if(data.isSuccessFlag == false){
+        			    alert(data.message);
+        			    return;
+        			}
+        			
         	        $('#category-tree-div').jstree().delete_node(node);
+        	        
         		}
         	});
         	
