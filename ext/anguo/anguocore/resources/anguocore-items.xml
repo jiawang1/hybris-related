@@ -220,6 +220,11 @@
 						<modifiers/>
 						<persistence type="property"/>
 					</attribute>
+					<attribute qualifier="identified" type="java.lang.Boolean">
+						<description>Whether pass the identification.</description>
+						<modifiers/>
+						<persistence type="property"/>
+					</attribute>	
 				</attributes>
 			</itemtype>
 			<itemtype code="PersonalAccount" extends="Customer">
@@ -245,11 +250,6 @@
 						<modifiers/>
 						<persistence type="property"/>
 					</attribute>
-					<attribute qualifier="identified" type="java.lang.Boolean">
-						<description>Whether pass the identification.</description>
-						<modifiers/>
-						<persistence type="property"/>
-					</attribute>										
 				</attributes>
 			</itemtype>
 			
@@ -258,9 +258,6 @@
 				<attributes>
 					<attribute qualifier="registeredNo" type="java.lang.Integer">
 						<persistence type="property" />
-					</attribute>
-					<attribute qualifier="status" type="java.lang.String">
-						<persistence type="property"/>
 					</attribute>
 				</attributes>
 			</itemtype>
