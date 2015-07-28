@@ -34,6 +34,7 @@ public class DefaultAnguoCategoryDao extends DefaultCategoryDao implements Anguo
 //		search query
 //		select * from {category as c}
 //		where
+//		{c:level} = 3 and
 //		{c:name[zh]:o} like '%人参%'
 //		or
 //		exists
@@ -48,6 +49,8 @@ public class DefaultAnguoCategoryDao extends DefaultCategoryDao implements Anguo
 		query.append("} FROM {");
 		query.append(CategoryModel._TYPECODE);
 		query.append(" as c} WHERE {c:");
+		query.append(CategoryModel.LEVEL);
+		query.append("} = 3 AND {c:");
 		query.append(CategoryModel.NAME);
 		query.append("[zh]:o} LIKE CONCAT('%',CONCAT(?keyword,'%'))");
 		query.append("OR EXISTS ({{SELECT {ca:");
