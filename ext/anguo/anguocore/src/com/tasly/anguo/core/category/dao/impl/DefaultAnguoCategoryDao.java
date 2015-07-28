@@ -52,7 +52,8 @@ public class DefaultAnguoCategoryDao extends DefaultCategoryDao implements Anguo
 		query.append(CategoryModel.LEVEL);
 		query.append("} = 3 AND {c:");
 		query.append(CategoryModel.NAME);
-		query.append("[zh]:o} LIKE CONCAT('%',CONCAT(?keyword,'%'))");
+//		query.append("[zh]:o");
+		query.append("} LIKE CONCAT('%',CONCAT(?keyword,'%'))");
 		query.append("OR EXISTS ({{SELECT {ca:");
 		query.append(CategoryAliasModel.PK);
 		query.append("} FROM {");
@@ -63,7 +64,8 @@ public class DefaultAnguoCategoryDao extends DefaultCategoryDao implements Anguo
 		query.append(CategoryModel.PK);
 		query.append("} AND {ca:");
 		query.append(CategoryAliasModel.ALIAS);
-		query.append("[zh]:o} LIKE CONCAT('%',CONCAT(?keyword,'%'))}})");
+//		query.append("[zh]:o");
+		query.append("} LIKE CONCAT('%',CONCAT(?keyword,'%'))}})");
 		
 		Map params = new HashMap();
 		params.put("keyword", keyword);
