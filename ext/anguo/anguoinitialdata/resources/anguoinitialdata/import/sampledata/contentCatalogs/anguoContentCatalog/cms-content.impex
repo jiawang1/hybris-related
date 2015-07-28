@@ -3,8 +3,8 @@
 # Macros / Replacement Parameter definitions
 $contentCatalog=anguoContentCatalog
 $contentCatalogName=Anguo Content Catalog
-$productCatalog=electronicsProductCatalog
-$productCatalogName=electronics Product Catalog
+$productCatalog=anguoProductCatalog
+$productCatalogName=anguo Product Catalog
 
 $contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
 $productCV=catalogVersion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
@@ -16,8 +16,6 @@ $contentPage=contentPage(uid, $contentCV);
 $siteResource=jar:com.tasly.anguo.initialdata.setup.InitialDataSystemSetup&/anguoinitialdata/import/sampledata/contentCatalogs/$contentCatalog
 $productResource=jar:com.tasly.anguo.initialdata.setup.InitialDataSystemSetup&/anguoinitialdata/import/sampledata/productCatalogs/$productCatalog
 $jarResourceCms=jar:com.tasly.anguo.initialdata.setup.InitialDataSystemSetup&/anguoinitialdata/import/sampledata/cockpits/cmscockpit
-#$productResource=jar:de.hybris.platform.electronicsstore.constants.ElectronicsstoreConstants&/electronicsstore/import/sampledata/productCatalogs/$productCatalog
-#$jarResourceCms=jar:de.hybris.platform.electronicsstore.constants.ElectronicsstoreConstants&/electronicsstore/import/sampledata/cockpits/cmscockpit
 
 INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];realfilename;@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];altText
 #;;/images/theme/logo-hybris.png;logo-hybris.png;$siteResource/images/theme/logo-hybris.png;image/png;hybris Accelerator
@@ -318,37 +316,37 @@ INSERT_UPDATE AccountNavigationCollectionComponent;$contentCV[unique=true];uid[u
 
 # Preview Image for use in the CMS Cockpit for special ContentPages
 INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];mime;realfilename;@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite=true]
-;;accountPagePreview;text/png;AccountPage.png;$jarResourceCms/preview-images/powertools/AccountPage.png
-;;addressBookPagePreview;text/png;AddressBook.png;$jarResourceCms/preview-images/powertools/AddressBookPage.png
-;;cartPagePreview;text/png;CartPage.png;$jarResourceCms/preview-images/powertools/CartPage.png
-;;addEditAddressPagePreview;text/png;AddEditAddressPage.png;$jarResourceCms/preview-images/powertools/AddEditAddressPage.png
-;;checkoutLoginPagePreview;text/png;CheckoutLoginPage.png;$jarResourceCms/preview-images/powertools/CheckoutLoginPage.png
-;;singleStepCheckoutSummaryPagePreview;text/png;SingleStepCheckoutSummaryPage.png;$jarResourceCms/preview-images/powertools/SingleStepCheckoutSummaryPage.png
-;;multiStepCheckoutPagePreview;text/png;MultiStepCheckoutPage.png;$jarResourceCms/preview-images/powertools/MultiStepCheckoutPage.png
-;;orderConfirmationPagePreview;text/png;OrderConfirmationPage.png;$jarResourceCms/preview-images/powertools/OrderConfirmationPage.png
-;;homepagePreview;text/png;Homepage.png;$jarResourceCms/preview-images/powertools/Homepage.png
-;;notFoundPagePreview;text/png;NotFoundPage.png;$jarResourceCms/preview-images/powertools/NotFoundPage.png
-;;orderHistoryPagePreview;text/png;OrderHistoryPage.png;$jarResourceCms/preview-images/powertools/OrderHistoryPage.png
-;;profilePagePreview;text/png;ProfilePage.png;$jarResourceCms/preview-images/powertools/ProfilePage.png
-;;loginPagePreview;text/png;LoginPage.png;$jarResourceCms/preview-images/powertools/LoginPage.png
-;;storefinderPagePreview;text/png;StoreFinderPage.png;$jarResourceCms/preview-images/powertools/StoreFinderPage.png
-;;searchResultsEmptyPagePreview;text/png;SearchResultsEmptyPage.png;$jarResourceCms/preview-images/powertools/SearchResultsEmptyPage.png
-;;paymentDetailsPagePreview;text/png;PaymentDetailsPage.png;$jarResourceCms/preview-images/powertools/PaymentDetailsPage.png
-;;mycompanyPagePreview;text/png;MyCompanyPage.png;$jarResourceCms/preview-images/powertools/MyCompanyPage.png
-;;manageUnitsPagePreview;text/png;ManageUnitsPage.png;$jarResourceCms/preview-images/powertools/ManageUnitsPage.png
-;;manageUserGroupsPagePreview;text/png;ManageUserGroupsPage.png;$jarResourceCms/preview-images/powertools/ManageUserGroupsPage.png
-;;organizationManagementPagePreview;text/png;OrganizationManagementPage.png;$jarResourceCms/preview-images/powertools/OrganizationManagementPage.png
-;;productDetailsPagePreview;text/png;ProductDetailsPage.png;$jarResourceCms/preview-images/powertools/ProductDetailsPage.png
-;;productListPagePreview;text/png;ProductListPage.png;$jarResourceCms/preview-images/powertools/ProductListPage.png
-;;searchPagePreview;text/png;SearchPage.png;$jarResourceCms/preview-images/powertools/SearchPage.png
-;;myReplenishmentOrdersPagePreview;text/png;MyReplenishmentOrdersPage.png;$jarResourceCms/preview-images/powertools/MyReplenishmentOrdersPage.png
-;;myQuotesPagePreview;text/png;MyQuotesPage.png;$jarResourceCms/preview-images/powertools/MyQuotesPage.png
-;;orderApprovalDashboardPagePreview;text/png;OrderApprovalDashboardPage.png;$jarResourceCms/preview-images/powertools/OrderApprovalDashboardPage.png
-;;myCompanyloginPagePreview;text/png;MyCompanyLoginPage.png;$jarResourceCms/preview-images/powertools/MyCompanyLoginPage.png
-;;orderDetailsPagePreview;text/png;OrderPage.png;$jarResourceCms/preview-images/powertools/OrderPage.png
-;;manageUnitApproversPagePreview;text/png;ManageUnitApproversPage.png;$jarResourceCms/preview-images/powertools/ManageUnitApproversPage.png
-;;updatePasswordPagePreview;text/png;UpdatePasswordPage.png;$jarResourceCms/preview-images/powertools/UpdatePasswordPage.png
-;;termsAndConditionsPagePreview;text/png;TermsAndConditionsPage.png;$jarResourceCms/preview-images/powertools/TermsAndConditionsPage.png
+;;accountPagePreview;text/png;AccountPage.png;$jarResourceCms/preview-images/anguo/AccountPage.png
+;;addressBookPagePreview;text/png;AddressBook.png;$jarResourceCms/preview-images/anguo/AddressBookPage.png
+;;cartPagePreview;text/png;CartPage.png;$jarResourceCms/preview-images/anguo/CartPage.png
+;;addEditAddressPagePreview;text/png;AddEditAddressPage.png;$jarResourceCms/preview-images/anguo/AddEditAddressPage.png
+;;checkoutLoginPagePreview;text/png;CheckoutLoginPage.png;$jarResourceCms/preview-images/anguo/CheckoutLoginPage.png
+;;singleStepCheckoutSummaryPagePreview;text/png;SingleStepCheckoutSummaryPage.png;$jarResourceCms/preview-images/anguo/SingleStepCheckoutSummaryPage.png
+;;multiStepCheckoutPagePreview;text/png;MultiStepCheckoutPage.png;$jarResourceCms/preview-images/anguo/MultiStepCheckoutPage.png
+;;orderConfirmationPagePreview;text/png;OrderConfirmationPage.png;$jarResourceCms/preview-images/anguo/OrderConfirmationPage.png
+;;homepagePreview;text/png;Homepage.png;$jarResourceCms/preview-images/anguo/Homepage.png
+;;notFoundPagePreview;text/png;NotFoundPage.png;$jarResourceCms/preview-images/anguo/NotFoundPage.png
+;;orderHistoryPagePreview;text/png;OrderHistoryPage.png;$jarResourceCms/preview-images/anguo/OrderHistoryPage.png
+;;profilePagePreview;text/png;ProfilePage.png;$jarResourceCms/preview-images/anguo/ProfilePage.png
+;;loginPagePreview;text/png;LoginPage.png;$jarResourceCms/preview-images/anguo/LoginPage.png
+;;storefinderPagePreview;text/png;StoreFinderPage.png;$jarResourceCms/preview-images/anguo/StoreFinderPage.png
+;;searchResultsEmptyPagePreview;text/png;SearchResultsEmptyPage.png;$jarResourceCms/preview-images/anguo/SearchResultsEmptyPage.png
+;;paymentDetailsPagePreview;text/png;PaymentDetailsPage.png;$jarResourceCms/preview-images/anguo/PaymentDetailsPage.png
+;;mycompanyPagePreview;text/png;MyCompanyPage.png;$jarResourceCms/preview-images/anguo/MyCompanyPage.png
+;;manageUnitsPagePreview;text/png;ManageUnitsPage.png;$jarResourceCms/preview-images/anguo/ManageUnitsPage.png
+;;manageUserGroupsPagePreview;text/png;ManageUserGroupsPage.png;$jarResourceCms/preview-images/anguo/ManageUserGroupsPage.png
+;;organizationManagementPagePreview;text/png;OrganizationManagementPage.png;$jarResourceCms/preview-images/anguo/OrganizationManagementPage.png
+;;productDetailsPagePreview;text/png;ProductDetailsPage.png;$jarResourceCms/preview-images/anguo/ProductDetailsPage.png
+;;productListPagePreview;text/png;ProductListPage.png;$jarResourceCms/preview-images/anguo/ProductListPage.png
+;;searchPagePreview;text/png;SearchPage.png;$jarResourceCms/preview-images/anguo/SearchPage.png
+;;myReplenishmentOrdersPagePreview;text/png;MyReplenishmentOrdersPage.png;$jarResourceCms/preview-images/anguo/MyReplenishmentOrdersPage.png
+;;myQuotesPagePreview;text/png;MyQuotesPage.png;$jarResourceCms/preview-images/anguo/MyQuotesPage.png
+;;orderApprovalDashboardPagePreview;text/png;OrderApprovalDashboardPage.png;$jarResourceCms/preview-images/anguo/OrderApprovalDashboardPage.png
+;;myCompanyloginPagePreview;text/png;MyCompanyLoginPage.png;$jarResourceCms/preview-images/anguo/MyCompanyLoginPage.png
+;;orderDetailsPagePreview;text/png;OrderPage.png;$jarResourceCms/preview-images/anguo/OrderPage.png
+;;manageUnitApproversPagePreview;text/png;ManageUnitApproversPage.png;$jarResourceCms/preview-images/anguo/ManageUnitApproversPage.png
+;;updatePasswordPagePreview;text/png;UpdatePasswordPage.png;$jarResourceCms/preview-images/anguo/UpdatePasswordPage.png
+;;termsAndConditionsPagePreview;text/png;TermsAndConditionsPage.png;$jarResourceCms/preview-images/anguo/TermsAndConditionsPage.png
 
 # Preview for Content Pages
 UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];previewImage(code,$contentCV)
@@ -972,7 +970,7 @@ INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];nam
 INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;&componentRef;target(code)[default='sameWindow']
 ;;HomepageLeftNav1001LinkComponent;Homepage Left Navigation Link 1 001;/Open-Catalogue/Office-Equipment%2C-Supplies-%26-Accessories/Hand-Tools/c/tubers;HomepageLeftNav1001LinkComponent
 #;;HomepageLeftNav1002LinkComponent;Homepage Left Navigation Link 1 002;/Open-Catalogue/Office-Equipment%2C-Supplies-%26-Accessories/Hand-Tools/Hand-Saws/c/1354;HomepageLeftNav1002LinkComponent
-;;HomepageLeftNav1003LinkComponent;Homepage Left Navigation Link 1 003;/Open-Catalogue/Office-Equipment%2C-Supplies-%26-Accessories/Hand-Tools/Hand-Saws/c/1GJL02;HomepageLeftNav1003LinkComponent
+;;HomepageLeftNav1003LinkComponent;Homepage Left Navigation Link 1 003;/Open-Catalogue/Office-Equipment%2C-Supplies-%26-Accessories/Hand-Tools/Hand-Saws/c/人参;HomepageLeftNav1003LinkComponent
 ;;HomepageLeftNav1004LinkComponent;Homepage Left Navigation Link 1 004;/Open-Catalogue/Office-Equipment%2C-Supplies-%26-Accessories/Hand-Tools/Hand-Saws/c/1GJL03;HomepageLeftNav1004LinkComponent
 ;;HomepageLeftNav1005LinkComponent;Homepage Left Navigation Link 1 005;/Open-Catalogue/Office-Equipment%2C-Supplies-%26-Accessories/Hand-Tools/Hand-Saws/c/1GJL04;HomepageLeftNav1005LinkComponent
 ;;HomepageLeftNav1006LinkComponent;Homepage Left Navigation Link 1 006;/Open-Catalogue/Office-Equipment%2C-Supplies-%26-Accessories/Hand-Tools/Hand-Saws/c/1GJL05;HomepageLeftNav1006LinkComponent
@@ -1256,13 +1254,13 @@ INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];realfilename;@medi
 # SimpleBannerComponent
 INSERT_UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;urlLink
 ;;HomepageImgBanner1;Homepage Img Banner 1;HomepageImgBanner1;/Open-Catalogue/Office-Equipment%2C-Supplies-%26-Accessories/Hand-Tools/Hand-Saws/c/1GJL05
-;;HomepageImgBanner2;Homepage Img Banner 2;HomepageImgBanner2;/Open-Catalogue/Office-Equipment%2C-Supplies-%26-Accessories/Hand-Tools/Hand-Saws/c/1GJL02
+;;HomepageImgBanner2;Homepage Img Banner 2;HomepageImgBanner2;/Open-Catalogue/Office-Equipment%2C-Supplies-%26-Accessories/Hand-Tools/Hand-Saws/c/人参
 ;;HomepageImgBanner3;Homepage Img Banner 3;HomepageImgBanner3;/Open-Catalogue/Office-Equipment%2C-Supplies-%26-Accessories/Hand-Tools/Hand-Saws/c/1GSZRL01
 ;;HomepageImgBanner4;Homepage Img Banner 4;HomepageImgBanner4;/Open-Catalogue/Office-Equipment%2C-Supplies-%26-Accessories/Hand-Tools/Hand-Saws/c/1GJL04
 ;;HomepageImgBanner5;Homepage Img Banner 5;HomepageImgBanner5;/Open-Catalogue/Office-Equipment%2C-Supplies-%26-Accessories/Hand-Tools/Hand-Saws/c/1HL02
 ;;HomepageImgBanner6;Homepage Img Banner 6;HomepageImgBanner6;/Open-Catalogue/Office-Equipment%2C-Supplies-%26-Accessories/Hand-Tools/Hand-Saws/c/1GJL03
 ;;HomepageImgBanner7;Homepage Img Banner 7;HomepageImgBanner7;/Open-Catalogue/Office-Equipment%2C-Supplies-%26-Accessories/Hand-Tools/Hand-Saws/c/1GJL05
-;;HomepageImgBanner8;Homepage Img Banner 8;HomepageImgBanner8;/Open-Catalogue/Office-Equipment%2C-Supplies-%26-Accessories/Hand-Tools/Hand-Saws/c/1GJL02
+;;HomepageImgBanner8;Homepage Img Banner 8;HomepageImgBanner8;/Open-Catalogue/Office-Equipment%2C-Supplies-%26-Accessories/Hand-Tools/Hand-Saws/c/人参
 ;;HomepageImgBanner9;Homepage Img Banner 9;HomepageImgBanner9;/Open-Catalogue/Office-Equipment%2C-Supplies-%26-Accessories/Hand-Tools/Hand-Saws/c/1GSZRL01
 ;;HomepageImgBanner10;Homepage Img Banner 10;HomepageImgBanner10;/Open-Catalogue/Office-Equipment%2C-Supplies-%26-Accessories/Hand-Tools/Hand-Saws/c/1GJL04
 ;;HomepageImgBanner11;Homepage Img Banner 11;HomepageImgBanner11;/Open-Catalogue/Office-Equipment%2C-Supplies-%26-Accessories/Hand-Tools/Hand-Saws/c/1HL02
@@ -1271,13 +1269,13 @@ INSERT_UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];nam
 # CMSLinkComponent
 INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;&componentRef;target(code)[default='sameWindow']
 ;;HomepageTextComponent1;Homepage Text Paragraph 1;/Open-Catalogue/Office-Equipment%2C-Supplies-%26-Accessories/Hand-Tools/Hand-Saws/c/1GJL05;HomepageTextComponent1
-;;HomepageTextComponent2;Homepage Text Paragraph 2;/Open-Catalogue/Office-Equipment%2C-Supplies-%26-Accessories/Hand-Tools/Hand-Saws/c/1GJL02;HomepageTextComponent2
+;;HomepageTextComponent2;Homepage Text Paragraph 2;/Open-Catalogue/Office-Equipment%2C-Supplies-%26-Accessories/Hand-Tools/Hand-Saws/c/人参;HomepageTextComponent2
 ;;HomepageTextComponent3;Homepage Text Paragraph 3;/Open-Catalogue/Office-Equipment%2C-Supplies-%26-Accessories/Hand-Tools/Hand-Saws/c/1GSZRL01;HomepageTextComponent3
 ;;HomepageTextComponent4;Homepage Text Paragraph 4;/Open-Catalogue/Office-Equipment%2C-Supplies-%26-Accessories/Hand-Tools/Hand-Saws/c/1GJL04;HomepageTextComponent4
 ;;HomepageTextComponent5;Homepage Text Paragraph 5;/Open-Catalogue/Office-Equipment%2C-Supplies-%26-Accessories/Hand-Tools/Hand-Saws/c/1HL02;HomepageTextComponent5
 ;;HomepageTextComponent6;Homepage Text Paragraph 6;/Open-Catalogue/Office-Equipment%2C-Supplies-%26-Accessories/Hand-Tools/Hand-Saws/c/1GJL03;HomepageTextComponent6
 ;;HomepageTextComponent7;Homepage Text Paragraph 7;/Open-Catalogue/Office-Equipment%2C-Supplies-%26-Accessories/Hand-Tools/Hand-Saws/c/1GJL05;HomepageTextComponent7
-;;HomepageTextComponent8;Homepage Text Paragraph 8;/Open-Catalogue/Office-Equipment%2C-Supplies-%26-Accessories/Hand-Tools/Hand-Saws/c/1GJL02;HomepageTextComponent8
+;;HomepageTextComponent8;Homepage Text Paragraph 8;/Open-Catalogue/Office-Equipment%2C-Supplies-%26-Accessories/Hand-Tools/Hand-Saws/c/人参;HomepageTextComponent8
 ;;HomepageTextComponent9;Homepage Text Paragraph 9;/Open-Catalogue/Office-Equipment%2C-Supplies-%26-Accessories/Hand-Tools/Hand-Saws/c/1GSZRL01;HomepageTextComponent9
 ;;HomepageTextComponent10;Homepage Text Paragraph 10;/Open-Catalogue/Office-Equipment%2C-Supplies-%26-Accessories/Hand-Tools/Hand-Saws/c/1GJL04;HomepageTextComponent10
 ;;HomepageTextComponent11;Homepage Text Paragraph 11;/Open-Catalogue/Office-Equipment%2C-Supplies-%26-Accessories/Hand-Tools/Hand-Saws/c/1HL02;HomepageTextComponent11

@@ -29,6 +29,14 @@
 		<function-class>de.hybris.platform.acceleratorstorefrontcommons.tags.Functions</function-class>
 		<function-signature>de.hybris.platform.commercefacades.product.data.ImageData getPrimaryImageForProductAndFormat(de.hybris.platform.commercefacades.product.data.ProductData,java.lang.String)</function-signature>
 	</function>
+		<function>
+		<description>
+			Get the primary image for the ProductData specified in the format specified.
+		</description>
+		<name>productCodeImage</name>
+		<function-class>tasly.anguo.storefront.tags.Functions</function-class>
+		<function-signature>de.hybris.platform.commercefacades.product.data.ImageData getImageForProductCode(de.hybris.platform.commercefacades.product.data.ProductData,java.lang.String,java.lang.String)</function-signature>
+	</function>
 
 	<function>
 		<description>
