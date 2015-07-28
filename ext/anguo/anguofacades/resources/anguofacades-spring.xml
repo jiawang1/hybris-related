@@ -206,8 +206,8 @@
 
 	<bean id="categoryCodeGenerator"  class="de.hybris.platform.servicelayer.keygenerator.impl.PersistentKeyGenerator" init-method="init" scope="tenant">
 		<property name="key" value="luckynumberseries"/>
-		<property name="digits" value="4"/>
-		<property name="start" value="0000"/>
+		<property name="digits" value="5"/>
+		<property name="start" value="00000"/>
 		<property name="numeric" value="false"/> 
     </bean>
     
