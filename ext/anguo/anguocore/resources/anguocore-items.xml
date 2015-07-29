@@ -36,12 +36,12 @@
 		</enumtype>
 		<!-- enumtype for product start -->
 		
-		<enumtype generate="true" code="packageUnitType" autocreate="true" dynamic="true">
+		<enumtype generate="true" code="PackageUnit" autocreate="true" dynamic="true">
 			<value code="PACKAGE"/>
 			<value code="BAG"/>
 		</enumtype>
 		 
-		<enumtype generate="true" code="processMethodType" autocreate="true" dynamic="true">
+		<enumtype generate="true" code="ProcessMethodType" autocreate="true" dynamic="true">
 			<value code="QIE"/>
 			<value code="HONG"/>
 			<value code="JINGXUAN"/>
@@ -63,12 +63,12 @@
 			<value code="OTHER"/>
 		</enumtype>
 		
-		<enumtype generate="true" code="productStatusType" autocreate="true" dynamic="true">
-			<value code="ONSALE"/>
-			<value code="OFFSALE"/>
+		<enumtype generate="true" code="ProductStatus" autocreate="true" dynamic="true">
+			<value code="ONLINE"/>
+			<value code="OFFLINE"/>
 			<value code="REJECT"/>
-			<value code="AUDIT"/>
-			<value code="APPROVED"/>
+			<value code="UNCHECK"/>
+			<value code="PROGRESS"/>
 		</enumtype>
 		
 		<!-- enumtype for product end -->
@@ -179,75 +179,8 @@
 
 
 		<!-- TypeGroups are for structure of this file only -->
-
-		<typegroup name="Apparel">
-			<itemtype code="ApparelProduct" extends="Product"
-			          autocreate="true" generate="true"
-			          jaloclass="com.tasly.anguo.core.jalo.ApparelProduct">
-				<description>Base apparel product extension that contains additional attributes.</description>
-				<attributes>
-					<attribute qualifier="genders" type="GenderList">
-						<description>List of genders that the ApparelProduct is designed for</description>
-						<modifiers/>
-						<persistence type="property"/>
-					</attribute>
-				</attributes>
-			</itemtype>
-
-			<itemtype code="ApparelStyleVariantProduct" extends="VariantProduct"
-			          autocreate="true" generate="true"
-			          jaloclass="com.tasly.anguo.core.jalo.ApparelStyleVariantProduct">
-				<description>Apparel style variant type that contains additional attribute describing variant style.
-				</description>
-				<attributes>
-					<attribute qualifier="style" type="localized:java.lang.String"
-					           metatype="VariantAttributeDescriptor">
-						<description>Color/Pattern of the product.</description>
-						<modifiers/>
-						<persistence type="property"/>
-					</attribute>
-
-					<attribute qualifier="swatchColors" type="SwatchColorSet">
-						<description>A normalized color mapping to a standardized front-end navigable name.
-						</description>
-						<modifiers/>
-						<persistence type="property"/>
-					</attribute>
-				</attributes>
-
-			</itemtype>
-
-			<itemtype code="ApparelSizeVariantProduct" extends="ApparelStyleVariantProduct"
-			          autocreate="true" generate="true"
-			          jaloclass="com.tasly.anguo.core.jalo.ApparelSizeVariantProduct">
-				<description>Apparel size variant type that contains additional attribute describing variant size.
-				</description>
-				<attributes>
-					<attribute qualifier="size" type="localized:java.lang.String"
-					           metatype="VariantAttributeDescriptor">
-						<description>Size of the product.</description>
-						<modifiers/>
-						<persistence type="property"/>
-					</attribute>
-				</attributes>
-			</itemtype>
-		</typegroup>
 		
-		<typegroup name="Electronics">
-			<itemtype code="ElectronicsColorVariantProduct" extends="VariantProduct"
-          autocreate="true" generate="true"
-          jaloclass="com.tasly.anguo.core.jalo.ElectronicsColorVariantProduct">
-				 <description>Electronics color variant type that contains additional attribute describing variant color.
-				</description>
-				<attributes>
-					<attribute qualifier="color" type="localized:java.lang.String"
-					           metatype="VariantAttributeDescriptor">
-						<description>Color of the product.</description>
-						<modifiers/>
-						<persistence type="property"/>
-					</attribute>
-				</attributes>
-			</itemtype>
+		<typegroup name="AccountManagement">
 			<itemtype code="Customer" autocreate="false" generate="false">
 				<description>Extending Customer type with additional attributes.</description>
 				<attributes>
@@ -360,8 +293,8 @@
 					</attribute>
 				</attributes>
 			</itemtype>
-			
 		</typegroup>
+		
 		<typegroup name="AnguoProduct">
 			<itemtype code="CategoryAlias" generate="true" autocreate="true">
 				<deployment table="CategoryAlias" typecode="10000"/>
@@ -373,14 +306,13 @@
 				</attributes>
 			</itemtype>
 			
-			<!-- extends hybris product? -->
 			<itemtype code="Product" generate="false" autocreate="false">
 				<attributes>
 					<attribute type="localized:java.lang.String" qualifier="specification">
 						<persistence type="property"></persistence>
 						<description>gui ge</description>
 					</attribute>
-					<!--TODO: need enum-->
+
 					<attribute type="AbstractLocationItem" qualifier="madeIn">
 						<persistence type="property"></persistence>
 						<description>chan di</description>
@@ -390,29 +322,10 @@
 						<persistence type="property"></persistence>
 						<description>sheng chan nian fen</description>
 					</attribute>
-					<!-- 
-				    <attribute type="java.lang.String" qualifier="processMethod">
-						<persistence type="property"></persistence>
-						<description>jia gong fang fa</description>
-					</attribute>
-					 -->
-					 <!-- 
-					<attribute type="java.lang.String" qualifier="huifen">
-						<persistence type="property"></persistence>
-						<description>hui fen</description>
-					</attribute>
-					 -->
-					 <!-- 
-					<attribute type="java.lang.Integer" qualifier="dryness">
-						<persistence type="property"></persistence>
-						<description>gan du</description>
-					</attribute>
-					 -->
-					<!--TODO: need enum-->
-					<attribute type="packageUnitType" qualifier="packageUnit">
+
+					<attribute type="PackageUnit" qualifier="packageUnit">
 						<persistence type="property"></persistence>
 					</attribute>
-					<!--TODO: need enum-->
 					<attribute type="AbstractLocationItem" qualifier="storageLocation">
 						<persistence type="property"></persistence>
 						<description>ku cun di</description>
@@ -421,7 +334,6 @@
 						<persistence type="property"></persistence>
 						<description>cang chu di dian not used</description>
 					</attribute>
-					
 					<attribute type="java.lang.Integer" qualifier="minSalesQuantity">
 						<persistence type="property"></persistence>
 						<description>min sales quantity</description>
@@ -431,18 +343,30 @@
 				    	<modifiers read="true" write="true" search="true" optional="true"/>
 					    <persistence type="property"/>
 					</attribute>
+					
 					<!-- 
+				    <attribute type="java.lang.String" qualifier="processMethod">
+						<persistence type="property"></persistence>
+						<description>jia gong fang fa</description>
+					</attribute>
+					<attribute type="java.lang.String" qualifier="huifen">
+						<persistence type="property"></persistence>
+						<description>hui fen</description>
+					</attribute>
+					<attribute type="java.lang.Integer" qualifier="dryness">
+						<persistence type="property"></persistence>
+						<description>gan du</description>
+					</attribute>
 					<attribute qualifier="containLiu" type="java.lang.String">
 				    	<modifiers read="true" write="true" search="true" optional="true"/>
 					    <persistence type="property"/>
 					</attribute>
 					 -->
-					
-					<!--TODO: need enum-->
-					<attribute qualifier="productStatus" type="productStatusType">
+					 
+					<attribute qualifier="productStatus" type="ProductStatus">
 				    	<modifiers read="true" write="true" search="true" optional="true"/>
 					    <persistence type="property"/>
-					    <defaultvalue>em().getEnumerationValue("productStatusType","ONSALE")</defaultvalue>
+					    <defaultvalue>em().getEnumerationValue("ProductStatus","UNCHECK")</defaultvalue>
 					</attribute>
 					
 				</attributes>
