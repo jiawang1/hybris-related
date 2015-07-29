@@ -31,9 +31,11 @@ public class DefaultCreateProductCodeStrategyIntegrationTest extends Servicelaye
 	public void testCreateProductCodeStrategy()
 	{
 		final String code1 = createProductCodeStrategy.generateProductCode();
+		LOG.info("code1  : " + code1);
 		final Long number1 = Long.parseLong(code1);
 		LOG.info("number1: " + number1);
 		final String code2 = createProductCodeStrategy.generateProductCode();
+		LOG.info("code2  : " + code2);
 		final Long number2 = Long.parseLong(code2);
 		LOG.info("number2: " + number2);
 

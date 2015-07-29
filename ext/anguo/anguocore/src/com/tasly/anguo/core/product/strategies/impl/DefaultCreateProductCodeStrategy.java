@@ -33,11 +33,16 @@ public class DefaultCreateProductCodeStrategy implements CreateProductCodeStrate
 		final Object generatedValue = keyGenerator.generate();
 		if (generatedValue instanceof String)
 		{
-			return (String) generatedValue;
+			return fillLeadingZeroes((String) generatedValue);
 		}
 		else
 		{
-			return String.valueOf(generatedValue);
+			return fillLeadingZeroes(String.valueOf(generatedValue));
 		}
+	}
+
+	private String fillLeadingZeroes(final String productCode)
+	{
+		return ("000000000000" + productCode).substring(productCode.length());
 	}
 }
