@@ -3,7 +3,7 @@
 # Macros / Replacement Parameter definitions
 $productCatalog=anguoProductCatalog
 $productCatalogName=安国药材目录
-$classificationCatalog=auguoClassification
+$classificationCatalog=anguoClassification
 
 $catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Online'])[unique=true,default=$productCatalog:Online]
 $classCatalogVersion=catalogversion(catalog(id[default='$classificationCatalog']),version[default='1.0'])[unique=true,default='$classificationCatalog:1.0']
@@ -16,11 +16,21 @@ $unit=unit(code,$classSystemVersion)
 
 # Insert Classifications
 INSERT_UPDATE ClassificationClass;$classCatalogVersion;code[unique=true];allowedPrincipals(uid)[default='customergroup']
+;;0001
 
 # Insert Classification Attributes
 INSERT_UPDATE ClassificationAttribute;$classSystemVersion;code[unique=true]
+;;dryness
+;;processmethod
+;;huifen
+;;containliu
 
 # Links ClassificationClasses to Categories
 INSERT_UPDATE CategoryCategoryRelation;$categories;$supercategories
+;药材;0001
 
-INSERT_UPDATE ClassAttributeAssignment;$class;$attribute;position;$unit;attributeType(code[default=string]);multiValued[default=false];range[default=false];localized[default=true]
+INSERT_UPDATE ClassAttributeAssignment;$class;$attribute;position;attributeType(code[default=string]);multiValued[default=false];range[default=false];localized[default=true]
+;0001;dryness;0;number
+;0001;processmethod;1;
+;0001;huifen;2;number
+;0001;containliu;3;

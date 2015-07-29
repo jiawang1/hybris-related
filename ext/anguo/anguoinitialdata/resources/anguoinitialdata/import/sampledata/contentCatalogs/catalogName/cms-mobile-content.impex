@@ -1,10 +1,10 @@
 # ImpEx for Importing CMS Mobile Content
 
 # Macros / Replacement Parameter definitions
-$contentCatalog=anguoContentCatalog
-$contentCatalogName=anguo Content Catalog
-$productCatalog=anguoProductCatalog
-$productCatalogName=anguo Product Catalog
+$contentCatalog=__CONTENT_CATALOG_NAME__
+$contentCatalogName=__CONTENT_CATALOG_FULL_NAME__
+$productCatalog=__PRODUCT_CATALOG_NAME__
+$productCatalogName=__PRODUCT_CATALOG_FULL_NAME__
 
 ##############VARIABLES#####################################
 $contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]

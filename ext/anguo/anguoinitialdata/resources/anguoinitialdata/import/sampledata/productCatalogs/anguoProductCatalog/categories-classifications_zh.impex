@@ -14,9 +14,12 @@ $lang=zh
 
 # Create Categories
 UPDATE ClassificationClass;code[unique=true];$classCatalogVersion;name[lang=$lang]
-
+;0001;;药材
 
 
 # Create Categories
 UPDATE ClassificationAttribute;code[unique=true];$classSystemVersion;name[lang=$lang]
- 
+;dryness;;干度
+;processmethod;;加工方法
+;huifen;;灰分
+;containliu;;是否含硫

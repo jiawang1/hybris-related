@@ -7,9 +7,16 @@ $productCatalogName=安国药材目录
 $catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Online'])[unique=true,default=$productCatalog:Online]
 
 
+INSERT_UPDATE Warehouse;code[unique=true];name[lang=zh];vendor(code);default[default=true]
+;anguo_warehouse;安国虚拟仓库;default
 
-INSERT_UPDATE Warehouse;code[unique=true];vendor(code);default[default=true]
+INSERT_UPDATE StockLevel;productCode[unique=true];warehouse(code)[unique=true,default=default];available;inStockStatus(code);maxPreOrder[default=1];maxStockLevelHistoryCount[default=-1];overSelling[default=0];preOrder[default=0];reserved[default=0]
+;千年人参;anguo_warehouse;414;notSpecified
+;泽兰;anguo_warehouse;104;notSpecified
+;薄片白芍;anguo_warehouse;1000;notSpecified
+;炙白芍,炒白芍;anguo_warehouse;1000;notSpecified
+;野生川贝;anguo_warehouse;1000;notSpecified
+;松贝母（川贝母）;anguo_warehouse;10000;notSpecified
 
-INSERT_UPDATE StockLevel;available;warehouse(code)[unique=true];inStockStatus(code);maxPreOrder;maxStockLevelHistoryCount;overSelling;preOrder;productCode[unique=true];reserved
-
-UPDATE Product;code[unique=true];$catalogVersion;stockLevels(productCode,warehouse(code));vendors(code)
+#INSERT_UPDATE Product;code[unique=true];stockLevels(productCode,warehouse(code));$catalogVersion
+#;千年人参;千年人参:anguo_warehouse
