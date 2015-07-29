@@ -9,7 +9,7 @@ body *{font-family:"微软雅黑",Arial}
 select,button,input,textarea{font-size:100%;vertical-align:middle;font-family:inherit;outline:0}
 img,a img,iframe,fieldset{border:0}
 a{color:#666;text-decoration:none;cursor:pointer;outline:0}
-a:hover{text-decoration:underline}
+a:hover{text-decoration:none;}
 ul,ol,li{list-style:none}
 table{border-collapse:collapse;border-spacing:0}
 h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal}
@@ -35,8 +35,8 @@ h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal}
 .productList .productListItem .thumb img{width:244px; height:220px;}
 .productDescription .futureStockLink{display:none;}
 /*tab*/
-.searchBox{margin-top:50px; margin-left:30px;}
-.tabList{position:relative; width:405px;}
+.searchBox{margin-top:50px; margin-left:35px;}
+.tabList{position:relative; width:540px;}
 .tabList .tabNav{clear:both; width:405px; position:absolute; top:0; left:0; z-index:1;font-size: 14px;}
 .tabList .tabNav .tab,.tabList .more{ background-color:#fff; border-top:3px solid #fff; color:#696969; cursor:pointer; float:left; padding:0px 20px; height:28px; line-height: 28px; }
 .tabList .tabContainer{ border:1px solid #b5b5b5; clear:both; height:33px; width:405px;position:absolute; top:31px; left:0; overflow: hidden; z-index:0;}
@@ -51,3 +51,32 @@ h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal}
 .siteSearch .control-group label{margin:0;}
 .siteSearch .siteSearchSubmit{background:none; background-color:#fafafa; border-left:1px solid #b5b5b5; color:#666; cursor:pointer; display: inline-block; font-size:14px; font-family:"微软雅黑"; float:left; height:33px; line-height: 33px; width:90px; margin:0; position:absolute; right:0; top:0; overflow: hidden}
 .siteSearch .siteSearchSubmit i{ background: url("../images/storesFacetSearchIcon.png") no-repeat scroll center center transparent; display: inline-block; height: 13px; width: 18px;}
+.orderHead div{ color:#36793b; font-size:20px; margin: 10px 0}
+/*En add*/
+.digitalHerbal .productListItem .big-price{
+    margin-top:0;
+    margin-bottom:0;
+    text-align:center;
+} 
+.digitalHerbal .productListItem .cart{
+    margin:0px 20px
+}
+.digitalHerbal .productListItem{
+    height: 351px;
+    overflow: hidden;
+    position:relative;
+}
+.digitalHerbal .productListItem .addToCartButton{
+    position:absolute;
+    bottom:0;
+}
+.Stits ul li span.Stitle{
+    letter-spacing:-1px;
+}
+.tabBlock-tab{
+    padding-right:1.3rem!important;
+    padding-left:1.3rem!important;
+}
+.newsconts h1{
+    height:auto;
+}
