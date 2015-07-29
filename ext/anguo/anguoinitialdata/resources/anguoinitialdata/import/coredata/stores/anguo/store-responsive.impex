@@ -2,7 +2,7 @@
 # Create the BaseStore
 #
 
-$storeUid=__STORE_UID__
+$storeUid=anguo
 $checkoutFlowGroup=responsiveCheckoutGroup
 
 # Base Store

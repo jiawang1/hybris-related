@@ -416,7 +416,12 @@
 		<property name="rootCategoryCode" value="categories"/>
 	</bean>
 
-	<!-- beans for product start -->	
+	<!-- beans for product start -->
+	<alias alias="countryService" name="defaultCountryService" />
+    <bean id="defaultCountryService" class="com.tasly.anguo.core.location.impl.DefaultCountryService">
+        <property name="countryDao" ref="countryDao"/>
+    </bean>
+    
 	<alias alias="regionService" name="defaultRegionService" />
     <bean id="defaultRegionService" class="com.tasly.anguo.core.location.impl.DefaultRegionService">
         <property name="regionDao" ref="regionDao"/>

@@ -10,10 +10,17 @@
 
 </head>
 <body>
-	<select name="regionSelector" id="regionSelector">
-		<c:forEach items="${regions}" var="region">
-			<option value="${region.isocode }">${region.name }</option>
+	<select name="countrySelector" id="countrySelector">
+		<option>--</option>
+		<c:forEach items="${countries}" var="country">
+			<option value="${country.isocode }">${country.name }</option>
 		</c:forEach>
+	</select>
+	<select name="regionSelector" id="regionSelector">
+<%-- 		<c:forEach items="${regions}" var="region"> --%>
+<%-- 			<option value="${region.isocode }">${region.name }</option> --%>
+<%-- 		</c:forEach> --%>
+		<option>--</option>
 	</select>
 	<select name="citySelector" id="citySelector">
 		<option>--</option>
