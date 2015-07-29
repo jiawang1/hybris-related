@@ -23,21 +23,26 @@ INSERT_UPDATE MediaFolder;qualifier[unique=true];path[unique=true]
 
 # Create Media
 INSERT_UPDATE Media;mediaFormat(qualifier);code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];$catalogVersion;
-;60Wx60H;/60Wx60H/01.jpg;$siteResource/images/60Wx60H/01.jpg
-;60Wx60H;/60Wx60H/02.jpg;$siteResource/images/60Wx60H/02.jpg
-;60Wx60H;/60Wx60H/03.jpg;$siteResource/images/60Wx60H/03.jpg
-;60Wx60H;/60Wx60H/04.jpg;$siteResource/images/60Wx60H/04.jpg
-;320Wx320H;/320Wx320H/01.jpg;$siteResource/images/320Wx320H/01.jpg
-;320Wx320H;/320Wx320H/02.jpg;$siteResource/images/320Wx320H/02.jpg
-;320Wx320H;/320Wx320H/03.jpg;$siteResource/images/320Wx320H/03.jpg
-;320Wx320H;/320Wx320H/04.jpg;$siteResource/images/320Wx320H/04.jpg
+;60Wx60H;/60Wx60H/1101690-1334.jpg;$siteResource/images/60Wx60H/1101690-1334.jpg
+;60Wx60H;/60Wx60H/1101695-7498.jpg;$siteResource/images/60Wx60H/1101695-7498.jpg
+;60Wx60H;/60Wx60H/1128762-6838.jpg;$siteResource/images/60Wx60H/1128762-6838.jpg
+;60Wx60H;/60Wx60H/1128763-2470.jpg;$siteResource/images/60Wx60H/1128763-2470.jpg
+
+;320Wx320H;/320Wx320H/1101690-1334.jpg;$siteResource/images/320Wx320H/1101690-1334.jpg
+;320Wx320H;/320Wx320H/1101695-7498.jpg;$siteResource/images/320Wx320H/1101695-7498.jpg
+;320Wx320H;/320Wx320H/1128762-6838.jpg;$siteResource/images/320Wx320H/1128762-6838.jpg
+;320Wx320H;/320Wx320H/1128763-2470.jpg;$siteResource/images/320Wx320H/1128763-2470.jpg
 
 # Create Media Containers
 INSERT_UPDATE MediaContainer;qualifier[unique=true];$medias;$catalogVersion
-;01;/320Wx320H/01.jpg,/60Wx60H/01.jpg;
-;02;/320Wx320H/02.jpg,/60Wx60H/02.jpg;
-;03;/320Wx320H/03.jpg,/60Wx60H/03.jpg;
-;04;/320Wx320H/04.jpg,/60Wx60H/04.jpg;
+;1101690-1334;/320Wx320H/1101690-1334.jpg,/60Wx60H/1101690-1334.jpg;
+;1101695-7498;/320Wx320H/1101695-7498.jpg,/60Wx60H/1101695-7498.jpg;
+;1128762-6838;/320Wx320H/1128762-6838.jpg,/60Wx60H/1128762-6838.jpg;
+;1128763-2470;/320Wx320H/1128763-2470.jpg,/60Wx60H/1128763-2470.jpg;
 
 # Update Products with Media and Media Containers
 UPDATE Product;code[unique=true];$sourceImage;$qualityImage;$galleryImages;$catalogVersion
+;千年人参;/320Wx320H/1101690-1334.jpg;/320Wx320H/1101690-1334.jpg;1101690-1334
+;泽兰;/320Wx320H/1101695-7498.jpg;/320Wx320H/1101695-7498.jpg;1101695-7498
+;薄片白芍;/320Wx320H/1128762-6838.jpg;/320Wx320H/1128762-6838.jpg;1128762-6838
+;炙白芍,炒白芍;/320Wx320H/1128763-2470.jpg;/320Wx320H/1128763-2470.jpg;1128763-2470
