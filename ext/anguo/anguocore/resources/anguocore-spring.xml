@@ -485,4 +485,9 @@
 		<property name="districtDao" ref="districtDao" />
 	</bean>
 	<!-- beans for product end -->
+	
+	<alias name="anguoProductModelUrlResolver" alias="productModelUrlResolver"/>
+	<bean id="anguoProductModelUrlResolver" class="com.tasly.anguo.core.util.AnguoProductModelUrlResolver"
+			parent="defaultProductModelUrlResolver">
+	</bean>
 </beans>

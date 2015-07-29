@@ -39,14 +39,14 @@
 					</sec:authorize>
 				</c:if>
 	<form id="addToCartForm" class="add_to_cart_form" action="<c:url value="/cart/add"/>" method="post">
+	<input type="hidden" name="CSRFToken" value="${CSRFToken}">
 	<c:if test="${product.purchasable}">
 		<input type="hidden" maxlength="3" size="1" id="qty" name="qty" class="qty" value="1">
 	</c:if>
 	<input type="hidden" name="productCodePost" value="${product.code}"/>
 
 	<c:if test="${allowAddToCart}">
-		<c:set var="buttonType">button</c:set>
-
+		<c:set var="buttonType">submit</c:set>
 		<c:if test="${product.purchasable and product.stock.stockLevelStatus.code ne 'outOfStock' }">
 			<c:set var="buttonType">submit</c:set>
 		</c:if>

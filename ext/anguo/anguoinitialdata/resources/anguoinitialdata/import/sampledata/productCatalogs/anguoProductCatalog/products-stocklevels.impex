@@ -6,10 +6,13 @@ $productCatalogName=安国药材目录
 
 $catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Online'])[unique=true,default=$productCatalog:Online]
 
+INSERT_UPDATE Vendor;code[unique=true];name[lang=zh]
+;anguo;anguo
 
+INSERT_UPDATE Warehouse;code[unique=true];vendor(code)[default=anguo];default[default=true]
+					   ;ag_warehouse_n;
+INSERT_UPDATE StockLevel;productCode[unique=true];warehouse(code)[unique=true];available;inStockStatus(code)
+;千年人参;ag_warehouse_n;1000;notSpecified
 
-INSERT_UPDATE Warehouse;code[unique=true];vendor(code);default[default=true]
-
-INSERT_UPDATE StockLevel;available;warehouse(code)[unique=true];inStockStatus(code);maxPreOrder;maxStockLevelHistoryCount;overSelling;preOrder;productCode[unique=true];reserved
-
-UPDATE Product;code[unique=true];$catalogVersion;stockLevels(productCode,warehouse(code));vendors(code)
+UPDATE Product;code[unique=true];stockLevels(productCode,warehouse(code));vendors(code)
+;千年人参;千年人参:ag_warehouse_n

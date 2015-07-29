@@ -20,4 +20,5 @@ $classificationCatalog=anguoClassification
 #$feature6=@<string>, <int>[$clAttrModifiers];  
 #$feature7=@<string>, <int>[$clAttrModifiers];  
 #$feature8=@<string>, <int>[$clAttrModifiers];  
-#INSERT_UPDATE Product;code[unique=true];$feature1;$feature2;$feature3;$feature4;$feature6;$feature7;$feature8;$catalogVersion;
+INSERT_UPDATE Product;code[unique=true];$feature1;$feature2;$feature3;$feature4;$feature6;$feature7;$feature8;$catalogVersion;
+ 					 ;千年人参;安国数字中药都;统货;河南 ;2014年;全干 ;＜3%;无蛀虫、无霉变 ;50kg/袋;;1000kg;50kg;100元/千克;2016年3月1日;非定向;否;免费配送
