@@ -1,4 +1,5 @@
 package com.tasly.anguo.facades.customer.impl;
+
 import static de.hybris.platform.servicelayer.util.ServicesUtil.validateParameterNotNullStandardMessage;
 
 import java.util.ArrayList;
@@ -21,51 +22,46 @@ import de.hybris.platform.core.model.user.PhoneContactInfoModel;
 public class AnguoCustomerFacade extends DefaultCustomerFacade
 
 {
-	private static final Logger LOG = Logger.getLogger(AnguoCustomerFacade.class);
+    private static final Logger LOG = Logger
+            .getLogger(AnguoCustomerFacade.class);
 
-	@Override
-	public void register(final RegisterData registerData) throws DuplicateUidException
+    @Override
+    public void register(final RegisterData registerData)
+            throws DuplicateUidException
 
-	{
-		validateParameterNotNullStandardMessage("registerData", registerData);
-		Assert.hasText(registerData.getLogin(),
-				"The field [Login] cannot be empty");
+    {
+        validateParameterNotNullStandardMessage("registerData", registerData);
+        Assert.hasText(registerData.getLogin(),
+                "The field [Login] cannot be empty");
 
-		CustomerModel newCustomer = null;
-		if (registerData.getUserType() == UserType.PERSONAL)
-		{
-			newCustomer = getModelService().create(PersonalAccountModel.class);
-		} else if(registerData.getUserType() == UserType.ENTERPRISE){
-			newCustomer = getModelService().create(EnterpriseAccountModel.class);			
-		}
+        CustomerModel newCustomer = null;
+        if (registerData.getUserType() == UserType.PERSONAL) {
+            newCustomer = getModelService().create(PersonalAccountModel.class);
+        } else if (registerData.getUserType() == UserType.ENTERPRISE) {
+            newCustomer = getModelService()
+                    .create(EnterpriseAccountModel.class);
+        }
+        newCustomer.setName(registerData.getLogin());
 
-		newCustomer.setName(registerData.getLogin());
+        setUidForRegister(registerData, newCustomer);
+        newCustomer.setSessionLanguage(getCommonI18NService().getCurrentLanguage());
+        newCustomer.setSessionCurrency(getCommonI18NService().getCurrentCurrency());
 
+        PhoneContactInfoModel phoneModel = new PhoneContactInfoModel();
 
-		setUidForRegister(registerData, newCustomer);
+        phoneModel.setType(PhoneContactInfoType.MOBILE);
 
-		newCustomer.setSessionLanguage(getCommonI18NService()
-				.getCurrentLanguage());
+        phoneModel.setPhoneNumber(registerData.getMobile());
 
-		newCustomer.setSessionCurrency(getCommonI18NService()
-				.getCurrentCurrency());
+        phoneModel.setUser(newCustomer);
 
-		PhoneContactInfoModel phoneModel = new PhoneContactInfoModel();
+        newCustomer.setContactInfos(new ArrayList<AbstractContactInfoModel>());
 
-		phoneModel.setType(PhoneContactInfoType.MOBILE);
+        newCustomer.getContactInfos().add(phoneModel);
 
-		phoneModel.setPhoneNumber(registerData.getMobile());
+        getCustomerAccountService().register(newCustomer,
+                registerData.getPassword());
 
-		phoneModel.setUser(newCustomer);
+    }
 
-		newCustomer.setContactInfos(new ArrayList<AbstractContactInfoModel>());
-
-		newCustomer.getContactInfos().add(phoneModel);
-
-		getCustomerAccountService().register(newCustomer,
-				registerData.getPassword());
-
-	}
-
-	
 }
