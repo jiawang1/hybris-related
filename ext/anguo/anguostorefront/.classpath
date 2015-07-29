@@ -14,6 +14,7 @@
 	<classpathentry kind="lib" path="web/webroot/WEB-INF/lib/rhino1_7R4.jar"/>
 	<classpathentry kind="lib" path="web/webroot/WEB-INF/lib/spring-security-taglibs-3.2.3.RELEASE.jar"/>
 	<classpathentry exported="true" kind="lib" path="resources"/>
+	<classpathentry kind="lib" path="lib/fastjson-1.1.40.jar"/>
 	<classpathentry kind="src" output="eclipsebin/web/classes" path="web/src"/>
 	<classpathentry kind="src" output="eclipsebin/web/classes" path="web/testsrc"/>
 	<classpathentry kind="output" path="eclipsebin/notused"/>

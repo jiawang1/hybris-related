@@ -31,6 +31,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.tasly.anguo.core.enums.UserType;
 import com.tasly.anguo.storefront.controllers.ControllerConstants;
 import com.tasly.anguo.storefront.forms.AnguoRegisterForm;
 
@@ -140,14 +141,25 @@ public class LoginPageController extends AbstractLoginPageController
 		data.setCaptcha(iForm.getCaptcha());
 		data.setLogin(iForm.getUserId());
 		data.setPassword(form.getPwd());
-		data.setMobile(iForm.getMobileNumber());;
+		data.setMobile(iForm.getMobileNumber());
+		data.setUserType(UserType.valueOf(iForm.getUserType()));
 		try
 		{
 			getCustomerFacade().register(data);
 			getAutoLoginStrategy().login(iForm.getUserId().toLowerCase(), form.getPwd(), request, response);
 
-			GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.CONF_MESSAGES_HOLDER,
-					"registration.confirmation.message.title");
+			switch(data.getUserType())
+			{
+			case ENTERPRISE: 
+		         GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.CONF_MESSAGES_HOLDER,
+		                    "registration.confirmation.message.enterprise.title"); 
+		         break;
+			case PERSONAL:
+		         GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.CONF_MESSAGES_HOLDER,
+		                    "registration.confirmation.message.personal.title");
+		         break;
+			}
+
 		}
 		catch (final DuplicateUidException e)
 		{
@@ -155,7 +167,7 @@ public class LoginPageController extends AbstractLoginPageController
 			model.addAttribute(form);
 			model.addAttribute(new LoginForm());
 			model.addAttribute(new GuestForm());
-			bindingResult.rejectValue("email", "registration.error.account.exists.title");
+			bindingResult.rejectValue("userId", "registration.error.account.exists.title");
 			GlobalMessages.addErrorMessage(model, "form.global.error");
 			return handleRegistrationError(model);
 		}

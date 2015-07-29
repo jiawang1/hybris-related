@@ -7,6 +7,7 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 
+import com.tasly.anguo.core.enums.UserType;
 import com.tasly.anguo.storefront.forms.AnguoRegisterForm;
 
 import de.hybris.platform.acceleratorstorefrontcommons.forms.validation.RegistrationValidator;
@@ -15,6 +16,8 @@ import de.hybris.platform.acceleratorstorefrontcommons.forms.validation.Registra
 public class AnguoRegistrationValidator extends RegistrationValidator
 {
 	public static final String EMAIL_REGEX = "\\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}\\b";
+	public static final String USER_NAME_INVALID_SUBSTRING_COMPANY = "公司";
+	public static final String USER_NAME_INVALID_SUBSTRING_STOCK   = "股份";
 
 	@Override
 	public boolean supports(final Class<?> aClass)
@@ -29,16 +32,22 @@ public class AnguoRegistrationValidator extends RegistrationValidator
 		final String userId = registerForm.getUserId();
 		final String pwd = registerForm.getPwd();
 		final String checkPwd = registerForm.getCheckPwd();
-		final String mobile = registerForm.getMobileNumber();
+		final String mobileNumber = registerForm.getMobileNumber();
 		final String captcha = registerForm.getCaptcha();
+		UserType userType = UserType.valueOf(registerForm.getUserType());
 
 		if (StringUtils.isEmpty(userId))
 		{
-			errors.rejectValue("userId", "register.username.invalid");
+			errors.rejectValue("userId", "register.username.isBlank");
 		}
 		else if (StringUtils.length(userId) > 255)
 		{
-			errors.rejectValue("titleCode", "register.username.invalid");
+			errors.rejectValue("userId", "register.username.overLength");
+		}
+		else if (userType == UserType.PERSONAL && 
+				(userId.contains(USER_NAME_INVALID_SUBSTRING_COMPANY) || userId.contains(USER_NAME_INVALID_SUBSTRING_STOCK)))
+		{
+			errors.rejectValue("userId", "register.username.personal.invalid.substring");			
 		}
 
 		if (StringUtils.isEmpty(pwd))
@@ -62,15 +71,20 @@ public class AnguoRegistrationValidator extends RegistrationValidator
 			}
 		}
 		
-		if (StringUtils.isEmpty(mobile))
+		if (StringUtils.isEmpty(mobileNumber))
 		{
-			errors.rejectValue("mobile", "register.mobile.invalid");
+			errors.rejectValue("mobileNumber", "register.mobile.invalid");
 		}
-		else if (StringUtils.length(mobile) != 11)
+		else
 		{
-			errors.rejectValue("mobile", "register.mobile.invalid");			
+			Pattern patter = Pattern.compile("^1\\d{10}$"); 
+			Matcher matcher = patter.matcher(mobileNumber); 
+			if(!matcher.find()) {
+				errors.rejectValue("mobileNumber", "register.mobile.invalid");		
+			}
 		}
 		
+		//TODO check whether the input captcha is the same with the captcha you received on your cellphone
 		if (StringUtils.isEmpty(captcha))
 		{
 			errors.rejectValue("captcha", "register.captcha.invalid");			

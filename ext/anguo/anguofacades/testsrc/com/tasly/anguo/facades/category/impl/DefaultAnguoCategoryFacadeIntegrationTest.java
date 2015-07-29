@@ -1,5 +1,7 @@
 package com.tasly.anguo.facades.category.impl;
 
+import static org.junit.Assert.*;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
@@ -12,7 +14,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.tasly.anguo.facades.category.AnguoCategoryFacade;
+import com.tasly.anguo.facades.constants.AnguoFacadesConstants;
 import com.tasly.anguo.facades.product.data.CategoryNodeData;
+import com.tasly.anguo.facades.product.data.MgmtCategoryData;
 
 import de.hybris.bootstrap.annotations.IntegrationTest;
 import de.hybris.platform.catalog.CatalogVersionService;
@@ -25,8 +29,8 @@ import de.hybris.platform.servicelayer.ServicelayerTransactionalTest;
 import de.hybris.platform.servicelayer.session.SessionService;
 
 @IntegrationTest
-public class DefaultAnguoCategoryFacadeTest extends ServicelayerTransactionalTest {
-	private Logger LOG = Logger.getLogger(DefaultAnguoCategoryFacadeTest.class);
+public class DefaultAnguoCategoryFacadeIntegrationTest extends ServicelayerTransactionalTest {
+	private Logger LOG = Logger.getLogger(DefaultAnguoCategoryFacadeIntegrationTest.class);
 	
 	@Resource
 	AnguoCategoryFacade anguoCategoryFacade;
@@ -42,19 +46,23 @@ public class DefaultAnguoCategoryFacadeTest extends ServicelayerTransactionalTes
 	
 	@Before
 	public void setup(){
-		CatalogVersionModel catalogVersionModel = catalogVersionService.getCatalogVersion("anguoProductCatalog", "Online");
+		CatalogVersionModel catalogVersionModel = catalogVersionService.getCatalogVersion(AnguoFacadesConstants.ACTIVECATALOG, AnguoFacadesConstants.ACTIVECATALOGVERSION);
 		sessionService.getCurrentSession().setAttribute(CatalogConstants.SESSION_CATALOG_VERSIONS, catalogVersionModel);
 	}
 	
 	@Test
 	public void testGetSubCategory(){
-		String categoryCode="药材";
+		String categoryCode = AnguoFacadesConstants.ROOTCATEGORY;
 		List<CategoryNodeData> categoryNodeDataList = anguoCategoryFacade.getSubCategoryByCode(categoryCode);
-
-		//LOG.info(JSON.toJSONString(categoryNodeDataList));
-
+        
+		assertNotNull(categoryNodeDataList);
+	    assertTrue(categoryNodeDataList.size()>0?true:false);
 	}
 	
-	
+	@Test
+	public void testGetCategoryDetail(){
+		MgmtCategoryData categoryData = anguoCategoryFacade.getCategoryDetail(AnguoFacadesConstants.ROOTCATEGORY);
+		assertEquals(categoryData.getCategoryCode(),"药材");
+	}
 	
 }

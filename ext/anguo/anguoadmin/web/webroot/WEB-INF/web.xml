@@ -9,7 +9,7 @@
 	<display-name>anguoadmin</display-name>
 	
 	<welcome-file-list>
-		<welcome-file>index.jsp</welcome-file>
+		<welcome-file></welcome-file>
 	</welcome-file-list>
 	
 	<login-config>
@@ -67,7 +67,7 @@
  -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>WEB-INF/anguoadmin-web-spring.xml</param-value>
+		<param-value>WEB-INF/config/anguoadmin-web-spring.xml</param-value>
 	</context-param>
 
 	<listener>
@@ -77,4 +77,29 @@
 	<listener>
     	<listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
 	</listener>
+	
+	<servlet>
+		<description>
+			DispatcherServlet
+			Spring MVC dispatcher servlet. This is the entry point for the Spring MVC application.
+		</description>
+		<servlet-name>DispatcherServlet</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<description>
+				Specifies the location for Spring MVC to load an additional XML configuration file.
+				Because hybris is already configured with the XML spring configuration files to load
+				we must set this param value to EMPTY in order to prevent loading of the default
+				/WEB-INF/applicationContext.xml file.
+			</description>
+			<param-name>contextConfigLocation</param-name>
+			<param-value></param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DispatcherServlet</servlet-name>
+		<!-- Map all requests to the DispatcherServlet -->
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
 </web-app> 
