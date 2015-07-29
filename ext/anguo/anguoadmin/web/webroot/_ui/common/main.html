@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
-        <link rel="stylesheet" type="text/css" href="./_ui/common/css/bootstrap.css" />
-        <link rel="stylesheet" type="text/css" href="./_ui/common/css/relayout.css" />
+        <link rel="stylesheet" type="text/css" href="./css/bootstrap.css" />
+        <link rel="stylesheet" type="text/css" href="./css/relayout.css" />
     </head>
 <body>
       <div class="container">
@@ -14,11 +14,11 @@
     <script type="application/javascript">
         var loadScriptHandler = function () {
             var loadScript = document.createElement("script");
-            loadScript.src = "_ui/common/js/lib/require-2.1.19.js";
+            loadScript.src = "./js/lib/require-2.1.19.js";
             loadScript.onload = function () {
                 if (!this.readyState || this.readyState === "loaded" || this.readyState === "complete") {
                     require.config({
-                        baseUrl: "_ui/common/js",
+                        baseUrl: "./js",
                         paths: {
                             jquery: 'lib/jquery-1.11.2', // resolve jquery double load issue
                             underscore: 'lib/underscore',
@@ -36,11 +36,13 @@
                             bootstrap:{
                                 deps: ["jquery"],
                                 exports: "bootstrap"
-                            }                        
+                            }
+                            
                         }
                     });
                     require(["applicationRouter"], function (router) {
                         var data = router;
+
                     });
                 }
             };

@@ -1,0 +1,33 @@
+<ul>
+     <%for( var i = 0, j = data.length; i < j; i++){%>
+        <li data-link="<%=data[i].link%>">
+            <%if(data[i].label == 'Category'){%>
+                <span class="glyphicon glyphicon-plus" aria-hidden="true">&nbsp;</span>  
+            <%}%>
+            <p><%-data[i].label%></%-data[i].label%></p>
+        </li>
+        <%if(data[i].label == 'Category'){%>
+           <li class="nav-sub relayout-hide">
+
+                <ul>
+                    <li class="nav-sub-item" data-link="#category/1">
+                        <p>Category-1</p> 
+                    </li>
+                     <li class="nav-sub-item" data-link="#category/2">
+                        <p>Category-2</p> 
+                    </li>
+                </ul>
+
+            </li>
+        <%}%>
+        
+    <%}%>
+    
+<!--
+     <%for( var i = 0, j = data.length; i < j; i++){%>
+        <li data-link="<%=data[i].link%>">
+            <a href="<%=data[i].link%>"><%-data[i].label%></a>
+        </li>
+    <%}%>
+-->
+</ul>
