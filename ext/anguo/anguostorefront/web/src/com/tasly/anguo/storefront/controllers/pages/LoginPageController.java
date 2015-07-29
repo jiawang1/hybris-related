@@ -148,8 +148,18 @@ public class LoginPageController extends AbstractLoginPageController
 			getCustomerFacade().register(data);
 			getAutoLoginStrategy().login(iForm.getUserId().toLowerCase(), form.getPwd(), request, response);
 
-			GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.CONF_MESSAGES_HOLDER,
-					"registration.confirmation.message.title");
+			switch(data.getUserType())
+			{
+			case ENTERPRISE: 
+		         GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.CONF_MESSAGES_HOLDER,
+		                    "registration.confirmation.message.enterprise.title"); 
+		         break;
+			case PERSONAL:
+		         GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.CONF_MESSAGES_HOLDER,
+		                    "registration.confirmation.message.personal.title");
+		         break;
+			}
+
 		}
 		catch (final DuplicateUidException e)
 		{
