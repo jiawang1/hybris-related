@@ -485,14 +485,14 @@ INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;c
 INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='login'];contentSlot(uid,$contentCV)[unique=true]
 ;;Side-login;SideContent;;SideContent-login
 
-###### Powertools Checkout Login Page ######
+######Checkout Login Page ######
 INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)
 ;;SideContent-checkoutLogin;Side Slot for Checkout Login Page;true;HelpParagraphComponent
 
 INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='checkout-login'];contentSlot(uid,$contentCV)[unique=true]
 ;;Side-checkoutLogin;SideContent;;SideContent-checkoutLogin
 
-###### Powertools Single/Multi Step Checkout Pages ######
+######  Single/Multi Step Checkout Pages ######
 INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)
 ;;SideContent-singleStepCheckoutSummaryPage;Side Slot for singleStepCheckoutSummaryPage;true;HelpParagraphComponent
 ;;SideContent-multiStepCheckoutPage ;Side slot for the multi-step checkout page ;true;HelpParagraphComponent
@@ -501,7 +501,7 @@ INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];positi
 ;;Side-singleStepCheckoutSummaryPage;SideContent;singleStepCheckoutSummaryPage;SideContent-singleStepCheckoutSummaryPage
 ;;Side-multiStepCheckoutPage;SideContent;multiStepCheckoutPage;SideContent-multiStepCheckoutPage
 
-###### Powertools Store Finder Page ######
+######  Store Finder Page ######
 INSERT_UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;urlLink
 ;;StoreFinderSideBanner;Store Finder Side Banner;StoreFinderSideBanner;#
 
@@ -511,7 +511,7 @@ INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;c
 INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='storefinderPage'];contentSlot(uid,$contentCV)[unique=true]
 ;;Side-StoreFinderPage;SideContent;;SideContent-StoreFinderPage
 
-###### Powertools Terms and Conditions Page
+######  Terms and Conditions Page
 
 # CMSParagraphComponent
 INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef
@@ -530,13 +530,13 @@ INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];positi
 
 
 
-###### Powertools My Company Page ######
+######  My Company Page ######
 
 INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef);;;
 ;;SideContent-Company;Side Content Slot for My Company Homepage;true;CompanyLeftNavigationComponent;;;
 ;;BodyContent-Company;Body Content Slot for My Company Homepage;true;CompanyHomepageComponent;;;
 
-###### Powertools My Account Page ######
+######  My Account Page ######
 
 INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef);;;
 ;;SideContent-Account;Side Content Slot for My Account Homepage;true;AccountLeftNavigationComponent;;;

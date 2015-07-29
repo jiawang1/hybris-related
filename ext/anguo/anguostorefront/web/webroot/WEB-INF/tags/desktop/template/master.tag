@@ -4,7 +4,7 @@
 <%@ attribute name="metaKeywords" required="false" %>
 <%@ attribute name="pageCss" required="false" fragment="true" %>
 <%@ attribute name="pageScripts" required="false" fragment="true" %>
-
+<%@ taglib prefix="debug" tagdir="/WEB-INF/tags/shared/debug" %>
 <%@ taglib prefix="template" tagdir="/WEB-INF/tags/desktop/template" %>
 <%@ taglib prefix="analytics" tagdir="/WEB-INF/tags/shared/analytics" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
@@ -65,6 +65,6 @@
 
 </body>
 
-
+<debug:debugFooter/>
 
 </html>
