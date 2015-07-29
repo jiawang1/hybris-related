@@ -3,7 +3,7 @@
 # Macros / Replacement Parameter definitions
 $productCatalog=anguoProductCatalog
 
-$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default=‘Online’])[unique=true,default=$productCatalog]
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Online'])[unique=true,default=$productCatalog]
 $media=@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator]
 $thumbnail=thumbnail(code, $catalogVersion)
 $picture=picture(code, $catalogVersion)
@@ -12,15 +12,24 @@ $detail=detail(code, $catalogVersion)
 $normal=normal(code, $catalogVersion)
 $others=others(code, $catalogVersion)
 $data_sheet=data_sheet(code, $catalogVersion)
+$qualityImage=qualityImage(code, $catalogVersion)
+$sourceImage=sourceImage(code, $catalogVersion)
 $medias=medias(code, $catalogVersion)
 $galleryImages=galleryImages(qualifier, $catalogVersion)
-$siteResource=jar:com.tasly.anguo.initialdata.setup.InitialDataSystemSetup&/anguoinitialdata/import/productCatalogs/$productCatalog
+$siteResource=jar:com.tasly.anguo.initialdata.constants.AnguoInitialDataConstants&/anguoinitialdata/import/productCatalogs/$productCatalog
+
+INSERT_UPDATE MediaFolder;qualifier[unique=true];path[unique=true]
+;images;images
 
 # Create Media
-INSERT_UPDATE Media;mediaFormat(qualifier);code[unique=true];$media;mime[default='image/jpeg'];$catalogVersion;folder(qualifier)
+INSERT_UPDATE Media;mediaFormat(qualifier);code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];$catalogVersion;
+;60Wx60H;01.jpg;$siteResource/images/01.jpg
+;320Wx320H;/320Wx320H/02.jpg;$siteResource/images/320Wx320H/02.jpg
+;320Wx320H;/320Wx320H/03.jpg;$siteResource/images/320Wx320H/03.jpg
+;320Wx320H;/320Wx320H/04.jpg;$siteResource/images/320Wx320H/04.jpg
 
 # Create Media Containers
 INSERT_UPDATE MediaContainer;qualifier[unique=true];$medias;$catalogVersion
 
 # Update Products with Media and Media Containers
-UPDATE Product;code[unique=true];$picture;$thumbnail;$detail;$others;$normal;$thumbnails;$galleryImages;$catalogVersion
+UPDATE Product;code[unique=true];$sourceImage;$qualityImage;$galleryImages;$catalogVersion

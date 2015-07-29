@@ -342,6 +342,18 @@
 					</attribute>
 				</attributes>
             </itemtype>
+            <itemtype code="Product" generate="false" autocreate="false">
+            	<attributes>
+					<attribute generate="true" autocreate="true" qualifier="qualityImage" type="MediaCollection">
+						<persistence type="property" qualifier=""/>
+						<modifiers read="true" write="true" search="true" encrypted="false" optional="true" removable="true" initial="false" unique="false" private="false" partof="false"/>
+					</attribute>
+					<attribute generate="true" autocreate="true" qualifier="sourceImage" type="MediaCollection">
+						<persistence type="property" qualifier=""/>
+						<modifiers read="true" write="true" search="true" encrypted="false" optional="true" removable="true" initial="false" unique="false" private="false" partof="false"/>
+					</attribute>
+            	</attributes>
+            </itemtype>
 		</typegroup>
 
 	</itemtypes>
