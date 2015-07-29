@@ -215,6 +215,12 @@
 		<property name="numeric" value="false"/> 
     </bean>
     
+    <alias alias="countryFacade" name="defaultCountryFacade" />
+	<bean id="defaultCountryFacade" class="com.tasly.anguo.facades.location.impl.DefaultCountryFacade">
+	  <property name="countryService" ref="countryService"></property>
+	  <property name="countryPopulator" ref="countryPopulator"></property>
+	</bean>
+    
 	<alias alias="regionFacade" name="defaultRegionFacade" />
 	<bean id="defaultRegionFacade" class="com.tasly.anguo.facades.location.impl.DefaultRegionFacade">
 	  <property name="regionService" ref="regionService"></property>
