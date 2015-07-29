@@ -40,7 +40,7 @@ public class AnguoRegistrationValidator extends RegistrationValidator
 		{
 			errors.rejectValue("userId", "register.username.isBlank");
 		}
-		else if (StringUtils.length(userId) > 255)
+		else if (StringUtils.length(userId) > 30)
 		{
 			errors.rejectValue("userId", "register.username.overLength");
 		}
