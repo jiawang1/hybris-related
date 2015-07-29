@@ -8,16 +8,24 @@ define(['jquery','backbone', 'underscore','productModel','text!../template/produ
 
         },
         
-        render:function(){                          /* render the view*/
+        render:function(){   
+
+        var that = this;                       /* render the view*/
             _.templateSettings={
 
                 interpolate: /\{\{(.+?)\}\}/g
             };
-           this.$el.html(_.template(sProductTemplate,{"model": new ProductModel()}));
+
+           $.when(new ProductModel().fetch()).done(function(model){
+
+              that.$el.html(_.template(sProductTemplate,{"model": model}));
+
+           });
+
            return this;
         }
     
     });
     
-    return ProductsView;                           /* expose the class */
+    return ProductsView;                           /* expose class */
 });

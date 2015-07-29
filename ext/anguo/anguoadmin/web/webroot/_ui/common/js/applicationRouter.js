@@ -56,11 +56,7 @@ var AppRouter = Backbone.Router.extend({
 //        $(".main-root").empty().append(new Products().render().$el);
 //    });
     
-    appRouter.on("route:handleCategory", function(){
-        
-        
-        $(".main-root").empty().append(new Products().render().$el);
-    });
+
     
     
     
