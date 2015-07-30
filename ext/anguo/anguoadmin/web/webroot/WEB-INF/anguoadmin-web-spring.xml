@@ -26,7 +26,7 @@
            http://www.springframework.org/schema/aop
            http://www.springframework.org/schema/aop/spring-aop.xsd">
 
-    
+    <context:annotation-config/> 
 	<!--  Configure the class to use for jalo session creation -->
 	<!-- <bean id="jalosession"   class="de.hybris.platform.jalo.JaloSessionFactory">
 		<property name="targetClassName" value="com.tasly.anguo.jalo.AnguoadminJaloSession"/>
@@ -36,9 +36,11 @@
 	<bean id="anguoadminPlatformFilterChain" class="de.hybris.platform.servicelayer.web.PlatformFilterChain">
 		<constructor-arg>
 			<list>
+				<ref bean="anguoActiveCatalogVersionFilter"/>
 				<ref bean="log4jFilter"/>
 				<ref bean="dynamicTenantActivationFilter"/>
 				<ref bean="sessionFilter"/>
+				
            		<ref bean="anguoadminSecureMediaFilter"/>				
 			</list>
 		</constructor-arg>
@@ -51,6 +53,10 @@
        <property name="mediaService" ref="mediaService"/>
       <!-- <property name="secureMediaToken" value="securemedias"/>  securemedias is default but you may overwrite it -->
      </bean>	
+   <bean id="anguoActiveCatalogVersionFilter" class="com.tasly.anguo.filter.ActiveCatalogVersionFilter">
+       <property name="catalogVersionService" ref="catalogVersionService"/>
+       <property name="catalogService" ref="catalogService"/>
+   </bean>	
 
 	<!-- 
 	 WARNING: 

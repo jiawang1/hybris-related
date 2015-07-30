@@ -129,7 +129,7 @@ public class DefaultAnguoCategoryFacade implements AnguoCategoryFacade {
 			CategoryModel parentCategory = categoryService.getCategoryForCode(superCategoryCode);
 			CategoryModel category = modelService.create(CategoryModel.class);
 			//TODO: need to refact this once catalog version is loaded by session
-			category.setCatalogVersion(catalogVersionService.getCatalogVersion(AnguoFacadesConstants.ACTIVECATALOG,AnguoFacadesConstants.ACTIVECATALOGVERSION));
+			category.setCatalogVersion(catalogVersionService.getCatalogVersion(AnguoFacadesConstants.ACTIVEPRODUCTCATALOG,AnguoFacadesConstants.ACTIVEPRODUCTCATALOGVERSION));
 			category.setCode((String)categoryCodeGenerator.generate());
 			category.setSupercategories(Arrays.asList(parentCategory));
 			category.setName(AnguoFacadesConstants.DEFAULTCATEGORYNAME);
