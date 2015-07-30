@@ -29,9 +29,12 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.tasly.anguo.core.enums.UserType;
+import com.tasly.anguo.core.service.ICaptchaService;
+import com.tasly.anguo.core.service.items.CaptchaSendStatus;
 import com.tasly.anguo.storefront.controllers.ControllerConstants;
 import com.tasly.anguo.storefront.forms.AnguoRegisterForm;
 
@@ -56,8 +59,20 @@ public class LoginPageController extends AbstractLoginPageController
 	private HttpSessionRequestCache httpSessionRequestCache;
 	@Resource(name = "anguoRegistrationValidator")
 	private Validator registrationValidator;
+	
+	@Resource(name = "captchaService")
+	private ICaptchaService captchaService;
+	
 
-	@Override
+	public ICaptchaService getCaptchaService() {
+        return captchaService;
+    }
+
+    public void setCaptchaService(ICaptchaService captchaService) {
+        this.captchaService = captchaService;
+    }
+
+    @Override
 	protected String getView()
 	{
 		return ControllerConstants.Views.Pages.Account.AccountLoginPage;
@@ -114,6 +129,13 @@ public class LoginPageController extends AbstractLoginPageController
 	{
 		getRegistrationValidator().validate(form, bindingResult);
 		return processRegisterUserRequest(referer, form, bindingResult, model, request, response, redirectModel);
+	}
+	
+	@RequestMapping(value="/sendCaptcha", method = RequestMethod.POST)
+	@ResponseBody
+	public CaptchaSendStatus sendCaptcha(@RequestParam String mobileNumber, final HttpServletRequest request,
+            final HttpServletResponse response) {
+	    return captchaService.sendCaptcha(mobileNumber);
 	}
 	
 	@Override

@@ -42,25 +42,33 @@
 </div>
 <script type="text/javascript">
 	var countdown=60; 
+	function checkTime(obj) {
+        if (countdown == 0) { 
+            obj.removeAttribute("disabled");    
+            obj.innerText='<spring:theme code="register.recaptcha" />';
+            countdown = 60;
+            return;
+        } else {
+            obj.setAttribute("disabled", true); 
+            obj.innerText='<spring:theme code="register.recaptcha" />'+"(" + countdown + ")"; 
+            countdown--; 
+        } 
+        setTimeout(function() { 
+        	checkTime(obj)
+                         }
+             ,1000); 		
+	}
 	function settime(obj) {
-	     if (countdown == 0) { 
-	        obj.removeAttribute("disabled");    
-	        obj.innerText=<spring:theme code="register.recaptcha" />;
-	        countdown = 60;
-	        return;
-	    } else { 
-	        obj.setAttribute("disabled", true); 
-	        obj.innerText='<spring:theme code="register.recaptcha" />'+"(" + countdown + ")"; 
-	        countdown--; 
-	    } 
-	setTimeout(function() { 
-	             			settime(obj)
-	              		 }
-	         ,1000);  
+		if(checkMobile()) {
+            $.post("/anguostorefront/anguo/zh/login/sendCaptcha",{mobileNumber:$("#mobile").val()},function(result){
+            	alert(result);
+            	checkTime(obj);           
+            });
+		}
 	}
     var cbIsAgreeTerms = document.getElementById("cbIsAgreeTerms");
     var btCaptcha = document.getElementById("btCaptcha");
-    btCaptcha.onclick = function(){settime(btCaptcha);}
+    btCaptcha.onclick = function(){settime(btCaptcha); return false;}
     cbIsAgreeTerms.onclick = function() {
 		$("#registerButton").enable($("#cbIsAgreeTerms").attr("checked")? true :false);			
 	};
@@ -75,22 +83,27 @@
 		$("#"+hiddenDiv).hide();
 		$("#userType").val((displayDiv=="divPersonal")? "PERSONAL" : "ENTERPRISE");
 	}
-	document.getElementById("mobile").onblur=function() {
-		var str = $("#mobile").val();
-	    if(str==""){
-	        alert('<spring:theme code="register.mobile.invalid" />');
-	        $("#mobile").focus();
-	    }
-	    else{
-	        var re = /^1\d{10}$/;
-	        if (!re.test(str)) {
-	        {
-		        alert('<spring:theme code="register.mobile.invalid" />');
-		        $("#mobile").focus();
-
+	function checkMobile() {
+	       var str = $("#mobile").val();
+	        if(str==""){
+	            alert('<spring:theme code="register.mobile.invalid" />');
+	            $("#mobile").focus();
+	            return false;
 	        }
-	    }
-	}	
+	        else{
+	            var re = /^1\d{10}$/;
+	            if (!re.test(str)) {
+	            {
+	                alert('<spring:theme code="register.mobile.invalid" />');
+	                $("#mobile").focus();
+	                return false;
+	            }
+	        }
+	    }	
+	    return true;
+	}
+	document.getElementById("mobile").onblur=function() {
+		checkMobile();
   }
 </script>
 
