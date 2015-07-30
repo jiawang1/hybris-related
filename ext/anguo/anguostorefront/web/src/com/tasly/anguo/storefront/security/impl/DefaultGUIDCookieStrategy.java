@@ -74,6 +74,11 @@ public class DefaultGUIDCookieStrategy implements GUIDCookieStrategy
 		}
 		
 		//if remember me is on,then create a cookie to remember the userName
+		setRememberMeCookie(request, response);
+	}
+
+	private void setRememberMeCookie(final HttpServletRequest request,
+			final HttpServletResponse response) {
 		final String rememberMe = request
 				.getParameter("_spring_security_remember_me");
 		if (rememberMe != null
