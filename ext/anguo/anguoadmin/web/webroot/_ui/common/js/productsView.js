@@ -11,14 +11,18 @@ define(['jquery','backbone', 'underscore','productModel','text!../template/produ
         render:function(){   
 
         var that = this;                       /* render the view*/
-            _.templateSettings={
-
-                interpolate: /\{\{(.+?)\}\}/g
-            };
+//            _.templateSettings={
+//
+//                interpolate: /\{\{(.+?)\}\}/g
+//            };
 
            $.when(new ProductModel().fetch()).done(function(model){
-
+        	   
+        	  console.log("productview: " + model);
+        	 
               that.$el.html(_.template(sProductTemplate,{"model": model}));
+              
+              console.log(that.$el.html());
 
            });
 

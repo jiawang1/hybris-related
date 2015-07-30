@@ -1,0 +1,10 @@
+#
+# Import the Content Catalog
+#
+$contentCatalog=storeEnterpriseFlagshipContentCatalog
+# Language
+$lang=zh
+
+# Create Content Catalog
+UPDATE ContentCatalog;id[unique=true];name[lang=$lang]
+;$contentCatalog;企业旗舰模版
