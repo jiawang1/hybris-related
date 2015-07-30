@@ -23,7 +23,8 @@
                             jquery: 'lib/jquery-1.11.2', // resolve jquery double load issue
                             underscore: 'lib/underscore',
                             backbone: 'lib/backbone-1.1.2',
-                            bootstrap: 'lib/bootstrap'
+                            bootstrap: 'lib/bootstrap',
+                            jstree: 'lib/jstree'                       
                         },
                         shim: {
                             underscore: {
@@ -36,7 +37,11 @@
                             bootstrap:{
                                 deps: ["jquery"],
                                 exports: "bootstrap"
-                            }                        
+                            },
+                            jstree:{
+                            	deps: ["jquery"],
+                            	exports: "jstree"
+                            }
                         }
                     });
                     require(["applicationRouter"], function (router) {

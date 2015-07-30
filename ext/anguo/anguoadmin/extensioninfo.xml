@@ -16,12 +16,14 @@
    <extension abstractclassprefix="Generated" classprefix="Anguoadmin" managername="AnguoadminManager" managersuperclass="de.hybris.platform.jalo.extension.Extension" name="anguoadmin">
                
       <!-- you should add all required extensions to this list, except platform extensions which are automatically required -->         
-      <!-- <requires-extension name="cms"/> -->         
+      <!-- <requires-extension name="cms"/> -->  
+      <requires-extension name="commercefacades"/>       
       
 
       <coremodule generated="true" manager="com.tasly.anguo.jalo.AnguoadminManager" packageroot="com.tasly.anguo"/>
 
       <webmodule jspcompile="false" webroot="/anguoadmin"/>
+      
 					
 	
 
