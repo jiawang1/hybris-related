@@ -461,5 +461,23 @@
 		<property name="interceptor" ref="anguoCategoryRemovalValidator" />
 		<property name="typeCode" value="Category" />
 	</bean>
+
+	<!-- add by LiuJi for AM-128 start -->
+	<!-- product -->
+	<bean id="productCodeGenerator" class="de.hybris.platform.servicelayer.keygenerator.impl.PersistentKeyGenerator">
+		<property name="key" value="${keygen.product.code.name}"/>
+		<property name="digits" value="${keygen.product.code.digits}"/>
+		<property name="start" value="${keygen.product.code.start}"/>
+		<property name="type" value="${keygen.product.code.type}"/>
+		<property name="template" value="${keygen.product.code.template}"/>
+	</bean>
+
+	<alias alias="createProductCodeStrategy" name="defaultCreateProductCodeStrategy"/>
+	<bean id="defaultCreateProductCodeStrategy"
+			class="com.tasly.anguo.core.product.strategies.impl.DefaultCreateProductCodeStrategy">
+		<property name="keyGenerator"
+					 ref="#{configurationService.configuration.getProperty('anguocore.productCode.keyGenerator')}"/>
+	</bean>
+	<!-- add by LiuJi for AM-128 end -->
 	<!-- beans for product end -->
 </beans>
