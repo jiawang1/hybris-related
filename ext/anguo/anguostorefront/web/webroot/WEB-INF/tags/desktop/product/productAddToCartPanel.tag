@@ -25,7 +25,7 @@
 	</c:if>
 
 	<ycommerce:testId code="productDetails_productInStock_label">
-		<product:productStockThreshold product="${product}"/> 
+		<%-- <product:productStockThreshold product="${product}"/>  --%>
 	</ycommerce:testId>
 </div>
 
@@ -45,6 +45,7 @@
 	</c:if>
 	<input type="hidden" name="productCodePost" value="${product.code}"/>
 
+	
 	<c:if test="${allowAddToCart}">
 		<c:set var="buttonType">submit</c:set>
 		<c:if test="${product.purchasable and product.stock.stockLevelStatus.code ne 'outOfStock' }">
