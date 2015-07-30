@@ -3,6 +3,10 @@
  */
 package com.tasly.anguo.facades.location.impl;
 
+import static org.junit.Assert.assertEquals;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.doAnswer;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,17 +17,9 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 
-import static org.junit.Assert.*;
-import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.doAnswer;
-
-import com.tasly.anguo.core.location.CityService;
 import com.tasly.anguo.core.location.RegionService;
-import com.tasly.anguo.facades.data.CityData;
-import com.tasly.anguo.facades.populators.CityPopulator;
 
 import de.hybris.bootstrap.annotations.UnitTest;
-import de.hybris.platform.chinaaccelerator.services.model.location.CityModel;
 import de.hybris.platform.commercefacades.user.converters.populator.RegionPopulator;
 import de.hybris.platform.commercefacades.user.data.RegionData;
 import de.hybris.platform.core.model.c2l.RegionModel;
