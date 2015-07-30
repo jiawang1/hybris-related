@@ -12,8 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.tasly.anguo.facades.data.CityData;
-import com.tasly.anguo.facades.data.DistrictData;
+import com.tasly.anguo.facades.data.AbstractLocationItemData;
 import com.tasly.anguo.facades.location.CityFacade;
 import com.tasly.anguo.facades.location.CountryFacade;
 import com.tasly.anguo.facades.location.DistrictFacade;
@@ -61,17 +60,17 @@ public class ProductionZonePageController extends AbstractPageController {
 	
 	@RequestMapping(value = "/getCity", method = RequestMethod.GET)
 	@ResponseBody
-	public List<CityData> getCity(@RequestParam(value = "region") String region)
+	public List<AbstractLocationItemData> getCity(@RequestParam(value = "region") String region)
 	{
-		List<CityData> cities = cityFacade.getCitiesByRegionCode(region);
+		List<AbstractLocationItemData> cities = cityFacade.getCitiesByRegionCode(region);
 		return cities;
 	}
 
 	@RequestMapping(value = "/getDistrict", method = RequestMethod.GET)
 	@ResponseBody
-	public List<DistrictData> getDistrict(@RequestParam(value = "city") String city)
+	public List<AbstractLocationItemData> getDistrict(@RequestParam(value = "city") String city)
 	{
-		List<DistrictData> districts = districtFacade.getDistrictsByCityCode(city);
+		List<AbstractLocationItemData> districts = districtFacade.getDistrictsByCityCode(city);
 		return districts;
 	}
 }

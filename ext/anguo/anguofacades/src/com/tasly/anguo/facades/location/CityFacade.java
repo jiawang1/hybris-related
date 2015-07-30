@@ -5,14 +5,14 @@ package com.tasly.anguo.facades.location;
 
 import java.util.List;
 
-import com.tasly.anguo.facades.data.CityData;
+import com.tasly.anguo.facades.data.AbstractLocationItemData;
 
 /**
  * @author i319019
  *
  */
 public interface CityFacade {
-	List<CityData> getCitiesByRegionCode(final String regionIsocode);
+	List<AbstractLocationItemData> getCitiesByRegionCode(final String regionIsocode);
 
-	CityData getCityForCode(final String cityCode);
+	AbstractLocationItemData getCityForCode(final String cityCode);
 }
