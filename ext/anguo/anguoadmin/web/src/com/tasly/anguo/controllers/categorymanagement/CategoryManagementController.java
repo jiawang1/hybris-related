@@ -44,12 +44,6 @@ public class CategoryManagementController {
     @Resource
 	private AnguoCategoryFacade anguoCategoryFacade;
     
-    @Resource
-    private CatalogVersionService catalogVersionService;
-    
-    @Resource
-    CommonI18NService commonI18nService;
-    
 	@RequestMapping(value=GET_CATEGORY_TREE)
 	public String renderPage(){
 		return ControllerConstants.Views.Pages.ProductManagement.CategoryManagement;
@@ -57,18 +51,7 @@ public class CategoryManagementController {
 	
 	@RequestMapping(value=GET_SUB_CATEGORY )
 	public 	@ResponseBody Object getSubCategory(String categoryCode){
-		
-		final Collection<CatalogVersionModel> catVersions = catalogVersionService.getSessionCatalogVersions();
-		if (catVersions.isEmpty())
-		{
-			final Collection<CatalogVersionModel> versions = 
-					Arrays.asList(catalogVersionService.getCatalogVersion(AnguoFacadesConstants.ACTIVEPRODUCTCATALOG, AnguoFacadesConstants.ACTIVEPRODUCTCATALOGVERSION));
 
-			catalogVersionService.setSessionCatalogVersions(versions);
-		}
-		
-		commonI18nService.setCurrentLanguage(commonI18nService.getLanguage("ZH"));
-		
 		return anguoCategoryFacade.getSubCategoryByCode(categoryCode.equals("#") ? "":categoryCode);
 	}
 	

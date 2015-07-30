@@ -36,7 +36,6 @@ public class ActiveCatalogVersionFilter extends GenericFilterBean{
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response,
 			FilterChain filterChain) throws IOException, ServletException {
-		LOG.info("LEGEND");
 		if (!(request instanceof HttpServletRequest) || !(response instanceof HttpServletResponse))
 		{
 			throw new ServletException("CatalogVersionActivationFilter just supports HTTP requests");

@@ -27,11 +27,9 @@ define(['jquery','backbone', 'underscore', 'jstree','datatables','text!./../temp
     				url:'/anguoadmin/categoryManagement/getCategoryDetail',
     				data:{'categoryCode':selected_node_id},
     				success:function(data){
-    					//TODO:表单清空,原代码不work
-    					$('#category-detail-form')[0].reset() ;
-    					
-    					$('input[name="categoryCode"]').attr("value",data.categoryCode);
-    					$('input[name="categoryName"]').attr("value",data.name);
+    			    	$('#category-detail-form :input').attr('value','');
+    					$('#categoryCode').attr("value",data.categoryCode);
+    					$('#categoryName').attr("value",data.name);
     					
     					$('#aliasGrid').dataTable().fnClearTable();
     					var aliasName = data.alias;
@@ -42,7 +40,7 @@ define(['jquery','backbone', 'underscore', 'jstree','datatables','text!./../temp
     					for(var i = 0;i < aliasName.length;i++)
         				   $('#aliasGrid').dataTable().fnAddData([aliasName[i].description,    					 
         				   '<a class="edit" href="">修改</a>', '<a class="delete" href="">删除</a>' ]);
-//    					  
+//    					 data table ootb how to add data
 //    					$('#aliasGrid').dataTable().fnAddData(data.alias);
     				}
     			});
@@ -108,6 +106,10 @@ define(['jquery','backbone', 'underscore', 'jstree','datatables','text!./../temp
         },
         renderCategoryPanel:function(){
         	this.$('#saveCat').on('click',function(){
+			if($('input[name="categoryCode"]').val()==''){
+			  alert('请先选择或者建立新类目');
+			  return;
+			}
 			
 			var aliasRow = $('#aliasGrid').DataTable().rows().data();
 			var aliasArray = new Array();
@@ -132,7 +134,7 @@ define(['jquery','backbone', 'underscore', 'jstree','datatables','text!./../temp
 				dataType:"json",
 				async:true,
 	    		success:function(data){
-	    			$("#category-tree-div").jstree().set_text(data.categoryCode , data.name);
+	    			$("#category-tree-div").jstree().set_text(data.categoryCode,data.name);
 	    			alert('更新成功');
 	    		}
 	    	});
@@ -189,8 +191,7 @@ function getCustomMenu(node) {
         'separator_after': true,
         'label': '添加子类目',
         'action': function (obj) {
-        	$(':input','#category-detail-form').not(':button,:submit,:reset,:hidden').val('')  
-			.removeAttr('checked').removeAttr('selected');
+        	$('#category-detail-form :input').attr('value','');
 			$('#aliasGrid').dataTable().fnClearTable();
         	$('input[name="superCategory"]').attr("value",node.id);
         	
@@ -220,7 +221,8 @@ function getCustomMenu(node) {
         			}
         			
         	        $('#category-tree-div').jstree().delete_node(node);
-        	        
+        	        $('#category-detail-form :input').attr('value','');
+        	        $('#aliasGrid').dataTable().fnClearTable();
         		}
         	});
         	
