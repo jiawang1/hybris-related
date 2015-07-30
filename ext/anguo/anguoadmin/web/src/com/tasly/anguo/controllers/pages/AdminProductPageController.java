@@ -37,8 +37,7 @@ public class AdminProductPageController extends AbstractController {
 	Logger LOG = Logger.getLogger(AdminProductPageController.class);
     @Resource
 	DefaultCatalogFacade catalogFacade;
-//    @Resource
-//    CatalogService catalogService;
+
 	protected ModelAndView handleRequestInternal(HttpServletRequest arg0,
 			HttpServletResponse arg1) throws Exception {
 		// TODO Auto-generated method stub
@@ -52,13 +51,7 @@ public class AdminProductPageController extends AbstractController {
 
 		ProductData product = new ProductData();
 		
-//		for(CatalogModel catalogModel : catalogService.getAllCatalogs())
-//		{
-//			LOG.info("Catalog ZH name : " + catalogModel.getName(Locale.CHINESE));
-//		}
-		JaloSession jaloSession = JaloSession.getCurrentSession();
-		Language lang = jaloSession.getC2LManager().getLanguageByIsoCode("zh");
-		jaloSession.getSessionContext().setLanguage(lang);
+
 		final List<CatalogData> catalogs = catalogFacade.getAllCatalogsWithOptions(ImmutableSet.of(CatalogOption.BASIC));
 		List<String> catalogNames = new ArrayList<String>();
 		
@@ -67,8 +60,7 @@ public class AdminProductPageController extends AbstractController {
 			String contentCatalogId = catalogs.get(i).getId();
 			
 			if(contentCatalogId.toUpperCase().contains("STORE")){
-				String contentCatalogName = catalogs.get(i).getName();
-				catalogNames.add(contentCatalogName);
+				catalogNames.add(contentCatalogId);
 			}			
 		}
 		
