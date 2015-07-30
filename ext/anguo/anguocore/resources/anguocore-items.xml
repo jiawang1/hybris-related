@@ -72,6 +72,19 @@
 		</enumtype>
 		
 		<!-- enumtype for product end -->
+		
+		
+		<!-- add by Yang for AM-18 start -->
+		<enumtype generate="true" code="StoreApproveStatus" autocreate="true" dynamic="true">
+			<value code="CREATE_WAIT"/>
+			<value code="CREATE_APPROVE"/>
+			<value code="CREATE_REJECT"/>
+			<value code="MODIFY_WAIT"/>
+			<value code="MODIFY_APPROVE"/>
+			<value code="MODIFY_REJECT"/>
+		</enumtype>
+		<!-- add by Yang for AM-18 end -->
+		
 	</enumtypes>
 
 	<relations>
@@ -112,6 +125,55 @@
 			</targetElement>
 		</relation>
 		<!-- relation for product end -->
+		
+		
+	<!-- add by Yang for AM-18 start -->
+        <!--
+            Zone -> Region / City / District should be a 1:1 relationship.
+            Only a finer location should be set. For example if a City is set,
+            the Region / Country should set to null.
+        -->
+<!--         <relation code="Zone2RegionRelation" generate="true" localized="false" autocreate="true">
+            <description>This will extend the Zone with linkage to region (province)</description>
+            <sourceElement type="Zone" qualifier="zone" cardinality="many">
+                <modifiers read="true" write="true" optional="true" search="true"/>
+            </sourceElement>
+            <targetElement type="Region" qualifier="region" cardinality="one">
+                <modifiers read="true" write="true" optional="true" search="true"/>
+            </targetElement>
+        </relation>
+
+        <relation code="Zone2CityRelation" generate="true" localized="false" autocreate="true">
+            <description>This will extend the Zone with linkage to city</description>
+            <sourceElement type="Zone" qualifier="zone" cardinality="many">
+                <modifiers read="true" write="true" optional="true" search="true"/>
+            </sourceElement>
+            <targetElement type="City" qualifier="city" cardinality="one">
+                <modifiers read="true" write="true" optional="true" search="true"/>
+            </targetElement>
+        </relation>
+
+        <relation code="Zone2DistrictRelation" generate="true" localized="false" autocreate="true">
+            <description>This will extend the Zone with linkage to district</description>
+            <sourceElement type="Zone" qualifier="zone" cardinality="many">
+                <modifiers read="true" write="true" optional="true" search="true"/>
+            </sourceElement>
+            <targetElement type="District" qualifier="district" cardinality="one">
+                <modifiers read="true" write="true" optional="true" search="true"/>
+            </targetElement>
+        </relation> -->
+        
+        <relation code="AnguoPlatformService2AnguoStoreRelation" generate="true" localized="false" autocreate="true">
+            <description></description>
+            <sourceElement type="AnguoPlatformService" qualifier="anguoPlatformService" cardinality="many">
+                <modifiers read="true" write="true" optional="true" search="true"/>
+            </sourceElement>
+            <targetElement type="AnguoStore" qualifier="anguoStore" cardinality="one">
+                <modifiers read="true" write="true" optional="true" search="true"/>
+            </targetElement>
+        </relation>
+	<!-- add by Yang for AM-18 end -->
+		
 	</relations>
 	
 	<itemtypes>
@@ -261,7 +323,19 @@
 						<description>Whether pass the identification.</description>
 						<modifiers/>
 						<persistence type="property"/>
-					</attribute>	
+					</attribute>
+					<!-- add by Yang for AM-18 start -->
+					<attribute qualifier="anguoStore" type="AnguoStore">
+						<description></description>
+						<modifiers/>
+						<persistence type="property"/>
+					</attribute>
+					<attribute qualifier="anguoStoreTemp" type="AnguoStoreTemp">
+						<description></description>
+						<modifiers/>
+						<persistence type="property"/>
+					</attribute>
+					<!-- add by Yang for AM-18 end -->						
 				</attributes>
 			</itemtype>
 			<itemtype code="PersonalAccount" extends="Customer">
@@ -446,6 +520,251 @@
 				</attributes>
             </itemtype>
 		</typegroup>
+
+		
+		
+		<!-- add by Yang for AM-18 start -->
+		<typegroup name="AnguoStore">
+
+<!--             <itemtype code="AbstractLocationItem"
+                      extends="GenericItem"
+                      jaloclass="de.hybris.platform.anguocore.services.jalo.location.AbstractLocationItem"
+                      autocreate="true"
+                      generate="true"
+                      abstract="true">
+                <description>Generic location item to be used for being extended into City and District item types.
+                </description>
+				<deployment table="AbstractLocationItem" typecode="9801"/>              
+                <attributes>
+                    <attribute qualifier="code" type="java.lang.String" autocreate="true">
+                        <description>Unique identifier.</description>
+                        <persistence type="property"/>
+                        <modifiers read="true" write="true" optional="false" unique="true"/>
+                    </attribute>
+                    <attribute qualifier="name" type="localized:java.lang.String" autocreate="true">
+                        <description>Name of the location.</description>
+                        <persistence type="property"/>
+                        <modifiers read="true" write="true" optional="true"/>
+                    </attribute>
+                    <attribute qualifier="sortOrder" type="java.lang.Integer" autocreate="true">
+                        <description>SortOrder allows for defining an ordering. For example used on StoreLocator page
+                            displaying cities in specific order.
+                        </description>
+                        <persistence type="property"/>
+                        <modifiers read="true" write="true" optional="true"/>
+                        <defaultvalue>Integer.valueOf(0)</defaultvalue>
+                    </attribute>
+                    <attribute qualifier="latitude" type="java.lang.Double" autocreate="true">
+                        <description>Latitude of the location item.</description>
+                        <persistence type="property"/>
+                        <modifiers read="true" write="true" optional="true"/>
+                    </attribute>
+                    <attribute qualifier="longitude" type="java.lang.Double" autocreate="true">
+                        <description>Longitude of the location item.</description>
+                        <persistence type="property"/>
+                        <modifiers read="true" write="true" optional="true"/>
+                    </attribute>
+                    <attribute qualifier="active" type="java.lang.Boolean" autocreate="true">
+                        <description>Flags if the location item is active or not. Usable as condition.</description>
+                        <persistence type="property" qualifier="ActiveFlag"/>
+                        <modifiers read="true" write="true" optional="false"/>
+                        <defaultvalue>java.lang.Boolean.TRUE</defaultvalue>
+                    </attribute>
+                </attributes>
+                <indexes>
+                    <index name="IDX_LOC_CODE">
+                        <key attribute="code"/>
+                    </index>
+                </indexes>
+            </itemtype>
+
+            <itemtype code="City"
+                      extends="AbstractLocationItem"
+                      jaloclass="de.hybris.platform.anguocore.services.jalo.location.City"
+                      autocreate="true"
+                      generate="true"
+                      abstract="false">
+            </itemtype>
+
+            <itemtype code="District"
+                      extends="AbstractLocationItem"
+                      jaloclass="de.hybris.platform.anguocore.services.jalo.location.District"
+                      autocreate="true"
+                      generate="true"
+                      abstract="false">
+            </itemtype> -->
+
+<!--             <itemtype code="Address" autocreate="false" generate="false">
+                <attributes>
+                    <attribute qualifier="city" type="City" generate="true">
+                        <description>The city.</description>
+                        <persistence type="property"/>
+                        <modifiers read="true" write="true" optional="true"/>
+                    </attribute>
+                    <attribute qualifier="cityDistrict" type="District">
+                        <description>District of the city.</description>
+                        <persistence type="property"/>
+                        <modifiers read="true" write="true" optional="true"/>
+                    </attribute>
+                </attributes>
+            </itemtype> -->
+            
+            <itemtype code="AnguoStore" autocreate="true" generate="true" jaloclass="com.tasly.anguo.core.jalo.AnguoStore">
+					<description> Anguo virtual store </description>
+            	<deployment table="AnguoStore" typecode="6900" />
+						<attributes>
+						<attribute qualifier="uid" type="java.lang.String">
+						<modifiers/>
+						<persistence type="property"/>
+						</attribute>
+						
+						<attribute qualifier="name" type="java.lang.String">
+						<modifiers/>
+						<persistence type="property"/>
+						</attribute>
+						
+						<attribute qualifier="logo" type="Media">
+						<modifiers/>
+						<persistence type="property"/>
+						</attribute>
+						
+						<attribute qualifier="contentCatalog" type="ContentCatalog">
+						<modifiers/>
+						<persistence type="property"/>
+						</attribute>
+						
+						<attribute qualifier="description" type="java.lang.String">
+						<modifiers/>
+						<persistence type="property"/>
+						</attribute>
+						
+						<attribute qualifier="country" type="Country">
+						<modifiers/>
+						<persistence type="property"/>
+						</attribute>
+						
+						<attribute qualifier="region" type="Region">
+						<modifiers/>
+						<persistence type="property"/>
+						</attribute>
+						
+						<attribute qualifier="city" type="City">
+						<modifiers/>
+						<persistence type="property"/>
+						</attribute>
+						
+						<attribute qualifier="cityDistrict" type="District">
+						<modifiers/>
+						<persistence type="property"/>
+						</attribute>
+						
+						<attribute qualifier="street" type="java.lang.String">
+						<modifiers/>
+						<persistence type="property"/>
+						</attribute>
+						
+						<attribute qualifier="contactName1" type="java.lang.String">
+						<modifiers/>
+						<persistence type="property"/>
+						</attribute>
+						
+						<attribute qualifier="contactPhone1" type="java.lang.String">
+						<modifiers/>
+						<persistence type="property"/>
+						</attribute>
+						
+						<attribute qualifier="contactName2" type="java.lang.String">
+						<modifiers/>
+						<persistence type="property"/>
+						</attribute>
+						
+						<attribute qualifier="contactPhone2" type="java.lang.String">
+						<modifiers/>
+						<persistence type="property"/>
+						</attribute>
+						
+						<attribute qualifier="contactName3" type="java.lang.String">
+						<modifiers/>
+						<persistence type="property"/>
+						</attribute>
+						
+						<attribute qualifier="contactPhone3" type="java.lang.String">
+						<modifiers/>
+						<persistence type="property"/>
+						</attribute>
+						
+						<attribute qualifier="qq" type="java.lang.String">
+						<modifiers/>
+						<persistence type="property"/>
+						</attribute>
+						
+						<attribute qualifier="fax" type="java.lang.String">
+						<modifiers/>
+						<persistence type="property"/>
+						</attribute>
+						
+						<attribute qualifier="telephone" type="java.lang.String">
+						<modifiers/>
+						<persistence type="property"/>
+						</attribute>
+						
+						<attribute qualifier="registerDate" type="java.util.Date">
+						<modifiers/>
+						<persistence type="property"/>
+						</attribute>
+						
+						<attribute qualifier="storeLevel" type="java.lang.String">
+						<modifiers/>
+						<persistence type="property"/>
+						</attribute>
+						
+						<attribute qualifier="storeTemplate" type="java.lang.String">
+						<modifiers/>
+						<persistence type="property"/>
+						</attribute>
+						
+
+						
+					</attributes>
+				</itemtype>
+				
+				
+				<itemtype code="AnguoStoreTemp"
+                      extends="AnguoStore"
+                      jaloclass="com.tasly.anguo.core.jalo.AnguoStoreTemp"
+                      autocreate="true"
+                      generate="true"
+                      abstract="false">
+            	<deployment table="AnguoStoreTemp" typecode="6901" />
+            	<attributes>
+						<attribute qualifier="status" type="StoreApproveStatus">
+						<modifiers/>
+						<persistence type="property"/>
+						</attribute>            	
+            	</attributes>
+            	</itemtype>
+				
+				<itemtype code="AnguoPlatformService" autocreate="true" generate="true" jaloclass="com.tasly.anguo.core.jalo.AnguoPlatformService">
+					<description> Anguo platform service </description>
+							<attributes>
+								<attribute qualifier="code" type="java.lang.String">
+								<modifiers/>
+								<persistence type="property"/>
+								</attribute>
+								<attribute qualifier="description" type="java.lang.String">
+								<modifiers/>
+								<persistence type="property"/>
+								</attribute>
+								<attribute qualifier="score" type="java.lang.Integer">
+								<modifiers/>
+								<persistence type="property"/>
+								</attribute>
+							</attributes>
+				</itemtype>
+            
+        </typegroup>
+		<!-- add by Yang for AM-18 end -->
+
 
 	</itemtypes>
 </items>

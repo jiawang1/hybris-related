@@ -480,4 +480,25 @@
 	</bean>
 	<!-- add by LiuJi for AM-128 end -->
 	<!-- beans for product end -->
+	
+	<!-- add by Yang for AM-18 start -->
+<!-- 	<bean id="cityDao" class="com.tasly.anguo.core.location.daos.impl.DefaultCityDao" >
+		<property name="flexibleSearchService" ref="flexibleSearchService"/>
+	</bean>
+
+	<alias alias="cityService" name="defaultCityService" />
+    <bean id="defaultCityService" class="com.tasly.anguo.core.location.impl.DefaultCityService">
+        <property name="cityDao" ref="cityDao"/>
+    </bean>
+
+	<bean id="districtDao" class="com.tasly.anguo.core.location.daos.impl.DefaultDistrictDao" >
+		<property name="flexibleSearchService" ref="flexibleSearchService"/>
+	</bean>
+
+	<alias alias="districtService" name="defaultDistrictService" />
+    <bean id="defaultDistrictService" class="com.tasly.anguo.core.location.impl.DefaultDistrictService">
+        <property name="districtDao" ref="districtDao"/>
+    </bean> -->
+    <!-- add by Yang for AM-18 end -->
+		
 </beans>
