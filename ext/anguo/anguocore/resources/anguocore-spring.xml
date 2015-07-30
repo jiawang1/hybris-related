@@ -461,8 +461,13 @@
 		<property name="commerceCategoryService" ref="commerceCategoryService"/>
 		<property name="rootCategoryCode" value="categories"/>
 	</bean>
-	
-	<!-- beans for product start -->	
+
+	<!-- beans for product start -->
+	<alias alias="countryService" name="defaultCountryService" />
+    <bean id="defaultCountryService" class="com.tasly.anguo.core.location.impl.DefaultCountryService">
+        <property name="countryDao" ref="countryDao"/>
+    </bean>
+    
 	<alias alias="regionService" name="defaultRegionService" />
     <bean id="defaultRegionService" class="com.tasly.anguo.core.location.impl.DefaultRegionService">
         <property name="regionDao" ref="regionDao"/>
@@ -484,6 +489,42 @@
 	<bean id="districtService" class="com.tasly.anguo.core.location.impl.DefaultDistrictService">
 		<property name="districtDao" ref="districtDao" />
 	</bean>
+	
+	<alias name="anguoCategoryDao" alias="anguoCategoryDao"/>
+	<bean id="anguoCategoryDao" class="com.tasly.anguo.core.category.dao.impl.DefaultAnguoCategoryDao" parent="categoryDao">
+		<property name="pagedFlexibleSearchService" ref="pagedFlexibleSearchService"></property>
+	</bean>
+	
+	<alias name="anguoCategoryService" alias="anguoCategoryService"/>
+	<bean id="anguoCategoryService" class="com.tasly.anguo.core.category.impl.DefaultAnguoCategoryService" parent="categoryService">
+		<property name="anguoCategoryDao" ref="anguoCategoryDao"></property>
+	</bean>	
+
+	<bean id="anguoCategoryRemovalValidator" class="com.tasly.anguo.core.category.interceptors.AnguoCategoryRemovalValidator">
+	</bean>
+
+	<bean id="categoryRemovalValidatorMapping" class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
+		<property name="interceptor" ref="anguoCategoryRemovalValidator" />
+		<property name="typeCode" value="Category" />
+	</bean>
+
+	<!-- add by LiuJi for AM-128 start -->
+	<!-- product -->
+	<bean id="productCodeGenerator" class="de.hybris.platform.servicelayer.keygenerator.impl.PersistentKeyGenerator">
+		<property name="key" value="${keygen.product.code.name}"/>
+		<property name="digits" value="${keygen.product.code.digits}"/>
+		<property name="start" value="${keygen.product.code.start}"/>
+		<property name="type" value="${keygen.product.code.type}"/>
+		<property name="template" value="${keygen.product.code.template}"/>
+	</bean>
+
+	<alias alias="createProductCodeStrategy" name="defaultCreateProductCodeStrategy"/>
+	<bean id="defaultCreateProductCodeStrategy"
+			class="com.tasly.anguo.core.product.strategies.impl.DefaultCreateProductCodeStrategy">
+		<property name="keyGenerator"
+					 ref="#{configurationService.configuration.getProperty('anguocore.productCode.keyGenerator')}"/>
+	</bean>
+	<!-- add by LiuJi for AM-128 end -->
 	<!-- beans for product end -->
 	
 	<alias name="anguoProductModelUrlResolver" alias="productModelUrlResolver"/>

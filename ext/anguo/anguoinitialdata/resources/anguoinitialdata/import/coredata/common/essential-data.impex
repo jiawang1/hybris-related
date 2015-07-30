@@ -13,6 +13,18 @@
 # * MediaFormats
 # * Tax & Tax Groups
 # * Jobs
+INSERT_UPDATE Unit;code[unique=true];name[lang=zh];unittype
+;KG;千克;KG
+;G;克;G
+;T;吨;T
+
+
+# Languages
+INSERT_UPDATE Language;isocode[unique=true];fallbackLanguages(isocode);active[default=true]
+;en;;;
+;de;en;;
+;ja;en;;
+;zh;en;;
 
 # Languages
 INSERT_UPDATE Language;isocode[unique=true];fallbackLanguages(isocode);active[default=true]
@@ -26,7 +38,6 @@ INSERT_UPDATE Currency;isocode[unique=true];conversion;digits;symbol
 ;GBP;1;2;£
 ;EUR;1;2;€
 ;USD;1,4;2;$
-;JPY;120;0;¥
 ;CNY;1;2;¥
 
 # SiteMap Language Currencies
@@ -54,11 +65,7 @@ INSERT_UPDATE Vendor;code[unique=true];name
 
 # Warehouse
 INSERT_UPDATE Warehouse;code[unique=true];name;vendor(code)[default=default];default[default=true]
-;default;Default Warehouse;
-;warehouse_s;Warehouse South;
-;warehouse_e;Warehouse East;
-;warehouse_w;Warehouse West;
-;warehouse_n;Warehouse North;
+;anguo;anguo warehouse;
 
 # Disable preview for email pages
 UPDATE CMSPageType;code[unique=true];previewDisabled

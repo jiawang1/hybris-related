@@ -6,8 +6,20 @@ $productCatalogName=安国药材目录
 
 $catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Online'])[unique=true,default=$productCatalog:Online]
 $supercategories=supercategories(code, $catalogVersion)
-$approved=approvalstatus(code)[default='check']
+$approved=approvalstatus(code)[default='approved']
+
+$productStatus=productStatus(code)[default='ONSALE']
+$packageUnit=packageUnit(code)[default='PACKAGE']
 
 # Insert Products
+
 INSERT_UPDATE Product;code[unique=true];$supercategories;unit(code)[default=pieces];$catalogVersion;$approved[default=approved]
 ;千年人参;人参;
+
+INSERT_UPDATE Product;code[unique=true];$supercategories;unit(code);$catalogVersion;$approved;$productStatus;$packageUnit
+
+;泽兰;泽兰;
+;薄片白芍;白芍;
+;炙白芍,炒白芍;白芍;
+;野生川贝;川贝母
+;松贝母（川贝母）;川贝母

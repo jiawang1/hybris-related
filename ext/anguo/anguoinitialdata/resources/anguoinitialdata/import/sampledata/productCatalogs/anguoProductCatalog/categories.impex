@@ -8,11 +8,11 @@ $supercategories=source(code, $catalogVersion)[unique=true]
 $categories=target(code, $catalogVersion)[unique=true]
 
 # Insert Categories lv1
-INSERT_UPDATE Category;code[unique=true];allowedPrincipals(uid)[default='customergroup'];$catalogVersion
+INSERT_UPDATE Category;code[unique=true];level[default=1];allowedPrincipals(uid)[default='customergroup'];$catalogVersion
 ;药材;
 
 # Insert Categories lv2
-INSERT_UPDATE Category;code[unique=true];allowedPrincipals(uid)[default='customergroup'];$catalogVersion
+INSERT_UPDATE Category;code[unique=true];level[default=2];allowedPrincipals(uid)[default='customergroup'];$catalogVersion
 ;根茎类;
 ;果实籽仁类;
 ;花类;
@@ -27,7 +27,7 @@ INSERT_UPDATE Category;code[unique=true];allowedPrincipals(uid)[default='custome
 
 
 # Insert Categories lv3
-INSERT_UPDATE Category;code[unique=true];allowedPrincipals(uid)[default='customergroup'];$catalogVersion
+INSERT_UPDATE Category;code[unique=true];level[default=3];allowedPrincipals(uid)[default='customergroup'];$catalogVersion
 ;人参;
 ;白芍;
 ;川贝母;
@@ -37,6 +37,7 @@ INSERT_UPDATE Category;code[unique=true];allowedPrincipals(uid)[default='custome
 ;艾叶;
 ;满山红;
 ;荷叶;
+;泽兰;
 
 # Insert Category Structure
 INSERT_UPDATE CategoryCategoryRelation;$categories;$supercategories
@@ -61,4 +62,11 @@ INSERT_UPDATE CategoryCategoryRelation;$categories;$supercategories
 ;动物类;药材
 ;矿物类;药材
 
+# Language
+$lang=zh
 
+INSERT_UPDATE CategoryAlias;alias[unique=true][lang=$lang];category(code)
+;鬼盖;人参
+;地精;人参
+;母龙精;川贝母
+;空草;川贝母

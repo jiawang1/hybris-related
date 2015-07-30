@@ -37,5 +37,11 @@ UPDATE Category;code[unique=true];$catalogVersion;name[lang=$lang]
 ;满山红;;满山红
 ;荷叶;;荷叶
 
+#插入别名
+INSERT CategoryAlias;alias[lang=$lang];category(code,$catalogVersion)
+;测试别名2;川贝母
+;川贝母2;川贝母
+;映山红;满山红
+;满山红2;满山红
 
  

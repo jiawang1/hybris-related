@@ -35,17 +35,53 @@
 			<value code="YELLOW"/>
 		</enumtype>
 		<!-- enumtype for product start -->
+		
+		<enumtype generate="true" code="PackageUnit" autocreate="true" dynamic="true">
+			<value code="PACKAGE"/>
+			<value code="BAG"/>
+		</enumtype>
+		 
+		<enumtype generate="true" code="ProcessMethodType" autocreate="true" dynamic="true">
+			<value code="QIE"/>
+			<value code="HONG"/>
+			<value code="JINGXUAN"/>
+			<value code="TAOXI"/>
+			<value code="PAOZHI"/>
+			<value code="DAN"/>
+			<value code="ZHISHUANG"/>
+			<value code="SHUIFEI"/>
+			<value code="FAYA"/>
+			<value code="FAJIAO"/>
+			<value code="OTHER"/>
+		</enumtype>
+		
+		<enumtype generate="true" code="huiFenType" autocreate="true" dynamic="true">
+			<value code="MORE"/>
+			<value code="MODERATE"/>
+			<value code="LESS"/>
+			<value code="NONE"/>
+			<value code="OTHER"/>
+		</enumtype>
+		
+		<enumtype generate="true" code="ProductStatus" autocreate="true" dynamic="true">
+			<value code="ONLINE"/>
+			<value code="OFFLINE"/>
+			<value code="REJECT"/>
+			<value code="UNCHECK"/>
+			<value code="PROGRESS"/>
+		</enumtype>
+		
 		<!-- enumtype for product end -->
 	</enumtypes>
 
 	<relations>
 		<relation code="enterpriseUser2Contact" generate="true" autocreate="true" localized="false">
-			<sourceElement qualifier="enterpriseUserUser" type="EnterpriseUser" cardinality="one" />
+			<sourceElement qualifier="enterpriseAccount" type="EnterpriseAccount" cardinality="one" />
 			<targetElement qualifier="contacts" type="Contact" cardinality="many" collectiontype="set"/>
 		</relation>
 		
 		<relation code="enterpriseUser2Media" generate="true" autocreate="true" localized="false">
-			<sourceElement qualifier="enterpriseUser" type="EnterpriseUser" cardinality="one" />
+			<sourceElement qualifier="enterpriseAccount" type="EnterpriseAccount" cardinality="one" />
 			<targetElement qualifier="medias" type="Media" cardinality="many" collectiontype="set"/>
 		</relation>
 	
@@ -147,6 +183,7 @@
 		</typegroup>
 
 
+
 		<!-- TypeGroups are for structure of this file only -->
 
 		<typegroup name="Apparel">
@@ -225,9 +262,14 @@
 						<modifiers/>
 						<persistence type="property"/>
 					</attribute>
+					<attribute qualifier="identified" type="java.lang.Boolean">
+						<description>Whether pass the identification.</description>
+						<modifiers/>
+						<persistence type="property"/>
+					</attribute>	
 				</attributes>
 			</itemtype>
-			<itemtype code="PersonalUser" extends="Customer">
+			<itemtype code="PersonalAccount" extends="Customer">
 				<attributes>
 					<attribute qualifier="gender" type="Gender">
 						<modifiers read="true" write="true" search="true"
@@ -250,22 +292,14 @@
 						<modifiers/>
 						<persistence type="property"/>
 					</attribute>
-					<attribute qualifier="identified" type="java.lang.Boolean">
-						<description>Whether pass the identification.</description>
-						<modifiers/>
-						<persistence type="property"/>
-					</attribute>										
 				</attributes>
 			</itemtype>
 			
-			<itemtype code="EnterpriseUser" extends="Customer">
+			<itemtype code="EnterpriseAccount" extends="Customer">
 				<description>EnterpriseUser extend from customer used for Enterprise .</description>
 				<attributes>
 					<attribute qualifier="registeredNo" type="java.lang.Integer">
 						<persistence type="property" />
-					</attribute>
-					<attribute qualifier="status" type="java.lang.String">
-						<persistence type="property"/>
 					</attribute>
 				</attributes>
 			</itemtype>
@@ -329,9 +363,8 @@
 					</attribute>
 				</attributes>
 			</itemtype>
-			
 		</typegroup>
-
+		
 		<typegroup name="AnguoProduct">
 			<itemtype code="CategoryAlias" generate="true" autocreate="true">
 				<deployment table="CategoryAlias" typecode="10000"/>
@@ -342,6 +375,81 @@
 					</attribute>
 				</attributes>
 			</itemtype>
+
+			
+			<itemtype code="Product" generate="false" autocreate="false">
+				<attributes>
+					<attribute type="localized:java.lang.String" qualifier="specification">
+						<persistence type="property"></persistence>
+						<description>gui ge</description>
+					</attribute>
+
+					<attribute type="AbstractLocationItem" qualifier="madeIn">
+						<persistence type="property"></persistence>
+						<description>chan di</description>
+					</attribute>
+					 
+					<attribute type="java.util.Date" qualifier="produceYear">
+						<persistence type="property"></persistence>
+						<description>sheng chan nian fen</description>
+					</attribute>
+
+					<attribute type="PackageUnit" qualifier="packageUnit">
+						<persistence type="property"></persistence>
+					</attribute>
+					<attribute type="AbstractLocationItem" qualifier="storageLocation">
+						<persistence type="property"></persistence>
+						<description>ku cun di</description>
+					</attribute>
+					<attribute type="java.lang.String" qualifier="warehouse">
+						<persistence type="property"></persistence>
+						<description>cang chu di dian not used</description>
+					</attribute>
+					<attribute type="java.lang.Integer" qualifier="minSalesQuantity">
+						<persistence type="property"></persistence>
+						<description>min sales quantity</description>
+					</attribute>
+					
+					<attribute qualifier="lastestOnlineDate" type="java.util.Date">
+				    	<modifiers read="true" write="true" search="true" optional="true"/>
+					    <persistence type="property"/>
+					</attribute>
+					
+					<!-- 
+				    <attribute type="java.lang.String" qualifier="processMethod">
+						<persistence type="property"></persistence>
+						<description>jia gong fang fa</description>
+					</attribute>
+					<attribute type="java.lang.String" qualifier="huifen">
+						<persistence type="property"></persistence>
+						<description>hui fen</description>
+					</attribute>
+					<attribute type="java.lang.Integer" qualifier="dryness">
+						<persistence type="property"></persistence>
+						<description>gan du</description>
+					</attribute>
+					<attribute qualifier="containLiu" type="java.lang.String">
+				    	<modifiers read="true" write="true" search="true" optional="true"/>
+					    <persistence type="property"/>
+					</attribute>
+					 -->
+					 
+					<attribute qualifier="productStatus" type="ProductStatus">
+				    	<modifiers read="true" write="true" search="true" optional="true"/>
+					    <persistence type="property"/>
+					    <defaultvalue>em().getEnumerationValue("ProductStatus","UNCHECK")</defaultvalue>
+					</attribute>
+					
+				</attributes>
+			</itemtype>
+            <itemtype code="Category" generate="false" autocreate="false">
+				<attributes>
+					<attribute type="java.lang.Integer" autocreate="true" generate="true" qualifier="level">
+						<persistence type="property"></persistence>
+						<description>category level</description>
+					</attribute>
+				</attributes>
+            </itemtype>
 		</typegroup>
 
 	</itemtypes>

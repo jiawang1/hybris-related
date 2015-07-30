@@ -7,18 +7,25 @@ $productCatalog=anguoProductCatalog
 $productCatalogName=安国药材目录
 $classificationCatalog=anguoClassification
 
-#$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default=''])[unique=true,default=$productCatalog:Online]
-#$clAttrModifiers=system='$classificationCatalog',version='1.0',translator=de.hybris.platform.catalog.jalo.classification.impex.ClassificationAttributeTranslator
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Online'])[unique=true,default=$productCatalog:Online]
+$clAttrModifiers=system='$classificationCatalog',version='1.0',translator=de.hybris.platform.catalog.jalo.classification.impex.ClassificationAttributeTranslator,lang=ZH
 
 # Insert Product Classifications
 
 # replace <string> and <int> with actual values
-#$feature1=@<string>, <int>[$clAttrModifiers];  
-#$feature2=@<string>, <int>[$clAttrModifiers];  
-#$feature3=@<string>, <int>[$clAttrModifiers];  
-#$feature4=@<string>, <int>[$clAttrModifiers];  
+$feature1=@dryness[$clAttrModifiers];  
+$feature2=@processmethod[$clAttrModifiers];  
+$feature3=@huifen[$clAttrModifiers];  
+$feature4=@containliu[$clAttrModifiers];  
 #$feature6=@<string>, <int>[$clAttrModifiers];  
 #$feature7=@<string>, <int>[$clAttrModifiers];  
 #$feature8=@<string>, <int>[$clAttrModifiers];  
-INSERT_UPDATE Product;code[unique=true];$feature1;$feature2;$feature3;$feature4;$feature6;$feature7;$feature8;$catalogVersion;
- 					 ;千年人参;安国数字中药都;统货;河南 ;2014年;全干 ;＜3%;无蛀虫、无霉变 ;50kg/袋;;1000kg;50kg;100元/千克;2016年3月1日;非定向;否;免费配送
+
+INSERT_UPDATE Product;code[unique=true];$feature1;$feature2;$feature3;$feature4;$catalogVersion;
+;千年人参;100;切;50;测试是否含硫
+;泽兰;60;烘;60;
+;薄片白芍;70;自定义;15
+;炙白芍,炒白芍;60;炒;60
+;野生川贝;10;无加工;10
+;松贝母（川贝母）;30;暂定;30
+
