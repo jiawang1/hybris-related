@@ -122,9 +122,9 @@ public class StorefrontAuthenticationSuccessHandler extends SavedRequestAwareAut
 	private void setSessionInfoForStorefront() {
 		UserModel user = userService.getCurrentUser();
 		if(user != null && user instanceof EnterpriseAccountModel) {
-			getSessionService().setAttribute("userType", UserType.ENTERPRISE);
+			getSessionService().setAttribute("userType", UserType.ENTERPRISE.toString());
 		}else if(user != null && user instanceof PersonalAccountModel) {
-			getSessionService().setAttribute("userType", UserType.PERSONAL);
+			getSessionService().setAttribute("userType", UserType.PERSONAL.toString());
 		}
 	}
 
