@@ -31,6 +31,12 @@
 		<property name="captcha" type="String"/>
 		<property name="userType" type="com.tasly.anguo.core.enums.UserType"></property>
 		
+	<bean class="com.tasly.anguo.facades.product.data.UnitData">
+		<property name="code" type="String"/>
+		<property name="name" type="String"/>
+		<property name="conversion" type="Double"/>
+		<property name="unitType" type="String"/>
+	</bean>
 	</bean>
 
 	<bean class="com.tasly.anguo.facades.product.data.CategoryNodeData">

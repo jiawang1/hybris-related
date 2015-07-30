@@ -191,6 +191,17 @@
 	<bean id="anguoCustomerFacade" class="com.tasly.anguo.facades.customer.impl.AnguoCustomerFacade" parent= "defaultCustomerFacade"/>
 	
 	<!-- beans for product start -->
+	<bean id="enumUtils" class="com.tasly.anguo.facades.utils.EnumUtils">
+		<property name="enumerationService" ref="enumerationService"/>
+	</bean>
+	
+	<bean id="unitPopulator" class="com.tasly.anguo.facades.populators.UnitPopulator" />
+	
+	<bean id="unitFacade" class="com.tasly.anguo.facades.product.impl.DefaultUnitFacade">
+		<property name="unitService" ref="unitService"/>
+		<property name="unitPopulator" ref="unitPopulator"/>
+	</bean>
+	
 	<alias name="anguoCategoryFacade" alias="categoryFacade"/>
 	<bean id="anguoCategoryFacade" class="com.tasly.anguo.facades.category.impl.DefaultAnguoCategoryFacade">
 		<property name="categoryService" ref="anguoCategoryService"></property>
