@@ -91,6 +91,11 @@ public interface ControllerConstants
 				String AccountPaymentInfoPage = "pages/account/accountPaymentInfoPage";
 				String AccountRegisterPage = "pages/account/accountRegisterPage";
 			}
+			
+			interface StoreApply 
+			{
+				String StoreApplyPage = "pages/storeApply/personalStoreApply";
+			}
 
 			interface Checkout
 			{
