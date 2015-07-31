@@ -74,8 +74,8 @@
 	<!-- add by Yang for AM-18 start -->
 	<bean class="com.tasly.anguo.facades.data.RegionResultData">
 		<property name="regions" type="java.util.List&lt;de.hybris.platform.commercefacades.user.data.RegionData>"/>
-		<property name="cities" type="java.util.List&lt;com.tasly.anguo.facades.data.CityData>"/>
-		<property name="cityDistricts" type="java.util.List&lt;com.tasly.anguo.facades.data.DistrictData>"/>
+		<property name="cities" type="java.util.List&lt;com.tasly.anguo.facades.data.AbstractLocationItemData>"/>
+		<property name="cityDistricts" type="java.util.List&lt;com.tasly.anguo.facades.data.AbstractLocationItemData>"/>
 	</bean>
 	
 	<bean class="com.tasly.anguo.store.data.AnguoStoreManagermentData">

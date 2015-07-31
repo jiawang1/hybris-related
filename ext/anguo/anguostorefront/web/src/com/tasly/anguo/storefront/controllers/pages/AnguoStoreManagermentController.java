@@ -50,6 +50,7 @@ import de.hybris.platform.commercefacades.i18n.I18NFacade;
 import de.hybris.platform.commercefacades.order.CheckoutFacade;
 import de.hybris.platform.commercefacades.user.data.CountryData;
 import de.hybris.platform.commercefacades.user.data.RegionData;
+import com.tasly.anguo.facades.data.AbstractLocationItemData;
 import de.hybris.platform.core.model.c2l.CountryModel;
 import de.hybris.platform.core.model.c2l.RegionModel;
 import de.hybris.platform.core.model.user.CustomerModel;
@@ -282,13 +283,13 @@ public class AnguoStoreManagermentController extends AbstractSearchPageControlle
 
 		if (incomingAddressForm.getRegionIso() != null && !incomingAddressForm.getRegionIso().isEmpty())
 		{
-			final List<CityData> cityDTOs = getCityFacade().getCitiesByRegionCode(incomingAddressForm.getRegionIso());
+			final List<AbstractLocationItemData> cityDTOs = getCityFacade().getCitiesByRegionCode(incomingAddressForm.getRegionIso());
 			data.setCities(cityDTOs);
 		}
 
 		if (incomingAddressForm.getCityCode() != null && !incomingAddressForm.getCityCode().isEmpty() && cmd.equals("cityselected"))
 		{
-			final List<DistrictData> cityDistricts = this.getDistrictFacade().getDistrictsByCityCode(
+			final List<AbstractLocationItemData> cityDistricts = this.getDistrictFacade().getDistrictsByCityCode(
 					incomingAddressForm.getCityCode());
 			data.setCityDistricts(cityDistricts);
 		}
