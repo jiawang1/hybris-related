@@ -21,6 +21,7 @@ import de.hybris.platform.commercefacades.product.ProductFacade;
 import de.hybris.platform.commercefacades.product.ProductOption;
 import de.hybris.platform.commerceservices.order.CommerceCartModificationException;
 import com.tasly.anguo.storefront.controllers.ControllerConstants;
+import de.hybris.platform.util.Config;
 
 import java.util.Arrays;
 
@@ -48,6 +49,7 @@ public class AddToCartController extends AbstractController
 	private static final String TYPE_MISMATCH_ERROR_CODE = "typeMismatch";
 	private static final String ERROR_MSG_TYPE = "errorMsg";
 	private static final String QUANTITY_INVALID_BINDING_MESSAGE_KEY = "basket.error.quantity.invalid.binding";
+    private static final String SHOWN_PRODUCT_COUNT = "storefront.minicart.shownProductCount";
 
 	protected static final Logger LOG = Logger.getLogger(AddToCartController.class);
 
@@ -98,7 +100,7 @@ public class AddToCartController extends AbstractController
 				model.addAttribute("quantity", Long.valueOf(0L));
 			}
 		}
-
+		 model.addAttribute("numberShowing", Config.getInt(SHOWN_PRODUCT_COUNT, 3));
 		model.addAttribute("product", productFacade.getProductForCodeAndOptions(code, Arrays.asList(ProductOption.BASIC)));
 
 		return ControllerConstants.Views.Fragments.Cart.AddToCartPopup;

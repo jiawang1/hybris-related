@@ -7,34 +7,21 @@ body {
 	color: #000;
 	text-align: left;
 	font-size: 12px;
-
 }
-
-
-
 
 #page{
-	width:950px;
+	width:1000px;
 	padding:0 5px;
 	margin:0 auto;
-
 }
-
-
 
 button{
 	cursor:pointer;
 }
 
-
 .strong{
 	font-weight:bold;
-	
 }
-
-
-
-
 
 /*
 	Rating Stars
@@ -48,8 +35,6 @@ button{
 	color: transparent;
 }
 
-
-
 /*
 	required
 *****************/
@@ -61,20 +46,9 @@ button{
 	max-width: 60%;
 }
 
-
-
-
-
-
-
-
-
-
-
 table.store-openings {
 	padding: 0;	
 	margin: 20px 0;
-
 }
 
 table.store-openings td {
@@ -92,20 +66,7 @@ table.store-openings td.specialday_openings_date {
 	font-weight: bold;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
 /*
-
 
 	Cart and Pickup button
 *****************/
@@ -121,11 +82,9 @@ button.addToCartButton{
 	font-size:1em;
 }
 
-
 button.pickupInStoreButton{
 	background:#fff;
 	color:#000;
-	
 }
 
 button.addToCartButton{
@@ -137,8 +96,6 @@ button.addToCartButton{
 
 	alerts
 *****************/
-
-
 
 .alert{
 	padding:12px;
@@ -161,26 +118,9 @@ button.addToCartButton{
 	color:#000;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /*
 	Scroller 
 *****************/
-
-
 
 .span-24 > .scroller{
 	padding:40px 0;
@@ -196,8 +136,6 @@ button.addToCartButton{
 	margin:0 0 40px 0;
 }
 
-
-
 .span-24 > .scroller ul li{
 	width:220px;
 	margin:0 20px 0 0;
@@ -205,9 +143,7 @@ button.addToCartButton{
 
 .span-24 > .scroller ul li{
 	width:230px;
-	margin:0 10px 0 0;
-	
-
+	margin:0 10px 0 0
 }
 
 .scrollerProduct{
@@ -215,39 +151,25 @@ button.addToCartButton{
 	display:block;
 }
 
-
 .scrollerProduct .thumb{
 	padding:0 0 20px 0;
-		margin:0 0 5px 0;
-		border-bottom:1px dotted #c1c1c1;
+	margin:0 0 5px 0;
+	border-bottom:1px dotted #c1c1c1;
 }
 
 .scrollerProduct .thumb img{ 
 	width:100%;
 }
 
-
-
-
 .scrollerProduct .details{
 	color:#8f8f8f;
 	padding:0 40px 0 0;
-
 }
-
 
 .scrollerProduct .priceContainer{
 	float:right;
 	margin: 0 0 0 5px;
 }
-
-
-
-
-
-
-
-
 
 /*
 	Scroller 
@@ -256,7 +178,6 @@ button.addToCartButton{
 .jcarousel-clip {
 	overflow: hidden;
 }
-
 
 .jcarousel-skin .jcarousel-prev,
 .jcarousel-skin .jcarousel-next {
@@ -275,7 +196,6 @@ button.addToCartButton{
 	cursor: default;
 }
 
-
 .jcarousel-skin .jcarousel-prev-horizontal,
 .jcarousel-skin .jcarousel-next-horizontal {
 	top: 40%;
@@ -290,7 +210,6 @@ button.addToCartButton{
 	right: -30px;
 	background-position: right 0;
 }
-
 
 .jcarousel-skin .jcarousel-prev-vertical,
 .jcarousel-skin .jcarousel-next-vertical {
@@ -308,25 +227,13 @@ button.addToCartButton{
 	background-position: right bottom;
 }
 
-
-
-
-
-
-
 .jcarousel-container-vertical{
 	margin:30px 0;
 }
 
-
-
 .jcarousel-container{
 	background:#fff;
 }
-
-
-
-
 
 ul.jcarousel-skin{
 	background: url("../images/spinner.gif") no-repeat center center ;
@@ -335,58 +242,25 @@ ul.jcarousel-skin{
     width: 100%;
 	min-width:50px;
 	min-height:50px;
-	
 }
 /* hide loading */
 ul.jcarousel-skin li{
 	display:none;
 }
-
-
-
-
-
 /*
 	Banner Sizes
 *****************/
 
-.cms_disp-img_slot .thumb img,
-#content .simple_disp-img img{
+.cms_disp-img_slot .thumb img {
 	width:100%;
 	height:auto;
 }
 
-
-
-
-
-
-
-
-
+.crossselling .simple_disp-img img {
+	height:auto;
+	float:right;
+}
 
 .doCheckoutBut{
 	margin-right:0;
-}
-
-
-
-
-
-.disp-img{
-	clear:both;
-
-
-}
-
-.disp-img .title{
-	display: block;
-	
-}
-
-.disp-img .thumb{
-	float: left;
-	margin-right: 10px;
-	margin-bottom: 5px;
-	
 }

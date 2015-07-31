@@ -10,6 +10,11 @@ $lang=zh
 
 
 # Update allProducts with localisations
+
+### for merge b2b
+UPDATE Product;code[unique=true];$catalogVersion;name[lang=$lang];summary[lang=$lang];description[lang=$lang]
+;千年人参;;千年人参;不规则团块状、本色（偏黄带土棕色）、有光泽。;人参
+#######
 UPDATE Product;code[unique=true];$catalogVersion;name[lang=$lang];madeIn(code);storageLocation(code);specification[lang=$lang];produceYear[dateformat=dd-MM-yyyy];minSalesQuantity;lastestOnlineDate[dateformat=dd-MM-yyyy];summary[lang=$lang];description[lang=$lang]
 ;千年人参;;千年人参;430321;430321;;01-01-1990;100;7-28-2015;
 ;泽兰;;泽兰;430321;430321;;01-01-1990;100;7-28-2015;
@@ -17,3 +22,4 @@ UPDATE Product;code[unique=true];$catalogVersion;name[lang=$lang];madeIn(code);s
 ;炙白芍,炒白芍;;炙白芍,炒白芍;430321;430321;;01-01-1990;100;7-28-2015;
 ;野生川贝;;川贝母;430321;430321;;01-01-1990;100;7-28-2015;
 ;松贝母（川贝母）;;川贝母;430321;430321;;01-01-1990;100;7-28-2015;
+

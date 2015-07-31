@@ -9,6 +9,7 @@ $prices=Europe1prices[translator=de.hybris.platform.europe1.jalo.impex.Europe1Pr
 # Set product approval status to Approved only for those products that have prices.
 $approved=approvalstatus(code)[default='approved']
 
+
 UPDATE Product;code[unique=true];$prices;$approved;$catalogVersion;Europe1PriceFactory_PTG(code)
 ;千年人参;1 pieces = 16,00 CNY N, 10 pieces = 14,89 CNY N, 30 pieces = 13,49 CNY N
 ;泽兰;3 pieces = 16 CNY N, 10 pieces = 14 CNY N, 30 pieces = 13  CNY N
@@ -16,3 +17,4 @@ UPDATE Product;code[unique=true];$prices;$approved;$catalogVersion;Europe1PriceF
 ;炙白芍,炒白芍;6 pieces = 16,00 CNY N, 10 pieces = 14,89 CNY N, 30 pieces = 13,49 CNY N
 ;野生川贝;7 pieces = 16,00 CNY N, 10 pieces = 14,89 CNY N, 30 pieces = 13,49 CNY N
 ;松贝母（川贝母）;8 pieces = 16,00 CNY N, 10 pieces = 14,89 CNY N, 30 pieces = 13,49 CNY N
+

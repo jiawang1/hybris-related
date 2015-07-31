@@ -13,7 +13,9 @@
 --><extensioninfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="extensioninfo.xsd">
 
 	<extension abstractclassprefix="Generated" classprefix="AnguoStorefront" name="anguostorefront">
-		<requires-extension name="anguocheckoutaddon"/>
+		
+
+<requires-extension name="anguocheckoutaddon"/>
 		<requires-extension name="btg"/>
 		<requires-extension name="acceleratorstorefrontcommons"/>
 		<requires-extension name="anguofacades"/>

@@ -11,9 +11,9 @@
 
 <%@ attribute name="containerCSS" required="false" type="java.lang.String" %>
 <c:if test="${not empty order.appliedOrderPromotions}">
-	<div class="item_container_holder promo">
-		<div class="title_holder">
-			<h2><spring:theme code="text.account.order.receivedPromotions" text="Received Promotions"/></h2>
+	<div class="item_container_holder promo_top">
+		<div class="headline">
+			<spring:theme code="text.account.order.receivedPromotions" text="Received Promotions"/>
 		</div>
 		<div class="item_container">
 			<ul>
