@@ -31,8 +31,6 @@ import com.tasly.anguo.core.model.AnguoPlatformServiceModel;
 import com.tasly.anguo.core.model.AnguoStoreModel;
 import com.tasly.anguo.core.model.AnguoStoreTempModel;
 import com.tasly.anguo.facades.anguostore.AnguoStoreManagermentFacade;
-import com.tasly.anguo.facades.data.CityData;
-import com.tasly.anguo.facades.data.DistrictData;
 import com.tasly.anguo.facades.data.RegionResultData;
 import com.tasly.anguo.facades.location.CityFacade;
 import com.tasly.anguo.facades.location.DistrictFacade;
