@@ -15,7 +15,7 @@
 
 <a href="${cartUrl}" class="minicart">
 	${component.title}
-	<ycommerce:testId code="miniCart_items_label">
+	<%-- <ycommerce:testId code="miniCart_items_label">
 		<span class="count">${totalItems}</span>	
 		<span class="price">
 			<c:if test="${totalDisplay == 'TOTAL'}">
@@ -28,7 +28,7 @@
 				<format:price priceData="${totalNoDelivery}"/>
 			</c:if>
 		</span>
-	</ycommerce:testId>
+	</ycommerce:testId> --%>
 </a>
 <div id="miniCartLayer" class="miniCartPopup" data-refreshMiniCartUrl="${refreshMiniCartUrl}/?"  data-rolloverPopupUrl="${rolloverPopupUrl}" ></div>
 

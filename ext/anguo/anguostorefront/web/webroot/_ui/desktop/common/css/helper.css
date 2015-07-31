@@ -39,7 +39,12 @@ ul li {
 
 a{
 	text-decoration:none;
-	color:#000;
+	color:#333;
+}
+
+a:hover {
+	color:#36793b; 
+	text-decoration:underline;
 }
 
 .hidden,.notVisible{

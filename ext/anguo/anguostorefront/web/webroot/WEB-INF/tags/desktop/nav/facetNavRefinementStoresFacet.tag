@@ -7,8 +7,6 @@
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags" %>
 <%@ taglib prefix="theme" tagdir="/WEB-INF/tags/shared/theme" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-
 
 <c:url value="/store-finder" var="searchUserLocationUrl"/>
 <c:url value="/store-finder/position" var="autoUserLocationUrl"/>
@@ -28,10 +26,10 @@
 			</a>
 		</div>
 
-		<div class="facetValues <c:if test="${empty userLocation}"> search_location </c:if> <c:if test="${not empty userLocation}"> search_no_location	hidden</c:if> clearfix">
+		<div class="facetValues <c:if test="${empty userLocation}"> search_location </c:if> <c:if test="${not empty userLocation}"> search_no_location	hidden</c:if>">
 			<form name="userLocationForm" action="${searchUserLocationUrl}" method="GET" id="user_location_form" class="storesFacetSearchForm">
 				<div class="control-group left">
-					<label class="control-label skip" for="user_location_query"><spring:theme code="storeFinder.search"/></label>
+					<label class="control-label skip" for="search"><spring:theme code="storeFinder.search"/></label>
 
 					<div class="controls">
 						<input type="text" name="q" id="user_location_query" class="storesFacetSearchInput">
@@ -41,11 +39,11 @@
 			</form>
 
 			<div class="line-text"><span><spring:theme code="storeFinder.line.text"/></span></div>
-			<form:form name="autoLocationForm" action="${autoUserLocationUrl}" method="POST" id="auto_location_form">
+			<form name="autoLocationForm" action="${autoUserLocationUrl}" method="POST" id="nearMeStorefinderForm" class="clearfix">
 				<input type="hidden" id="latitude" name="latitude"/>
 				<input type="hidden" id="longitude" name="longitude"/>
 				<button type="submit" id="findStoresNearMeAjax" class="positive input-block-level findStoresNearMe"><spring:theme code="storeFinder.findStoresNearMe"/></button>
-			</form:form>
+			</form>
 		</div>
 
 

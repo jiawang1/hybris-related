@@ -66,12 +66,15 @@
 
 <link rel="stylesheet" type="text/css" media="all" href="${commonResourcePath}/css/cartItems.css"/>
 
-
+<link rel="stylesheet" type="text/css" media="all" href="${commonResourcePath}/css/checkoutContentPanel.css"/>
+<link rel="stylesheet" type="text/css" media="all" href="${commonResourcePath}/css/checkoutOrderDetails.css"/>
 <link rel="stylesheet" type="text/css" media="all" href="${commonResourcePath}/css/landingLayout2Page.css"/>
 <link rel="stylesheet" type="text/css" media="all" href="${commonResourcePath}/css/storeDetail.css"/>
 <link rel="stylesheet" type="text/css" media="all" href="${commonResourcePath}/css/storeFinder.css"/>
+<link rel="stylesheet" type="text/css" media="all" href="${commonResourcePath}/css/angocommon.css"/>
 
-
+<%-- B2B CSS files --%>
+<link rel="stylesheet" type="text/css" media="all" href="${themeResourcePath}/css/company.css"/>
 <%-- Theme CSS files --%>
 <link rel="stylesheet" type="text/css" media="all" href="${themeResourcePath}/css/changes.css"/>
 
@@ -79,3 +82,6 @@
 <c:forEach items="${addOnThemeCssPaths}" var="addOnThemeCss">
 	<link rel="stylesheet" type="text/css" media="all" href="${addOnThemeCss}"/>
 </c:forEach>
+
+<%-- digitalHerbal CSS files --%>
+<link rel="stylesheet" type="text/css" media="all" href="${commonResourcePath}/css/digitalHerbal.css"/>

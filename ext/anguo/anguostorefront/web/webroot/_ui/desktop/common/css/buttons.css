@@ -76,6 +76,13 @@ a.button:active,
 button:active {
 }
 
+#negotiateQuoteButton,
+#acceptQuoteButton,
+#cancelQuoteButton,
+#addAdditionalComment {
+	float: right;
+}
+
 /* Positive */
 button.positive,
 a.button.positive {
@@ -128,7 +135,7 @@ button.block, a.button.block {
 
 
 button[disabled]{
-	opacity:0.2;
+	
 	cursor:default;
 	text-transform: none;
 }
@@ -152,4 +159,22 @@ button.link {
 	font-weight:normal;
 	color:inherit !important;
 	opacity:inherit;
+}
+
+.edit_btn_area {
+	padding-top: 10px;
+}
+
+.edit_btn_area {
+	margin-bottom: 0;
+}
+
+#reorderButton{
+	margin-bottom: 15px;
+}
+
+.repl_top_cont_btn a{
+    margin-right: 0;
+    position: relative;
+    top: -20px;	
 }

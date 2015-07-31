@@ -89,7 +89,7 @@
 			</td>
 		</tr>
 	</c:if>
-	<cart:taxExtimate cartData="${cartData}" showTaxEstimate="${showTaxEstimate}"/>
+
 	</tbody>
 </table>
 

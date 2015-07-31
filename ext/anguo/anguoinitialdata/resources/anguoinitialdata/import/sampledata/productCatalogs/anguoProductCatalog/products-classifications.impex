@@ -20,6 +20,7 @@ $feature4=@containliu[$clAttrModifiers];
 #$feature6=@<string>, <int>[$clAttrModifiers];  
 #$feature7=@<string>, <int>[$clAttrModifiers];  
 #$feature8=@<string>, <int>[$clAttrModifiers];  
+
 INSERT_UPDATE Product;code[unique=true];$feature1;$feature2;$feature3;$feature4;$catalogVersion;
 ;千年人参;100;切;50;测试是否含硫
 ;泽兰;60;烘;60;
@@ -27,3 +28,4 @@ INSERT_UPDATE Product;code[unique=true];$feature1;$feature2;$feature3;$feature4;
 ;炙白芍,炒白芍;60;炒;60
 ;野生川贝;10;无加工;10
 ;松贝母（川贝母）;30;暂定;30
+

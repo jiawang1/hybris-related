@@ -10,16 +10,6 @@
 	clear: both;
 }
 
-.footer .links{
-	float:left;
-	
-}
-
-.footer .links .title{
-	
-}
-
-
 .footer .links ul{
 	float:left;
 	width:192px;
@@ -29,6 +19,7 @@
 
 .footer .links a{
 	font-weight:bold;
+
 }
 
 
@@ -37,5 +28,4 @@
 
 .footer .copyright{
 	clear:both;
-	padding-top: 10px;
 }

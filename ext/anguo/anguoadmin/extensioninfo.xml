@@ -19,7 +19,9 @@
       <!-- <requires-extension name="cms"/> -->  
       <requires-extension name="commercefacades"/>       
       
-
+	  <requires-extension name="btg"/>
+	  <requires-extension name="acceleratorstorefrontcommons"/>
+	  <requires-extension name="anguofacades"/>
       <coremodule generated="true" manager="com.tasly.anguo.jalo.AnguoadminManager" packageroot="com.tasly.anguo"/>
 
       <webmodule jspcompile="false" webroot="/anguoadmin"/>
