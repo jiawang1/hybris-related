@@ -528,7 +528,7 @@
 	</bean>
 	<!-- add by LiuJi for AM-128 end -->
 	<!-- beans for product end -->
-	
+
 	<alias name="anguoProductModelUrlResolver" alias="productModelUrlResolver"/>
 	<bean id="anguoProductModelUrlResolver" class="com.tasly.anguo.core.util.AnguoProductModelUrlResolver"
 			parent="defaultProductModelUrlResolver">
