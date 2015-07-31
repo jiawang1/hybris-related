@@ -22,8 +22,8 @@ import de.hybris.platform.servicelayer.session.SessionService;
  */
 @Controller
 @Scope("tenant")
-@RequestMapping("/storeApply")
-public class StoreApplyController extends AbstractSearchPageController {
+@RequestMapping("/identify")
+public class CustomerIdentifyController extends AbstractSearchPageController {
 
 	@Resource
 	SessionService sessionService;
@@ -35,7 +35,7 @@ public class StoreApplyController extends AbstractSearchPageController {
 	 * @throws CMSItemNotFoundException
 	 */
 	@RequestMapping(method = RequestMethod.GET)
-	public String storeApply(final Model model) throws CMSItemNotFoundException
+	public String customerIdentify(final Model model) throws CMSItemNotFoundException
 	{
 		String userType = sessionService.getCurrentSession().getAttribute("userType");
 		if(userType.equals(UserType.PERSONAL.toString())) {

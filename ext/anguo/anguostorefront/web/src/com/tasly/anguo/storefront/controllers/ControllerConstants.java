@@ -94,7 +94,7 @@ public interface ControllerConstants
 			
 			interface StoreApply 
 			{
-				String StoreApplyPage = "pages/storeApply/personalStoreApply";
+				String StoreApplyPage = "pages/customerIdentify/personalInfoIdentify";
 			}
 
 			interface Checkout
