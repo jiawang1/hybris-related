@@ -128,41 +128,6 @@
 		
 		
 	<!-- add by Yang for AM-18 start -->
-        <!--
-            Zone -> Region / City / District should be a 1:1 relationship.
-            Only a finer location should be set. For example if a City is set,
-            the Region / Country should set to null.
-        -->
-<!--         <relation code="Zone2RegionRelation" generate="true" localized="false" autocreate="true">
-            <description>This will extend the Zone with linkage to region (province)</description>
-            <sourceElement type="Zone" qualifier="zone" cardinality="many">
-                <modifiers read="true" write="true" optional="true" search="true"/>
-            </sourceElement>
-            <targetElement type="Region" qualifier="region" cardinality="one">
-                <modifiers read="true" write="true" optional="true" search="true"/>
-            </targetElement>
-        </relation>
-
-        <relation code="Zone2CityRelation" generate="true" localized="false" autocreate="true">
-            <description>This will extend the Zone with linkage to city</description>
-            <sourceElement type="Zone" qualifier="zone" cardinality="many">
-                <modifiers read="true" write="true" optional="true" search="true"/>
-            </sourceElement>
-            <targetElement type="City" qualifier="city" cardinality="one">
-                <modifiers read="true" write="true" optional="true" search="true"/>
-            </targetElement>
-        </relation>
-
-        <relation code="Zone2DistrictRelation" generate="true" localized="false" autocreate="true">
-            <description>This will extend the Zone with linkage to district</description>
-            <sourceElement type="Zone" qualifier="zone" cardinality="many">
-                <modifiers read="true" write="true" optional="true" search="true"/>
-            </sourceElement>
-            <targetElement type="District" qualifier="district" cardinality="one">
-                <modifiers read="true" write="true" optional="true" search="true"/>
-            </targetElement>
-        </relation> -->
-        
         <relation code="AnguoPlatformService2AnguoStoreRelation" generate="true" localized="false" autocreate="true">
             <description></description>
             <sourceElement type="AnguoPlatformService" qualifier="anguoPlatformService" cardinality="many">
