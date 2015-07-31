@@ -243,4 +243,36 @@
 	</bean>
 
 	<!-- beans for product end -->
+	
+	
+	<!-- add by Yang for AM-18 start -->
+	<alias name="defaultAnguoStoreManagermentFacade" alias="anguoStoreManagermentFacade"/>
+	<bean id="defaultAnguoStoreManagermentFacade" class="com.tasly.anguo.facades.anguostore.impl.DefaultAnguoStoreManagermentFacade">
+		<property name="modelService" ref="modelService"/>
+		<property name="timeService" ref="timeService"/>
+		<property name="userService" ref="userService"/>
+		<property name="mediaService" ref="mediaService"/>
+		<property name="mediaStorageConfigService" ref="mediaStorageConfigService"/>
+		<property name="catalogVersionService" ref="catalogVersionService"/>
+		<property name="anguoStoreReversePopulator" ref="anguoStoreReversePopulator"/>
+		<property name="anguoStoreCodeGenerator" ref="anguoStoreCodeGenerator"/>
+	</bean>
+	
+	<alias alias="anguoStoreReversePopulator" name="defaultAnguoStoreReversePopulator" />
+	<bean id="defaultAnguoStoreReversePopulator" class="com.tasly.anguo.facades.populators.AnguoStoreReversePopulator" scope="tenant">
+		 <property name="cityService" ref="cityService" />
+		 <property name="districtService" ref="districtService" />
+		 <property name="commonI18NService" ref="commonI18NService"/>
+	</bean>
+	
+	<bean id="anguoStoreCodeGenerator"
+	      class="de.hybris.platform.servicelayer.keygenerator.impl.PersistentKeyGenerator"
+	      init-method="init" scope="tenant">
+		<property name="key" value=""/>
+		<property name="digits" value="10"/>
+		<property name="start" value="0000000000"/>
+		<property name="numeric" value="true"/>
+	</bean>
+	<!-- add by Yang for AM-18 end -->
+	
 </beans>
