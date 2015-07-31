@@ -20,8 +20,7 @@ var AppRouter = Backbone.Router.extend({
             "default":"createFrame" 
         },
         
-        handleCategory:function(){
-            
+        handleCategory:function(){           
             require(["categoryView"], function(Category){
                 $(".main-root").empty().append(new Category().render().$el);
             });

@@ -5,7 +5,7 @@ package com.tasly.anguo.facades.location;
 
 import java.util.List;
 
-import com.tasly.anguo.facades.data.DistrictData;
+import com.tasly.anguo.facades.data.AbstractLocationItemData;
 
 /**
  * @author i319019
@@ -17,12 +17,12 @@ public interface DistrictFacade {
 	 * @param cityCode
 	 * @return
 	 */
-	List<DistrictData> getDistrictsByCityCode(final String cityCode);
+	List<AbstractLocationItemData> getDistrictsByCityCode(final String cityCode);
 	
 	/**
 	 * Find district with given code
 	 * @param code
 	 * @return
 	 */
-	DistrictData getDistrictByCode(final String code);
+	AbstractLocationItemData getDistrictByCode(final String code);
 }

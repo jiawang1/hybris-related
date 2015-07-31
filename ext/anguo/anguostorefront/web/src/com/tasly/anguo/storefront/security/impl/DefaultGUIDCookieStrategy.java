@@ -14,12 +14,14 @@
 package com.tasly.anguo.storefront.security.impl;
 
 import de.hybris.platform.acceleratorstorefrontcommons.security.GUIDCookieStrategy;
+
 import com.tasly.anguo.storefront.interceptors.beforecontroller.RequireHardLoginBeforeControllerHandler;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -42,6 +44,8 @@ public class DefaultGUIDCookieStrategy implements GUIDCookieStrategy
 
 	private CookieGenerator cookieGenerator;
 
+	private Integer cookieMaxAge;
+
 	public DefaultGUIDCookieStrategy() throws NoSuchAlgorithmException
 	{
 		random = SecureRandom.getInstance("SHA1PRNG");
@@ -53,6 +57,7 @@ public class DefaultGUIDCookieStrategy implements GUIDCookieStrategy
 	@Override
 	public void setCookie(final HttpServletRequest request, final HttpServletResponse response)
 	{
+		
 		if (!request.isSecure())
 		{
 			// We must not generate the cookie for insecure requests, otherwise there is not point doing this at all
@@ -60,13 +65,35 @@ public class DefaultGUIDCookieStrategy implements GUIDCookieStrategy
 		}
 
 		final String guid = createGUID();
-
 		getCookieGenerator().addCookie(response, guid);
 		request.getSession().setAttribute(RequireHardLoginBeforeControllerHandler.SECURE_GUID_SESSION_KEY, guid);
 
 		if (LOG.isInfoEnabled())
 		{
 			LOG.info("Setting guid cookie and session attribute: " + guid);
+		}
+		
+		//if remember me is on,then create a cookie to remember the userName
+		setRememberMeCookie(request, response);
+	}
+
+	private void setRememberMeCookie(final HttpServletRequest request,
+			final HttpServletResponse response) {
+		final String rememberMe = request
+				.getParameter("_spring_security_remember_me");
+		if (rememberMe != null
+				&& (rememberMe.equalsIgnoreCase("true")
+						|| rememberMe.equalsIgnoreCase("on")
+						|| rememberMe.equalsIgnoreCase("yes") || rememberMe
+							.equals("1"))) {
+			final Cookie usernameCookie = new Cookie("rememberMeCookie",
+					request.getParameter("j_username"));
+			usernameCookie.setHttpOnly(false);
+			usernameCookie.setSecure(false);
+			usernameCookie.setPath("/");
+			usernameCookie.setMaxAge(getCookieMaxAge() == null ? 1296000
+					: getCookieMaxAge());
+			response.addCookie(usernameCookie);
 		}
 	}
 
@@ -115,5 +142,24 @@ public class DefaultGUIDCookieStrategy implements GUIDCookieStrategy
 	protected MessageDigest getSha()
 	{
 		return sha;
+	}
+	
+	/**
+	 * @return the cookieMaxAge
+	 */
+	public Integer getCookieMaxAge()
+	{
+		return cookieMaxAge;
+	}
+
+
+
+	/**
+	 * @param cookieMaxAge
+	 *           the cookieMaxAge to set
+	 */
+	public void setCookieMaxAge(Integer cookieMaxAge)
+	{
+		this.cookieMaxAge = cookieMaxAge;
 	}
 }

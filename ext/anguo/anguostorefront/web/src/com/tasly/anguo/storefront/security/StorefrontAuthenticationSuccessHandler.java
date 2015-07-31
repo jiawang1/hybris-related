@@ -21,12 +21,15 @@ import de.hybris.platform.commercefacades.order.data.CartData;
 import de.hybris.platform.commerceservices.enums.UiExperienceLevel;
 import de.hybris.platform.commerceservices.order.CommerceCartMergingException;
 import de.hybris.platform.commerceservices.order.CommerceCartRestorationException;
+import de.hybris.platform.core.model.user.UserModel;
 import de.hybris.platform.servicelayer.session.SessionService;
+import de.hybris.platform.servicelayer.user.UserService;
 
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Resource;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -37,6 +40,10 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
+
+import com.tasly.anguo.core.enums.UserType;
+import com.tasly.anguo.core.model.EnterpriseAccountModel;
+import com.tasly.anguo.core.model.PersonalAccountModel;
 
 
 /**
@@ -53,6 +60,9 @@ public class StorefrontAuthenticationSuccessHandler extends SavedRequestAwareAut
 	private BruteForceAttackCounter bruteForceAttackCounter;
 	private Map<UiExperienceLevel, Boolean> forceDefaultTargetForUiExperienceLevel;
 	private List<String> restrictedPages;
+	
+	@Resource
+	public UserService userService;
 
 	private static String CHECKOUT_URL = "/checkout";
 	private static String CART_URL = "/cart";
@@ -65,7 +75,8 @@ public class StorefrontAuthenticationSuccessHandler extends SavedRequestAwareAut
 	public void onAuthenticationSuccess(final HttpServletRequest request, final HttpServletResponse response,
 			final Authentication authentication) throws IOException, ServletException
 	{
-
+		setSessionInfoForStorefront();
+		
 		getCustomerFacade().loginSuccess();
 		request.setAttribute(CART_MERGED, Boolean.FALSE);
 
@@ -104,9 +115,17 @@ public class StorefrontAuthenticationSuccessHandler extends SavedRequestAwareAut
 				LOG.error("User saved cart could not be merged");
 			}
 		}
-
 		getBruteForceAttackCounter().resetUserCounter(getCustomerFacade().getCurrentCustomer().getUid());
 		super.onAuthenticationSuccess(request, response, authentication);
+	}
+
+	private void setSessionInfoForStorefront() {
+		UserModel user = userService.getCurrentUser();
+		if(user != null && user instanceof EnterpriseAccountModel) {
+			getSessionService().setAttribute("userType", UserType.ENTERPRISE.toString());
+		}else if(user != null && user instanceof PersonalAccountModel) {
+			getSessionService().setAttribute("userType", UserType.PERSONAL.toString());
+		}
 	}
 
 	protected List<String> getRestrictedPages()

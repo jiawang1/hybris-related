@@ -54,6 +54,9 @@ public class InitialDataSystemSetup extends AbstractSystemSetup
 	private static final String ACTIVATE_SOLR_CRON_JOBS = "activateSolrCronJobs";
 	private static final String PRODUCT_CATALOG_NAME = "anguo";
 	private static final String CONTENT_CATALOG_NAME = "anguo";
+	private static final String STORE_STANDARD_CONTENT_CATALOG_NAME = "storeStandard";
+	private static final String STORE_FLAGSHIP_CONTENT_CATALOG_NAME = "storeFlagship";
+	private static final String STORE_ENTERPRISE_FLAGSHIP_CONTENT_CATALOG_NAME = "storeEnterpriseFlagship";
 	private static final String Store_Name = "anguo";
 	
 	private AnguoCoreDataImportService coreDataImportService;
@@ -105,7 +108,7 @@ public class InitialDataSystemSetup extends AbstractSystemSetup
 		  final List<ImportData> importData = new ArrayList<ImportData>();
 		  final ImportData sampleImportData = new ImportData();
 		  sampleImportData.setProductCatalogName(PRODUCT_CATALOG_NAME);
-		  sampleImportData.setContentCatalogNames(Arrays.asList(CONTENT_CATALOG_NAME));
+		  sampleImportData.setContentCatalogNames(Arrays.asList(CONTENT_CATALOG_NAME,STORE_STANDARD_CONTENT_CATALOG_NAME,STORE_FLAGSHIP_CONTENT_CATALOG_NAME,STORE_ENTERPRISE_FLAGSHIP_CONTENT_CATALOG_NAME));
 		  sampleImportData.setStoreNames(Arrays.asList(Store_Name));
 		  importData.add(sampleImportData);
 		  
