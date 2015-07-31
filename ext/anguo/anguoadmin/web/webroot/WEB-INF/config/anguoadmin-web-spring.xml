@@ -40,6 +40,8 @@
 				<ref bean="dynamicTenantActivationFilter"/>
 				<ref bean="sessionFilter"/>
            		<ref bean="anguoadminSecureMediaFilter"/>				
+           		<ref bean="anguoActiveCatalogVersionFilter"/>				
+           		<ref bean="defaultLanguageFilter"/>				
 			</list>
 		</constructor-arg>
 	</bean>
@@ -52,6 +54,12 @@
       <!-- <property name="secureMediaToken" value="securemedias"/>  securemedias is default but you may overwrite it -->
      </bean>	
 
+   <bean id="anguoActiveCatalogVersionFilter" class="com.tasly.anguo.filter.ActiveCatalogVersionFilter">
+       <property name="catalogVersionService" ref="catalogVersionService"/>
+       <property name="catalogService" ref="catalogService"/>
+   </bean>	
+   <bean id="defaultLanguageFilter" class="com.tasly.anguo.filter.DefaultLanguageFilter">
+   </bean>	
 	<!-- 
 	 WARNING: 
 	 Do NOT override hybris managers or items within the web module!

@@ -3,6 +3,10 @@
     <head>
         <link rel="stylesheet" type="text/css" href="./_ui/common/css/bootstrap.css" />
         <link rel="stylesheet" type="text/css" href="./_ui/common/css/relayout.css" />
+        <link rel="stylesheet" type="text/css" href="./_ui/common/css/style.css" />
+        <link rel="stylesheet" type="text/css" href="./_ui/common/css/jquery.dataTables.css" />
+        <link rel="stylesheet" type="text/css" href="./_ui/common/css/dataTables.editor.min.css" />
+        <link rel="stylesheet" type="text/css" href="./_ui/common/css/dataTables.tableTools.css" />
     </head>
 <body>
       <div class="container">
@@ -24,7 +28,13 @@
                             underscore: 'lib/underscore',
                             backbone: 'lib/backbone-1.1.2',
                             bootstrap: 'lib/bootstrap',
-                            jstree: 'lib/jstree'                       
+                            jstree:'lib/jstree',
+                            datatables:'lib/jquery.dataTables'
+//                             dataTablesEditor:'lib/dataTables.editor',
+//                             tableTools:'lib/dataTables.tableTools.min',
+//                             dataTablesEditable:'lib/jquery.dataTables.editable'
+                           // jdataTableEditor:'lib/jquery.dataTables.editable.js',
+                           // dataTableTools:'lib/dataTables.tableTools.min.js'
                         },
                         shim: {
                             underscore: {
@@ -39,8 +49,11 @@
                                 exports: "bootstrap"
                             },
                             jstree:{
-                            	deps: ["jquery"],
-                            	exports: "jstree"
+                                deps: ['jquery'],
+                                exports: 'jstree'
+                            },
+                            datatables:{
+                            	deps: ['jquery']
                             }
                         }
                     });
