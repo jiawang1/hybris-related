@@ -9,15 +9,15 @@
 <div class="accountNav">
 	
 		<div class="headline"><spring:theme code="text.account.yourAccount" text="My Account"/></div>
-
-			<ul>
-				<li class='${selected eq 'profile' ? 'active' : ''}'>
-					<c:url value="/my-account/profile" var="encodedUrl" />
-					<ycommerce:testId code="myAccount_profile_navLink">
-						<a href="${encodedUrl}"><spring:theme code="text.account.profile" text="Profile"/></a>
-					</ycommerce:testId>
-				</li>
-				<li class='${selected eq 'address-book' ? 'active' : ''}'>
+              <ul>
+               <li class='${selected eq 'profile' ? 'active' : ''}'>
+                    <c:url value="/my-account/profile" var="encodedUrl" />
+                    <ycommerce:testId code="myAccount_profile_navLink">
+                    <a href="${encodedUrl}"><spring:theme code="text.account.profile" text="Profile"/></a>
+                    </ycommerce:testId>
+                    
+                </li>
+                <li class='${selected eq 'address-book' ? 'active' : ''}'>
 					<c:url value="/my-account/address-book" var="encodedUrl" />
 					<ycommerce:testId code="myAccount_addressBook_navLink">
 						<a href="${encodedUrl}"><spring:theme code="text.account.addressBook" text="Address Book"/></a>

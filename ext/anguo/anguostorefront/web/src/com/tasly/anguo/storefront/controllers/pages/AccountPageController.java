@@ -276,6 +276,25 @@ public class AccountPageController extends AbstractSearchPageController
 		return getViewForPage(model);
 	}
 
+    @RequestMapping(value = "/enterprise", method = RequestMethod.GET)
+    @RequireHardLogIn
+    public String enterprise(@RequestParam(value = "page", defaultValue = "0") final int page,
+            @RequestParam(value = "show", defaultValue = "Page") final ShowMode showMode,
+            @RequestParam(value = "sort", required = false) final String sortCode, final Model model)
+            throws CMSItemNotFoundException
+    {
+        // Handle paged search results
+        final PageableData pageableData = createPageableData(page, 5, sortCode, showMode);
+        final SearchPageData<OrderHistoryData> searchPageData = orderFacade.getPagedOrderHistoryForStatuses(pageableData);
+        populateModel(model, searchPageData, showMode);
+
+        storeCmsPageInModel(model, getContentPageForLabelOrId(ORDER_HISTORY_CMS_PAGE));
+        setUpMetaDataForContentPage(model, getContentPageForLabelOrId(ORDER_HISTORY_CMS_PAGE));
+        model.addAttribute("breadcrumbs", accountBreadcrumbBuilder.getBreadcrumbs("text.account.orderHistory"));
+        model.addAttribute("metaRobots", "noindex,nofollow");
+        return getViewForPage(model);
+    }
+	
 	@RequestMapping(value = "/order/" + ORDER_CODE_PATH_VARIABLE_PATTERN, method = RequestMethod.GET)
 	@RequireHardLogIn
 	public String order(@PathVariable("orderCode") final String orderCode, final Model model) throws CMSItemNotFoundException
