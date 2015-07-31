@@ -9,7 +9,7 @@
 }
 
 .miniCart > a .count{
-	background:#464646;
+	background:#f1a106;
 	color:#fff;
 	width:20px;
 	margin:0 5px;
@@ -53,9 +53,14 @@
 	border-bottom:1px dotted #a5a5a5;
 }
 
+.miniCartPopup .legend a, 
+#addToCartLayer .legend a {
+	float: right;
+}
+
 .popupCartItem {
 	clear:both;
-	min-height:70px;
+	min-height:90px;
 	margin:10px 0;
 }
 
@@ -78,6 +83,9 @@
 }
 
 .popupCartItem .itemDesc .itemPrice{
+    color:#e32e3d;
+    font-size:14px;
+    font-weight: bold;
 	text-align:right;
 }
 
@@ -99,3 +107,20 @@
 .miniCartPopup .links{
 	clear:both;
 }
+#addToCartLayer  .button.positive{
+    font-size:14px;
+    font-weight:bold;
+    padding:0 20px;
+}
+#addToCartLayer .itemName,#addToCartLayer .itemQuantity{
+    color:#000;
+    font-size:14px;
+    font-weight:bold;
+    line-height: 30px
+}
+#addToCartLayer .popupCartItem .itemThumb,#addToCartLayer .popupCartItem .itemThumb img{
+    width:75px;
+    height:75px;
+}
+#addToCartLayer a.button{
+    margin: 0.7em 0

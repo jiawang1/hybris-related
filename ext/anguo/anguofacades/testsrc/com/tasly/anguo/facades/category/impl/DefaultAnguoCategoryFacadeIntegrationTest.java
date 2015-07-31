@@ -46,7 +46,7 @@ public class DefaultAnguoCategoryFacadeIntegrationTest extends ServicelayerTrans
 	
 	@Before
 	public void setup(){
-		CatalogVersionModel catalogVersionModel = catalogVersionService.getCatalogVersion(AnguoFacadesConstants.ACTIVECATALOG, AnguoFacadesConstants.ACTIVECATALOGVERSION);
+		CatalogVersionModel catalogVersionModel = catalogVersionService.getCatalogVersion(AnguoFacadesConstants.ACTIVEPRODUCTCATALOG, AnguoFacadesConstants.ACTIVEPRODUCTCATALOGVERSION);
 		sessionService.getCurrentSession().setAttribute(CatalogConstants.SESSION_CATALOG_VERSIONS, catalogVersionModel);
 	}
 	

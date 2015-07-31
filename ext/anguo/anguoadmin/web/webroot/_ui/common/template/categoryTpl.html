@@ -1,51 +1,78 @@
+
 <div class="form-horizontal category-page">
-    <div id="panel-title" class="">
-        <legend class="">Category Management</legend>
-    </div>
     
-    <div class="form-group">
-        <label class="control-label col-xs-3" for="input01">Category name</label>
-        <div class="controls col-xs-9">
-            <input type="text" placeholder="your category" class="form-control">
-            <p class="help-block">name for your category</p>
-        </div>
-    </div>
+    <div style="float:left;overflow-y:scroll;overflow:auto;width:400px;height:300px;border:1px solid" id="category-tree-div"></div>
+	<div style="float:none;clear:both;margin:10px;padding:10px">
+    	<div>
+			<button id="saveCat">保存类目</button>
+		</div>
+		<form id="category-detail-form">
+			<label for="categoryName">目录名称</label>
+			<input type="text" id="categoryName" name="categoryName"></input>
+			<input type="hidden" id="categoryCode" name="categoryCode"></input> 
+		</form>
+		<button id="new">新建别名</button>
+		<table id="aliasGrid" style="float:left" class="display" cellspacing="0" width="40%">
+		<thead>
+			<tr>
+			  <th width="60px">别名</th>
+			  <th width="20px"></th>
+			  <th width="20px"></th>
+			</tr>
+		</thead>
+		<tbody>
+		</tbody>
+	</table>
+	</div>
 
-    <div class="form-group">
-        <label class="control-label col-xs-3" for="input01">Category ID</label>
-        <div class="controls col-xs-9">
-            <input type="text" placeholder="category" class="form-control">
-            <p class="help-block">supply category for your category</p>
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label class="control-label col-xs-3">Attribute2</label>
-        <div class="controls col-xs-9">
-            <div class="input-group">
-                <span class="input-group-addon">2</span>
-                <input class="form-control" placeholder="placeholder" id="prependedInput" type="text">
-            </div> 
-        </div>
-    </div>
+<!-- 	    <div id="panel-title" class=""> -->
+<!--         <legend class="">Category Management</legend> -->
+<!--     </div> -->
     
-    <div class="form-group">
-        <label class="control-label col-xs-3">Attribute3</label>
-        <div class="controls col-xs-9">
-            <div class="input-group">
-                <span class="input-group-addon valtype">3</span>
-                <input class="form-control" placeholder="placeholder" id="prependedInput" type="text">
-            </div>
-        </div>
-    </div>
+<!--     <div class="form-group"> -->
+<!--         <label class="control-label col-xs-3" for="input01">Category name</label> -->
+<!--         <div class="controls col-xs-9"> -->
+<!--             <input type="text" placeholder="your category" class="form-control"> -->
+<!--             <p class="help-block">name for your category</p> -->
+<!--         </div> -->
+<!--     </div> -->
 
-    <div class="form-group">
-        <label class="control-label col-xs-3">Category description</label>
-        <div class="controls col-xs-9">
-            <div class="textarea">
-                <textarea type="" class="form-control"> </textarea>
-            </div>
-        </div>
-    </div>
+<!--     <div class="form-group"> -->
+<!--         <label class="control-label col-xs-3" for="input01">Category ID</label> -->
+<!--         <div class="controls col-xs-9"> -->
+<!--             <input type="text" placeholder="category" class="form-control"> -->
+<!--             <p class="help-block">supply category for your category</p> -->
+<!--         </div> -->
+<!--     </div> -->
+
+<!--     <div class="form-group"> -->
+<!--         <label class="control-label col-xs-3">Attribute2</label> -->
+<!--         <div class="controls col-xs-9"> -->
+<!--             <div class="input-group"> -->
+<!--                 <span class="input-group-addon">2</span> -->
+<!--                 <input class="form-control" placeholder="placeholder" id="prependedInput" type="text"> -->
+<!--             </div>  -->
+<!--         </div> -->
+<!--     </div> -->
+    
+<!--     <div class="form-group"> -->
+<!--         <label class="control-label col-xs-3">Attribute3</label> -->
+<!--         <div class="controls col-xs-9"> -->
+<!--             <div class="input-group"> -->
+<!--                 <span class="input-group-addon valtype">3</span> -->
+<!--                 <input class="form-control" placeholder="placeholder" id="prependedInput" type="text"> -->
+<!--             </div> -->
+<!--         </div> -->
+<!--     </div> -->
+
+<!--     <div class="form-group"> -->
+<!--         <label class="control-label col-xs-3">Category description</label> -->
+<!--         <div class="controls col-xs-9"> -->
+<!--             <div class="textarea"> -->
+<!--                 <textarea type="" class="form-control"> </textarea> -->
+<!--             </div> -->
+<!--         </div> -->
+<!--     </div> -->
+    
 
 </div>

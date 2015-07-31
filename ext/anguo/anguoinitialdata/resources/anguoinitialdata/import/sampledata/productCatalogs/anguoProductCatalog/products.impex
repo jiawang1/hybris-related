@@ -12,8 +12,12 @@ $productStatus=productStatus(code)[default='ONSALE']
 $packageUnit=packageUnit(code)[default='PACKAGE']
 
 # Insert Products
-INSERT_UPDATE Product;code[unique=true];$supercategories;unit(code);$catalogVersion;$approved;$productStatus;$packageUnit
+
+INSERT_UPDATE Product;code[unique=true];$supercategories;unit(code)[default=pieces];$catalogVersion;$approved[default=approved]
 ;千年人参;人参;
+
+INSERT_UPDATE Product;code[unique=true];$supercategories;unit(code);$catalogVersion;$approved;$productStatus;$packageUnit
+
 ;泽兰;泽兰;
 ;薄片白芍;白芍;
 ;炙白芍,炒白芍;白芍;

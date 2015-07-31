@@ -122,9 +122,9 @@
 
 	<bean id="coreUserDetailsService" class="de.hybris.platform.spring.security.CoreUserDetailsService"  />
 
-	<bean id="guidCookieStrategy" class="com.tasly.anguo.storefront.security.impl.DefaultGUIDCookieStrategy"
-	      >
+	<bean id="guidCookieStrategy" class="com.tasly.anguo.storefront.security.impl.DefaultGUIDCookieStrategy" >
 		<property name="cookieGenerator" ref="guidCookieGenerator" />
+		<property name="cookieMaxAge" value="1296000"/>
 	</bean>
 	
 	<alias name="defaultGuestCheckoutCartCleanStrategy" alias="guestCheckoutCartCleanStrategy"/>
@@ -278,11 +278,11 @@
 
 	
 	<alias name="defaultRememberMeServices" alias="rememberMeServices"/>
-	<bean id="defaultRememberMeServices" class="com.tasly.anguo.storefront.security.AcceleratorRememberMeServices" >
+	<bean id="defaultRememberMeServices" class="com.tasly.anguo.storefront.security.AcceleratorRememberMeServices">
 		<property name="userDetailsService" ref="originalUidUserDetailsService" />
 		<property name="key" value="anguostorefront" />
 		<property name="cookieName" value="anguostorefrontRememberMe" />
-		<property name="alwaysRemember" value="true" />
+		<property name="alwaysRemember" value="false" />
 		<property name="userService" ref="userService"/>
 		<property name="useSecureCookie" value="false"/>
 		<property name="customerFacade" ref="customerFacade"/>

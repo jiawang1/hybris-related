@@ -3,7 +3,7 @@
 # Macros / Replacement Parameter definitions
 $productCatalog=anguoProductCatalog
 
-$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default=‘Online’])[unique=true,default=$productCatalog]
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Online'])[unique=true,default='$productCatalog:Online']
 $media=@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator]
 $thumbnail=thumbnail(code, $catalogVersion)
 $picture=picture(code, $catalogVersion)
@@ -16,11 +16,18 @@ $medias=medias(code, $catalogVersion)
 $galleryImages=galleryImages(qualifier, $catalogVersion)
 $siteResource=jar:com.tasly.anguo.initialdata.setup.InitialDataSystemSetup&/anguoinitialdata/import/productCatalogs/$productCatalog
 
+
+INSERT_UPDATE MediaFolder;qualifier[unique=true];path[unique=true]
+;images;images
+
 # Create Media
 INSERT_UPDATE Media;mediaFormat(qualifier);code[unique=true];$media;mime[default='image/jpeg'];$catalogVersion;folder(qualifier)
+				   ;300Wx300H;/300Wx300H/1GJL02-danshen.jpg;$siteResource/images/300Wx300H/1GJL02-danshen.jpg
 
 # Create Media Containers
 INSERT_UPDATE MediaContainer;qualifier[unique=true];$medias;$catalogVersion
+			  人参1;/300Wx300H/1GJL02-danshen.jpg
 
 # Update Products with Media and Media Containers
 UPDATE Product;code[unique=true];$picture;$thumbnail;$detail;$others;$normal;$thumbnails;$galleryImages;$catalogVersion
+;千年人参;/300Wx300H/1GJL02-danshen.jpg;/96Wx96H/1GJL02-danshen.jpg;/1200Wx1200H/1GJL02-danshen.jpg;/515Wx515H/1GJL02-danshen.jpg,/65Wx65H/1GJL02-danshen.jpg,/30Wx30H/1GJL02-danshen.jpg;/300Wx300H/1GJL02-danshen.jpg;/96Wx96H/1GJL02-danshen.jpg;1GJL02-danshen,codeTest-danshen,codeReview-danshen

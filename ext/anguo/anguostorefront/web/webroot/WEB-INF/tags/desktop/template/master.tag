@@ -4,17 +4,11 @@
 <%@ attribute name="metaKeywords" required="false" %>
 <%@ attribute name="pageCss" required="false" fragment="true" %>
 <%@ attribute name="pageScripts" required="false" fragment="true" %>
-
-<%@ taglib prefix="template" tagdir="/WEB-INF/tags/desktop/template" %>
-<%@ taglib prefix="addonScripts" tagdir="/WEB-INF/tags/desktop/common/header" %>
-<%@ taglib prefix="analytics" tagdir="/WEB-INF/tags/shared/analytics" %>
 <%@ taglib prefix="debug" tagdir="/WEB-INF/tags/shared/debug" %>
+<%@ taglib prefix="template" tagdir="/WEB-INF/tags/desktop/template" %>
+<%@ taglib prefix="analytics" tagdir="/WEB-INF/tags/shared/analytics" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="htmlmeta" uri="http://hybris.com/tld/htmlmeta" %>
-
-
-
 <!DOCTYPE html>
 <html lang="${currentLanguage.isocode}">
 <head>
@@ -25,10 +19,15 @@
 
 	<%-- Meta Content --%>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-	<%-- Additional meta tags --%>
-	<htmlmeta:meta items="${metatags}"/>
-
+	<%-- Additional meta tags --%>	
+	<c:forEach var="metatag" items="${metatags}">
+		<c:if test="${not empty metatag.content}" >
+			<meta name="${metatag.name}" content="${metatag.content}" />
+		</c:if>
+	</c:forEach>
+	
 	<%-- Favourite Icon --%>
 	<spring:theme code="img.favIcon" text="/" var="favIconPath"/>
     <link rel="shortcut icon" type="image/x-icon" media="all" href="${originalContextPath}${favIconPath}" />
@@ -62,12 +61,11 @@
 	<template:javaScript/>
 	
 	<%-- Inject any additional JavaScript required by the page --%>
-	<jsp:invoke fragment="pageScripts"/>
+	<jsp:invoke fragment="pageScripts"/>	
 
-	<addonScripts:addonScripts/>
 
 </body>
 
 <debug:debugFooter/>
 
-</ html>
+</html>

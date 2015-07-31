@@ -1,88 +1,22 @@
 /*
 ## productList
 ********************************************************************/
-
-.productList .productListItem {
-	margin:25px 5px 40px;
-	border-bottom:1px dotted #c1c1c1;
-}
-
-
-.productList .productListItem .thumb{
-	float:left;
-}
-
-.productList .productListItem .thumb img{ 
-	width:220px;
-}
-
-
-.productList .productListItem .price{
-	float:right;
-	font-size: 1.5em;
-}
+.productList{margin:0 0 0 -20px;}
+.productListItem{float:left; display: inline-block; border:1px solid #e1e1e1; margin-left:20px; margin-bottom:20px; width:244px; padding-bottom:12px}
+.productListItem .detail{padding-left:10px; padding-right:10px}
+.productListItem .thumb{width:244px; height:220px}
+.productListItem .head{color:#333; font-size:14px; line-height: 25px;}
+.productListItem .pnBox{ margin-top:5px; margin-bottom:5px}
+.productListItem .price{font-weight:bold; float:left;}
+.productListItem .norm,.productListItem .origin{color:#666; float:right}
+.productListItem .seller,.productListItem .origin{color:#999;}
+.productListItem .cart{ margin:10px 20px}
+.productListItem .addToCartButton,.productAddToCartPanel .addToCartButton {background-color: #f1a106; border:0; color:#fff; cursor:pointer; font-size:16px; height:45px; line-height: 45px; width:200px; text-align:center;}
+.productListItem .addToCartButton:hover{background-color: #f19606}
+.productAddToCartPanel .addToCartButton{margin-top:45px;}
 
 
-.productList .productListItem .head{
-	border-bottom: 1px dotted #979797;
-	color: #666666;
-	font-size: 1.5em;
-	font-weight: normal;
-	padding: 0 0 1px;
-	margin:0 0 10px 240px;	
-}
 
-
-.productList .productListItem .stars{
-	float:none;	
-	margin:0 0 10px 240px;	
-}
-
-.productList .productListItem .details{
-	color:#8f8f8f;
-	padding:5px 0;
-	margin:0 0 0 240px;	
-}
-
-
-.productList .productListItem .product-classification{
-	margin:0 0 0 240px;	
-}
-
-.productList .productListItem .lowStock{
-	margin:0 0 0 240px;	
-}
-
-
-.productList .productListItem .product-classification dd{
-	margin:0;	
-}
-
-
-.productList .productListItem .priceContainer{
-	float:right;
-}
-
-.productList .productListItem .cart{
-	padding:5px 0;	
-	margin:0  0 0 240px;	
-}
-
-
-.productList .productListItem .cart .add_to_cart_form{
-	float:right;
-	width:29%;
-}
-
-.productList .productListItem .cart .collect_from_store{
-	width:29%;
-	float: right;
-	margin-right: 10px;
-}
-
-.productListItem button.pickupInStoreButton, .productListItem button.addToCartButton {
-	height: 27px;
-}
 
 
 

@@ -3,6 +3,10 @@
  */
 package com.tasly.anguo.facades.location.impl;
 
+import static org.junit.Assert.assertEquals;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.doAnswer;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,13 +17,9 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 
-import static org.junit.Assert.*;
-import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.doAnswer;
-
 import com.tasly.anguo.core.location.CityService;
-import com.tasly.anguo.facades.data.CityData;
-import com.tasly.anguo.facades.populators.CityPopulator;
+import com.tasly.anguo.facades.data.AbstractLocationItemData;
+import com.tasly.anguo.facades.populators.AbstractLocationItemPopulator;
 
 import de.hybris.bootstrap.annotations.UnitTest;
 import de.hybris.platform.chinaaccelerator.services.model.location.CityModel;
@@ -39,7 +39,7 @@ public class DefaultCityFacadeTest {
 	@Mock
 	private CityModel cityModel;
 	@Mock
-	private CityPopulator cityPopulator;
+	private AbstractLocationItemPopulator cityPopulator;
 	
 	private DefaultCityFacade defaultCityFacade;
 	
@@ -49,7 +49,7 @@ public class DefaultCityFacadeTest {
 		MockitoAnnotations.initMocks(this);
 		defaultCityFacade = new DefaultCityFacade();
 		defaultCityFacade.setCityService(cityService);
-		defaultCityFacade.setCityPopulator(cityPopulator);
+		defaultCityFacade.setAbstractLocationItemPopulator(cityPopulator);
 	}
 	
 	@Test
@@ -57,23 +57,23 @@ public class DefaultCityFacadeTest {
 	{
 		String cityCode = "cityCode";
 		given(cityService.getCityByCode(cityCode)).willReturn(cityModel);
-		doAnswer(new Answer<CityData>() {
+		doAnswer(new Answer<AbstractLocationItemData>() {
 			@Override
-			public CityData answer(final InvocationOnMock invocation)
+			public AbstractLocationItemData answer(final InvocationOnMock invocation)
 					throws Throwable {
 				final Object[] args = invocation.getArguments();
-				if (args[1] instanceof CityData) {
-					final CityData rd = (CityData) args[1];
-					rd.setCityName("cityName");
+				if (args[1] instanceof AbstractLocationItemData) {
+					final AbstractLocationItemData rd = (AbstractLocationItemData) args[1];
+					rd.setName("cityName");
 					rd.setCode("cityCode");
 				}
 				return null;
 			}
 		}).when(this.cityPopulator).populate(
 				org.mockito.Matchers.any(CityModel.class),
-				org.mockito.Matchers.any(CityData.class));
-		CityData result = defaultCityFacade.getCityForCode(cityCode);
-		assertEquals(result.getCityName(), "cityName");
+				org.mockito.Matchers.any(AbstractLocationItemData.class));
+		AbstractLocationItemData result = defaultCityFacade.getCityForCode(cityCode);
+		assertEquals(result.getName(), "cityName");
 		assertEquals(result.getCode(), "cityCode");
 	}
 	
@@ -84,23 +84,23 @@ public class DefaultCityFacadeTest {
 		cityModels.add(cityModel);
 		String regionCode = "regionCode";
 		given(cityService.getCitiesByRegion(regionCode)).willReturn(cityModels);
-		doAnswer(new Answer<CityData>() {
+		doAnswer(new Answer<AbstractLocationItemData>() {
 			@Override
-			public CityData answer(final InvocationOnMock invocation)
+			public AbstractLocationItemData answer(final InvocationOnMock invocation)
 					throws Throwable {
 				final Object[] args = invocation.getArguments();
-				if (args[1] instanceof CityData) {
-					final CityData rd = (CityData) args[1];
-					rd.setCityName("cityName");
+				if (args[1] instanceof AbstractLocationItemData) {
+					final AbstractLocationItemData rd = (AbstractLocationItemData) args[1];
+					rd.setName("cityName");
 					rd.setCode("cityCode");
 				}
 				return null;
 			}
 		}).when(this.cityPopulator).populate(
 				org.mockito.Matchers.any(CityModel.class),
-				org.mockito.Matchers.any(CityData.class));
-		List<CityData> result = defaultCityFacade.getCitiesByRegionCode(regionCode);
-		assertEquals(result.get(0).getCityName(), "cityName");
+				org.mockito.Matchers.any(AbstractLocationItemData.class));
+		List<AbstractLocationItemData> result = defaultCityFacade.getCitiesByRegionCode(regionCode);
+		assertEquals(result.get(0).getName(), "cityName");
 		assertEquals(result.get(0).getCode(), "cityCode");
 	}
 }

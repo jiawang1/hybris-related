@@ -18,20 +18,15 @@
 	margin:0 0 0 110px;
 }
 
-
-
 .productImage .productImagePrimary a.productImagePrimaryLink{
 	display:block;
 	width:420px;
 
 }
 
-
 .productImage .productImagePrimary a.productImagePrimaryLink img{
 	width:100%;
 }
-
-
 
 .productImage .productImagePrimary a.productImageZoomLink{
 	display:block;
@@ -44,8 +39,6 @@
 }
 
 
-
-
 /*
 ### Product Images scroller
 ********************************************************************/
@@ -54,12 +47,9 @@
 	float:left;
 	width:100px;
 	position:relative;
-	height:420px;
+	height:440px;
 	overflow:hidden;
 }
-
-
-
 
 .productImage .productImageGallery .jcarousel-clip{
 	height:360px;
@@ -71,76 +61,64 @@
 	margin:0 0 30px 0;
 }
 
-
 .productImage .productImageGallery li .thumb{
 	border:1px solid #d9d9d9;
 	display:block;
 	overflow:hidden;
 	width:96px;
 	margin:1px;
-
 }
-
 
 .productImage .productImageGallery li .thumb.active{
 	border:2px solid #000000;
-	margin:0;
-	
-
+	margin:0
 }
 
-
-
-
-
-
-
-
-
-
+.productImage .productImageGallery li .thumb img{
+	max-width:96px;
+	_width:expression(this.width > 96 ? "96px" : this.width);
+}
 
 
 /*
 ## Product Description
 ********************************************************************/
 
-
 .productDescription{
-	
+	position:relative
 }
-
-
+.productDescription .prodReview{
+    line-height: 40px
+}
 .productDescription h1{
-	font-size:2em;
+	font-size:24px;
 	font-weight:normal;
 	color:#000;
 	border-bottom:1px dotted #979797;
 	padding:0 0 5px 0;
+    margin-bottom:0;
 }
-
 
 .productDescription .big-price{
-	font-size:1.417em;
-	color:#303030;
-	padding:0 0 10px 10px;
+	float:left;
+    font-size:18px;
+    font-weight:bold;
+    color:#f1a106;
+    border:0;
+    line-height: 40px;
+    margin:0;
 }
-
 
 .productDescription .summary{
 	color:#666666;
 	margin:0 0 10px 0;
 }
 
-
-
-
-
 .productDescription .colour{
 	padding: 5px 0;
 	line-height:2.5em;
 	color:#929292;
 }
-
 
 .productDescription  ul.colorlist {
 	float:left;
@@ -151,45 +129,47 @@
 	margin:0 10px 0 0;
 }
 
-
-
 .productDescription  .size{
 	padding: 10px 0;
-
-	color:#929292;
-	
+	color:#929292
 }
 
 .productDescription  .size form{
-	float:left;
-	
+	float:left
 }
 
 .productDescription  .size .size-guide{
-	float:left;
-	
+	float:left
 }
-
 
 .productDescription  .size form label{
 	display:block;
 	font-weight:normal;
 }
 
-
-
-.productDescription .productAddToCartPanel .span-5 {
- width: 185px;
+.productDescription .add_to_cart_form{
+	width:49%
 }
 
+.productDescription .collect_from_store{
+	width:49%
+}
 
+.productDetailsPanel .productDescription .qty label{
+    font-size:14px;
+    width:32px!important;
+}
+.productDescription .stock_message{
+    font-size:14px;
+}
 
-
-.productDescription .LoveShare {
+.productDescription .LoveShare{
 	text-align:center;
-	margin-top: 15px;
+	width:49%;
+	float:right;
+	margin-bottom: 20px;
+    display: none
 }
-
 
 .productDescription .share{
 	color:#666666;
@@ -197,35 +177,20 @@
 	display:inline-block;
 	height:20px;
 	line-height:20px;
-
-	padding:0 0 0 25px;
-
-
+	padding:0 0 0 25px
 }
 
 .productDescription .share > span{ 
-	display:none;
-
+	display:none
 }
-
 
 .productDescription .share{
 	background:url("../images/productShareIcon.png") no-repeat left center;
 }
 
-
-
-
-
-
-
-
-
-
 /*
 ## Product Tabs
 ********************************************************************/
-
 
 /*
 #productTabs{
@@ -233,9 +198,6 @@
 	margin:0 0 20px 0;
 	clear: both;
 }
-
-
-
 
 #productTabs ul.tabs-list,
 #productTabs .tabHead{
@@ -256,44 +218,20 @@
 	text-transform: uppercase;
 	font-weight: bold;
 	padding:0 20px 0 0;
-
-
 }
-
 
 #productTabs ul.tabs-list li.current a{
 	color: #000;
-
-
 }
 
 #productTabs  .current-info,
 #productTabs .content .tabhead{
 	display:none;
-
-
 }
-
-
-
-
-
-
-
-
-
-
-
 
 .prodReview{
 	margin:0 0 20px 0;
-	
 }
-
-
-
-
-
 
 .prodReview .count{ 
 	color:#808080;
@@ -305,26 +243,18 @@
 	font-weight:bold;
 	padding:0 0 0 10px;
 	background:url("../images/facetMoreLessIcon.png") no-repeat left center ;
-	
 }
 */
 
 
-
 #productTabs{
-
 	margin:0 0 20px 0;
 	clear: both;
 }
 
-
-
-
 #productTabs ul.tabs-list,
 #productTabs .tabHead{
 	border-bottom:1px solid #979797;
-
-
 }
 
 #productTabs ul.tabs-list li{
@@ -339,119 +269,76 @@
 	text-transform: uppercase;
 	font-weight: bold;
 	padding:10px 20px 10px 20px;
-
-
 }
-
 
 #productTabs ul.tabs-list li.current a{
 	color: #000;
+    font-size:14px;
 	background:#fff;
 	border:1px solid #979797;
 	border-bottom:0;
 	margin:0 0 -1px 0;
-	padding:9px 19px 11px 19px;
-
-
+	padding:9px 19px 11px 19px
 }
 
 #productTabs  .current-info,
 #productTabs .content .tabhead{
 	display:none;
-
-
 }
-
-
 
 #productTabs .content{
 	position:relative;
-	margin:40px 0 0 0;
+	margin:25px 0;
 }
-
-
-
-
 
 /*
 ### productDescriptionText
 ********************************************************************/
 
-
 .productDescriptionText{
 	-webkit-column-count: 2; 
 	-moz-column-count: 2; 
 	column-count: 2; 
+    font-size:14px;
+    line-height:23px;
 }
-
 
 /*
 ### productFeatureClasses
 ********************************************************************/
 
-
-
 .productFeatureClasses{
 	
 }
 
-
 .productFeatureClasses .headline{
 	border-bottom:1px solid #a5a5a5;
+    font-size:14px;
 	height:30px;
 	line-height:30px;
 	text-transform:uppercase;
 	font-weight:bold;
-	font-size:1em;
 	white-space: nowrap;
 	display:block;
 	margin:20px 0 0 0;
-	
 }
 
-
-
 .productFeatureClasses table{
-	width:100%;
-	
+	width:100%;	
 }
 
 .productFeatureClasses table tr:nth-child(odd){
 	background:#f6f6f6;
-	
 }
-
 
 .productFeatureClasses table td{
 	width:50%;
-	
 	padding:10px 20px;
-	
 }
-
 
 .productFeatureClasses table td.attrib{
-	font-weight:bold;
-	
+	font-weight:bold;	
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /*
 ### prodReview
@@ -459,9 +346,7 @@
 
 .prodReview{
 	margin:0 0 20px 0;
-	
 }
-
 
 .prodReview .count{ 
 	color:#808080;
@@ -473,20 +358,16 @@
 	font-weight:bold;
 	padding:0 0 0 10px;
 	background:url("../images/facetMoreLessIcon.png") no-repeat left center ;
-	
 }
 
 .reviews{
-	
-	
+		
 }
 
 .reviews .actionBar{
-
 	height:30px;
 	line-height:30px;
 	color:#808080;
-
 	font-size:1em;
 	white-space: nowrap;
 	display:block;
@@ -494,12 +375,10 @@
 }
 
 .reviews .actionBar.top{
-
 	border-bottom:1px solid #a5a5a5;
 }
 
 .reviews .actionBar.bottom{
-
 	border-top:1px solid #a5a5a5;
 }
 
@@ -508,10 +387,8 @@
 	color:#808080;
 	font-weight:bold;
 	padding:0 0 0 10px;
-	background:url("../images/facetMoreLessIcon.png") no-repeat left center ;
-	
+	background:url("../images/facetMoreLessIcon.png") no-repeat left center ;	
 }
-
 
 .reviews .reviewDetail{ 
 	border-top:1px dotted #a5a5a5;
@@ -522,7 +399,6 @@
 	border-top:0;
 }
 
-
 .reviews .reviewDetail .headline{ 
 	font-weight:bold;
 }
@@ -531,14 +407,10 @@
 	
 }
 
-
 .reviews .reviewDetail .autor{ 
 	font-style:italic;
 	color:#808080;
 }
-
-
-
 
 #write_reviews.reviews .headline{
 	border-bottom: 1px solid #A5A5A5;
@@ -555,22 +427,13 @@
 }
 
 
-
-
-
-
-
 /*
 ### Product Images Colorbox
 ********************************************************************/
 
-
-
 #colorbox .productImage{
 	padding:20px;
 }
-
-
 
 #colorbox .productImage .productImageGallery{
 	height:515px;
@@ -584,31 +447,27 @@
     margin: 0 0 18px;
 }
 
-
 #colorbox .productImage .productImagePrimary {
     margin: 0 0 0 150px;
 }
 
 
-
-
-
+#colorbox .productImage .productImagePrimary img{
+	max-width:515px;
+	_width:expression(this.width > 515 ? "515px" : this.width);
+}
 /*
 ### quickviewLightbox Colorbox
 ********************************************************************/
-
 
 #quickviewLightbox{
 	padding:20px;
 }
 
-
-
 #quickviewLightbox .productImage{
 	padding: 0;
 	margin:0 30px 0 0;
 }
-
 
 #quickviewLightbox .productImage .productImagePrimary{
 	margin:0;
@@ -622,12 +481,23 @@
 	right:0;
 }
 
-
 #quickviewLightbox .productDescription{
 	width: 496px;
 }
 
+.productDescription .norm,.productDescription .origin{
+    color:#000;
+    font-size:14px;
+    line-height: 30px;
+    
+    
+}
+.maijia { width:100%;overflow: hidden;}
+.maijia ul li{width:313px; float:left;color:#225626; overflow: hidden; font-size:14px;line-height: 30px;background-color:#f1f0f0; margin-bottom: 10px; word-wrap: break-word; margin-left:10px;text-indent:1em;}
+.maijia ul li.norm{ width:95px; height:30px; line-height: 30px; overflow: hidden; float:left;font-size:15px;background-color:#f1f0f0; color:#225626;margin-left:0px;text-indent:1em;}
 
-
+.productDescription .origin{
+    margin-bottom:10px;
+}
 
 

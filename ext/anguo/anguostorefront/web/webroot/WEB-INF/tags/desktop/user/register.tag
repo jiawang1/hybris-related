@@ -7,19 +7,16 @@
 <%@ taglib prefix="formElement" tagdir="/WEB-INF/tags/desktop/formElement" %>
 <%@ taglib prefix="theme" tagdir="/WEB-INF/tags/shared/theme" %>
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags" %>
+
 <div class="userRegister">
-	<div id="divPersonal">
-		<div class="headline"><spring:theme code="register.new.account.personal" /></div>
-		<div class="required right"><a href="javascript:personalEnterpriseSwitch('divEnterprise', 'divPersonal')"><spring:theme code="register.change.to.enterprise.account"/></a></div>
-		<div class="description"><spring:theme code="register.description.personal"/></div>
-	</div>
-	<div id="divEnterprise" style="display:none">
-		<div class="headline"><spring:theme code="register.new.account.enterprise" /></div>
-		<div class="required right"><a href="javascript:personalEnterpriseSwitch('divPersonal', 'divEnterprise')"><spring:theme code="register.change.to.personal.account"/></a></div>
-		<div class="description"><spring:theme code="register.description.enterprise"/></div>
-	</div>
-	<form:form method="post" commandName="anguoRegisterForm" action="${action}">
+	<div class="headline"><spring:theme code="register.new.customer" /></div>
+	<div class="required right"><spring:theme code="form.required"/></div>
+	<div class="description"><spring:theme code="register.description"/></div>
+
+
+	<form:form method="post" commandName="registerForm" action="${action}">
 		<div class="form_field-elements js-recaptcha-captchaaddon">
+
 			<!--<formElement:formSelectBox idKey="register.title" labelKey="register.title" path="titleCode" mandatory="true" skipBlank="false" skipBlankMessageKey="form.select.empty" items="${titles}"/>-->
 			<!--<formElement:formInputBox idKey="register.firstName" labelKey="register.firstName" path="firstName" inputCSS="text" mandatory="true"/>
 			<formElement:formInputBox idKey="register.lastName" labelKey="register.lastName" path="lastName" inputCSS="text" mandatory="true"/>-->
@@ -32,6 +29,7 @@
 			<input type="hidden" id="recaptchaChallangeAnswered" value="${requestScope.recaptchaChallangeAnswered}"/>
 			<input type="hidden" id="accountType" value="${requestScope.recaptchaChallangeAnswered}"/>
 			<form:hidden path="userType" id="userType" value="PERSONAL"/>
+
 		</div>
 		<div class="form-actions clearfix">
 			<ycommerce:testId code="register_Register_button">

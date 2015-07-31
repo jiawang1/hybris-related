@@ -32,10 +32,56 @@
 
 	<!-- Solr field value providers -->
 
+    <bean id="volumeAwareProductPriceValueProvider" class="tasly.anguo.core.solr.provider.VolumeAwareProductPriceValueProvider"  parent="abstractPropertyFieldValueProvider">
+        <property name="fieldNameProvider" ref="solrFieldNameProvider"/>
+        <property name="priceService" ref="priceService"/>
+        <property name="commonI18NService" ref="commonI18NService"/>
+        <property name="sessionService" ref="sessionService"/>
+        <property name="userService" ref="userService"/>
+        <property name="priceComparator" ref="volumePriceComparator"/>
+        <property name="catalogVersionService" ref="catalogVersionService"/>
+    </bean>
+
+    <bean id="volumePriceComparator" class="tasly.anguo.core.VolumeAwarePriceInformationComparator" scope="singleton"/>
+
+    <bean id="productVolumePricesProvider" class="tasly.anguo.core.solr.provider.ProductVolumePricesProvider"  parent="abstractPropertyFieldValueProvider">
+        <property name="fieldNameProvider" ref="solrFieldNameProvider"/>
+        <property name="priceService" ref="priceService"/>
+    </bean>
+
 	<bean id="electronicsCategorySource" parent="abstractCategorySource">
 		<property name="rootCategory" value="1"/>
 		<!-- '1' is the root icecat category -->
 	</bean>
+	
+	    <bean id="anguoCategoryCodeValueProvider" parent="abstractCategoryCodeValueProvider">
+        <property name="categorySource" ref="anguoCategorySource"/>
+    </bean>
+    <bean id="anguoBrandCategoryCodeValueProvider" parent="abstractCategoryCodeValueProvider">
+        <property name="categorySource" ref="anguoBrandCategorySource"/>
+    </bean>
+    <bean id="anguoVariantCategoryCodeValueProvider" parent="abstractCategoryCodeValueProvider">
+        <property name="categorySource" ref="anguoVariantCategorySource"/>
+    </bean>
+
+
+    <bean id="anguoCategoryNameValueProvider" parent="abstractCategoryNameValueProvider">
+        <property name="categorySource" ref="anguoCategorySource"/>
+    </bean>
+    <bean id="anguoBrandCategoryNameValueProvider" parent="abstractCategoryNameValueProvider">
+        <property name="categorySource" ref="anguoBrandCategorySource"/>
+    </bean>
+    
+    <bean id="anguoCategorySource" parent="variantCategorySource">
+        <property name="rootCategory" value="1"/> <!-- '1' is the root icecat category -->
+    </bean>
+    <bean id="anguoVariantCategorySource" parent="variantCategorySource"/>
+
+    <bean id="anguoBrandCategorySource" parent="defaultCategorySource">
+        <property name="rootCategory" value="brands"/> <!-- 'brands' is the root of the brands hierarchy -->
+    </bean>
+    
+    
 	<bean id="electronicsBrandCategorySource" parent="abstractCategorySource">
 		<property name="rootCategory" value="brands"/>
 		<!-- 'brands' is the root of the brands hierarchy -->
@@ -416,7 +462,12 @@
 		<property name="rootCategoryCode" value="categories"/>
 	</bean>
 
-	<!-- beans for product start -->	
+	<!-- beans for product start -->
+	<alias alias="countryService" name="defaultCountryService" />
+    <bean id="defaultCountryService" class="com.tasly.anguo.core.location.impl.DefaultCountryService">
+        <property name="countryDao" ref="countryDao"/>
+    </bean>
+    
 	<alias alias="regionService" name="defaultRegionService" />
     <bean id="defaultRegionService" class="com.tasly.anguo.core.location.impl.DefaultRegionService">
         <property name="regionDao" ref="regionDao"/>
@@ -455,9 +506,31 @@
 	<bean id="categoryRemovalValidatorMapping" class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
 		<property name="interceptor" ref="anguoCategoryRemovalValidator" />
 		<property name="typeCode" value="Category" />
-	</bean>
-    
+	</bean>    
     <bean id="captchaService" class="com.tasly.anguo.core.service.impl.DefaultCaptchaService">
     </bean>
+
+	<!-- add by LiuJi for AM-128 start -->
+	<!-- product -->
+	<bean id="productCodeGenerator" class="de.hybris.platform.servicelayer.keygenerator.impl.PersistentKeyGenerator">
+		<property name="key" value="${keygen.product.code.name}"/>
+		<property name="digits" value="${keygen.product.code.digits}"/>
+		<property name="start" value="${keygen.product.code.start}"/>
+		<property name="type" value="${keygen.product.code.type}"/>
+		<property name="template" value="${keygen.product.code.template}"/>
+	</bean>
+
+	<alias alias="createProductCodeStrategy" name="defaultCreateProductCodeStrategy"/>
+	<bean id="defaultCreateProductCodeStrategy"
+			class="com.tasly.anguo.core.product.strategies.impl.DefaultCreateProductCodeStrategy">
+		<property name="keyGenerator"
+					 ref="#{configurationService.configuration.getProperty('anguocore.productCode.keyGenerator')}"/>
+	</bean>
+	<!-- add by LiuJi for AM-128 end -->
 	<!-- beans for product end -->
+	
+	<alias name="anguoProductModelUrlResolver" alias="productModelUrlResolver"/>
+	<bean id="anguoProductModelUrlResolver" class="com.tasly.anguo.core.util.AnguoProductModelUrlResolver"
+			parent="defaultProductModelUrlResolver">
+	</bean>
 </beans>

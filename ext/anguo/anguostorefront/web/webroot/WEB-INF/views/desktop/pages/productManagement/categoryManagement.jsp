@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="${commonResourcePath}/css/dataTables.tableTools.css" />
 
 <compressible:js/>
-<script type="text/javascript" src="${commonResourcePath}/js/jstree.min.js"></script>
+<script type="text/javascript" src="${commonResourcePath}/js/jstree.js"></script>
 
 <script type="text/javascript" src="${commonResourcePath}/js/jquery.dataTables.js"></script>
 <script type="text/javascript" src="${commonResourcePath}/js/jquery.dataTables.editable.js"></script>
@@ -43,6 +43,6 @@
 		</tbody>
 	</table>
 	</div>
-
+    <div id="test"></div>
 </body>
 </html>
