@@ -4,7 +4,7 @@
 $productCatalog=anguoProductCatalog
 $contentCatalog=anguoContentCatalog
 $contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
-$defaultLanguage=en
+$defaultLanguage=zh
 $storeUid=anguo
 $siteUid=anguo
 $promoGrp=anguoPromoGrp

@@ -7,9 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.tasly.anguo.core.location.DistrictService;
-import com.tasly.anguo.facades.data.DistrictData;
+import com.tasly.anguo.facades.data.AbstractLocationItemData;
 import com.tasly.anguo.facades.location.DistrictFacade;
-import com.tasly.anguo.facades.populators.DistrictPopulator;
+import com.tasly.anguo.facades.populators.AbstractLocationItemPopulator;
 
 import de.hybris.platform.chinaaccelerator.services.model.location.DistrictModel;
 
@@ -20,19 +20,19 @@ import de.hybris.platform.chinaaccelerator.services.model.location.DistrictModel
  */
 public class DefaultDistrictFacade implements DistrictFacade {
 	private DistrictService districtService;
-	private DistrictPopulator districtPopulator;
+	private AbstractLocationItemPopulator abstractLocationItemPopulator;
 	
 	/* (non-Javadoc)
 	 * @see com.tasly.anguo.facades.location.DistrictFacade#getDistrictsByCityCode(java.lang.String)
 	 */
 	@Override
-	public List<DistrictData> getDistrictsByCityCode(String cityCode) {
+	public List<AbstractLocationItemData> getDistrictsByCityCode(String cityCode) {
 		final List<DistrictModel> districtModels = districtService.getDistrictsByCity(cityCode);
-		final List<DistrictData> districtFacadeData = new ArrayList<DistrictData>();
+		final List<AbstractLocationItemData> districtFacadeData = new ArrayList<AbstractLocationItemData>();
 		for (final DistrictModel districtModel : districtModels)
 		{
-			final DistrictData district = new DistrictData();
-			this.districtPopulator.populate(districtModel, district);
+			final AbstractLocationItemData district = new AbstractLocationItemData();
+			this.abstractLocationItemPopulator.populate(districtModel, district);
 
 			districtFacadeData.add(district);
 		}
@@ -43,10 +43,10 @@ public class DefaultDistrictFacade implements DistrictFacade {
 	 * @see com.tasly.anguo.facades.location.DistrictFacade#getDistrictByCode(java.lang.String)
 	 */
 	@Override
-	public DistrictData getDistrictByCode(String code) {
+	public AbstractLocationItemData getDistrictByCode(String code) {
 		DistrictModel districtModel = districtService.getDistrictByCode(code);
-		DistrictData district = new DistrictData();
-		this.districtPopulator.populate(districtModel, district);
+		AbstractLocationItemData district = new AbstractLocationItemData();
+		this.abstractLocationItemPopulator.populate(districtModel, district);
 		return district;
 	}
 
@@ -67,19 +67,18 @@ public class DefaultDistrictFacade implements DistrictFacade {
 	}
 
 	/**
-	 * getter
-	 * @return
+	 * @return the abstractLocationItemPopulator
 	 */
-	public DistrictPopulator getDistrictPopulator() {
-		return districtPopulator;
+	public AbstractLocationItemPopulator getAbstractLocationItemPopulator() {
+		return abstractLocationItemPopulator;
 	}
 
 	/**
-	 * setter
-	 * @param districtPopulator
+	 * @param abstractLocationItemPopulator the abstractLocationItemPopulator to set
 	 */
-	public void setDistrictPopulator(DistrictPopulator districtPopulator) {
-		this.districtPopulator = districtPopulator;
+	public void setAbstractLocationItemPopulator(
+			AbstractLocationItemPopulator abstractLocationItemPopulator) {
+		this.abstractLocationItemPopulator = abstractLocationItemPopulator;
 	}
 
 }
