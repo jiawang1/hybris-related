@@ -260,24 +260,6 @@
 		<property name="anguoStoreCodeGenerator" ref="anguoStoreCodeGenerator"/>
 	</bean>
 	
-<!-- 	<alias alias="cityFacade" name="defaultCityFacade" />
-	<bean id="defaultCityFacade" class="com.tasly.anguo.facades.location.impl.DefaultCityFacade">
-	  <property name="cityService" ref="cityService"></property>
-	  <property name="cityPopulator" ref="cityPopulator"></property>
-	</bean>
-
-	<alias alias="cityPopulator" name="defaultCityPopulator" />
-	<bean id="defaultCityPopulator" class="com.tasly.anguo.facades.populators.CityPopulator" />
-
-	<alias alias="districtFacade" name="defaultDistrictFacade" />
-	<bean id="defaultDistrictFacade" class="com.tasly.anguo.facades.location.impl.DefaultDistrictFacade">
-	  <property name="districtService" ref="districtService"></property>
-	  <property name="districtPopulator" ref="districtPopulator"></property>
-	</bean>
-
-	<alias alias="districtPopulator" name="defaultDistrictPopulator" />
-	<bean id="defaultDistrictPopulator" class="com.tasly.anguo.facades.populators.DistrictPopulator" />
- -->	
 	<alias alias="anguoStoreReversePopulator" name="defaultAnguoStoreReversePopulator" />
 	<bean id="defaultAnguoStoreReversePopulator" class="com.tasly.anguo.facades.populators.AnguoStoreReversePopulator" scope="tenant">
 		 <property name="cityService" ref="cityService" />

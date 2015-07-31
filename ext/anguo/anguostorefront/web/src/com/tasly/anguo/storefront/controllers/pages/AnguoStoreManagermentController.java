@@ -39,6 +39,7 @@ import com.tasly.anguo.facades.location.DistrictFacade;
 import com.tasly.anguo.store.data.AnguoStoreManagermentData;
 import com.tasly.anguo.storefront.forms.AnguoStoreApplyForm;
 
+import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
 import de.hybris.platform.acceleratorstorefrontcommons.annotations.RequireHardLogIn;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractSearchPageController;
 import de.hybris.platform.catalog.CatalogVersionService;
@@ -145,11 +146,11 @@ public class AnguoStoreManagermentController extends AbstractSearchPageControlle
 
 		getAnguoStoreApplyValidator().validate(anguoStoreApplyForm, bindingResult);
 		
-//		if (bindingResult.hasErrors())
-//		{
-//			GlobalMessages.addErrorMessage(model, "form.global.error");
-//			return "pages/store/anguoStoreApplyPage";
-//		}
+		if (bindingResult.hasErrors())
+		{
+			GlobalMessages.addErrorMessage(model, "form.global.error");
+			return "pages/store/anguoStoreApplyPage";
+		}
 
 		BeanUtils.copyProperties(anguoStoreApplyForm, anguoStoreData);		
 		
