@@ -144,7 +144,7 @@ public interface ControllerConstants
 			interface ProductManagement
 			{
 				String CategoryManagement = "pages/productManagement/categoryManagement";
-				String CategorySelect = "pages/productManagement/categorySelect";
+				String CategorySelect = "pages/productManagement/publishNewProduct";
 			}
 		}
 
