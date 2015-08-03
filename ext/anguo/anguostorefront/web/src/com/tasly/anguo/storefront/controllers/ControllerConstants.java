@@ -92,9 +92,10 @@ public interface ControllerConstants
 				String AccountRegisterPage = "pages/account/accountRegisterPage";
 			}
 			
-			interface StoreApply 
+			interface CustomerIdentify 
 			{
-				String StoreApplyPage = "pages/customerIdentify/personalInfoIdentify";
+				String IdCardIdentify = "pages/customerIdentify/idCardIdentify";
+				String AccountNumberIdentify = "pages/customerIdentify/accountNumberIdentify";
 			}
 
 			interface Checkout
