@@ -344,6 +344,10 @@
             </itemtype>
             <itemtype code="Product" generate="false" autocreate="false">
             	<attributes>
+            		<attribute qualifier="lastestStatusChangeDate" type="java.util.Date">
+				    	<modifiers read="true" write="true" search="true" optional="true"/>
+					    <persistence type="property"/>
+					</attribute>
 					<attribute generate="true" autocreate="true" qualifier="qualityImage" type="MediaCollection">
 						<persistence type="property" qualifier=""/>
 						<modifiers read="true" write="true" search="true" encrypted="false" optional="true" removable="true" initial="false" unique="false" private="false" partof="false"/>
