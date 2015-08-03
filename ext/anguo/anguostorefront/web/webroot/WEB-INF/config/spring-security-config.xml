@@ -86,6 +86,7 @@
 		<security:intercept-url pattern="/checkout/multi/billingaddressform" access="hasAnyRole('ROLE_ANONYMOUS','ROLE_CUSTOMERGROUP')" requires-channel="https" />
 		<security:intercept-url pattern="/my-account*" access="hasRole('ROLE_CUSTOMERGROUP')" requires-channel="https" />
 		<security:intercept-url pattern="/my-account/**" access="hasRole('ROLE_CUSTOMERGROUP')" requires-channel="https" />
+		<security:intercept-url pattern="/anguo-storemanagerment/**" access="hasRole('ROLE_CUSTOMERGROUP')" requires-channel="https" />
 
 		<security:intercept-url pattern="/**" requires-channel="https" /> <!-- Everything should be secure -->
 
