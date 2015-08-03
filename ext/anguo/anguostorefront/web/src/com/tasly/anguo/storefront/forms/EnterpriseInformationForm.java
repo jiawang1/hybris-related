@@ -1,12 +1,20 @@
 package com.tasly.anguo.storefront.forms;
 
+import java.util.List;
+import com.tasly.anguo.facades.user.data.ContactData;
 public class EnterpriseInformationForm {
     private String name;
     private String registerId;
     private String address;
     private String phone;
     private String fax;
-    private String contact;
+    private List<ContactData> contacts;
+    public List<ContactData> getContacts() {
+        return contacts;
+    }
+    public void setContacts(List<ContactData> contacts) {
+        this.contacts = contacts;
+    }
     public String getName() {
         return name;
     }
@@ -36,12 +44,6 @@ public class EnterpriseInformationForm {
     }
     public void setFax(String fax) {
         this.fax = fax;
-    }
-    public String getContact() {
-        return contact;
-    }
-    public void setContact(String contact) {
-        this.contact = contact;
     }
 
 }

@@ -30,8 +30,22 @@
 		<property name="mobile" type="String"/>
 		<property name="captcha" type="String"/>
 		<property name="userType" type="com.tasly.anguo.core.enums.UserType"></property>
-		
 	</bean>
+
+    <bean class="com.tasly.anguo.facades.user.data.ContactData">
+        <property name="name" type="String"/>
+        <property name="posistion" type="String"/>
+        <property name="contactInfo" type="String"></property>
+    </bean>
+
+    <bean class="com.tasly.anguo.facades.user.data.EnterpriseInformationData">
+        <property name="name" type="String"/>
+        <property name="registerId" type="String"/>
+        <property name="address" type="String"/>
+        <property name="phone" type="String"/>
+        <property name="fax" type="String"/>
+        <property name="contacts" type="java.util.List&lt;com.tasly.anguo.facades.user.data.ContactData>"/>
+    </bean>    
 
 	<bean class="com.tasly.anguo.facades.product.data.CategoryNodeData">
 		<property name="id" type="String"></property>

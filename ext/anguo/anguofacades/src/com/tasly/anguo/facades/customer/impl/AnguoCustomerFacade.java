@@ -10,8 +10,10 @@ import org.springframework.util.Assert;
 import com.tasly.anguo.core.enums.UserType;
 import com.tasly.anguo.core.model.EnterpriseAccountModel;
 import com.tasly.anguo.core.model.PersonalAccountModel;
+import com.tasly.anguo.facades.user.data.EnterpriseInformationData;
 
 import de.hybris.platform.commercefacades.customer.impl.DefaultCustomerFacade;
+import de.hybris.platform.commercefacades.user.data.CustomerData;
 import de.hybris.platform.commercefacades.user.data.RegisterData;
 import de.hybris.platform.commerceservices.customer.DuplicateUidException;
 import de.hybris.platform.core.enums.PhoneContactInfoType;
@@ -33,7 +35,6 @@ public class AnguoCustomerFacade extends DefaultCustomerFacade
         validateParameterNotNullStandardMessage("registerData", registerData);
         Assert.hasText(registerData.getLogin(),
                 "The field [Login] cannot be empty");
-
         CustomerModel newCustomer = null;
         if (registerData.getUserType() == UserType.PERSONAL) {
             newCustomer = getModelService().create(PersonalAccountModel.class);
@@ -42,26 +43,30 @@ public class AnguoCustomerFacade extends DefaultCustomerFacade
                     .create(EnterpriseAccountModel.class);
         }
         newCustomer.setName(registerData.getLogin());
-
         setUidForRegister(registerData, newCustomer);
         newCustomer.setSessionLanguage(getCommonI18NService().getCurrentLanguage());
         newCustomer.setSessionCurrency(getCommonI18NService().getCurrentCurrency());
-
         PhoneContactInfoModel phoneModel = new PhoneContactInfoModel();
-
         phoneModel.setType(PhoneContactInfoType.MOBILE);
-
         phoneModel.setPhoneNumber(registerData.getMobile());
-
         phoneModel.setUser(newCustomer);
-
         newCustomer.setContactInfos(new ArrayList<AbstractContactInfoModel>());
-
         newCustomer.getContactInfos().add(phoneModel);
-
         getCustomerAccountService().register(newCustomer,
                 registerData.getPassword());
 
+    }
+    
+    public void updateEnterpriseInformation(
+            final EnterpriseInformationData enterpriseInformationData) {
+        validateDataBeforeUpdate(customerData);
+
+        final String name = getCustomerNameStrategy().getName(
+                customerData.getFirstName(), customerData.getLastName());
+        final CustomerModel customer = getCurrentSessionCustomer();
+        customer.setOriginalUid(customerData.getDisplayUid());
+        getCustomerAccountService().updateProfile(customer,
+                customerData.getTitleCode(), name, customerData.getUid());
     }
 
 }

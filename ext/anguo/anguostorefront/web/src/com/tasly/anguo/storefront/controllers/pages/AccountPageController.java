@@ -21,6 +21,7 @@ import java.util.Set;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
@@ -39,6 +40,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.tasly.anguo.storefront.controllers.ControllerConstants;
+import com.tasly.anguo.storefront.forms.AnguoRegisterForm;
 import com.tasly.anguo.storefront.forms.EnterpriseInformationForm;
 
 import de.hybris.platform.acceleratorstorefrontcommons.annotations.RequireHardLogIn;
@@ -286,6 +288,19 @@ public class AccountPageController extends AbstractSearchPageController
             throws CMSItemNotFoundException
     {
 
+        model.addAttribute("breadcrumbs", accountBreadcrumbBuilder.getBreadcrumbs("text.account.enterprise.information.update"));
+        model.addAttribute("metaRobots", "noindex,nofollow");
+        model.addAttribute(new EnterpriseInformationForm());
+        return ControllerConstants.Views.Pages.Account.AccountEnterprisePage;
+    }
+    
+    @RequestMapping(value = "/enterprise", method = RequestMethod.POST)
+    @RequireHardLogIn
+    public String updateEnterprise(@RequestParam(value = "page", defaultValue = "0") final int page,
+            @RequestParam(value = "show", defaultValue = "Page") final ShowMode showMode, final EnterpriseInformationForm form,
+            final BindingResult bindingResult, final Model model, final HttpServletRequest request,
+            final HttpServletResponse response, final RedirectAttributes redirectModel) throws CMSItemNotFoundException
+    {
         model.addAttribute("breadcrumbs", accountBreadcrumbBuilder.getBreadcrumbs("text.account.enterprise.information.update"));
         model.addAttribute("metaRobots", "noindex,nofollow");
         model.addAttribute(new EnterpriseInformationForm());
