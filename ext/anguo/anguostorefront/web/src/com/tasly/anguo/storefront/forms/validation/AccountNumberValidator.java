@@ -39,7 +39,7 @@ public class AccountNumberValidator implements Validator {
 	
 	private boolean checkAccountNumber(String bank,String accountNumber,String accountOwer) {
 	
-		return false;
+		return true;
 	}
 
 }

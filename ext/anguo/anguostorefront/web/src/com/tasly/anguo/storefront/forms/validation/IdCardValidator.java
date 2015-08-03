@@ -22,20 +22,15 @@ public class IdCardValidator implements Validator {
 		String idCard = form.getIdCard();
 		if(StringUtils.isBlank(idName)){
 			errors.rejectValue("idName", "idName.isBlank");
-		}
-		if(StringUtils.isBlank(idCard)){
+		}else if(StringUtils.isBlank(idCard)){
 			errors.rejectValue("idCard", "idCard.isBlank");
-		}
-		//TODO call the idcard check interface to validate whether the idcard number is correct or not
-		if(!checkIdCard(idName,idCard)) {
+		}else if(!checkIdCard(idName,idCard)) {
 			errors.rejectValue("idCard", "idCard.invalid");;
 		}
-		
-		
 	}
 	
 	private boolean checkIdCard(String idName,String idCard) {
 		
-		return false;
+		return true;
 	}
 }
