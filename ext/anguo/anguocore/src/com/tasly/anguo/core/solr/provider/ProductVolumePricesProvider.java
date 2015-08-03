@@ -11,7 +11,7 @@
  *
  *  
  */
-package com.tasly.anguo.core.solr.provider;
+package tasly.anguo.core.solr.provider;
 
 import de.hybris.platform.core.model.c2l.CurrencyModel;
 import de.hybris.platform.core.model.product.ProductModel;

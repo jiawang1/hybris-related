@@ -11,7 +11,7 @@
  *
  *  
  */
-package com.tasly.anguo.core.solr.provider;
+package tasly.anguo.core.solr.provider;
 
 import de.hybris.platform.catalog.CatalogVersionService;
 import de.hybris.platform.catalog.model.CatalogVersionModel;
