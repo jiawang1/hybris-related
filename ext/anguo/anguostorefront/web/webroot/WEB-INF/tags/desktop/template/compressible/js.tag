@@ -71,7 +71,8 @@
 <%-- accessible-tabs  --%>
 <script type="text/javascript" src="${commonResourcePath}/js/jquery.accessible-tabs-1.9.7.min.js"></script>
 <script type="text/javascript" src="${commonResourcePath}/js/acc.productDetail.js"></script>
-<script type="text/javascript" src="${commonResourcePath}/js/acc.producttabs.js"></script>	
+<script type="text/javascript" src="${commonResourcePath}/js/acc.producttabs.js"></script>
+<script type="text/javascript" src="${commonResourcePath}/js/acc.selector.js"></script>
 
 
 <%-- Cms Action JavaScript files --%>
