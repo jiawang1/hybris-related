@@ -40,7 +40,7 @@
 
     <bean class="com.tasly.anguo.facades.user.data.EnterpriseInformationData">
         <property name="name" type="String"/>
-        <property name="registerId" type="String"/>
+        <property name="registerId" type="Long"/>
         <property name="address" type="String"/>
         <property name="phone" type="String"/>
         <property name="fax" type="String"/>

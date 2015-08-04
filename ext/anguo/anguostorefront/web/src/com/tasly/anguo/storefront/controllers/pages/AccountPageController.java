@@ -13,6 +13,7 @@
  */
 package com.tasly.anguo.storefront.controllers.pages;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
@@ -39,8 +40,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.tasly.anguo.facades.user.data.ContactData;
 import com.tasly.anguo.storefront.controllers.ControllerConstants;
-import com.tasly.anguo.storefront.forms.AnguoRegisterForm;
 import com.tasly.anguo.storefront.forms.EnterpriseInformationForm;
 
 import de.hybris.platform.acceleratorstorefrontcommons.annotations.RequireHardLogIn;
@@ -290,7 +291,25 @@ public class AccountPageController extends AbstractSearchPageController
 
         model.addAttribute("breadcrumbs", accountBreadcrumbBuilder.getBreadcrumbs("text.account.enterprise.information.update"));
         model.addAttribute("metaRobots", "noindex,nofollow");
-        model.addAttribute(new EnterpriseInformationForm());
+        EnterpriseInformationForm form = new EnterpriseInformationForm();
+        form.setAddress("address");
+        form.setName("companyname");
+        form.setPhone("15311426630");
+        form.setRegisterId("12345566");
+        form.setFax("234555");
+        List<ContactData> contacts = new ArrayList<ContactData>();
+        ContactData contact1 = new ContactData();
+        contact1.setName("name1");
+        contact1.setPosistion("position1");
+        contact1.setContactInfo("123456");
+        ContactData contact2 = new ContactData();
+        contact2.setName("name2");
+        contact2.setPosistion("position2");
+        contact2.setContactInfo("1234567");        
+        contacts.add(contact1);
+        contacts.add(contact2);
+        form.setContacts(contacts);
+        model.addAttribute(form);
         return ControllerConstants.Views.Pages.Account.AccountEnterprisePage;
     }
     
@@ -303,7 +322,8 @@ public class AccountPageController extends AbstractSearchPageController
     {
         model.addAttribute("breadcrumbs", accountBreadcrumbBuilder.getBreadcrumbs("text.account.enterprise.information.update"));
         model.addAttribute("metaRobots", "noindex,nofollow");
-        model.addAttribute(new EnterpriseInformationForm());
+
+        model.addAttribute(form);
         return ControllerConstants.Views.Pages.Account.AccountEnterprisePage;
     }
 	

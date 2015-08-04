@@ -38,9 +38,11 @@ public class AnguoCustomerFacade extends DefaultCustomerFacade
         CustomerModel newCustomer = null;
         if (registerData.getUserType() == UserType.PERSONAL) {
             newCustomer = getModelService().create(PersonalAccountModel.class);
+            newCustomer.setIdentified(true);
         } else if (registerData.getUserType() == UserType.ENTERPRISE) {
             newCustomer = getModelService()
                     .create(EnterpriseAccountModel.class);
+            newCustomer.setIdentified(false);
         }
         newCustomer.setName(registerData.getLogin());
         setUidForRegister(registerData, newCustomer);
@@ -59,14 +61,21 @@ public class AnguoCustomerFacade extends DefaultCustomerFacade
     
     public void updateEnterpriseInformation(
             final EnterpriseInformationData enterpriseInformationData) {
-        validateDataBeforeUpdate(customerData);
-
-        final String name = getCustomerNameStrategy().getName(
-                customerData.getFirstName(), customerData.getLastName());
+//        validateDataBeforeUpdate(customerData);
+//
+//        final String name = getCustomerNameStrategy().getName(
+//                customerData.getFirstName(), customerData.getLastName());
         final CustomerModel customer = getCurrentSessionCustomer();
-        customer.setOriginalUid(customerData.getDisplayUid());
-        getCustomerAccountService().updateProfile(customer,
-                customerData.getTitleCode(), name, customerData.getUid());
+        if (customer instanceof EnterpriseAccountModel) {
+            EnterpriseAccountModel eam = (EnterpriseAccountModel) customer;
+            eam.setCompanyName(enterpriseInformationData.getName());
+            eam.setRegisteredNo(enterpriseInformationData.getRegisterId());
+//            eam.set
+//            enterpriseInformationData.getAddress()
+        }
+//        customer.setOriginalUid(customerData.getDisplayUid());
+//        getCustomerAccountService().updateProfile(customer,
+//                customerData.getTitleCode(), name, customerData.getUid());
     }
 
 }

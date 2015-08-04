@@ -1,0 +1,187 @@
+*{
+    font-family: 微软雅黑;
+    font-size: 15px;
+}
+#product{
+    background-color: #F9F9F9;
+}
+.contenta{
+    width:1000px;
+    background-color: #fff;
+    padding: 20px 20px;
+}
+.imprvBox{
+    width: 100%;
+}
+.oneImprvForm .gender div{
+     display: inline-block;
+     width: 127px;
+}
+.oneImprvForm .gender div label{
+    width: 32px;
+}
+.oneImprvForm div:nth-child(2) input{
+      width: 20px;
+      height: 20px;
+}
+.contenta form{
+      margin:0 auto;
+      border-radius: 5px;
+      background-color: #fff;
+}
+.contenta form div{
+      height: 50px;
+}
+.contenta form .phone input{
+      width: 120px;
+      height: 40px;
+      margin-left: -4px;
+}
+.contenta form div label{
+      width:115px;
+      height:30px;
+      text-align: right;
+      margin-right: 10px;
+      display: inline-block;
+      position: relative;
+}
+.contenta form div label b {
+    color: #F80707;
+}
+.contenta form div input{
+      height: 40px;
+      width: 258px;
+      border-radius: 4px;
+      border-style: groove;
+}
+.tipInfo{
+      text-align: left;
+      padding: 10px 0 20px 40px;
+}
+.contenta button{
+      width:123px;
+      height:40px;
+      color:#fff;
+      border-radius: 1px;
+      border-style: none;
+      background-color: #49A94F;
+      margin-top: 30px;
+      margin-bottom: 20px;
+      font-size: 17px;
+      border-radius: 3px;
+}
+.contenta .btn{
+      background-color: #fff;
+      text-align: center;
+}
+.contenta .btn a{
+      color:#000;
+      padding-left: 15px;
+}
+.contenta .btn a:hover{
+      color:#49A94F;
+}
+.regBox{
+    width: 100%;
+}
+.regBox div span:nth-child(3){
+    font-size: 13px;
+    padding-right: 10px;
+}
+.regBox .tipInfo{
+    text-align: right;
+    margin-right: 50px;
+    font-size: 15px;
+}
+.imprvBox .tipInfo span:nth-child(2){
+    color: #49A94F;
+}
+.regBox div input[type=checkbox]{
+    text-align: left;
+    width: 14px;
+    height: 14px;
+}
+.regDone{
+    width: 461px;
+    /* text-align: center; */
+    margin: 0 auto;
+    margin-left: 325px;
+}
+.yesMark{
+    width: 61px;
+    height: 61px;
+    background-image: url("images/regDone.jpg");
+}
+.startBuyBtn{
+    margin: 15px 0 15px 115px;
+}
+.regDone a{
+    display: block;
+    text-decoration:underline;
+    color: #49A94F;
+    margin-left: 115px;
+}
+.contenta form .contacts div{
+    display: inline-block;
+}
+.contacts .contactInfo div{
+    margin-right: 15px;
+}
+.contenta form .contacts div label{
+    line-height: 38px;
+    background-color: #E7E5E5;
+    font-size: 13px;
+    margin-left: -4px;
+    border: 2px groove #EEEEEE;
+    width: 40px;
+    height: 40px;
+    padding-right: 6px;
+    margin-right: -5px;
+    border-radius: 3px;
+}
+.contenta form .contacts div input{
+    width: 134px;
+}
+.contenta form .contacts a{
+    color:#6B6969;
+    text-decoration: underline;
+}
+.contenta form .contacts a:hover{
+    color:#49A94F;
+}
+form.bankCardForm,form.oneAuthForm,form.oneImprvForm{
+   width: 490px;
+}
+form.oneRegForm,form.firmRegForm,form.firmImprvForm{
+   width: 805px;
+}
+form.resetPwdForm{
+  width: 710px;
+}
+form.resetPwdForm div a{
+  border: 1px solid #9A9A9A;
+  padding: 8px 5px;
+  color: #49A94F;
+  border-radius: 3px;
+}
+form.resetPwdForm a:nth-child(2){
+  display: none;
+}
+form.resetPwdForm div i{
+  color: #F80707;
+  padding: 1px 5px;
+}
+form.firmImprvForm span{
+  padding-left: 10px;
+  font-size: 13px;
+  color: #818181;
+}
+button.confirmBtn{
+    margin-left: -205px;
+}
+button.regBtn{
+    margin-left: -315px;
+}
+button.authenBtn{
+    font-size: 17px;
+}
