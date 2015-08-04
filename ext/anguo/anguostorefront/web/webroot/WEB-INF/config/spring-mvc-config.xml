@@ -262,6 +262,14 @@
 		<property name="parentBreadcrumbLinkPath" value="/my-account"/>
 		<property name="parentBreadcrumbResourceKey" value="header.link.account"/>
 	</bean>
+	
+	<!-- An guo buyer center start -->
+	<bean id="buyerCenterBreadcrumbBuilder" class="de.hybris.platform.acceleratorstorefrontcommons.breadcrumb.impl.DefaultResourceBreadcrumbBuilder" >
+		<property name="i18nService" ref="i18nService" />
+		<property name="parentBreadcrumbLinkPath" value="/anguo-buyercenter"/>
+		<property name="parentBreadcrumbResourceKey" value="header.link.buyercenter"/>
+	</bean>
+	<!-- An guo buyer center end -->
 
 	<bean id="multiStepCheckoutBreadcrumbBuilder" class="de.hybris.platform.acceleratorstorefrontcommons.breadcrumb.impl.DefaultResourceBreadcrumbBuilder" >
 		<property name="i18nService" ref="i18nService" />
