@@ -468,6 +468,7 @@ INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=
 ;NavigationBar;;;navigation
 ;TopContent;;;wide
 ;SideContent;;;narrow
+;RightContentSlot;;;wide
 ;MerchantContact;;CMSParagraphComponent
 ;Footer;;;footer
 ;TopHeaderSlot;;;wide
@@ -596,7 +597,7 @@ INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active
 ;;MerchantContactSlot;MerchantContact;true
 ;;TopHeaderSlot;Top Header;true
 ;;BottomHeaderSlot;Bottom Header;true
-
+;;RightContentSlot;Right Content Slot;true
 
 
 # newsInfo Template    sunyue add it in 2015/04/23
@@ -811,6 +812,7 @@ INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];po
 ;;MerchantContactContent-LoginPage;MerchantContactContent;;MerchantContactSlot;true
 ;;TopHeaderSlot-LoginPage;TopHeaderSlot;;TopHeaderSlot;true
 ;;BottomHeaderSlot-LoginPage;BottomHeaderSlot;;BottomHeaderSlot;true
+;;RightContentSlot-LoginPage;RightContentSlot;;RightContentSlot;true
 
 # Bind Content Slots to Single Step Checkout Summary Page Templates
 INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='SingleStepCheckoutSummaryPageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
