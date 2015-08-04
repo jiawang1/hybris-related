@@ -94,13 +94,12 @@ public class CustomerIdentifyController extends AbstractSearchPageController {
 			return ControllerConstants.Views.Pages.CustomerIdentify.IdCardIdentify;
 		}
 		String userType = sessionService.getAttribute("userType");
-		if(userType.equals(UserType.PERSONAL)) {
+		if(userType.equals(UserType.PERSONAL.toString())) {
 			PersonalAccountModel user = (PersonalAccountModel)userService.getCurrentUser();
 			user.setIdCard(form.getIdCard());
 			user.setIdName(form.getIdName());
 			modelService.save(user);
 		}
-		
 		return ControllerConstants.Views.Pages.CustomerIdentify.AccountNumberIdentify;
 	}
 	
@@ -123,18 +122,24 @@ public class CustomerIdentifyController extends AbstractSearchPageController {
 		}
 		
 		String userType = sessionService.getAttribute("userType");
-		if(userType.equals(UserType.PERSONAL)) {
-			PersonalAccountModel user = (PersonalAccountModel)userService.getCurrentUser();
-			DebitPaymentInfoModel paymentInfo =  modelService.create(DebitPaymentInfoModel.class);
-			paymentInfo.setBank(form.getBank());
-			paymentInfo.setAccountNumber(form.getAccountNumber());
-			paymentInfo.setBaOwner(form.getAccountOwer());
-			Collection<PaymentInfoModel> paymentInfos = new ArrayList<PaymentInfoModel>();
-			paymentInfos.add(paymentInfo);
-			user.setPaymentInfos(paymentInfos);
-			modelService.save(user);
+		if(userType.equals(UserType.PERSONAL.toString())) {
+			setPaymentInfo(form);
 		}
+		//TODO
 		return ControllerConstants.Views.Pages.CustomerIdentify.AccountNumberIdentify;
+	}
+
+	private void setPaymentInfo(final PersonalIdentifyForm form) {
+		PersonalAccountModel user = (PersonalAccountModel)userService.getCurrentUser();
+		DebitPaymentInfoModel paymentInfo =  modelService.create(DebitPaymentInfoModel.class);
+		paymentInfo.setBank(form.getBank());
+		paymentInfo.setAccountNumber(form.getAccountNumber());
+		paymentInfo.setBaOwner(form.getAccountOwer());
+		Collection<PaymentInfoModel> paymentInfos = new ArrayList<PaymentInfoModel>();
+		paymentInfos.add(paymentInfo);
+		user.setPaymentInfos(paymentInfos);
+		user.setIdentified(true);
+		modelService.save(user);
 	}
 	
 	/**
