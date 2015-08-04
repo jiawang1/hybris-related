@@ -73,7 +73,7 @@
 		
 		<!-- enumtype for product end -->
 		
-		
+		<!-- enumtype for anguostore start -->
 		<!-- add by Yang for AM-18 start -->
 		<enumtype generate="true" code="StoreApproveStatus" autocreate="true" dynamic="true">
 			<value code="CREATE_WAIT"/>
@@ -84,7 +84,14 @@
 			<value code="MODIFY_REJECT"/>
 		</enumtype>
 		<!-- add by Yang for AM-18 end -->
-		
+		<enumtype generate="true" code="StoreMediaSubFolder" autocreate="true" dynamic="true">
+			<value code="PRODUCT"/>
+			<value code="SOURCE"/>
+			<value code="QUALITY"/>
+			<value code="DESCRIPTION"/>
+			<value code="LOGO"/>
+		</enumtype>
+		<!-- enumtype for anguostore end -->
 	</enumtypes>
 
 	<relations>
