@@ -28,7 +28,6 @@
 				<img width="5" height="6" alt="${loginrequiredText}" title="${loginrequiredText}" src="${commonResourcePath}/images/mandatory.gif">
 			</span>
 		</c:if>
-		<span class="skip"><form:errors path="${path}"/></span>
 	</label>
 		
 	<div class="controls">

@@ -91,6 +91,12 @@ public interface ControllerConstants
 				String AccountPaymentInfoPage = "pages/account/accountPaymentInfoPage";
 				String AccountRegisterPage = "pages/account/accountRegisterPage";
 			}
+			
+			interface CustomerIdentify 
+			{
+				String IdCardIdentify = "pages/customerIdentify/idCardIdentify";
+				String AccountNumberIdentify = "pages/customerIdentify/accountNumberIdentify";
+			}
 
 			interface Checkout
 			{

@@ -48,7 +48,7 @@
       <ul>
        <li><a href="#"><spring:theme code="ango.top.buyerscenter"/></a></li>
        <li><a href="${contextPath}/anguo-storemanagerment/anguoStoreapplypage"><spring:theme code="ango.top.sellercenter"/></a></li>
-       <li><a href="#"><spring:theme code="ango.top.accountmanagement"/></a></li>
+       <li><a href="${contextPath}/my-account"><spring:theme code="ango.top.accountmanagement"/></a></li>
        <li><cms:pageSlot position="MiniCart" var="cart">
 				<cms:component component="${cart}" class="miniCart" />
 			</cms:pageSlot></li>
