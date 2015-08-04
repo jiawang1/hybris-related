@@ -25,18 +25,18 @@
 	
 	
 	<div class="span-24">
-		<cms:pageSlot position="SideContent" var="feature" element="div" class="span-4">
+<%-- 		<cms:pageSlot position="SideContent" var="feature" element="div" class="span-4">
 			<cms:component component="${feature}"/>
-		</cms:pageSlot>
+		</cms:pageSlot> --%>
 
-
-	
-
-		<div class="span-20 last">
+		<div class="span-12">
 			<c:url value="/j_spring_security_check" var="loginActionUrl" />
 			<user:login actionNameKey="login.login" action="${loginActionUrl}"/>
 		</div>
-
+		
+		<cms:pageSlot position="RightContentSlot" var="feature" element="div" class="span-12 last">
+			<cms:component component="${feature}"/>
+		</cms:pageSlot>		
 	</div>
-
+    <div style="clear:both"></div>
 </template:page>
