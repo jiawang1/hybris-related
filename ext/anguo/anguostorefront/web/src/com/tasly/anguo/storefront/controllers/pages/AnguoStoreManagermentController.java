@@ -81,6 +81,9 @@ public class AnguoStoreManagermentController extends AbstractSearchPageControlle
 	
 	private static final String REDIRECT_SHOW_ANGUOSTORE_MANAGE = REDIRECT_PREFIX + "/anguo-storemanagerment/show-anguostore-manage";
 
+	private static final String FORWARD_SHOW_ANGUOSTORE_MANAGE = FORWARD_PREFIX + "/anguo-storemanagerment/show-anguostore-manage";
+
+
 	@Resource(name = "anguoStoreManagermentFacade")
 	private AnguoStoreManagermentFacade anguoStoreManagermentFacade;
 
@@ -148,9 +151,9 @@ public class AnguoStoreManagermentController extends AbstractSearchPageControlle
 		if (bindingResult.hasErrors())
 		{
 			GlobalMessages.addErrorMessage(model, "form.global.error");
-			return "pages/store/anguoStoreApplyPage";
+			return FORWARD_SHOW_ANGUOSTORE_MANAGE;
 		}
-
+		
 		BeanUtils.copyProperties(anguoStoreApplyForm, anguoStoreData);		
 		
 		if (anguoTempStore != null) {
@@ -304,7 +307,7 @@ public class AnguoStoreManagermentController extends AbstractSearchPageControlle
 	 * @throws InvocationTargetException 
 	 * @throws IllegalAccessException 
 	 */
-	@RequestMapping(value = "/show-anguostore-manage", method = RequestMethod.GET)
+	@RequestMapping(value = "/show-anguostore-manage")
 	@RequireHardLogIn
 	public String showStoreInfoManage(final Model model) throws IllegalAccessException, InvocationTargetException
 	{
@@ -388,8 +391,14 @@ public class AnguoStoreManagermentController extends AbstractSearchPageControlle
 		//Add common address data
 		model.addAttribute("countries", getCountries());
 		model.addAttribute("regions", getI18NFacade().getRegionsForCountryIso("CN"));
-		model.addAttribute("cities", getCityFacade().getCitiesByRegionCode(storeApplyForm.getRegionIso()));
-		model.addAttribute("cityDistricts", getDistrictFacade().getDistrictsByCityCode(storeApplyForm.getCityCode()));
+		
+		if (storeApplyForm.getRegionIso() != null && !(storeApplyForm.getRegionIso().isEmpty())) {
+			model.addAttribute("cities", getCityFacade().getCitiesByRegionCode(storeApplyForm.getRegionIso()));
+		}
+		
+		if (storeApplyForm.getCityCode() != null && !(storeApplyForm.getCityCode().isEmpty())) {
+			model.addAttribute("cityDistricts", getDistrictFacade().getDistrictsByCityCode(storeApplyForm.getCityCode()));
+		}
 		
 		return "pages/store/anguoStoreApplyPage";
 	}		
