@@ -153,7 +153,6 @@ height:20px;
 	 <div id="anguoStoreDiv" class="myAddEdit2"> 
 	  <form:form method="POST" class="anguoStoreApplyForm" commandName="anguoStoreApplyForm" action="saveStore" enctype="multipart/form-data">
 	   <input type="hidden" id="CSRFToken"/>
-	   <input type="hidden" id="approveStatus" value="${anguoStoreApplyForm.approveStatus}"/>
 	   <input type="hidden" id="approveStatus" value="${anguoStoreApplyForm.approveStatus}"/> 
 	   <input type="hidden" id="fieldsNeedApprove" value="${anguoStoreApplyForm.fieldsNeedApprove}"/> 
 	  <%-- <div class="required right"><spring:theme code="form.required"/></div>
