@@ -34,7 +34,7 @@ height:20px;
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>店铺信息</title>
 <compressible:js/>
 
 <common:globalMessages/>
@@ -42,6 +42,7 @@ height:20px;
 	<c:url value="/anguo-storemanagerment/select-address-location?cmd=provinceselected&url=${formActionURL}" var="encodedUrlProvinceSelector" />
 	<c:url value="/anguo-storemanagerment/select-address-location?cmd=cityselected&url=${formActionURL}" var="encodedUrlCitySelector" />
 
+<script type="text/javascript" src="${commonResourcePath}/js/anguostore.js"></script>
 <script type="text/javascript">
 			$(function(){
 				
