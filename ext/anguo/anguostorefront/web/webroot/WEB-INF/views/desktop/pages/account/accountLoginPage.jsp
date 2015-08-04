@@ -25,6 +25,7 @@
 	
 	
 	<div class="span-24">
+	<!-- below commented component may be used in future -->
 <%-- 		<cms:pageSlot position="SideContent" var="feature" element="div" class="span-4">
 			<cms:component component="${feature}"/>
 		</cms:pageSlot> --%>
