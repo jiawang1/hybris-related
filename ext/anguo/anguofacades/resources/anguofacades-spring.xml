@@ -275,4 +275,18 @@
 	</bean>
 	<!-- add by Yang for AM-18 end -->
 	
+	<!-- add by Yang for AM-58 start -->
+	<alias name="defaultAnguoOrderHistoryPopulator" alias="anguoOrderHistoryPopulator"/>
+	<bean id="defaultAnguoOrderHistoryPopulator" class="com.tasly.anguo.facades.populators.AnguoOrderHistoryPopulator">
+		<property name="orderEntryConverter" ref="orderEntryConverter"/>
+		<property name="enumerationService" ref="enumerationService"/>
+		<property name="priceDataFactory" ref="priceDataFactory"/>
+	</bean>
+	
+	<bean parent="modifyPopulatorList">
+		<property name="list" ref="orderHistoryConverter"/>
+		<property name="add" ref="anguoOrderHistoryPopulator"/>
+	</bean>
+	<!-- add by Yang for AM-58 end -->
+	
 </beans>

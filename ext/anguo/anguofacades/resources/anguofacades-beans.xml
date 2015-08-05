@@ -101,4 +101,9 @@
 	</bean>
 	<!-- add by Yang for AM-18 end -->
 	
+	<!-- add by Yang for AM-58 start -->
+	<bean class="de.hybris.platform.commercefacades.order.data.OrderHistoryData">
+		<property name="entries" type="java.util.List&lt;de.hybris.platform.commercefacades.order.data.OrderEntryData>"/>
+	</bean>
+	<!-- add by Yang for AM-58 end -->
 </beans>
