@@ -10,6 +10,7 @@ import org.springframework.util.Assert;
 import com.tasly.anguo.core.enums.UserType;
 import com.tasly.anguo.core.model.EnterpriseAccountModel;
 import com.tasly.anguo.core.model.PersonalAccountModel;
+import com.tasly.anguo.facades.populators.EnterpriseInformationData2ModelPopulator;
 import com.tasly.anguo.facades.user.data.EnterpriseInformationData;
 
 import de.hybris.platform.commercefacades.customer.impl.DefaultCustomerFacade;
@@ -30,7 +31,6 @@ public class AnguoCustomerFacade extends DefaultCustomerFacade
     @Override
     public void register(final RegisterData registerData)
             throws DuplicateUidException
-
     {
         validateParameterNotNullStandardMessage("registerData", registerData);
         Assert.hasText(registerData.getLogin(),
@@ -68,10 +68,10 @@ public class AnguoCustomerFacade extends DefaultCustomerFacade
         final CustomerModel customer = getCurrentSessionCustomer();
         if (customer instanceof EnterpriseAccountModel) {
             EnterpriseAccountModel eam = (EnterpriseAccountModel) customer;
-            eam.setCompanyName(enterpriseInformationData.getName());
-            eam.setRegisteredNo(enterpriseInformationData.getRegisterId());
-//            eam.set
-//            enterpriseInformationData.getAddress()
+            EnterpriseInformationData2ModelPopulator populator = new EnterpriseInformationData2ModelPopulator();
+            populator.populate(enterpriseInformationData, eam);
+//            getCustomerAccountService().updateProfile(customer,
+//                  customerData.getTitleCode(), name, customerData.getUid());
         }
 //        customer.setOriginalUid(customerData.getDisplayUid());
 //        getCustomerAccountService().updateProfile(customer,

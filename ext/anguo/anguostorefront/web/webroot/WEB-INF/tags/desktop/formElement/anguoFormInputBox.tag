@@ -14,7 +14,7 @@
 <%@ taglib prefix="template" tagdir="/WEB-INF/tags/desktop/template" %>
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags" %>
  
-<template:errorSpanField path="${path}">
+<template:anguoErrorSpanField path="${path}">
 	<ycommerce:testId code="LoginPage_Item_${idKey}">
 
 	<label class="control-label ${labelCSS}" for="${idKey}">
@@ -28,4 +28,4 @@
         <spring:theme code="${desc}"/></span>
     </c:if>
 	</ycommerce:testId>
-</template:errorSpanField>
+</template:anguoErrorSpanField>

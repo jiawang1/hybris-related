@@ -40,9 +40,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.tasly.anguo.facades.customer.impl.AnguoCustomerFacade;
 import com.tasly.anguo.facades.user.data.ContactData;
+import com.tasly.anguo.facades.user.data.EnterpriseInformationData;
 import com.tasly.anguo.storefront.controllers.ControllerConstants;
 import com.tasly.anguo.storefront.forms.EnterpriseInformationForm;
+import com.tasly.anguo.storefront.forms.validation.AnguoEnterpriseInformationValidator;
 
 import de.hybris.platform.acceleratorstorefrontcommons.annotations.RequireHardLogIn;
 import de.hybris.platform.acceleratorstorefrontcommons.breadcrumb.Breadcrumb;
@@ -61,7 +64,6 @@ import de.hybris.platform.acceleratorstorefrontcommons.forms.verification.Addres
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.address.AddressVerificationFacade;
 import de.hybris.platform.commercefacades.address.data.AddressVerificationResult;
-import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.i18n.I18NFacade;
 import de.hybris.platform.commercefacades.order.CheckoutFacade;
 import de.hybris.platform.commercefacades.order.OrderFacade;
@@ -128,7 +130,7 @@ public class AccountPageController extends AbstractSearchPageController
 	protected UserFacade userFacade;
 
 	@Resource(name = "customerFacade")
-	protected CustomerFacade customerFacade;
+	protected AnguoCustomerFacade customerFacade;
 
 	@Resource(name = "accountBreadcrumbBuilder")
 	private ResourceBreadcrumbBuilder accountBreadcrumbBuilder;
@@ -153,8 +155,16 @@ public class AccountPageController extends AbstractSearchPageController
 
 	@Resource(name = "addressVerificationResultHandler")
 	private AddressVerificationResultHandler addressVerificationResultHandler;
+	
+    @Resource(name = "anguoEnterpriseInformationValidator")
+    private AnguoEnterpriseInformationValidator anguoEnterpriseInformationValidator;
+	
 
-	protected PasswordValidator getPasswordValidator()
+	public AnguoEnterpriseInformationValidator getAnguoEnterpriseInformationValidator() {
+        return anguoEnterpriseInformationValidator;
+    }
+
+    protected PasswordValidator getPasswordValidator()
 	{
 		return passwordValidator;
 	}
@@ -300,11 +310,11 @@ public class AccountPageController extends AbstractSearchPageController
         List<ContactData> contacts = new ArrayList<ContactData>();
         ContactData contact1 = new ContactData();
         contact1.setName("name1");
-        contact1.setPosistion("position1");
+        contact1.setPosition("position1");
         contact1.setContactInfo("123456");
         ContactData contact2 = new ContactData();
         contact2.setName("name2");
-        contact2.setPosistion("position2");
+        contact2.setPosition("position2");
         contact2.setContactInfo("1234567");        
         contacts.add(contact1);
         contacts.add(contact2);
@@ -320,6 +330,21 @@ public class AccountPageController extends AbstractSearchPageController
             final BindingResult bindingResult, final Model model, final HttpServletRequest request,
             final HttpServletResponse response, final RedirectAttributes redirectModel) throws CMSItemNotFoundException
     {
+        anguoEnterpriseInformationValidator.validate(form, bindingResult);
+        if (bindingResult.hasErrors())
+        {
+            model.addAttribute(form);
+            GlobalMessages.addErrorMessage(model, "form.global.error");
+            return ControllerConstants.Views.Pages.Account.AccountEnterprisePage;
+        }
+        EnterpriseInformationData eid = new EnterpriseInformationData();
+        eid.setName(form.getName());
+        eid.setRegisterId(Long.parseLong(form.getRegisterId()));
+        eid.setAddress(form.getAddress());
+        eid.setPhone(form.getPhone());
+        eid.setFax(form.getFax());
+        eid.setContacts(form.getContacts());
+        customerFacade.updateEnterpriseInformation(eid);
         model.addAttribute("breadcrumbs", accountBreadcrumbBuilder.getBreadcrumbs("text.account.enterprise.information.update"));
         model.addAttribute("metaRobots", "noindex,nofollow");
 

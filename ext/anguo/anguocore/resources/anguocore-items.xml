@@ -323,9 +323,18 @@
 			<itemtype code="EnterpriseAccount" extends="Customer">
 				<description>EnterpriseUser extend from customer used for Enterprise .</description>
 				<attributes>
+                   <attribute qualifier="enterpriseAddress" type="java.lang.String">
+                        <persistence type="property" />
+                    </attribute>
 					<attribute qualifier="registeredNo" type="java.lang.Long">
 						<persistence type="property" />
 					</attribute>
+                   <attribute qualifier="enterprisePhone" type="java.lang.String">
+                        <persistence type="property" />
+                    </attribute>
+                    <attribute qualifier="enterpriseFax" type="java.lang.String">
+                        <persistence type="property" />
+                    </attribute>
 				</attributes>
 			</itemtype>
 			
