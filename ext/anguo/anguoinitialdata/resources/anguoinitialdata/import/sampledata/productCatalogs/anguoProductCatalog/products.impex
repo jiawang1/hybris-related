@@ -8,7 +8,7 @@ $catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[defa
 $supercategories=supercategories(code, $catalogVersion)
 $approved=approvalstatus(code)[default='approved']
 
-$productStatus=productStatus(code)[default='ONSALE']
+$productStatus=productStatus(code)[default='ONLINE']
 $packageUnit=packageUnit(code)[default='PACKAGE']
 
 # Insert Products
