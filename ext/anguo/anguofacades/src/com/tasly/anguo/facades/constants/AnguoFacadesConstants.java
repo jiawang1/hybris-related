@@ -20,8 +20,8 @@ package com.tasly.anguo.facades.constants;
 public class AnguoFacadesConstants extends GeneratedAnguoFacadesConstants
 {
 	public static final String EXTENSIONNAME = "anguofacades";
-	public static final String ACTIVECATALOG = "anguoProductCatalog";
-	public static final String ACTIVECATALOGVERSION = "Online";
+	public static final String ACTIVEPRODUCTCATALOG = "anguoProductCatalog";
+	public static final String ACTIVEPRODUCTCATALOGVERSION = "Online";
 	public static final String DEFAULTCATEGORYNAME = "unknown";
 	public static final String ROOTCATEGORY ="药材";
 	

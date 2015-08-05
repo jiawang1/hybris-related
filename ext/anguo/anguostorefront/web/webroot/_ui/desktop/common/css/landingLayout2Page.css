@@ -113,6 +113,7 @@
 	margin: 0;
 }
 
+
 #homepage_slider.stripViewer ul {
 	margin: 0;
 	padding: 0;
@@ -123,6 +124,7 @@
 	list-style-type: none;
 }
 
+.stripViewer img { width:490px; height:330px;}
 #homepage_slider.stripViewer ul li {
 	float: left;
 }
@@ -140,11 +142,11 @@
 
 .stripTransmitter {
 	overflow: auto;
-	padding: 0 15px ;
-	width: 438px !important;
-	height:51px;
-	border-bottom:1px dotted #A5A5A5;
-	background-color: #eee;
+    padding: 0 15px;
+    width: 438px !important;
+    height: 30px;
+    margin-top: -32px;
+    position: absolute;
 }
 
 .stripTransmitter ul {
@@ -155,21 +157,29 @@
 }
 
 .stripTransmitter ul li {
-	width: 30px;
+	width: 20px;
 	float: left;
+	border-radius: 10px;
+    background-color: #f1a106;
+    margin-left: 10px;
+    
 }
 
 .stripTransmitter a {
-	line-height: 47px;
+	line-height: 20px;
 	display: block;
 	padding: 0 0 0 0;
 	text-align: center;
 	text-decoration: none;
-	font-size: 1.4em;
+	font-size: 1.2em;
+	color:#fff;
+	font-family: Arial;
 }
 
 .stripTransmitter a:hover,a.current {
 	font-weight: bold;
+	border-radius: 10px;
+    background-color: #0b4f04;
 
 }
 

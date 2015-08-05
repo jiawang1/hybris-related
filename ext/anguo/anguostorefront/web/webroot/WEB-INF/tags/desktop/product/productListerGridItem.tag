@@ -10,9 +10,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="theme" tagdir="/WEB-INF/tags/shared/theme" %>
 <%@ taglib prefix="format" tagdir="/WEB-INF/tags/shared/format" %>
-<%@ taglib prefix="storepickup" tagdir="/WEB-INF/tags/desktop/storepickup" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ taglib prefix="action" tagdir="/WEB-INF/tags/desktop/action" %>
 
 <spring:theme code="text.addToCart" var="addToCartText"/>
 <c:url value="${product.url}" var="productUrl"/>
@@ -23,45 +20,74 @@
 	<div class="productGridItem ${hasPromotion ? 'productGridItemPromotion' : ''}">
 		<a href="${productUrl}" title="${product.name}" class="productMainLink">
 			<div class="thumb">
-				<product:productPrimaryImage product="${product}" format="product"/>
+					<product:productPrimaryImage product="${product}" format="product"/>
 				<c:if test="${not empty product.potentialPromotions and not empty product.potentialPromotions[0].productBanner}">
 					<img class="promo" src="${product.potentialPromotions[0].productBanner.url}" alt="${product.potentialPromotions[0].description}" title="${product.potentialPromotions[0].description}"/>
 				</c:if>
 			</div>
-
+		
 			<div class="priceContainer">
 				<c:set var="buttonType">submit</c:set>
-				<ycommerce:testId code="product_productPrice">
-					<span class="price"><format:price priceData="${product.price}"/></span>
-				</ycommerce:testId>
-			</div>
-
-
+	      		<ycommerce:testId code="product_productPrice">
+	          		<span class="price"><format:price priceData="${product.price}"/></span>
+	      		</ycommerce:testId>
+		     </div>
+		
 			<div class="details">
 				<ycommerce:testId code="product_productName">${product.name}</ycommerce:testId>
 			</div>
-
-			<c:choose>
-				<c:when test="${product.stock.stockLevelStatus.code eq 'outOfStock' }">
-					<c:set var="buttonType">button</c:set>
-					<spring:theme code="text.addToCart.outOfStock" var="addToCartText"/>
-					<span class='listProductLowStock listProductOutOfStock mlist-stock'>${addToCartText}</span>
-				</c:when>
-			</c:choose>
-		</a>
-
-		<div class="cart clearfix">
+			
+			
+			
+		
+  		<c:choose>
+        	<c:when test="${product.stock.stockLevelStatus.code eq 'outOfStock' }">
+            	<c:set var="buttonType">button</c:set>
+              	<spring:theme code="text.addToCart.outOfStock" var="addToCartText"/>
+              	<span class='listProductLowStock listProductOutOfStock mlist-stock'>${addToCartText}</span>
+          </c:when>
+      </c:choose>
+		
+	</a>
+		
+		
+	<div class="cart clearfix">
+	
+	  <form id="addToCartForm${product.code}" action="<c:url value="/cart/add" />" method="post" class="add_to_cart_form clear_fix">
+			<input type="hidden" name="productCodePost" value="${product.code}"/>
 			<c:if test="${not empty product.averageRating}">
-				<product:productStars rating="${product.averageRating}"/>
+				<product:productStars rating="${product.averageRating}" />
 			</c:if>
+			<ycommerce:testId code="product_addProduct_button">
+				<button type="${buttonType}" class="addToCartButton <c:if test="${product.stock.stockLevelStatus.code eq 'outOfStock' }">out-of-stock</c:if>" <c:if test="${product.stock.stockLevelStatus.code eq 'outOfStock' }"> disabled="disabled" aria-disabled="true"</c:if>>${addToCartText}</button>
+			</ycommerce:testId>
+		</form>
+	
+	
+         
 
-			<c:set var="product" value="${product}" scope="request"/>
-			<c:set var="addToCartText" value="${addToCartText}" scope="request"/>
-			<c:set var="addToCartUrl" value="${addToCartUrl}" scope="request"/>
-			<div id="actions-container-for-${component.uid}" class="listAddPickupContainer clearfix">
-				<action:actions element="div" parentComponent="${component}"/>
-			</div>
-		</div>
 
+
+
+	</div>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 	</div>
 </ycommerce:testId>

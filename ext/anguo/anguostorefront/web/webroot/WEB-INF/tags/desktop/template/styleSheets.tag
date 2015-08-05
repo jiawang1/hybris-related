@@ -23,4 +23,13 @@
 	@IMPORT url("${commonResourcePath}/blueprint/print.css");
 </style>
 
+
+<%-- our site css --%>
+<!--[if IE 8]> <link type="text/css" rel="stylesheet" href="${commonResourcePath}/css/ie_8.css" media="screen, projection" /> <![endif]-->
+<!--[if IE 7]> <link type="text/css" rel="stylesheet" href="${commonResourcePath}/css/ie_7.css" media="screen, projection" /> <![endif]-->
+
+<%-- theme specific css --%>
+<!--[if IE 8]> <link type="text/css" rel="stylesheet" href="${themeResourcePath}/css/ie_8.css" media="screen, projection" /> <![endif]-->
+<!--[if IE 7]> <link type="text/css" rel="stylesheet" href="${themeResourcePath}/css/ie_7.css" media="screen, projection" /> <![endif]-->
+
 <cms:previewCSS cmsPageRequestContextData="${cmsPageRequestContextData}" />

@@ -3,15 +3,25 @@
 ********************************************************************/
 
 .breadcrumb{
-	background:#f6f6f6;
-	margin:0 0 20px 0;
+    height:37px;
+    line-height:37px;
+	margin:0
 }
-
 .breadcrumb ul{
 	padding:12px;
 	line-height:0.833em;
 }
-
+.breadcrumb i{
+    background: url('../images/szbcBg.png');
+    background-position: -16px 0;
+    display: inline-block;
+    float:left;
+    margin-right:10px;
+    margin-top:8px;
+    width:17px;
+    height:17px;
+    overflow: hidden
+}
 .breadcrumb ul li{
 	float:left;
 }
@@ -21,14 +31,12 @@
 	font-size: 1em;
 	line-height: 0.9em;
 }
-
 .breadcrumb ul li,
 .breadcrumb ul li a{
-	color:#919191;
-	font-size:0.9em;
+	color:#666;
+	font-size:12px;
 	text-transform:uppercase;
 }
-
 .breadcrumb ul li a.last{
 	color:#ed5f69;
 }

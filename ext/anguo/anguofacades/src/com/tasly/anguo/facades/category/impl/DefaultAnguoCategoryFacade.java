@@ -5,10 +5,12 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
+import org.springframework.cglib.core.Local;
 
 import com.tasly.anguo.core.category.AnguoCategoryService;
 import com.tasly.anguo.core.model.CategoryAliasModel;
@@ -23,6 +25,9 @@ import com.tasly.anguo.facades.product.data.MgmtCategoryData;
 
 import de.hybris.platform.catalog.CatalogVersionService;
 import de.hybris.platform.category.model.CategoryModel;
+import de.hybris.platform.core.model.c2l.CountryModel;
+import de.hybris.platform.jalo.c2l.C2LManager;
+import de.hybris.platform.jalo.c2l.Country;
 import de.hybris.platform.servicelayer.exceptions.ModelRemovalException;
 import de.hybris.platform.servicelayer.exceptions.UnknownIdentifierException;
 import de.hybris.platform.servicelayer.interceptor.InterceptorException;
@@ -129,10 +134,10 @@ public class DefaultAnguoCategoryFacade implements AnguoCategoryFacade {
 			CategoryModel parentCategory = categoryService.getCategoryForCode(superCategoryCode);
 			CategoryModel category = modelService.create(CategoryModel.class);
 			//TODO: need to refact this once catalog version is loaded by session
-			category.setCatalogVersion(catalogVersionService.getCatalogVersion(AnguoFacadesConstants.ACTIVECATALOG,AnguoFacadesConstants.ACTIVECATALOGVERSION));
+			category.setCatalogVersion(catalogVersionService.getCatalogVersion(AnguoFacadesConstants.ACTIVEPRODUCTCATALOG,AnguoFacadesConstants.ACTIVEPRODUCTCATALOGVERSION));
 			category.setCode((String)categoryCodeGenerator.generate());
 			category.setSupercategories(Arrays.asList(parentCategory));
-			category.setName(AnguoFacadesConstants.DEFAULTCATEGORYNAME);
+			category.setName(AnguoFacadesConstants.DEFAULTCATEGORYNAME,Locale.CHINESE);
 			if(CollectionUtils.isNotEmpty(parentCategory.getSupercategories()))
 				category.setLevel(3);
 			else

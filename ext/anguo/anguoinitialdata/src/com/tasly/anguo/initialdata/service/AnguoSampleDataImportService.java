@@ -1,14 +1,13 @@
 package com.tasly.anguo.initialdata.service;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-
 import de.hybris.platform.commerceservices.dataimport.impl.SampleDataImportService;
 import de.hybris.platform.commerceservices.setup.AbstractSystemSetup;
 import de.hybris.platform.commerceservices.setup.data.ImportData;
 import de.hybris.platform.core.initialization.SystemSetupContext;
 import de.hybris.platform.validation.services.ValidationService;
+
+import java.util.Iterator;
+import java.util.List;
 
 public class AnguoSampleDataImportService extends SampleDataImportService {
 	
@@ -31,12 +30,32 @@ public class AnguoSampleDataImportService extends SampleDataImportService {
 			  this.importCommonData(extensionName);
 			  
 			  importProductCatalog(extensionName, data.getProductCatalogName());
+			  /* AM-206 Bo Lou add content catalog into initializing and synchronize from stage to online start */
+			  List<String> contentCatalogList = data.getContentCatalogNames();
+			  for(int i=0; i<contentCatalogList.size();i++){
+				  this.importContentCatalog(extensionName, contentCatalogList.get(i));
+			  }
 			  
-			  List<String> storeNameList = data.getStoreNames();
-			  
+			  for (Iterator localIterator = data.getContentCatalogNames().iterator(); localIterator.hasNext();) 
+			  {
+				  String contentCatalogName = (String) localIterator.next();
+
+					systemSetup.logInfo(context, String.format(
+							"Synchronizing content catalog for [%s]",
+							new Object[] { contentCatalogName }));
+					synchronizeContentCatalog(systemSetup, context,
+							(String) contentCatalogName, true);
+			  }
+			  /* AM-206 Bo Lou add content catalog into initializing and synchronize from stage to online end */
+			  List<String> storeNameList = data.getStoreNames();			  
 			  for(int i = 0; i < storeNameList.size();i++)
 			      this.importStore(extensionName, storeNameList.get(i), data.getProductCatalogName()); 
-			  
+			  /* AM-255 wangqingxiang@tasly.com add solr and job into initializing */
+                for(int i = 0; i < storeNameList.size();i++) {
+                    this.importSolrIndex(extensionName, storeNameList.get(i));
+                    this.importJobs(extensionName, storeNameList.get(i));
+                }
+              /*end */
 		    }
 
 			ValidationService validation = (ValidationService) getBeanForName("validationService");
