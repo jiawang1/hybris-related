@@ -128,7 +128,7 @@ INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;url
 
 # An guo CMS Link Components - Buyer Center
 INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;&linkRef;&componentRef;target(code)[default='sameWindow']
-;;BuyerCenterOrderManagementLink;Buyer Center Order Management Link;/buyer-center/ordermanage;BuyerCenterOrderManagementLink;BuyerCenterOrderManagementLink;;;;
+;;BuyerCenterOrderManagementLink;Buyer Center Order Management Link;/anguo-buyercenter/ordermanage;BuyerCenterOrderManagementLink;BuyerCenterOrderManagementLink;;;;
 
 
 # CMS User Group Restrictions
@@ -554,6 +554,16 @@ INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;c
 
 INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef);;;
 ;;SideContent-BuyerCenter;Side Content Slot for Buyer Center Homepage;true;BuyerCenterLeftNavigationComponent;;;
+
+###### Buyer Center Order Manage Page #######
+
+INSERT_UPDATE JspIncludeComponent;$contentCV[unique=true];uid[unique=true];name;page;actions(uid,$contentCV);&componentRef
+;;BuyerCenterOrderManagementComponent;Buyer Center Order Management Component;buyercenterOrderHistoryPage.jsp;;BuyerCenterOrderManagementComponent
+
+# ContentSlot
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef);;;
+;;SideContent-buyerCenterOM;Side Content Slot for Buyer Center Order Management;true;BuyerCenterLeftNavigationComponent;;;
+;;BodyContent-buyerCenterOM;Body Content Slot for Buyer Center Order Management;true;BuyerCenterOrderManagementComponent;;;
 
 ################################################################
 
@@ -1398,6 +1408,7 @@ INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];positi
 INSERT_UPDATE JspIncludeComponent;$contentCV[unique=true];uid[unique=true];name;page;actions(uid,$contentCV);&componentRef
 ;;NewCustomerLoginComponent;New Customer Login Component;accountNewCustomerLogin.jsp;;NewCustomerLoginComponent
 
+
 ### Customer Login
 INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef);;;
 ;;RightContentSlot-login;Right Content Slot for Customer Login;true;NewCustomerLoginComponent;;;
@@ -1410,5 +1421,10 @@ INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];positi
 # An guo buyer center ContentSlotForPage start
 INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='buyercenter'];contentSlot(uid,$contentCV)[unique=true];;;
 ;;SideContent-BuyerCenter;SideContent;;SideContent-BuyerCenter;;;
+
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='buyercenterordermanage'];contentSlot(uid,$contentCV)[unique=true];;;
+;;SideContent-buyerCenterOM;SideContent;;SideContent-buyerCenterOM;;;
+;;BodyContent-buyerCenterOM;BodyContent;;BodyContent-buyerCenterOM;;;
 # An guo buyer center ContentSlotForPage end
 

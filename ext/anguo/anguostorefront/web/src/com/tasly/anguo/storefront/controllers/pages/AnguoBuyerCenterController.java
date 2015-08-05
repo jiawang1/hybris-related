@@ -38,6 +38,15 @@ import de.hybris.platform.commercefacades.product.data.ProductData;
 import de.hybris.platform.commerceservices.search.pagedata.PageableData;
 import de.hybris.platform.commerceservices.search.pagedata.SearchPageData;
 
+import de.hybris.platform.acceleratorstorefrontcommons.annotations.RequireHardLogIn;
+import de.hybris.platform.acceleratorstorefrontcommons.breadcrumb.ResourceBreadcrumbBuilder;
+import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractSearchPageController;
+import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
+import de.hybris.platform.commercefacades.customer.CustomerFacade;
+import de.hybris.platform.commercefacades.user.UserFacade;
+import de.hybris.platform.commercefacades.user.data.CustomerData;
+import de.hybris.platform.commercefacades.user.data.TitleData;
+
 
 /**
  * Controller for home page
@@ -50,9 +59,16 @@ public class AnguoBuyerCenterController extends AbstractSearchPageController
 
 	// CMS Pages
 	private static final String BUYERCENTER_CMS_PAGE = "buyercenter";
+	private static final String ORDERMANAGE_CMS_PAGE = "buyercenterordermanage";
 
 	private static final Logger LOG = Logger.getLogger(AnguoBuyerCenterController.class);
 
+	@Resource(name = "userFacade")
+	protected UserFacade userFacade;
+	
+	@Resource(name = "customerFacade")
+	protected CustomerFacade customerFacade;
+	
 	@Resource(name = "buyerCenterBreadcrumbBuilder")
 	private ResourceBreadcrumbBuilder buyerCenterBreadcrumbBuilder;
 
@@ -71,6 +87,43 @@ public class AnguoBuyerCenterController extends AbstractSearchPageController
 		model.addAttribute("breadcrumbs", buyerCenterBreadcrumbBuilder.getBreadcrumbs(null));
 		model.addAttribute("metaRobots", "noindex,nofollow");
 		return getViewForPage(model);
+	}
+	
+	@RequestMapping(value = "/ordermanage", method = RequestMethod.GET)
+	@RequireHardLogIn
+	public String profile(final Model model) throws CMSItemNotFoundException
+	{
+		LOG.info("进入买家中心订单管理页面。");
+		final List<TitleData> titles = userFacade.getTitles();
+
+		final CustomerData customerData = customerFacade.getCurrentCustomer();
+		if (customerData.getTitleCode() != null)
+		{
+			model.addAttribute("title", findTitleForCode(titles, customerData.getTitleCode()));
+		}
+
+		model.addAttribute("customerData", customerData);
+
+		storeCmsPageInModel(model, getContentPageForLabelOrId(ORDERMANAGE_CMS_PAGE));
+		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(ORDERMANAGE_CMS_PAGE));
+		model.addAttribute("breadcrumbs", buyerCenterBreadcrumbBuilder.getBreadcrumbs("text.buyercenter.ordermanage"));
+		model.addAttribute("metaRobots", "noindex,nofollow");
+		return getViewForPage(model);
+	}
+	
+	protected TitleData findTitleForCode(final List<TitleData> titles, final String code)
+	{
+		if (code != null && !code.isEmpty() && titles != null && !titles.isEmpty())
+		{
+			for (final TitleData title : titles)
+			{
+				if (code.equals(title.getCode()))
+				{
+					return title;
+				}
+			}
+		}
+		return null;
 	}
 
 	@RequestMapping(value = "/orders", method = RequestMethod.GET)
