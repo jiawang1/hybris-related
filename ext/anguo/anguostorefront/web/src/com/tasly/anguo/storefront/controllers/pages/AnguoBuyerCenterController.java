@@ -13,69 +13,25 @@
  */
 package com.tasly.anguo.storefront.controllers.pages;
 
-import de.hybris.platform.acceleratorstorefrontcommons.annotations.RequireHardLogIn;
-import de.hybris.platform.acceleratorstorefrontcommons.breadcrumb.Breadcrumb;
-import de.hybris.platform.acceleratorstorefrontcommons.breadcrumb.ResourceBreadcrumbBuilder;
-import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractSearchPageController;
-import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
-import de.hybris.platform.acceleratorstorefrontcommons.forms.AddressForm;
-import de.hybris.platform.acceleratorstorefrontcommons.forms.UpdateEmailForm;
-import de.hybris.platform.acceleratorstorefrontcommons.forms.UpdatePasswordForm;
-import de.hybris.platform.acceleratorstorefrontcommons.forms.UpdateProfileForm;
-import de.hybris.platform.acceleratorstorefrontcommons.forms.validation.AddressValidator;
-import de.hybris.platform.acceleratorstorefrontcommons.forms.validation.EmailValidator;
-import de.hybris.platform.acceleratorstorefrontcommons.forms.validation.PasswordValidator;
-import de.hybris.platform.acceleratorstorefrontcommons.forms.validation.ProfileValidator;
-import de.hybris.platform.acceleratorstorefrontcommons.forms.verification.AddressVerificationResultHandler;
-import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
-import de.hybris.platform.commercefacades.address.AddressVerificationFacade;
-import de.hybris.platform.commercefacades.address.data.AddressVerificationResult;
-import de.hybris.platform.commercefacades.customer.CustomerFacade;
-import de.hybris.platform.commercefacades.i18n.I18NFacade;
-import de.hybris.platform.commercefacades.order.CheckoutFacade;
-import de.hybris.platform.commercefacades.order.OrderFacade;
-import de.hybris.platform.commercefacades.order.data.CCPaymentInfoData;
-import de.hybris.platform.commercefacades.order.data.OrderData;
-import de.hybris.platform.commercefacades.order.data.OrderHistoryData;
-import de.hybris.platform.commercefacades.user.UserFacade;
-import de.hybris.platform.commercefacades.user.data.AddressData;
-import de.hybris.platform.commercefacades.user.data.CountryData;
-import de.hybris.platform.commercefacades.user.data.CustomerData;
-import de.hybris.platform.commercefacades.user.data.RegionData;
-import de.hybris.platform.commercefacades.user.data.TitleData;
-import de.hybris.platform.commercefacades.user.exceptions.PasswordMismatchException;
-import de.hybris.platform.commerceservices.address.AddressVerificationDecision;
-import de.hybris.platform.commerceservices.customer.DuplicateUidException;
-import de.hybris.platform.commerceservices.search.pagedata.PageableData;
-import de.hybris.platform.commerceservices.search.pagedata.SearchPageData;
-import de.hybris.platform.servicelayer.exceptions.UnknownIdentifierException;
-import de.hybris.platform.util.Config;
-import com.tasly.anguo.storefront.controllers.ControllerConstants;
-
-import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 
-import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.context.annotation.Scope;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import de.hybris.platform.acceleratorstorefrontcommons.annotations.RequireHardLogIn;
+import de.hybris.platform.acceleratorstorefrontcommons.breadcrumb.ResourceBreadcrumbBuilder;
+import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractSearchPageController;
+import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
+import de.hybris.platform.commercefacades.customer.CustomerFacade;
+import de.hybris.platform.commercefacades.user.UserFacade;
+import de.hybris.platform.commercefacades.user.data.CustomerData;
+import de.hybris.platform.commercefacades.user.data.TitleData;
 
 
 /**
@@ -89,9 +45,16 @@ public class AnguoBuyerCenterController extends AbstractSearchPageController
 
 	// CMS Pages
 	private static final String BUYERCENTER_CMS_PAGE = "buyercenter";
+	private static final String ORDERMANAGE_CMS_PAGE = "buyercenterordermanage";
 
 	private static final Logger LOG = Logger.getLogger(AnguoBuyerCenterController.class);
 
+	@Resource(name = "userFacade")
+	protected UserFacade userFacade;
+	
+	@Resource(name = "customerFacade")
+	protected CustomerFacade customerFacade;
+	
 	@Resource(name = "buyerCenterBreadcrumbBuilder")
 	private ResourceBreadcrumbBuilder buyerCenterBreadcrumbBuilder;
 
@@ -106,6 +69,43 @@ public class AnguoBuyerCenterController extends AbstractSearchPageController
 		model.addAttribute("breadcrumbs", buyerCenterBreadcrumbBuilder.getBreadcrumbs(null));
 		model.addAttribute("metaRobots", "noindex,nofollow");
 		return getViewForPage(model);
+	}
+	
+	@RequestMapping(value = "/ordermanage", method = RequestMethod.GET)
+	@RequireHardLogIn
+	public String profile(final Model model) throws CMSItemNotFoundException
+	{
+		LOG.info("进入买家中心订单管理页面。");
+		final List<TitleData> titles = userFacade.getTitles();
+
+		final CustomerData customerData = customerFacade.getCurrentCustomer();
+		if (customerData.getTitleCode() != null)
+		{
+			model.addAttribute("title", findTitleForCode(titles, customerData.getTitleCode()));
+		}
+
+		model.addAttribute("customerData", customerData);
+
+		storeCmsPageInModel(model, getContentPageForLabelOrId(ORDERMANAGE_CMS_PAGE));
+		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(ORDERMANAGE_CMS_PAGE));
+		model.addAttribute("breadcrumbs", buyerCenterBreadcrumbBuilder.getBreadcrumbs("text.buyercenter.ordermanage"));
+		model.addAttribute("metaRobots", "noindex,nofollow");
+		return getViewForPage(model);
+	}
+	
+	protected TitleData findTitleForCode(final List<TitleData> titles, final String code)
+	{
+		if (code != null && !code.isEmpty() && titles != null && !titles.isEmpty())
+		{
+			for (final TitleData title : titles)
+			{
+				if (code.equals(title.getCode()))
+				{
+					return title;
+				}
+			}
+		}
+		return null;
 	}
 
 }

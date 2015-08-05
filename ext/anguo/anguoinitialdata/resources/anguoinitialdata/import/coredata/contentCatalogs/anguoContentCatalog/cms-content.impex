@@ -1045,6 +1045,7 @@ INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTe
 ;;homePageNewsList3-ContentPage;homePage NewsList3 Link;newsInfoTemplate;homePageNewsList3-ContentPage
 #An guo buyer center page start
 ;;buyercenter;Buyer Center Page;BuyerCenterPageTemplate;buyercenter
+;;buyercenterordermanage;Order Manage Page For Buyer Center;BuyerCenterPageTemplate;buyercenterordermanage
 #An guo buyer center page end
 
 
