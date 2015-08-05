@@ -98,9 +98,6 @@
 <%-- Fix for Webkit Browsers (Needs to be loaded last)  --%>
 <script type="text/javascript" src="${commonResourcePath}/js/acc.skiplinks.js"></script>
 
-<%-- Anguo Store page related AM-26 by liyao  --%>
-<script type="text/javascript" src="${commonResourcePath}/js/anguostore.js"></script>
-
 <script type="text/javascript" src="${commonResourcePath}/js/97zzw.js"></script>
 <script type="text/javascript" src="${commonResourcePath}/js/index.js"></script>
 <script type="text/javascript" src="${commonResourcePath}/js/agPro.js"></script>
