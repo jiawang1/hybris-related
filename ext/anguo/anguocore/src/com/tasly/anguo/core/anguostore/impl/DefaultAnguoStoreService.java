@@ -3,12 +3,17 @@ package com.tasly.anguo.core.anguostore.impl;
 import de.hybris.platform.cms2.jalo.contents.ContentCatalog;
 
 import com.tasly.anguo.core.anguostore.AnguoStoreService;
+import com.tasly.anguo.core.anguostore.dao.AnguoStoreDao;
 import com.tasly.anguo.core.model.AnguoStoreModel;
 import com.tasly.anguo.core.model.AnguoStoreTempModel;
 
 
+/**
+ *
+ */
 public class DefaultAnguoStoreService implements AnguoStoreService
 {
+	private AnguoStoreDao anguoStoreDao;
 
 	@Override
 	public ContentCatalog getStoreContentCatalog(final String storeId)
@@ -41,15 +46,23 @@ public class DefaultAnguoStoreService implements AnguoStoreService
 	@Override
 	public AnguoStoreTempModel getAnguoStoreTempById(final String uid)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return anguoStoreDao.findAnguoStoreTempById(uid);
 	}
 
 	@Override
 	public AnguoStoreModel getAnguoStoreById(final String uid)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return anguoStoreDao.findAnguoStoreById(uid);
+	}
+
+	public AnguoStoreDao getAnguoStoreDao()
+	{
+		return anguoStoreDao;
+	}
+
+	public void setAnguoStoreDao(final AnguoStoreDao anguoStoreDao)
+	{
+		this.anguoStoreDao = anguoStoreDao;
 	}
 
 }
