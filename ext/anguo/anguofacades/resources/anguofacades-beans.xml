@@ -16,6 +16,7 @@
 		<value>ENTERPRISE</value>
 	</enum>
 	
+	<!-- beans for product start -->
 	<bean class="de.hybris.platform.commercefacades.product.data.ProductData">
 		<property name="genders" type="java.util.List&lt;com.tasly.anguo.facades.product.data.GenderData>"/>
 	</bean>
@@ -54,20 +55,10 @@
 	<bean class="com.tasly.anguo.facades.product.data.CategoryData" extends="de.hybris.platform.commercefacades.product.data.CategoryData"> 
 		<property name="categoryPath" type="String"></property>
 	</bean>
-
-	<bean class="com.tasly.anguo.facades.data.CityData" >
-		<property name="storeCount" type="Integer"/>
-		<property name="cityPK" type="Long"/>
-		<property name="cityName" type="String"/>
-		<property name="geoPoint" type="de.hybris.platform.commerceservices.store.data.GeoPoint"/>
-		<property name="code" type="String"/>
-		<property name="name" type="String"/>
-	</bean>
 	
-	<bean class="com.tasly.anguo.facades.data.DistrictData" >
+	<bean class="com.tasly.anguo.facades.data.AbstractLocationItemData" >
 		<property name="storeCount" type="Integer"/>
-		<property name="districtPK" type="Long"/>
-		<property name="districtName" type="String"/>
+		<property name="pk" type="Long"/>
 		<property name="geoPoint" type="de.hybris.platform.commerceservices.store.data.GeoPoint"/>
 		<property name="code" type="String"/>
 		<property name="name" type="String"/>
@@ -77,4 +68,37 @@
 		<property name="isSuccessFlag" type="Boolean"/>
 		<property name="message" type="String"/>
 	</bean>
+	<!-- beans for product end -->
+	
+	
+	<!-- add by Yang for AM-18 start -->
+	<bean class="com.tasly.anguo.facades.data.RegionResultData">
+		<property name="regions" type="java.util.List&lt;de.hybris.platform.commercefacades.user.data.RegionData>"/>
+		<property name="cities" type="java.util.List&lt;com.tasly.anguo.facades.data.AbstractLocationItemData>"/>
+		<property name="cityDistricts" type="java.util.List&lt;com.tasly.anguo.facades.data.AbstractLocationItemData>"/>
+	</bean>
+	
+	<bean class="com.tasly.anguo.store.data.AnguoStoreManagermentData">
+		<property name="registerDate" type="java.util.Date"/>
+		<property name="name" type="String"/>
+		<property name="logo" type="org.apache.commons.fileupload.FileItem"/>
+		<property name="description" type="String"/>
+		<property name="countryIso" type="String"/>
+		<property name="regionIso" type="String"/>
+		<property name="cityCode" type="String"/>
+		<property name="cityDistrictCode" type="String"/>
+		<property name="street" type="String"/>
+		<property name="contactName1" type="String"/>
+		<property name="contactPhone1" type="String"/>
+		<property name="contactName2" type="String"/>
+		<property name="contactPhone2" type="String"/>
+		<property name="contactName3" type="String"/>
+		<property name="contactPhone3" type="String"/>
+		<property name="qq" type="String"/>
+		<property name="fax" type="String"/>
+		<property name="telephone" type="String"/>
+		<property name="status" type="com.tasly.anguo.core.enums.StoreApproveStatus"/>
+	</bean>
+	<!-- add by Yang for AM-18 end -->
+	
 </beans>

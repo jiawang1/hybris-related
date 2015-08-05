@@ -1,0 +1,10 @@
+#
+# Import the Content Catalog
+#
+$contentCatalog=storeStandardContentCatalog
+# Language
+$lang=zh
+
+# Create Content Catalog
+UPDATE ContentCatalog;id[unique=true];name[lang=$lang]
+;$contentCatalog;个人标准模板

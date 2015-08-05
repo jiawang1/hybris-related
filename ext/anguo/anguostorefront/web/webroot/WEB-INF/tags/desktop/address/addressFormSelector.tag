@@ -13,9 +13,7 @@
 
 
 <c:if test="${not empty deliveryAddresses}">
-	<button type="button" class="positive clear view-address-book" id="viewAddressBook" >
-		<spring:theme code="checkout.checkout.multi.deliveryAddress.viewAddressBook" text="View Address Book"/>
-	</button>
+	<button type="button" class="positive clear view-address-book" id="viewAddressBook" >View Address Book</button>
 </c:if>
 
 
@@ -81,7 +79,7 @@
 					<c:otherwise>
 						<ycommerce:testId code="multicheckout_saveAddress_button">
 							<button class="positive right change_address_button show_processing_message" type="submit">
-								<spring:theme code="checkout.multi.deliveryAddress.continue" text="Continue"/>
+								<spring:theme code="checkout.checkout.multi.next" text="Continue"/>
 							</button>
 						</ycommerce:testId>
 					</c:otherwise>

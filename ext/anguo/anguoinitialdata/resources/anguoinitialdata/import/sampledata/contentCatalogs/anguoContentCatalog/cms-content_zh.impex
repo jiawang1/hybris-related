@@ -1,100 +1,1792 @@
-# ImpEx for Importing CMS Content
-# ZH Localisation
-
-# Macros / Replacement Parameter definitions
 $contentCatalog=anguoContentCatalog
-
 $contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
 $picture=media(code, $contentCV);
-$siteResource=jar:com.tasly.anguo.initialdata.setup.InitialDataSystemSetup&/anguoinitialdata/import/contentCatalogs/$contentCatalog
+$siteResource=jar:com.tasly.anguo.initialdata.setup.InitialDataSystemSetup&/anguoinitialdata/import/sampledata/contentCatalogs/$contentCatalog
 
 # Language
 $lang=zh
 
 # Site Logo Component
 UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];$picture[lang=$lang]
+;;SiteLogoComponent;/images/theme/logo-hybris.png
+
+# CMS Image Components
+UPDATE CMSImageComponent;$contentCV[unique=true];uid[unique=true];$picture[lang=$lang]
 
 # CMS Link Components
-UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang=$lang]
+UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang=zh]
+ ;;AboutAcceleratorLink;"关于多渠道加速器"
+ ;;AboutHybrisLink;"关于 hybris"
+ ;;AgileCommerceBlogLink;"Agile Commerce 博客"
+ ;;AngleGrindersCategoryLink;"角磨机"
+ ;;CircularSawsCategoryLink;"圆锯"
+ ;;ContactUsLink;"联系我们"
+ ;;DocumentationLink;"文档"
+ ;;FacebookLink;"Facebook"
+ ;;HammersCategoryLink;"锤具"
+ ;;HandSawsCategoryLink;"手锯"
+ ;;HandToolsCategoryLink;"手动工具"
+ ;;HomepageNavLink;"主页"
+ ;;JigsawsCategoryLink;"曲线锯"
+ ;;LinkedInLink;"LinkedIn"
+ ;;LogoutLink;"[退出]"
+ ;;ManageBudgetsLink;"管理预算"
+ ;;ManageBusinessUnitsLink;"管理业务部门"
+ ;;ManageCostCentersLink;"管理成本中心"
+ ;;ManagePermissionsLink;"管理权限"
+ ;;ManageUsergroupsLink;"管理用户组"
+ ;;ManageUsersLink;"管理用户"
+ ;;MeasuringLayoutToolsCategoryLink;"测量及布局工具"
+ ;;MyAccountLink;"我的帐户"
+ ;;MyCompanyLink;"我的公司"
+ ;;NutDriversCategoryLink;"螺帽起子"
+ ;;PowerDrillsCategoryLink;"电钻"
+ ;;PunchesCategoryLink;"冲头"
+ ;;RotaryHammersCategoryLink;"电锤"
+ ;;SandersCategoryLink;"砂磨机"
+ ;;ScrewdriversCategoryLink;"起子机"
+ ;;StoreFinderLink;"店铺搜索器"
+ ;;StrippingToolsCategoryLink;"剥线工具"
+ ;;TwitterLink;"Twitter"
+ ;;UserLoginLink;"[登录]"
+ ;;UserLoginRightLink;"登录"
+ ;;ReleaseRightLink;"发布中药材"
 
 # Lightbox Banner for Mini Cart (banner is not localizable so we must create a separate banner per language)
-INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];&imageRef;folder(qualifier)[default='images'];altText
+INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];&imageRef;altText
+ ;;Powertools_358x45_HomeDeliveryBanner_ZH_01.gif;$siteResource/images/banners/site/Powertools_358x45_HomeDeliveryBanner_ZH_01.gif;image/gif;Powertools_358x45_HomeDeliveryBanner_ZH_01.gif;"下午 6 点之前提交订单，次日即可送达"
 
 UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];$picture[lang=$lang]
+ ;;LightboxHomeDeliveryBannerComponent;Powertools_358x45_HomeDeliveryBanner_ZH_01.gif;
 
 # CMS Mini Cart Component
-UPDATE MiniCartComponent;$contentCV[unique=true];uid[unique=true];name;title[lang=$lang]
+UPDATE MiniCartComponent;$contentCV[unique=true];uid[unique=true];title[lang=zh]
+ ;;MiniCart;"购物车"
 
 # CMS tabs components
-UPDATE CMSTabParagraphComponent;$contentCV[unique=true];uid[unique=true];title[lang=$lang];content[lang=$lang]
+UPDATE CMSTabParagraphComponent;$contentCV[unique=true];uid[unique=true];title[lang=zh];content[lang=zh]
+# ;;deliveryTab;送货;"<table border=""0"" cellspacing=""0"" cellpadding=""10"" style=""border-collapse: collapse; empty-cells: show; font-size: 12px; padding: 0px; margin: 0px; border: 0px initial initial;""><tbody><tr style=""padding: 0px; margin: 0px;""><td colspan=""4"" style=""vertical-align: top; text-align: left; font-weight: normal; padding: 0px; margin: 0px;""><div style=""padding-top: 10px; padding-right: 0px; padding-bottom: 0px; padding-left: 0px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #8edf75; height: 30px; border-top-width: 1px; border-top-style: solid; border-top-color: #8edf75; margin: 0px;""><strong style=""font-weight: bold; padding: 0px; margin: 0px;""><span style=""color: #285190; font-size: 14px; padding: 0px; margin: 0px;"">发货与交付</span></strong></div></td></tr><tr style=""padding: 0px; margin: 0px;""><td colspan=""4"" style=""vertical-align: top; text-align: left; font-weight: normal; padding: 0px; margin: 0px;""><strong style=""font-weight: bold; padding: 0px; margin: 0px;""><br />2.1 我的运费是多少？<br /></strong>美国大陆范围内所有产品均全免运费。除双筒望远镜和单筒望远镜外，发往阿拉斯加、夏威夷、波多黎各、关岛和各美国陆军邮政地址的所有产品均免运费。请单击此处，了解更多详细信息。<br /><br /></td></tr></tbody></table>";
 
 # CMS Footer Component
-UPDATE FooterComponent;$contentCV[unique=true];uid[unique=true];notice[lang=$lang]
+UPDATE FooterComponent;$contentCV[unique=true];uid[unique=true];notice[lang=zh]
+ ;;FooterComponent;"© 2014 hybris software"
 
 # CMS Paragraph Component (Contact information)
-UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];content[lang=$lang]
+UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];content[lang=zh]
+ ;;ContactInfo;"联系电话：+1 302 295 5067"
+ ;;NewCustomerContactCenterParagraphComponent;"想要成为我们的新客户吗？请联系我们的客服团队进行注册，电话：888-888-8888！"
 
 # CMS ProductReferences Components
-UPDATE ProductReferencesComponent;$contentCV[unique=true];uid[unique=true];title[lang=$lang]
-
-# CMS PurchasedCategorySuggestionComponent Components
-UPDATE PurchasedCategorySuggestionComponent;$contentCV[unique=true];uid[unique=true];title[lang=$lang]
-
-# CMS CartSuggestion Components
-UPDATE CartSuggestionComponent;$contentCV[unique=true];uid[unique=true];title[lang=$lang]
+UPDATE ProductReferencesComponent;$contentCV[unique=true];uid[unique=true];title[lang=zh]
+ ;;AccessoriesProductReferencesComponent;"饰品"
+ ;;CrossSellingProductReferencesComponent;"你可能还会喜欢…"
 
 # Category Pages
-UPDATE CategoryPage;$contentCV[unique=true];uid[unique=true];title[lang=$lang]
+UPDATE CategoryPage;$contentCV[unique=true];uid[unique=true];title[lang=zh]
 
 # CMS Navigation Nodes
-UPDATE CMSNavigationNode;$contentCV[unique=true];uid[unique=true];title[lang=$lang]
+UPDATE CMSNavigationNode;$contentCV[unique=true];uid[unique=true];title[lang=zh]
+ ;;AcceleratorNavNode;"加速器"
+ ;;AngleGrindersNavNode;"角磨机"
+ ;;FollowUsNavNode;"关注我们"
+ ;;HammersNavNode;"锤具"
+ ;;HandToolsLinksNavNode;"手动工具"
+ ;;HandToolsNavNode;"手动工具"
+ ;;HybrisNavNode;"Hybris"
+ ;;MeasuringLayoutToolsNavNode;"测量及布局工具"
+ ;;MyCompanyLinksNavNode;"我的公司"
+ ;;PowerDrillsNavNode;"电钻"
+ ;;PowertoolsNavNode;"安国"
+ ;;SandersNavNode;"砂磨机"
+ ;;ScrewdriversNavNode;"起子机"
+ ;;SiteRootNode;"站点根目录"
 
-# FAQ Page
+# Powertools Terms and Conditions Page
 
-# CMS Paragraph Component (Contact information)
+# CMS Paragraph Component
 UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];content[lang=zh];
 
-# Terms and Conditions Page
+#  Powertools Homepage
 
-# CMS Paragraph Component (Contact information)
-UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];content[lang=zh];
+# Media
+INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];&imageRef;altText
+ ;;Powertools_228x228_Home_Banner_ZH_01.jpg;$siteResource/images/banners/homepage/Powertools_228x228_Home_Banner_ZH_01.jpg;;Powertools_228x228_Home_Banner_ZH_01.jpg;"重量轻，功能强大的所有螺丝起子工作"
+ ;;Powertools_228x228_Home_Banner_ZH_02.jpg;$siteResource/images/banners/homepage/Powertools_228x228_Home_Banner_ZH_02.jpg;;Powertools_228x228_Home_Banner_ZH_02.jpg;"寻找螺丝刀和位设置"
+ ;;Powertools_228x228_Home_Banner_ZH_03.jpg;$siteResource/images/banners/homepage/Powertools_228x228_Home_Banner_ZH_03.jpg;;Powertools_228x228_Home_Banner_ZH_03.jpg;"其价格范围内最强大的工具"
+ ;;Powertools_228x228_Home_Banner_ZH_04.jpg;$siteResource/images/banners/homepage/Powertools_228x228_Home_Banner_ZH_04.jpg;;Powertools_228x228_Home_Banner_ZH_04.jpg;"做工粗糙的电源包"
+ ;;Powertools_468x418_Rotating_Image_ZH_01.jpg;$siteResource/images/banners/homepage/Powertools_468x418_Rotating_Image_ZH_01.jpg;;Powertools_468x418_Rotating_Image_ZH_01.jpg;"桑德多 - 新的范围，现在股票"
+ ;;Powertools_468x418_Rotating_Image_ZH_02.jpg;$siteResource/images/banners/homepage/Powertools_468x418_Rotating_Image_ZH_02.jpg;;Powertools_468x418_Rotating_Image_ZH_02.jpg;"贸易和工业 Bosch"
+ ;;Powertools_468x418_Rotating_Image_ZH_03.jpg;$siteResource/images/banners/homepage/Powertools_468x418_Rotating_Image_ZH_03.jpg;;Powertools_468x418_Rotating_Image_ZH_03.jpg;"现代技术和高性能"
+ ;;Powertools_948x60_Home_Top_Banner_ZH_01.jpg;$siteResource/images/banners/homepage/Powertools_948x60_Home_Top_Banner_ZH_01.jpg;;Powertools_948x60_Home_Top_Banner_ZH_01.jpg;"Bosch | Black & Decker | Einhall | Skil | Hitachi"
+ ;;Powertools_96x96_CatScrewdrivers_ZH_01.jpg;$siteResource/images/banners/homepage/Powertools_96x96_CatScrewdrivers_ZH_01.jpg;;Powertools_96x96_CatScrewdrivers_ZH_01.jpg;"螺丝刀"
 
-# Homepage
+#UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];$picture[lang=$lang]
+# ;;BTGBannerProductDetail;Powertools_228x228_Home_Banner_ZH_01.jpg;
+# ;;HomepageBanner1;Powertools_228x228_Home_Banner_ZH_01.jpg;
+# ;;HomepageBanner2;Powertools_228x228_Home_Banner_ZH_02.jpg;
+# ;;HomepageBanner3;Powertools_228x228_Home_Banner_ZH_03.jpg;
+# ;;HomepageBanner4;Powertools_228x228_Home_Banner_ZH_04.jpg;
+# ;;HomepageTopBanner;Powertools_948x60_Home_Top_Banner_ZH_01.jpg;
 
-# Media Content
-INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];&imageRef;folder(qualifier)[default='images'];altText
+#UPDATE BannerComponent;$contentCV[unique=true];uid[unique=true];headline[lang=zh];$picture[lang=$lang];content[lang=zh]
+# ;;RotatingImageBanner1;桑德多 - 新的范围，现在股票;Powertools_468x418_Rotating_Image_ZH_01.jpg;;
+# ;;RotatingImageBanner2;贸易和工业 Bosch;Powertools_468x418_Rotating_Image_ZH_02.jpg;;
+# ;;RotatingImageBanner3;现代技术和高性能 - 退房;Powertools_468x418_Rotating_Image_ZH_02.jpg;;
+
+#UPDATE ProductCarouselComponent;$contentCV[unique=true];uid[unique=true];title[lang=zh]
+# ;;PowertoolsHomepageProductCarouselComponent;"我们最畅销的产品"
+# ;;PremiumbuyersgroupHomepageProductCarouselComponent;"我们最畅销的产品"
+
+#UPDATE CategoryFeatureComponent;$contentCV[unique=true];uid[unique=true];title[lang=zh];description[lang=zh];$picture[lang=$lang]
+# ;;ScrewdriversFeatureComponent;螺丝刀;;Powertools_96x96_CatScrewdrivers_ZH_01.jpg;
+
+
+#  Powertools Search Results Page
+
+# Media
+INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];altText
+ ;;Powertools_148x318_SearchResultsSideBanner_ZH_01.jpg;$siteResource/images/banners/site/Powertools_148x318_SearchResultsSideBanner_ZH_01.jpg;;
 
 UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];$picture[lang=$lang]
+# ;;SearchResultsSideBanner;Powertools_148x318_SearchResultsSideBanner_ZH_01.jpg;
 
-UPDATE BannerComponent;$contentCV[unique=true];uid[unique=true];headline[lang=$lang];$picture[lang=$lang];content[lang=$lang]
+UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];content[lang=zh]
+ ;;NoSearchResultsParagraphComponent;<h2>很抱歉，没有找到您所搜索的信息</h2>;
 
-UPDATE ProductCarouselComponent;$contentCV[unique=true];uid[unique=true];title[lang=$lang]
 
-# Camera Accessories and Supplies Category Landing Page
+#  Powertools Cart Page
 
-UPDATE CategoryPage;$contentCV[unique=true];uid[unique=true];title[lang=$lang]
-
-# Media Content
-INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];folder(qualifier)[default='images'];altText
-
-UPDATE CategoryFeatureComponent;$contentCV[unique=true];uid[unique=true];title[lang=$lang];$picture[lang=$lang];description[lang=$lang]
-
-UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];$picture[lang=$lang]
-
-# Search Results Page
-
-# Media Content
-INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];folder(qualifier)[default='images'];altText
+# Media
+INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];altText
+#;;Powertools_148x300_HelpBanner_ZH_01.jpg;$siteResource/images/banners/site/Powertools_148x300_HelpBanner_ZH_01.jpg;;"需要帮助吗？点击这里寻求帮助与检查"
+ ;;Powertools_788x120_HomeDeliveryBanner_ZH_01.jpg;$siteResource/images/banners/site/Powertools_788x120_HomeDeliveryBanner_ZH_01.jpg;;"下午 6 点之前提交订单，次日即可送达"
 
 UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];$picture[lang=$lang]
+ ;;HelpBanner;Powertools_148x300_HelpBanner_ZH_01.jpg;
+ ;;NextDayDeliveryBanner120;Powertools_788x120_HomeDeliveryBanner_ZH_01.jpg;
+
+UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];content[lang=zh]
+ ;;EmptyCartParagraphComponent;<h2>您的购物篮是空的</h2>;
+
+UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];content[lang=zh]
+ #;;HelpParagraphComponent;"<div class=""helpBanner""><span class=""bannerHeadline"" >需要帮助？</span><span class=""bannerText"">点击此处查看结算帮助<a href=""#"" >GO > ></a></span></div>";
+
+# Powertools Store Finder Page
+
+# Media
+INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];altText
+ ;;Powertools_148x318_StoreFinderSideBanner_ZH_01.jpg;$siteResource/images/banners/site/Powertools_148x318_StoreFinderSideBanner_ZH_01.jpg;;""
+
+UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];$picture[lang=$lang]
+ ;;StoreFinderSideBanner;Powertools_148x318_StoreFinderSideBanner_ZH_01.jpg;
+
+
+ 
+ 
+ 
+ 
+ 
+ 
+ #################################################################
+ 
+ 
+ 
+ 
+ ## ANGUO Home Page
+
+#homePage news
+UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];content[lang=$lang]
+;;homePageNotice1Component;"<h1>银联支付调整通知</h1>
+<p>尊敬的用户：</p>
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;目前银联支付做出如下调整：</p>
+  	<p>&nbsp;&nbsp;&nbsp;&nbsp;1、网银支付通道仅支持8家银行，分别是：农行、中行、建行、邮政储蓄、广发、民生、上海银行、北京银行;</p>
+  	<p>&nbsp;&nbsp;&nbsp;&nbsp;2、不再支持信用卡支付。</p>
+    <p>&nbsp;&nbsp;&nbsp;&nbsp;由此给您带来的不便敬请谅解。如有疑问，请拨打全国客服热线:022-86342634。</p>
+  	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	数字本草</p>
+  	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;
+  	2015年5月17日</p>"
+
+;;homePageNotice2Component;"<h1>数字本草网站维护通知</h1>
+<p>尊敬的用户：</p>
+    <p>&nbsp;&nbsp;&nbsp;&nbsp;因数字本草网站维护，需要关闭服务器，期间网站无法访问。</p>
+    <p>&nbsp;&nbsp;&nbsp;&nbsp;维护时间为2015-03-27 01:30 到 2015-03-27 06:00。</p>
+    <p>&nbsp;&nbsp;&nbsp;&nbsp;给您带来的不便，敬请谅解，感谢您对我们的支持，谢谢。</p>
+    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	数字本草</p>
+  	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;
+  	2015年3月24日</p>"
+  	
+;;homePageNotice3Component;"<h1>关于未进入交收月入库货物可当天申请注册仓单的公告</h1>
+<p>各交易商、指定交收仓库：</p><br/>
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;为满足客户需求，经入库目检合格的可当天申请注册仓单，送样至数字本草指定的质检机构检测后不合格的，客户需换货入库，如进入交收未能提交已检测合格仓单的按卖方违约办理。</p><br/>
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;特此公告。</p>
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	数字本草</p>
+  	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;
+  	2015年3月23日</p>"
+  	
+;;homePageNotice4Component;"<h1>关于《数字本草白芍交收质量标准》的通知</h1>
+<p>各交易商、指定交收仓库：</p><br/>
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;为更有效的保障各交易商权益，在仔细参考交易商的建议及有效数据统计下，加强对白芍缺陷量的控制，加检缺陷项目：</p><br/>
+	<p>&nbsp;&nbsp;1.变茬，变茬量计入缺陷量但变茬量单项不得超过0.5%。</p><br/>
+	<p>&nbsp;&nbsp;2.走油，走油量计入缺陷量。</p><br/>
+	<p>&nbsp;&nbsp;入库抽包检测时发现有虫蛀或霉变的不得入库，走访数据实际拣货均为人工拣货无法做到绝对值，故对交收时买方看货发现有虫蛀或霉变的由买方指定包数由质检人员现场检测，如虫蛀或霉变量超出0.2%的，要求卖方在规定时间内重新拣货完毕，再次检测超出0.2%的按卖方违约办理。</p><br/>
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;特此公告。</p>
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	数字本草</p>
+  	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;
+  	2015年3月23日</p>"
+  	
+;;homePageNotice5Component;"<h1>关于2015年五一劳动节休市安排的通知</h1>
+<p>各交易商、结算银行、指定交收仓库：</p><br/>
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;根据《国务院办公厅关于2015年部分节假日安排的通知》，现将数字本草2015年五一劳动节休市有关安排通知如下：5月1日（星期五）至5月3日（星期日）休市，5月4日（星期一）起照常开市。5月2日（星期六）、5月3日（星期日）为周末休市。</p><br/>
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;请各交易商及相关单位据此安排好有关工作。</p><br/>
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;特此公告。</p>
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	数字本草</p>
+  	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;
+  	2015年4月25日</p>"
+
+;;homePageNotice6Component;"<h1>关于开展数据库系统升级模拟测试的通知</h1>
+<p>各交易商、结算银行、指定交收仓库：</p><br/>
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;我公司定于5月16日（周六）上午8:55至11:00进行交易系统联网测试。测试主要涉及两方面内容：一是数据库系统优化升级测试，二是核心交易系统优化升级测试。请各单位提前安排交易系统和结算系统相关人员参加测试。</p><br/>
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;特此通知。</p>
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	数字本草</p>
+  	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;
+  	2015年4月28日</p>"
+	
+;;homePageNotice7Component;"<h1>关于商品包邮政策的公告</h1>
+<p>尊敬的顾客：</p><br/>
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;经研究决定，数字本草所有自营商品实施包邮政策，有效期至2016年5月20日。</p><br/>
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;感谢您的支持！</p>
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	数字本草</p>
+  	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;
+  	2015年5月10日</p>"
+  		
+;;homePageNotice8Component;"<h1>关于数字本草网站试运营的公告</h1>
+<p>尊敬的各位用户：</p><br/>
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;2015年5月18日，数字本草电商平台上线试运营。</p>
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;试运营期间，欢迎广大用户提出宝贵的意见和建议，为药材行业繁荣、健康、持续发展共同努力。</p>
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;网站近期将推出系列活动，敬请广大客户关注网站公告。</p>
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	数字本草</p>
+  	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;
+  	2015年5月9日</p>"
+  	
+;;homePageNotice9Component;"<h1>关于数字本草电商平台征集业务规则意见的公告</h1>
+<p>尊敬的各位用户：</p><br/>
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;《数字本草电子交易中心挂牌交易细则》、《数字本草电子交易中心违规违约处理办法》、《数字本草电子交易中心信息披露管理办法》、《数字本草电子交易中心指定交收仓库管理办法》现将社会征集公众意见，欢迎药材行业的企业单位和个人提供宝贵意见和建议。</p>
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	数字本草</p>
+  	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;
+  	2015年5月7日</p>"
+  	
+;;homePageRule1Component;"<h1>数字本草电子交易中心挂牌交易细则</h1>
+<h2>第一章&nbsp;&nbsp;&nbsp;&nbsp;总&nbsp;&nbsp;则</h2>
+<p><span>第一条</span>&nbsp;&nbsp;&nbsp;&nbsp;为规范数字本草电子交易中心（以下简称“数字本草”）挂牌交易活动，保护会员的合法权益，保障数字本草挂牌交易的顺利开展，根据《数字本草电子交易中心交易规则》制定本细则。</p>  	
+<p><span>第二条</span>&nbsp;&nbsp;&nbsp;&nbsp;参与挂牌交易的企业，须按照《数字本草电子交易中心会员管理办法》，提交相关申请材料，经中心审核通过后，与中心签订《数字本草电子交易中心会员入市协议》，成为中心会员,方可在中心进行挂牌交易。</p>  	
+<p><span>第三条</span>&nbsp;&nbsp;&nbsp;&nbsp;参与挂牌交易的会员必须遵守《数字本草电子交易中心交易规则》及本细则。本细则有关规定与《数字本草电子交易中心交易规则》不一致时，应以本细则的规定为准。</p>  	
+<h2>第二章&nbsp;&nbsp;&nbsp;&nbsp;术语和定义</h2>  	
+<p><span>第四条</span>&nbsp;&nbsp;&nbsp;&nbsp;挂牌交易是指在中心规定的可交易的商品范围内，卖方会员通过中心网站或电子交易系统销售商品，发出要约，买方自主选购，生成不可撤销和不可变更的交易合同，并完成履约的交易模式。</p>  	
+<p><span>第五条</span>&nbsp;&nbsp;&nbsp;&nbsp;挂牌交易合同指会员通过中心的网站、电子交易系统签订的约定双方权利和义务的合同。约定的内容包括但不限于：品种、品名、品牌、质量、规格、等级、产地、生产厂家、交收要求、交收日期、包装、数量、重量、价格及付款方式等。</p> 	
+<p><span>第六条</span>&nbsp;&nbsp;&nbsp;&nbsp;挂牌交易的所有价格均为指定提货地点的现金含税价格，单位为元/吨、元/千克；挂牌交易可公布挂牌价，也可不公布挂牌价，由卖方会员、买方会员进行询价交易。</p> 	  	
+<p><span>第七条</span>&nbsp;&nbsp;&nbsp;&nbsp;保证金分为挂牌保证金和摘牌保证金。挂牌保证金是指卖方会员储存于结算银行中心专用结算账户，并在挂牌时由中心冻结，用于担保交易的、一定数量或一定比例的会员资金。挂牌保证金仅用于卖方会员获得挂牌交易资格，担保合同执行，不可用于其他用途。摘牌保证金是指买方会员储存于结算银行中心专用结算账户，并在摘牌时由中心冻结，用于担保合同执行的资金。摘牌保证金可作为货款的一部分。</p> 	  	
+<p><span>第八条</span>&nbsp;&nbsp;&nbsp;&nbsp;卖方会员可使用电子仓单或保证金进行挂牌交易，而买方会员须用保证金进行挂牌交易。</p> 	  	
+<h2>第三章&nbsp;&nbsp;&nbsp;&nbsp;交&nbsp;&nbsp;易</h2>  	
+<p><span>第九条</span>&nbsp;&nbsp;&nbsp;&nbsp;卖方挂牌</p>
+<p>（一）	卖方会员需先在中心注册电子仓单或缴纳挂牌保证金，以获得挂牌交易资格。</p>  	
+<p>（二）	已获得挂牌交易资格的卖方会员，通过中心网站或电子交易系统，提交挂牌信息。挂牌信息包括：商品详细信息、交收要求、挂牌要求、备注等。</p>  	
+<p>1.	商品详细信息包括但不限于：品种、品名、品牌、规格、计量方式、重量、数量、价格、产地、生产厂家、生产日期、包装等。</p>  	
+<p>2.	交收要求包括但不限于：交收地点、交收仓库、交收货位等。</p>  	
+<p>3.	挂牌要求包括但不限于：是否定向、挂牌发布日、挂牌结束日、起订量、最小交易量、结算方式等。</p> 
+<p>（三）	卖方会员负责核对挂牌商品信息，保证挂牌信息与实物相一致，对不一致所产生的一切交易结果承担最终责任。</p> 	
+<p>（四）	卖方挂牌可分为定向挂牌与不定向挂牌。定向挂牌只有指定会员可进行摘牌；不定向挂牌所有会员均可进行摘牌。</p> 	
+<p>（五）	挂牌有效期需提前公告。卖方会员可通过电子交易系统自动挂牌，并设置自动挂牌结束日期。</p> 	
+<p>（六）	挂牌期间，所有成交的订单将成立不可撤销的合同，进入交收环节；</p> 	
+<p>（七）	挂牌期间，卖方会员可进行价格修改，但已成交部分除外。</p> 	
+<p><span>第十条</span>&nbsp;&nbsp;&nbsp;&nbsp;买方摘牌</p>
+<p>（一）	买方会员通过中心网站、电子交易系统选购商品。</p>    	
+<p>（二）	买方会员选定商品后，需仔细阅读挂牌信息的相关内容，并确认后，填写购买数量并提交摘牌信息，系统自动冻结保证金，同时自动生成不可撤销和不可变更的《数字本草电子交易中心挂牌交易合同》“以下简称“《交易合同》”。</p>    	
+<p>（三）	《交易合同》分以下几种方式：卖方会员与买方会员直接签订；卖方会员、买方会员分别与中心签订；卖方会员、买方会员与第三方签订等。《交易合同》具体签约方式在挂牌公告中明确。</p>    	
+<p>（四）	《交易合同》的成交价格为卖方挂牌价格或双方协商成交价格。</p>    	
+<p><span>第十一条</span>&nbsp;&nbsp;&nbsp;&nbsp;撤牌</p>  	
+<p>（一）	卖方会员可根据实际情况撤销挂牌。</p>
+<p>（二）   若到挂牌结束日为止，挂牌商品不论成交、未成交、部分成交，挂牌均结束；卖方会员可重新进行挂牌；挂牌存在未成交或部分成交的，卖方会员可在挂牌时委托系统信息进行自动挂牌。</p>
+<p>（三）   当日交易结束时，若卖方会员的挂牌信息中有未成交的，中心将在当日交易结束后自动为卖方会员撤牌，由卖方会员手工撤销的除外。</p>
+<p>（四）   若卖方会员当日交易账户资金不足，则自动挂牌停止。</p>
+<p>（五）   中心保留对挂牌商品进行撤牌等特殊处理的权利。</p>
+<h2>第四章&nbsp;&nbsp;&nbsp;&nbsp;结&nbsp;&nbsp;算</h2>
+<p><span>第十二条</span>&nbsp;&nbsp;&nbsp;&nbsp;挂牌交易的结算方式分为场内结算和场外结算。场内结算是指通过中心完成收付货款的结算方式；场外结算是指不通过中心，买卖双方会员自行完成收付货款的结算方式。结算方式可由卖方会员自行选择。</p>  	
+<p><span>第十三条</span>&nbsp;&nbsp;&nbsp;&nbsp;买方会员应在以下时间节点，向中心（场内结算）或卖方会员（场外结算）支付货款。若交易合同中另行约定的以交易合同为准。</p>  	
+<p>（一）	在12：00之前成交的，须在当日16：00前支付货款；</p>
+<p>（二）	在12：00之后成交的，须在下一交易日12：00前支付货款。</p>
+<p><span>第十四条</span>&nbsp;&nbsp;&nbsp;&nbsp;中心或卖方会员应在买方会员支付货款后1个工作日内开具《提货单》。</p>
+<p><span>第十五条</span>&nbsp;&nbsp;&nbsp;&nbsp;对于场内结算方式，买卖双方会员须完成以下事项:买方会员在规定时间内将货款划至中心后，中心冻结全部货款并释放其保证金，其保证金可作为货款一部分;买方会员收到提货单之日起3个工作日内完成提货并确认后，中心将80%货款划拨至卖方会员;卖方会员在查收货款后须开具全额发票，将发票在5个工作日内送达买方会员;买方会员在收到发票后3个工作日内给予到票确认，中心将剩余20%货款划拨给卖方会员，中心解冻挂牌保证金。</p>
+<p><span>第十六条</span>&nbsp;&nbsp;&nbsp;&nbsp;对于场外结算方式,买卖双方在规定时间内一次性付款提货，履行合同，在结清相关费用后办理提货手续。提货完成并经买卖双方确认后,中心解冻保证金。</p>
+<p><span>第十七条</span>&nbsp;&nbsp;&nbsp;&nbsp;中心通过网站、电子交易系统向会员提供与其相关的交易及结算数据，因特殊情况造成中心不能通过网站、电子交易系统正常提供与其相关的交易及结算数据时，本中心将提前公告。</p>
+<p><span>第十八条</span>&nbsp;&nbsp;&nbsp;&nbsp;会员须每日自行核对结算数据，若对结算数据有异议，须在次日开市前三十分钟以传真形式通知中心并提供相关材料。如在上述规定时间内会员没有对结算数据提出异议，则视为会员已认可结算数据的正确性。</p>
+<p><span>第十九条</span>&nbsp;&nbsp;&nbsp;&nbsp;中心向会员收取交易手续费等费用，具体收费标准以中心公告为准。</p>
+<h2>第五章&nbsp;&nbsp;&nbsp;&nbsp;交&nbsp;&nbsp;收</h2>  	
+<p><span>第二十条</span>&nbsp;&nbsp;&nbsp;&nbsp;交收包括中心指定交收仓库交收和非指定交收仓库交收两种方式。</p>
+<p><span>第二十一条</span>&nbsp;&nbsp;&nbsp;&nbsp;对于指定交收仓库交收，指定交收仓库负责对商品的入库检验、储存保管及具体交收手续的办理。指定交收仓库交收流程：</p>
+<p><span>第二十一条</span>&nbsp;&nbsp;&nbsp;&nbsp;对于指定交收仓库交收，指定交收仓库负责对商品的入库检验、储存保管及具体交收手续的办理。指定交收仓库交收流程：</p>
+<p>（一）	中心根据电子仓单和交易合同开具《提货单》。</p>
+<p>（二）	买方会员可凭《提货单》提货。生成《提货单》后3个交易日内，买方会员无正当理由未提收的或未提收完成的，视为违约。</p>
+<p>（三）	指定交收仓库在办理提货手续时，需在《提货单》上填写实发重量、数量，签字或盖章。针对一份《提货单》的实际交收数量不得超过提货单的可提量，合同累计交收量不超出单一合同溢短范围。</p>
+<p>（四）	买方会员提货完成后，买卖双方会员应根据商品交收的实际数量向中心缴纳交收手续费,具体收费标准以中心公告为准。</p>
+<p><span>第二十二条</span>&nbsp;&nbsp;&nbsp;&nbsp;指定交收仓库应严格按照有关仓储行业规定和惯例对入库商品的数量、外包装、标签等进行验收。</p>
+<p><span>第二十三条</span>&nbsp;&nbsp;&nbsp;&nbsp;对于非指定交收仓库交收，由买、卖双方自行商定《提货单》的开具、提货、出库或过户的办理手续。</p>
+<p><span>第二十四条</span>&nbsp;&nbsp;&nbsp;&nbsp;指定交收仓库办理交收手续时，仓储及吊装费等依据指定交收仓库规定执行。非指定交收仓库办理交收手续时，仓储及吊装费等由买、卖双方自行商定。</p>
+<p><span>第二十五条</span>&nbsp;&nbsp;&nbsp;&nbsp;卖方会员应根据双方约定向买方会员寄送或传真相应的质量证明书。质量证明书需由中心认可的或双方约定的检测机构出具。</p>
+<p><span>第二十六条</span>&nbsp;&nbsp;&nbsp;&nbsp;会员需中心或指定交收仓库提供物流配送服务的，可与中心或相关指定交收仓库联系具体事宜并签订协议，费用由该会员承担。</p>
+<h2>第六章&nbsp;&nbsp;&nbsp;&nbsp;信息发布</h2>
+<p><span>第二十七条</span>&nbsp;&nbsp;&nbsp;&nbsp;中心通过中心网站、电子交易系统发布文件与公告，向会员提供本中心行情、交易公告和相关交易规则。</p>
+<p><span>第二十八条</span>&nbsp;&nbsp;&nbsp;&nbsp;会员可以通过中心网站、电子交易系统查询自己的相关交易信息。</p>
+<p><span>第二十九条</span>&nbsp;&nbsp;&nbsp;&nbsp;会员可通过电子交易系统查询某笔交易商品的基本信息，及与其相关的交易资金状况、订单状况和提货状况等。</p>
+<h2>第七章&nbsp;&nbsp;&nbsp;&nbsp;违约与处理</h2>
+<p><span>第三十条</span>&nbsp;&nbsp;&nbsp;&nbsp;买卖双方会员对其通过中心电子交易系统生成的交易合同负有全面、诚信履行的义务。</p>
+<p><span>第三十一条</span>&nbsp;&nbsp;&nbsp;&nbsp;卖方会员应保证其挂牌商品拥有合法的所有权或处分权。因卖方会员权利瑕疵导致第三人对该商品提出权利主张的，其责任概由卖方会员承担；造成中心或买方会员损失的，卖方会员负责赔偿。</p>
+<p><span>第三十二条</span>&nbsp;&nbsp;&nbsp;&nbsp;交易过程中出现下述行为的视为违约：</p>
+<p>（一）	买方会员未在交易合同规定的时间内支付全额货款；</p>
+<p>（二）	买方会员未在规定时间内核对、提收货物（但因卖方会员违约导致的除外）；</p>
+<p>（三）	卖方会员未能按约提供货物给买方会员，包括到规定时间内未提供货物、提供的货物有权利瑕疵、提供的货物与卖方会员挂牌信息不符等；</p>
+<p>（四）	卖方会员未按全额货款开具增值税发票给买方会员或开票时间超过规定期限的；</p>
+<p>（五）	其他违约行为；</p>
+<p>违约处理：出现以上情况时，根据交易合同约定，当一方违约时，守约方有权向中心提出交易纠纷调解申请，中心依据调解申请有权行使“冻结权”，冻结违约方电子仓单或保证金。冻结期间，中心按照调解程序进行双方调解，当调解双方达成一致时，双方签订违约确认书，中心根据违约确认书的约定处理；当协商不成时，可提请中心所在地的仲裁委员会仲裁，中心根据仲裁结果执行。仲裁期间，中心继续冻结违约方电子仓单或保证金。守约方所能获得的赔付以违约方冻结的保证金为限，如不足以赔付时，可另行通过司法手段自行向违约方索取额外的赔付金额，中心没有使用自有资金支付赔偿金、补偿金、抚恤金或其他任何款项的义务。</p>
+<p><span>第三十三条</span>&nbsp;&nbsp;&nbsp;&nbsp;卖方会员交付的货物应以中心电子交易系统发布的挂牌信息为准。买方会员应在提收的当日对货物的外包装、数量进行验收，如有不符合约定的，应在提收货物后的3日内提出异议；买方会员对提收货物产品质量有异议的，应在提收货物后的10日内提出异议；异议应以书面方式向中心提出，逾期未提出的，中心不再受理。</p>
+<p><span>第三十四条</span>&nbsp;&nbsp;&nbsp;&nbsp;买方会员对货物产生异议的，可提交由中心认定的或双方约定的检测机构进行检测。</p>
+<p><span>第三十五条</span>&nbsp;&nbsp;&nbsp;&nbsp;若检测结果认定货物存在问题的，检测费用由卖方会员支付；若检测结果认定货物不存在问题的，检测费用由买方会员支付。买卖双方另有约定的除外。</p>
+<p><span>第三十六条</span>&nbsp;&nbsp;&nbsp;&nbsp;买卖双方对检测结果仍存在异议的，由买卖双方协商，或通过法律途径解决。</p>
+<p><span>第三十七条</span>&nbsp;&nbsp;&nbsp;&nbsp;下列行为是中心禁止的行为：</p>
+<p>（1）	妨碍中心工作人员履行职责；</p>
+<p>（2）	恶意拖欠应付或应存入的各种款项；</p>
+<p>（3）	诋毁中心声誉，损坏中心财产；</p>
+<p>（4）	欺行霸市，扰乱市场秩序；</p>
+<p>（5）	其他违反本细则的行为；</p>
+<p>（6）	其他违法行为。</p>
+<p><span>第三十八条</span>&nbsp;&nbsp;&nbsp;&nbsp;会员违约或违反中心有关规定，中心将根据其行为性质及后果，选择采取警告、暂停交易、限制交易权限、注销会员交易账号、取消会员资格、在有关网站、媒体上进行公告等制约措施，必要时中心可同时采用两种及以上的制约措施。违反法律法规的，中心有权追究其法律责任。</p>
+<p><span>第三十九条</span>&nbsp;&nbsp;&nbsp;&nbsp;交易过程中，会员发生违规违约行为的，记入信用评价体系。</p>
+<h2>第八章&nbsp;&nbsp;&nbsp;&nbsp;附&nbsp;&nbsp;则</h2>
+<p><span>第四十条</span>&nbsp;&nbsp;&nbsp;&nbsp;本细则的解释权属于中心。中心有权根据会员的需求和实际情况，对本细则进行修改。</p>
+<p><span>第四十一条</span>&nbsp;&nbsp;&nbsp;&nbsp;本细则自发布之日起试行。</p>"
+
+;;homePageRule2Component;"<h1>数字本草电子交易中心违规违约处理办法</h1>
+<h2>第一章&nbsp;&nbsp;&nbsp;&nbsp;总&nbsp;&nbsp;则</h2>
+<p><span>第一条</span>&nbsp;&nbsp;&nbsp;&nbsp;为加强数字本草电子交易中心（以下简称“数字本草”）市场管理，规范数字本草的交易行为，保障市场参与者的合法权益，根据国家有关法律和政策以及数字本草制定的《数字本草电子交易中心交易规则》等业务规则的有关规定，制定本办法。</p>  	
+<p><span>第二条</span>&nbsp;&nbsp;&nbsp;&nbsp;本办法适用与数字本草的交易商及其工作人员、交易商、交收仓库、交收服务商及交易市场相关参与者等。</p>  	
+<p><span>第三条</span>&nbsp;&nbsp;&nbsp;&nbsp;数字本草根据公平、公正的原则，以事实为依据，依照国家有关法律法规以及数字本草的有关业务规则，对数字本草违规违约行为进行调查、认定和处罚。</p>
+<p><span>第四条</span>&nbsp;&nbsp;&nbsp;&nbsp;违规违约行为涉嫌构成犯罪的，移交司法机关，依法追究刑事责任。</p>  	
+<p><span>第五条</span>&nbsp;&nbsp;&nbsp;&nbsp;数字本草调查、认定和处理违规违约行为，应当做到事实清楚、证据确凿、程序规范、适用规定准确、处理决定适当。</p>
+<h2>第二章&nbsp;&nbsp;&nbsp;&nbsp;常规检查与立案调查</h2>
+<p><span>第六条</span>&nbsp;&nbsp;&nbsp;&nbsp;常规检查是指数字本草是依据其交易、结算、交收等交易规则和数字本草与相关各方签署的书面协议，对交易商、指定交收仓库及交易市场相关参与者的业务活动及交易行为进行定期和不定期监督检查。</p> 	  	
+<p><span>第七条</span>&nbsp;&nbsp;&nbsp;&nbsp;数字本草履行监管职责时，可以行使下列职权：</p>
+<p>（一）	查阅、复制与交易有关的信息、文件和资料；</p>
+<p>（二）	对交易商、指定交收仓库等单位和人员进行调查、取证；</p>
+<p>（三）	要求交易商、指定交收仓库等被调查者申报、陈述、解释、说明有关情况；</p>
+<p>（四）	制止、纠正、处理违规行为；</p>
+<p>（五）	数字本草履行监管职责所必须的其他职权。</p>
+<p><span>第八条</span>&nbsp;&nbsp;&nbsp;&nbsp;交易商、指定交收仓库、交收服务商及交易市场相关参与者应当接受数字本草的监督检查，配合数字本草履行监管职责，如实提供数字本草要求提供的文件和资料。</p>
+<p><span>第九条</span>&nbsp;&nbsp;&nbsp;&nbsp;数字本草设立投诉、举报电话。投诉、举报人应当身份真实、明确；投诉、举报人不愿公开其身份的，数字本草为其保密。</p>
+<p><span>第十条</span>&nbsp;&nbsp;&nbsp;&nbsp;对日常检查工作中发现的、投诉举报的、监管部门和司法机关等单位移交的或其他途径获得的线索进行审查后，认为有违规行为发生的，数字本草应当予以立案调查。</p>
+<p><span>第十一条</span>&nbsp;&nbsp;&nbsp;&nbsp;对已立案的违规案件，数字本草应当指定专人负责调查；调查取证应当由两名以上调查人员参加，并出示本人工作证或数字本草的证明文件。</p>
+<p><span>第十二条</span>&nbsp;&nbsp;&nbsp;&nbsp;调查人员认为自己与本案有利害关系或者其他可能影响案件公正处理的，应当申请回避。<br>被调查人员认为调查人员与本案有关、可能影响公正办案的，有权申请有关人员回避。<br>数字本草认为调查人员应当回避的，决定其回避。</p>
+<p><span>第十三条</span>&nbsp;&nbsp;&nbsp;&nbsp;证据包括书证、物证、调查笔录、鉴定结论、视听材料、电子记录等能够证明案件真实情况的一切材料。证据应当调查核实才能作为定案的根据。</p>
+<p><span>第十四条</span>&nbsp;&nbsp;&nbsp;&nbsp;询问被调查人应当制作调查笔录。调查笔录应当交被调查人核对，核对无误后由被调查人和调查人员签名调查笔录核对无误后，被调查人和调查人员应当在笔录上签名。<br>书证、物证的提取应当制作提取笔录，注明提取的时间和地点，并由被调查人签名。被调查人拒绝签名或无法签名的，由见证人签名。<br>视听资料、电子记录的收集应当注明收集或制作的时间、地点、方式、使用的设备及保存的条件，并由被调查人或见证人签名。<br>鉴定结论应当由数字本草认定的有资质鉴定单位做出，由相关当事人协商选定，协商不成，由数字本草指定，鉴定结论由鉴定单位和鉴定人盖章签字。</p>
+<p><span>第十五条</span>&nbsp;&nbsp;&nbsp;&nbsp;调查人员在常规检查和立案调查过程中应当严格遵守保密制度，不得滥用职权。对违反规定的，数字本草根据不同情节给予相应的处分。</p>
+<p><span>第十六条</span>&nbsp;&nbsp;&nbsp;&nbsp;交易商、交收服务商、指定交收仓库涉嫌重大违规，经数字本草立案调查的，在确认违规行为之前，为防止违规行为后果进一步扩大，确保违规案件处理的执行，数字本草可以对上述机构或人员采取下列限制性措施：</p>
+<p>（一）	限期说明情况；</p>
+<p>（二）	暂停登录新的交易商代码；</p>
+<p>（三）	冻结资金和库存实物；</p>
+<p>（四）	限制订立交易；</p>
+<p>（五）	限期转让； </p>
+<p>（六）	代为转让； </p>
+<p>（七）	限制指定交收仓库的交收业务；</p>
+<p>（八）	数字本草认为必要的其它措施。</p>
+<p>采取前款第（一）至（五）项临时处置措施，可以市场公正运作委员会提出处罚方案，由数字本草总经理决定；其他临时处置措施由数字本草董事会决定，并及时报告市场监管监督管理委员会。</p>
+<h2>第三章&nbsp;&nbsp;&nbsp;&nbsp;违约行为及其处理</h2>
+<p><span>第十七条</span>&nbsp;&nbsp;&nbsp;&nbsp;交易商应对其在数字本草进行的交易活动及其结果承担法律责任。</p>
+<p><span>第十八条</span>&nbsp;&nbsp;&nbsp;&nbsp;违约是指交易商违反合同的约定，不履行或不完全履行合同约定的义务的行为。违约分为交易违约和交收违约两类。</p>
+<p><span>第十九条</span>&nbsp;&nbsp;&nbsp;&nbsp;交易违约</p>
+<p>交易商有下列行为之一的，为交易违约：</p>
+<p>（一）	交易商当日可用资金小于零，并未能在规定时限内补足的；</p>
+<p>（二）	交易商订货量超出规定限额的；</p>
+<p>（三）	交易商在交易过程中出现的恶意炒作、操纵价格、扰乱交易秩序的行为；</p>
+<p>（四）	其他构成交易违约的行为。</p>
+<p><span>第二十条</span>&nbsp;&nbsp;&nbsp;&nbsp;对交易违约的处理</p>
+<p>对十九条所列交易违约行为，数字本草将根据交易违约行为类型对交易商采取以下一种或多种风控措施：</p>
+<p>（一）	提示或劝告；</p>
+<p>（二）	调整其履约订金比例；</p>
+<p>（三）	责成交易商限量或限期自行转让合同；</p>
+<p>（四）	由数字本草强制转让其部分合同强制减仓。</p>
+<p>具体依照《数字本草电子交易中心有限公司风险控制管理办法》相关条款办理。</p>
+<p><span>第二十一条</span>&nbsp;&nbsp;&nbsp;&nbsp;交收违约</p>
+<p>交易商有下列行为之一的，视为交收违约：</p>
+<p>（一）	截止合同规定的最后交收时间，买方未能按成交价将全部货款转（汇）到数字本草指定账户的，且用其履约订金补充后仍有不足的部分；</p>
+<p>（二）	截止合同规定的最后交收时间，卖方未能按合同要求足量履行交货义务的不足部分；</p>
+<p>（三）	卖方所交付的货物经抽样质检，被判定为不符合该合同规定的质量等级要求的；</p>
+<p>（四）	其他构成交收违约的行为。</p>
+<p><span>第二十二条</span>&nbsp;&nbsp;&nbsp;&nbsp;对交收违约的处理</p>
+<p>对于第二十一条所列交收违约行为，按下列方式处理：</p>
+<p>（一）	某合同出现交收违约时，数字本草将冻结相关交易商违约部分的订金、货款、仓单和交收盈亏，同时限制相关交易商办理出金。</p>
+<p>（二）	由数字本草对涉及交收违约的相关交易商各自所持有的该合同订货进行清算，清算价为该合同交收月最后交易日（含当日）前所有交易日结算价的加权平均价。数字本草将分别按照交易商各自所持有该合同订货价的加权平均价与清算价进行转让。</p>
+<p>（三）	对于交收违约的交易商，数字本草将执行清算结果并按以下原则进行资金的划拨：违约方须按数字本草规定标准（违约部分的20%）支付违约金（违约金=交货价×违约数量×20%），数字本草直接从该违约交易商的订金或货款等可用资金中划扣，用于因违约行为导致守约方无法履行合同时对守约方的赔偿；如账户中可用资金不足，该交易商须履行补足亏损金额的义务。否则，数字本草将按交易规则相关规定进行追索。<br>对于因其他交易商的违约行为而无法履行合同的守约方，数字本草将执行清算结果并按以下原则进行资金的划拨：在数字本草收到违约方按数字本草规定的标准支付违约金的前提下，数字本草将该笔资金转入该守约交易商的账户。</p>
+<p>（四）	完成所有清算工作后，买卖双方各自违约数量相对应的合同将解除。数字本草将释放相关交易商按上述规定被冻结的保证金及货款的余额，释放卖方仓单，同时取消出金限制。</p>
+<p>（五）	数字本草在交收过程中收取的交易交收手续费，不因违约而退还。</p>
+<p><span>第二十三条</span>&nbsp;&nbsp;&nbsp;&nbsp;违约金由数字本草从违约方账户的自有资金中直接向守约方划转。如违约方自有资金部分不足，数字本草按以下方式进行处理及追索：</p>
+<p>（一）	用该交易商在数字本草的资金或货物清偿；</p>
+<p>（二）	对该交易商持有合同进行强制转让，用其履约保证金清偿；</p>
+<p>（三）	通过法律途径追索。</p>
+<h2>第四章&nbsp;&nbsp;&nbsp;&nbsp;违约行为及其处理</h2>
+<p><span>第二十四条</span>&nbsp;&nbsp;&nbsp;&nbsp;交易商有以下行为之一的，数字本草责令其改正，并依情节轻重，给予警告或提出公开批评；公开批评累计达到3次的，撤销其交易商资格：</p>
+<p>（一）	提供虚假材料，获得交易商资格；</p>
+<p>（二）	没有按数字本草交易规则的规定进行风险管理的；</p>
+<p>（三）	拒绝、阻扰数字本草依法对其业务行为进行监督检查的；</p>
+<p>（四）	擅自对媒体发布未经审核、确认的有关数字本草的信息、言论，造成重大负面影响的；或进行虚假宣传的；</p>
+<p>（五）	资金、人员和设备严重不足，管理混乱的；</p>
+<p>（六）	数字本草认为的其它情况。</p>
+<p><span>第二十五条</span>&nbsp;&nbsp;&nbsp;&nbsp;交易商存在下列情况之一，并且在数字本草规定期限内未向数字本草书面报告的，数字本草给予警告或公开批评；情节严重的，撤销交易商资格：</p>
+<p>（一）	变更法定代表人；</p>
+<p>（二）	变更注册资本或股权结构；</p>
+<p>（三）	变更名称、住所或者营业场所、经营范围及联系方式；</p>
+<p>（四）	设立、合并或者终止分支机构；</p>
+<p>（五）	变更分支机构的营业场所、负责人或者经营范围；</p>
+<p>（六）	经营状况发生重大变化；</p>
+<p>（七）	发生100万元以上诉讼仲裁案件或其他经济纠纷；</p>
+<p>（八）	取得其他交易中心会员资格；</p>
+<p>（九）	因涉嫌违法、违规受到有权机关立案调查、处罚或者受到其他交易中心处罚。</p>
+<p>（十）	数字本草要求报告的其他情况。</p>
+<p><span>第二十六条</span>&nbsp;&nbsp;&nbsp;&nbsp;交易商存在下列情况之一，数字本草撤销其交易商资格：</p>
+<p>（一）	非法从事代理交易业务；</p>
+<p>（二）	从事非法集资活动；</p>
+<p>（三）	从事与业务范围无关的活动，损害数字本草形象</p>
+<p>（四）	违反国家法律、法规或严重违反数字本草有关规定。</p>
+<p><span>第二十七条</span>&nbsp;&nbsp;&nbsp;&nbsp;交易商具有下列违反交易管理规定行为之一的，责令改正，没收违规所得。情节较轻的，给予警告、代为转让、暂停1个月以内的进行交易处罚；情节严重的，给予通报批评、暂停1至6个月的进行交易或取消交易商资格的处罚。</p>
+<p>（一）	通过合谋集中资金，统一指令，联手买卖，操纵市场价格的；</p>
+<p>（二）	不以成交为目的或明知申报指令不可能成交，仍恶意或连续输入交易指令企图影响市场价格，扰乱市场秩序或转移资金的；</p>
+<p>（三）	为伪造虚假的市场行情而进行连续买卖或蓄意串通，按事先约定的方式或价格进行交易或互为买卖，影响或企图影响市场价格或订货量的；</p>
+<p>（四）	利用内幕信息进行交易或泄露内幕信息影响交易的；</p>
+<p>（五）	以操纵市场为目的，用直接或间接的方法操纵或扰乱交易秩序，妨碍交易，损害国家利益和社会公共利益的；</p>
+<p>（六）	其他违反数字本草有关交易管理规定的行为。</p>
+<p><span>第二十八条</span>&nbsp;&nbsp;&nbsp;&nbsp;对于交易商或交收服务商蓄意违约，影响或企图影响实物交收的正常进行，牟取非法利益的，数字本草对违约交易商可给予公开批评、暂停订立交易1至6个月的处罚。</p>
+<p><span>第二十九条</span>&nbsp;&nbsp;&nbsp;&nbsp;指定交收仓库有下列行为之一的，数字本草责令改正、没收违规所得。情节较轻的，给予警告、公开批评；情节严重的，暂停交收业务、取消其指定交收仓库资格。</p>
+<p>（一）	参加其提供交收服务商品的交易；</p>
+<p>（二）	开具虚假仓单；</p>
+<p>（三）	未完成规定的检验项目而开具仓单；</p>
+<p>（四）	错收错发货物；</p>
+<p>（五）	因保管不当，引起储存商品变质、灭失；</p>
+<p>（六）	在搬运、装卸、堆码等作业过程中造成包装和商品损坏；</p>
+<p>（七）	蓄意刁难，造成卖方交易商或买方交易商违约；</p>
+<p>（八）	违反数字本草交收业务规则，限制、故意拖延交收商品的入库、出库；</p>
+<p>（九）	商品交收中不按数字本草规定收费；</p>
+<p>（十）	擅自挪用或调换交收商品；</p>
+<p>（十一）    盗卖交收商品；</p>
+<p>（十二）    代理交易商收购货物用于申领仓单</p>
+<p>（十三）    其他违反数字本草规则，损害交易商或交收服务商的行为。</p>
+<p><span>第三十条</span>&nbsp;&nbsp;&nbsp;&nbsp;交易商、指定交收仓库有多种违规行为的，数字本草可采取“分别定性，数罚并用”的处理措施；多次违规的，从重或加重处罚。</p>
+<p><span>第三十一条</span>&nbsp;&nbsp;&nbsp;&nbsp;数字本草工作人员违反有关规定的，按国家法律、法规和数字本草内部管理制度的有关规定处理。</p>
+<h2>第五章&nbsp;&nbsp;&nbsp;&nbsp;处罚程序与执行</h2>
+<p><span>第三十二条</span>&nbsp;&nbsp;&nbsp;&nbsp;撤销数字本草资格的处罚由数字本草市场部提出，报交易商资格审查委员会审核，由数字本草总经理批准。其他处罚由数字本草运营部门提出，报公平运作委员会审核，由数字本草总经理批准。</p>
+<p><span>第三十三条</span>&nbsp;&nbsp;&nbsp;&nbsp;数字本草对违规行为查核后，事实清楚、证据确凿的，依照数字本草交易规则及本办法规定予以裁定并执行。</p>
+<p><span>第三十四条</span>&nbsp;&nbsp;&nbsp;&nbsp;数字本草做出处罚应制作处理决定书。</p>
+<p>处理决定书主要包括以下内容：</p>
+<p>（一）	当事人的姓名或者名称、住所；</p>
+<p>（二）	违规事实和证据；</p>
+<p>（三）	处罚种类和依据；</p>
+<p>（四）	处罚的履行方式和限期；</p>
+<p>（五）	不服处罚决定申请复议途径和限期；</p>
+<p>（六）	做出处理决定的日期。</p>
+<p><span>第三十五条</span>&nbsp;&nbsp;&nbsp;&nbsp;数字本草应将处理决定书送达当事人。处理决定书可挂号邮寄送达。邮件按其在数字本草住所寄出后，市内3日、市外7日视为送达。处理决定书同时分送有关协助执行部门。</p>
+<p><span>第三十六条</span>&nbsp;&nbsp;&nbsp;&nbsp;数字本草做出的处理决定书自送达之日起生效。</p>
+<p>当事人对处理决定书不服的，可于决定书生效之日起10日内向数字本草书面申请复议一次，复议期间不停止决定的执行。</p>
+<p><span>第三十七条</span>&nbsp;&nbsp;&nbsp;&nbsp;数字本草应于收到复议申请书之日起一个月内做出复议决定，复议决定为最终决定。</p>
+<h2>第六章&nbsp;&nbsp;&nbsp;&nbsp;纠纷调解</h2>
+<p><span>第三十八条</span>&nbsp;&nbsp;&nbsp;&nbsp;交易商在交易及交收过程中所产生的纠纷，交易商、指定交收仓库、交收服务商、指定检验机构在数字本草交易、结算、交割过程中发生争议时，可自行协商解决，也可向数字本草申请调解。争议各方经协商或数字本草调解，达成协议的，由数字本草监督协议的履行；若在争议发生后30日内，争议各方协商不成或数字本草调解无效的，各方同意将争议提交河北省仲裁委员会进行仲裁解决。</p>
+<p><span>第三十九条</span>&nbsp;&nbsp;&nbsp;&nbsp;当事人向公平运作委员会提出调解申请，应当自其知道或者应当知道其合法权益被侵害之日起30日内提出。</p>
+<p><span>第四十条</span>&nbsp;&nbsp;&nbsp;&nbsp;当事人申请调解应当符合下列条件：</p>
+<p>（一）	有调解申请书；</p>
+<p>（二）	有具体的事实、理由和请求；</p>
+<p>（三）	属于公平运作委员会的受理范围。</p>
+<p><span>第四十一条</span>&nbsp;&nbsp;&nbsp;&nbsp;当事人向公平运作委员会申请调解，应当提交书面申请和有关材料。</p>
+<p>调解申请书应当写明下列事项：</p>
+<p>（一）	当事人的姓名、性别、年龄、职业、工作单位和住所，或者单位名称、住所和法定代表人或者负责人的姓名、职务；</p>
+<p>（二）	调解的事实、理由和请求；</p>
+<p>（三）	有关证据。</p>
+<p><span>第四十二条</span>&nbsp;&nbsp;&nbsp;&nbsp;当事人根据有关规定负有举证的责任。公平运作委员会认为必要时，可以调查收集证据。</p>
+<p><span>第四十三条</span>&nbsp;&nbsp;&nbsp;&nbsp;数字本草调解纠纷应在事实清楚、责任明确的基础上，依据国家有关法律、法规和数字本草的规章制度进行。</p>
+<p><span>第四十四条</span>&nbsp;&nbsp;&nbsp;&nbsp;数字本草调解纠纷应当在查明事实的基础上，促使当事各方相互谅解，达成协议。</p>
+<p><span>第四十五条</span>&nbsp;&nbsp;&nbsp;&nbsp;经调解达成的协议应当记录在案，并制作调解书，经双方当事人签收后生效。</p>
+<p><span>第四十六条</span>&nbsp;&nbsp;&nbsp;&nbsp;调解书应当写明下列内容：</p>
+<p>（一）	双方当事人的名称、住所、法定代表人或者负责人的姓名及职务以及代理人的姓名及其与当事人的关系；</p>
+<p>（二）	争议的事项和请求；</p>
+<p>（三）	协议结果。</p>
+<p><span>第四十七条</span>&nbsp;&nbsp;&nbsp;&nbsp;公平运作委员会应当在受理调解后30日内结案；到期未结案的，调解委员会应当向当事人说明理由。双方当事人要求继续调解的，调解委员会应当继续调解。一方要求终止调解的，应当终止调解。</p>
+<p><span>第四十八条</span>&nbsp;&nbsp;&nbsp;&nbsp;数字本草调解不成的，当事人可以依法提请河北仲裁委员会进行仲裁。</p>
+<h2>第七章&nbsp;&nbsp;&nbsp;&nbsp;附&nbsp;&nbsp;则</h2>
+<p><span>第四十九条</span>&nbsp;&nbsp;&nbsp;&nbsp;本办法的解释权和修订权属数字本草。</p>
+<p><span>第五十条</span>&nbsp;&nbsp;&nbsp;&nbsp;本办法自发布之日起试行。</p>"
+
+;;homePageRule3Component;"<h1>数字本草电子交易中心信息披露管理办法</h1>
+<h2>第一章&nbsp;&nbsp;&nbsp;&nbsp;总&nbsp;&nbsp;则</h2>
+<p><span>第一条</span>&nbsp;&nbsp;&nbsp;&nbsp;为规范信息发布和使用，保障交易商及时有效地获得信息，维护数字本草电子交易中心（以下简称“数字本草”）相关信息管理权利，根据国家有关法律法规和《数字本草电子交易中心交易规则》等规则，制定本管理办法。</p>  	
+<p><span>第二条</span>&nbsp;&nbsp;&nbsp;&nbsp;本管理办法所称信息，是指与在数字本草交易商品有关的任何信息与数据，包括数字本草所有交易商品的交易行情、各种交易数据统计资料、数字本草发布的各种公告和通知、数字本草行情综述、国家及行业相关政策及生产贸易信息，以及数字本草交易商遵照数字本草有关规定发布的商品供求信息、企业经营广告信息等。</p>  	
+<p><span>第三条</span>&nbsp;&nbsp;&nbsp;&nbsp;数字本草对信息享有所有权，未经数字本草授权许可，任何单位和个人不得从事与数字本草信息有关的业务，包括发布、经营、增值开发或者传播数字本草信息等。</p>
+<p><span>第四条</span>&nbsp;&nbsp;&nbsp;&nbsp;数字本草可以独立、与第三方合作或者委托第三方对数字本草信息进行经营管理。</p>  	
+<p><span>第五条</span>&nbsp;&nbsp;&nbsp;&nbsp;数字本草信息的发布、经营、传播和使用适用本办法。数字本草、交易商、指定交收仓库、信息服务机构、软件开发公司，以及其他经营、传播和使用数字本草信息的组织应当遵守本办法。</p>
+<h2>第二章&nbsp;&nbsp;&nbsp;&nbsp;信息内容及发布</h2>
+<p><span>第六条</span>&nbsp;&nbsp;&nbsp;&nbsp;数字本草通过数字本草网站或行情交易系统发布相关信息，包括数字本草重大动态、文件、公告、当日交易行情、相关统计资料和行业信息等。</p>
+<p><span>第七条</span>&nbsp;&nbsp;&nbsp;&nbsp;数字本草相关文件和公告，自发布起即时生效并视同送达。</p>
+<p><span>第八条</span>&nbsp;&nbsp;&nbsp;&nbsp;根据市场情况，数字本草有权对上述相关信息发布内容和时间进行调整。</p>
+<p><span>第九条</span>&nbsp;&nbsp;&nbsp;&nbsp;数字本草发布的交易行情信息包括：货物合同代码、交货时间、最新价、涨跌、开盘价、收盘价、最高价、最低价、结算价、成交量和订货量等。</p>
+<p><span>第十条</span>&nbsp;&nbsp;&nbsp;&nbsp;数字本草配备相应设施，建立药材的基于互联网通讯技术的同步报价、交易和成交查询系统，并根据情况及时进行升级。</p>
+<p><span>第十一条</span>&nbsp;&nbsp;&nbsp;&nbsp;交易商通过数字本草交易系统进行交易，签订合同，实时查看货物交易行情，并及时获得自身货物采购或销售的交易、结算或交收信息。</p>
+<p><span>第十二条</span>&nbsp;&nbsp;&nbsp;&nbsp;交易商应对自身交易代码、交易密码、成交数据等相关信息强化保密意识和防范措施，并对自身系统交易终端设施及时进行升级和维护，对交易商因自身原因，导致其系统交易终端中毒、木马盗号等产生泄密或损失情况的，后果自负。</p>
+<p><span>第十三条</span>&nbsp;&nbsp;&nbsp;&nbsp;交易商利用数字本草网站或交易系统，进行信息发布或货物交易时，应保证自身所提供、发布或交易信息等的真实性和有效性。</p>
+<p><span>第十四条</span>&nbsp;&nbsp;&nbsp;&nbsp;交易商故意提供、发布虚假信息造成数字本草或第三方损失的，须承担相应责任，数字本草有权对其进行处罚并要求赔偿相关损失。</p>
+<p><span>第十五条</span>&nbsp;&nbsp;&nbsp;&nbsp;数字本草、交易商、指定交收仓库、指定资金存管银行和其它业务关联方，应严格保守参与数字本草业务所获取的各类商业秘密，并不得利用上述获得的商业秘密进行任何商业盈利行为，或者开展有害于其它业务关联方行为。</p>
+<p><span>第十六条</span>&nbsp;&nbsp;&nbsp;&nbsp;为保证交易及资金数据安全，数字本草和指定资金存管银行将分别建立有效的数据备份系统。</p>
+<h2>第三章&nbsp;&nbsp;&nbsp;&nbsp;信息传播及免责</h2>	
+<p><span>第十七条</span>&nbsp;&nbsp;&nbsp;&nbsp;数字本草通过数字本草系统、互联网站、会员席位等方式发布信息，并通过经数字本草授权的信息服务机构、公共媒体等机构传播信息。</p>	
+<p><span>第十八条</span>&nbsp;&nbsp;&nbsp;&nbsp;因不可抗力、意外事件等原因，导致交易信息及设备传输中断或者发生故障无法正常运作时，数字本草不承担任何责任。</p>	
+<p><span>第十九条</span>&nbsp;&nbsp;&nbsp;&nbsp;数字本草信息发布正常，但因互联网络等原因影响交易商自身正常接收信息的，数字本草不承担相关责任。</p>	
+<h2>第四章&nbsp;&nbsp;&nbsp;&nbsp;信息服务</h2>	
+<p><span>第二十条</span>&nbsp;&nbsp;&nbsp;&nbsp;数字本草对在数字本草挂牌商品交易产生的信息享有所有权。数字本草除有义务向主管机关、交易商和法律规定的有关单位提供信息外，数字本草的一切信息服务均实行有偿服务。</p>	
+<p><span>第二十一条</span>&nbsp;&nbsp;&nbsp;&nbsp;交易商对数字本草信息传播的范围只限于其营业场所，数字本草信息的使用对象只能是交易商自身。未经数字本草许可，交易商不得自行或与第三方合作再传播或经营数字本草信息。</p>	
+<p><span>第二十二条</span>&nbsp;&nbsp;&nbsp;&nbsp;信息服务分为信息传播服务和信息增值服务。从事信息服务业务，应当经数字本草许可或者授权，并与数字本草签订信息许可协议。</p>	
+<p><span>第二十三条</span>&nbsp;&nbsp;&nbsp;&nbsp;信息传播服务是指经数字本草许可或者授权，向其他机构传输，或者向信息终端用户（以下简称终端用户）、社会公众传播数字本草信息的服务业务。 </p>	
+<p><span>第二十四条</span>&nbsp;&nbsp;&nbsp;&nbsp;信息增值服务是指经数字本草许可或者授权，对数字本草信息进行加工，产生增值的服务业务。</p>	
+<p><span>第二十五条</span>&nbsp;&nbsp;&nbsp;&nbsp;申请信息传播服务，应当具备下列条件：</p>	
+<p>（一）	应当自行建立信息服务系统，能够提供以市场为导向的显示应用系统；</p>
+<p>（二）	应当设置监控中心，具有控制功能，并配置软、硬件工程师；</p>
+<p>（三）	具备必要的接收或者储存交易信息的设备或者方式，能够有效地防止交易信息的非授权接收、传播或者使用；</p>	
+<p>（四）	公司财务及经营状况良好；</p>	
+<p>（五）	无不良商业记录；</p>	
+<p>（六）	数字本草规定的其他条件。</p>	
+<p><span>第二十六条</span>&nbsp;&nbsp;&nbsp;&nbsp;申请信息增值服务业务，除满足上面条款第（三）、（四）、（五）、（六）项之规定外，还应当具有信息增值开发的能力和资质。</p>	
+<p><span>第二十七条</span>&nbsp;&nbsp;&nbsp;&nbsp;申请信息服务的，应当依照数字本草规定向数字本草提交下列材料：</p>	
+<p>（一）	数字本草信息服务业务申请表，并注明申请从事的业务类型；</p>
+<p>（二）	法定代表人或者负责人身份证件；</p>
+<p>（三）	工商行政管理部门核发的营业执照；</p>	
+<p>（四）	组织机构代码证；</p>	
+<p>（五）	经会计师事务所审核的最近一个会计年度的财务报告； </p>	
+<p>（六）	特许行业者需附主管机关的许可证照；</p>	
+<p>（七）	数字本草要求提供的其他材料。</p>	
+<p><span>第二十八条</span>&nbsp;&nbsp;&nbsp;&nbsp;申请直接连接数字本草系统的，应当首先通过数字本草连接测试。其与数字本草系统连接时，不得影响数字本草交易业务，必要时数字本草可以限制其连接。</p>	
+<p><span>第二十九条</span>&nbsp;&nbsp;&nbsp;&nbsp;从事信息服务业务的机构改变连接方式的，应当事先报数字本草同意。 </p>	
+<p><span>第三十条</span>&nbsp;&nbsp;&nbsp;&nbsp;从事信息服务业务的机构以及交易商应当与数字本草签订交易信息许可协议，严格依照交易信息许可协议接收、储存、在许可的区域内传播交易信息或者在其基础上进行增值开发，履行交易信息许可协议规定的义务。</p>	
+<p><span>第三十一条</span>&nbsp;&nbsp;&nbsp;&nbsp;未经数字本草许可，从事信息服务业务的机构不得将交易信息用于信息许可协议载明的许可用途之外的任何目的。</p>	
+<p><span>第三十二条</span>&nbsp;&nbsp;&nbsp;&nbsp;从事信息传播服务的机构及交易商在传播数字本草信息时，应当保证其真实、准确、完整，并且在传播过程中明确注明信息来源。</p>	
+<p><span>第三十三条</span>&nbsp;&nbsp;&nbsp;&nbsp;从事信息传播服务的机构或者交易商，发现其传输、传播的交易信息或者同时传播的新闻信息内容有错误时，应当立即通知数字本草，及时更正并公开说明。</p>	
+<p><span>第三十四条</span>&nbsp;&nbsp;&nbsp;&nbsp;从事信息传播服务的机构或者交易商，在传输或者传播交易信息时，应当采取必要的技术措施以防止该信息被盗用、窃取或者外接使用。</p>	
+<p>不符合上述规定的，数字本草有权自行或者要求其他从事信息传播服务的机构暂停或者终止向其提供交易信息。</p>
+<p><span>第三十五条</span>&nbsp;&nbsp;&nbsp;&nbsp;从事信息传播服务的机构或者交易商未经数字本草同意，不得将交易信息出售或者转让他人，或者以任何方式再转接到其他场所。</p>	
+<p><span>第三十六条</span>&nbsp;&nbsp;&nbsp;&nbsp;从事信息传播服务的机构向其他机构传输交易信息，供后者进行再传播或者增值开发的，应当通知数字本草，并要求后者提供其已获得数字本草合法授权或者许可的证明。后者未提供前述证明的，从事信息传播服务的机构不得向其提供交易信息。</p>	
+<p><span>第三十七条</span>&nbsp;&nbsp;&nbsp;&nbsp;从事信息传播服务的机构，法定代表人、联系人、营业地址、联系电话、传真号码以及其他经数字本草规定应当申报的事项发生变更的，应当于该事实发生之日起10个工作日内向数字本草报告。</p>	
+<p><span>第三十八条</span>&nbsp;&nbsp;&nbsp;&nbsp;从事信息增值服务的机构在对信息进行增值开发时，应当保证信息的真实、准确、完整。对于经其加工处理后的信息，应当明显标示增值开发机构名称及加注说明，并承担法律责任。</p>	
+<p><span>第三十九条</span>&nbsp;&nbsp;&nbsp;&nbsp;从事信息增值服务的机构发现经其加工处理后的信息有错误或者可能误导信息消费者时，应当立即通知数字本草，及时更正并公开说明。</p>	
+<p><span>第四十条</span>&nbsp;&nbsp;&nbsp;&nbsp;从事信息增值服务的机构对信息进行的增值开发应当仅限于信息服务的目的。未经数字本草事先书面同意，信息增值服务机构不得为信息服务以外的任何目的进行增值开发。</p>	
+<p><span>第四十一条</span>&nbsp;&nbsp;&nbsp;&nbsp;发现或者认为可能存在针对数字本草信息的侵权行为的，信息服务机构应当立即通知数字本草，协助数字本草展开调查，并配合数字本草针对侵权行为采取包括诉讼在内的法律措施。</p>	
+<h2>第四章&nbsp;&nbsp;&nbsp;&nbsp;监督管理</h2>	
+<p><span>第四十二条</span>&nbsp;&nbsp;&nbsp;&nbsp;对未经数字本草许可，擅自发布、传输和传播交易信息的机构和个人，数字本草有权终止其接收、传输和传播数字本草信息，必要时追究其法律责任。</p>	
+<p><span>第四十三条</span>&nbsp;&nbsp;&nbsp;&nbsp;对未经数字本草许可，擅自对交易信息进行增值开发的机构和个人，数字本草有权要求其停止增值开发，禁止其使用增值开发成果，必要时追究法律责任。</p>	
+<p><span>第四十四条</span>&nbsp;&nbsp;&nbsp;&nbsp;信息服务机构应当将约定的增值开发成果向数字本草备案。未履行备案义务的，数字本草有权终止向其提供交易信息，并可根据已签署的交易信息许可协议进行处理。</p>	
+<p><span>第四十五条</span>&nbsp;&nbsp;&nbsp;&nbsp;已获数字本草许可传播和增值开发信息的机构违反本办法的，数字本草根据已签署的交易信息许可协议进行处理。</p>	
+<p><span>第四十六条</span>&nbsp;&nbsp;&nbsp;&nbsp;交易商使用、传播数字本草信息的，除遵守本办法有关规定外，还应当遵守《天津数字本草交易商管理办法》的有关规定。</p>	
+<p><span>第四十七条</span>&nbsp;&nbsp;&nbsp;&nbsp;交易商违反本办法的，数字本草将根据《天津数字本草违规违约处理办法》以及相关协议进行处理。</p>	
+<h2>第六章&nbsp;&nbsp;&nbsp;&nbsp;附&nbsp;&nbsp;则</h2>	
+<p><span>第四十八条</span>&nbsp;&nbsp;&nbsp;&nbsp;本办法由数字本草负责解释。</p>	
+<p><span>第四十九条</span>&nbsp;&nbsp;&nbsp;&nbsp;本办法自数字本草发布之日起试行。</p>"	
+	
+;;homePageRule4Component;"<h1>数字本草电子交易中心指定交收仓库管理办法</h1>	
+<h2>第一章&nbsp;&nbsp;&nbsp;&nbsp;总&nbsp;&nbsp;则</h2>	
+<p><span>第一条</span>&nbsp;&nbsp;&nbsp;&nbsp;为加强数字本草电子交易中心（以下简称“数字本草”）指定交收仓库的管理，规范交收行为，保证交收正常进行，根据《中华人民共和国合同法》和《数字本草电子交易中心交易规则》的有关规定，制定本办法。</p>	
+<p><span>第二条</span>&nbsp;&nbsp;&nbsp;&nbsp;指定交收仓库是指根据交易需要，由交易商申请并经数字本草指定的，用于交易商履行在数字本草签订合同时进行货物交收的仓库。</p>	
+<p><span>第三条</span>&nbsp;&nbsp;&nbsp;&nbsp;数字本草依据本办法对指定交收仓库进行监管，指定交收仓库及其工作人员应当遵守本办法。</p>	
+<h2>第二章&nbsp;&nbsp;&nbsp;&nbsp;申请和审批</h2>	
+<p><span>第四条</span>&nbsp;&nbsp;&nbsp;&nbsp;申请数字本草指定交收仓库，应当具备以下条件：</p>	
+<p>（一）	具有工商行政管理部门颁发的营业执照；</p>
+<p>（二）	固定资产和注册资本应当达到数字本草规定的数额；</p>
+<p>（三）	财务状况良好，具有较强的抗风险能力；</p>	
+<p>（四）	具有良好的商业信誉，完善的仓储管理规章制度；近三年内无严重违法行为记录和被取消指定交收仓库资格的记录；</p>	
+<p>（五）	承认数字本草的交易规则、交收细则等； </p>	
+<p>（六）	仓库主要管理人员应当有五年以上的仓储管理经验以及有一支训练有素的专业管理队伍；</p>	
+<p>（七）	有严格、完善的商品出入库制度、库存商品管理制度等；</p>
+<p>（八）	堆场、库房有一定规模，有储存数字本草上市商品的条件、设备完好、齐全、计量符合规定要求以及良好的交通运输条件；</p>
+<p>（九）	数字本草要求的其他条件。</p>
+<p><span>第五条</span>&nbsp;&nbsp;&nbsp;&nbsp;申请成为数字本草指定交收仓库应当提供下列材料：</p>	
+<p>（一）	数字本草指定交收仓库申请书；</p>
+<p>（二）	工商行政管理部门颁发的营业执照复印件（加盖单位公章）；</p>
+<p>（三）	注册会计师事务所出具的近两年审计报告原件或加盖会计师事务所印章的复印件；</p>	
+<p>（四）	申请单位仓库土地使用证复印件及相关文件（加盖单位公章）；</p>	
+<p>（五）	申请单位上级主管部门或其董事会出具的同意申请指定交收仓库的批准文件； </p>	
+<p>（六）	仓库管理制度及简介；</p>	
+<p>（七）	数字本草要求提供的其他文件。</p>
+<p><span>第六条</span>&nbsp;&nbsp;&nbsp;&nbsp;指定交收仓库的审批程序：</p>	
+<p>（一）	数字本草根据前条所列材料进行初审；</p>
+<p>（二）	数字本草根据初审结果派员对申请单位进行实地调查和评估；</p>
+<p>（三）	数字本草根据实地调查和评估结果择优选用仓储企业，并与之签订《指定交收仓库协议书》。</p>
+<p><span>第七条</span>&nbsp;&nbsp;&nbsp;&nbsp;指定交收仓库经数字本草核定批准后应当办理以下事宜：</p>	
+<p>（一）	指定交收仓库签发《存货凭证》所需各种印章应当到数字本草备案；</p>
+<p>（二）	指定交收仓库须书面确定一名负责人，具体负责数字本草交收业务。交收业务指定专人授权书及专人签字应当到数字本草备案；</p>
+<p>（三）	指定交收仓库从事数字本草交收品种的管理和业务人员，应当接受数字本草的交收业务培训；</p>
+<p>（四）	数字本草规定的其他事宜。</p>
+<p><span>第八条</span>&nbsp;&nbsp;&nbsp;&nbsp;指定交收仓库申请放弃指定交收仓库资格，应当向数字本草递交《放弃指定交收仓库资格申请书》，并经数字本草审核批准。</p>
+<p><span>第九条</span>&nbsp;&nbsp;&nbsp;&nbsp;指定交收仓库放弃或被取消资格的，应当办理以下事项：</p>
+<p>（一）	交收商品全部出库或转为非数字本草交收商品；</p>
+<p>（二）	结清与数字本草的债权债务；</p>
+<p>（三）	其它与数字本草相关事项。</p>
+<p><span>第十条</span>&nbsp;&nbsp;&nbsp;&nbsp;指定交收仓库在办理上述事项中，应服从数字本草安排，保证交收商品安全和对数字本草及相关各方债权债务的顺利了结，否则须承担相应的赔偿责任，数字本草有权根据相关规定对其处罚，并拥有继续向该仓库追索损失赔偿的权利。</p>
+<p><span>第十一条</span>&nbsp;&nbsp;&nbsp;&nbsp;指定交收仓库资格的确认、放弃或取消，数字本草应当及时通告交易商及指定交收仓库。</p>
+<h2>第三章&nbsp;&nbsp;&nbsp;&nbsp;权利和义务</h2>	
+<p><span>第十二条</span>&nbsp;&nbsp;&nbsp;&nbsp;指定交收仓库的权利：</p>
+<p>（一）	按数字本草规定签发《存货凭证》；</p>
+<p>（二）	按数字本草审定的收费项目、标准和方法收取有关费用；</p>
+<p>（三）	对数字本草制定的有关交收的规定享有建议权；</p>
+<p>（四）	数字本草交收细则和《指定交收仓库协议书》规定的其他权利；</p>
+<p>（五）	参加数字本草组织的相关培训及其它活动。</p>
+<p><span>第十三条</span>&nbsp;&nbsp;&nbsp;&nbsp;指定交收仓库的义务：</p>
+<p>（一）	遵守数字本草的交收细则和其他有关规定，接受数字本草的监管，及时向数字本草提供有关情况；</p>
+<p>（二）	根据现货提单规定的标准，对用于交收的商品进行验收入库；</p>
+<p>（三）	按规定保管好库内的商品，确保商品安全；</p>
+<p>（四）	按现货提单要求提供商品，积极协助货主安排交收商品的运输；</p>
+<p>（五）	保守获悉的与数字本草及交易商相关的商业秘密；</p>
+<p>（六）	参加数字本草组织的年审，积极配合数字本草的监督和检查工作；</p>
+<p>（七）	不得参与数字本草交易；</p>
+<p>（八）	变更法定代表人、注册资本、股东或股权结构、仓储场地、授权业务人员等事项，应当及时向数字本草报告；</p>
+<p>（九）	数字本草交收细则和《指定交收仓库协议书》规定的其他义务。</p>
+<h2>第四章&nbsp;&nbsp;&nbsp;&nbsp;日常业务</h2>	
+<p><span>第十四条</span>&nbsp;&nbsp;&nbsp;&nbsp;指定交收仓库的日常业务主要包括：商品入库、商品保管和商品出库。</p>
+<p><span>第十五条</span>&nbsp;&nbsp;&nbsp;&nbsp;指定交收仓库应保证数字本草交收商品优先办理入库、出库。不得将非数字本草交收商品与数字本草交收商品混放，否则应负由此产生的风险和损失赔偿责任。</p>
+<p><span>第十六条</span>&nbsp;&nbsp;&nbsp;&nbsp;商品入库是商品进入储存的第一阶段，商品入库依次经过下列作业环节：</p>
+<p>（一）	商品接运。接运工作的主要任务是及时而准确地向运输部门接收入库商品，手续要清楚，责任要分明，遇有封识损坏、苫罩异常、货证不符、数量短缺、商品残损、包装损坏等现象的，一要摸清情况；二要分清责任，向承运部门索要商务记录或普通记录，交货主处理；三要做好入库验收记录。</p>
+<p>（二）	商品验收。商品的验收是按一定的程序和手续，对某项商品的外观质量和数量进行检查，以验证其是否货证一致，是否符合数字本草交收规定的一项工作。数字本草指定交收仓库的验收项目为：商品名称、商标、规格、数量、必备的入库资料、包装状况，以及无须开箱拆捆直观可见可辨的表面质量状况（问题较多、直观难见或已有规则规定按比例抽样检查的，应当拆箱、拆捆、拆包检查）。</p>
+<p>（三）	商品入库和签发《存货凭证》。商品验收无误（或在验收中发现的问题已处理完毕）方可办理入库手续，即登账、立卡、建立商品档案，并根据货主要求按数字本草的具体规定签发《存货凭证》。</p>
+<p><span>第十七条</span>&nbsp;&nbsp;&nbsp;&nbsp;商品经验收入库后，即进入储存阶段，在整个储存期间仓库应当做好商品的保管保养工作。指定交收仓库应当根据各种商品不同的性能、特点，结合当地的自然条件选择合适储存场所和科学合理的堆码方式，对商品进行不同的保管、维护和保养，以确保储存商品完好。</p>
+<p><span>第十八条</span>&nbsp;&nbsp;&nbsp;&nbsp;交收商品验收码放时，不同交易商、品种、规格、牌号、生产厂家、出厂日期的商品应分货位码放。办理过户时，根据实际情况可不移动货位。码大垛、高垛时，不能超过地面设计负荷能力，严禁压沉地面。</p>
+<p><span>第十九条</span>&nbsp;&nbsp;&nbsp;&nbsp;指定交收仓库应当对交收商品实行挂牌管理，挂牌标识的内容应包括：商品名称、规格、牌号、出厂日期、数量、重量、存放仓库、货位等。</p>
+<p><span>第二十条</span>&nbsp;&nbsp;&nbsp;&nbsp;商品在储存保管期间，指定交收仓库必须做好商品储存记录。储存记录内容包括：商品入库时间、存货方位、储存期间货物外观变化情况、出库情况等。同时还应定期将库存情况通报数字本草交收服务部门。</p>
+<p><span>第二十一条</span>&nbsp;&nbsp;&nbsp;&nbsp;指定交收仓库对交收商品存放货位不得移动，如确需移动，必须征得数字本草同意后方可进行，同时将相关情况及时反馈数字本草。</p>
+<p><span>第二十二条</span>&nbsp;&nbsp;&nbsp;&nbsp;未经数字本草批准，交易商无权进入指定交收仓库查看储存货物。对于持数字本草现货提单到指定交收仓库提货的交易商，指定交收仓库应在验明身份后方可允许交易商进仓验货。</p>
+<p><span>第二十三条</span>&nbsp;&nbsp;&nbsp;&nbsp;商品出库是指定交收仓库根据货主的要求，用发货、送货、代运等方式将商品发送出库。商品出库标志着储存阶段结束。</p>
+<p><span>第二十四条</span>&nbsp;&nbsp;&nbsp;&nbsp;商品出库应当核对出库凭证、检查无误方可发货；发货完毕当日登销料账、清理单据证件、清理场地、整理货垛；对需办理代运的物资应当提前向承运部门提出运输计划；收回《存货凭证》加盖“货讫”章与仓库留底配对后保存。</p>
+<p><span>第二十五条</span>&nbsp;&nbsp;&nbsp;&nbsp;商品过户。过户应当做好记录和料账的登、销工作。</p>
+<p><span>第二十六条</span>&nbsp;&nbsp;&nbsp;&nbsp;指定交收仓库在办理商品进出库手续时，应当及时将相应数据录入交收管理系统，并做好数据传送工作。</p>
+<h2>第四章&nbsp;&nbsp;&nbsp;&nbsp;监督管理</h2>	
+<p><span>第二十七条</span>&nbsp;&nbsp;&nbsp;&nbsp;指定交收仓库应当对数字本草交收商品单独设账管理。</p>
+<p><span>第二十八条</span>&nbsp;&nbsp;&nbsp;&nbsp;为保证和提高数字本草指定交收仓库为交易商服务的质量，切实改进仓库管理水平，数字本草对指定交收仓库实行仓库自查、数字本草抽查和年审制度。</p>
+<p>（一）	自查制度。各指定交收仓库根据本办法、交收细则、现货提单管理办法和仓库的实际情况，每月选择一项或几项工作内容进行检查，并做好记录。</p>
+<p>（二）	数字本草抽查制度。数字本草根据掌握的情况或交易商的反映，随时对各指定交收仓库的一项或多项工作进行抽查，并做好详细记录，以检查指定交收仓库在日常工作中对数字本草各项规定的执行情况。</p>
+<p>（三）	年审制度。数字本草每一年度对指定交收仓库的工作做一次年度检查并进行考核评比，提出下一年度的要求。</p>
+<p><span>第二十九条</span>&nbsp;&nbsp;&nbsp;&nbsp;数字本草审查的内容包括仓储设施、库容库貌、业务能力、业务实绩、账目管理、交易商满意程度以及数字本草认为必要的其他内容。</p>
+<p><span>第三十条</span>&nbsp;&nbsp;&nbsp;&nbsp;对审查发现不符合要求、或存在违规、违约行为的仓库，数字本草可以采取限期整改、减少核定库容、暂停交收业务等措施，直至取消其指定交收仓库的资格，并予以公告。</p>
+<p><span>第三十一条</span>&nbsp;&nbsp;&nbsp;&nbsp;禁止指定交收仓库试行下列行为：</p>
+<p>（一）	擅自处理（包括挪用、调换等）数字本草相关业务仓储商品；</p>
+<p>（二）	与交易商联手，以虚占库容等方式影响或企图影响数字本草正常交易业务和市场价格；</p>
+<p>（三）	与交易商通谋虚开《存货凭证》，或实开存货凭证后私自将存放商品出库；</p>
+<p>（四）	未取得质量保证书等相关单据，或未完成规定的验收项目而签发《存货凭证》；</p>
+<p>（五）	不遵守数字本草审定项目及标准的费用规定，滥行收费；</p>
+<p>（六）	蓄意刁难，造成交易商违约；</p>
+<p>（七）	拒绝、阻挠数字本草正常的监督和检查工作；</p>
+<p>（八）	其他违规违约、弄虚作假，影响数字本草业务正常进行的；</p>
+<p>（九）	为未解除质押的货物办理出库；</p>
+<p>（十）	违反数字本草规定的其他行为。</p>
+<p><span>第三十二条</span>&nbsp;&nbsp;&nbsp;&nbsp;指定交收仓库存在上述禁止行为的，数字本草可根据数字本草相关规定对其进行处罚。上述行为给数字本草或交易商造成损害的，指定交收仓库应予以赔偿；构成犯罪的，数字本草有权移交司法机关追究其刑事责任。</p>
+<h2>第六章&nbsp;&nbsp;&nbsp;&nbsp;附&nbsp;&nbsp;则</h2>	
+<p><span>第三十三条</span>&nbsp;&nbsp;&nbsp;&nbsp;根据市场状况和交易商需求，数字本草有权对上述相关内容进行修改和调整。</p>
+<p><span>第三十四条</span>&nbsp;&nbsp;&nbsp;&nbsp;本办法解释权属于数字本草。</p>
+<p><span>第三十五条</span>&nbsp;&nbsp;&nbsp;&nbsp;本办法自数字本草颁布之日起试行。</p>"
+
+;;homePageLetters1Component;"<h1>5月6日禹州中药材市场交易快报</h1>	
+<p>杏仁：价微滑，走动不快，统货市价22-24元。</p>	
+<p>菊花：走缓价滑，统货市价23-27元不等。</p>	
+<p>川芎：随着奶芎上市，老芎走稳，统货的价格21-21.5元。</p>	
+<p>何首乌：近段价微滑，统货市价14-14.5元。</p>	
+<p>云木香：走畅，产地价升 ，市场随着升，统货市价7-7.5元。</p>	
+<p>补骨脂：走畅，市场货量较少，统货市价8.5元左右。</p>"
+	
+;;homePageLetters2Component;"<h1>5月6日安国中药材市场交易快报</h1>	
+<p>国贸路是东北商户的天下，主要经营品种是红参、白参、西洋参，还有北五味、辽细辛、龙胆草、平贝等，其它还有鹿茸、鹿角、鹿鞭，灵芝、不老草、红景天。</p>	
+<p>西北品种大多在“国强药材行”销售，多数为甘肃产地直销商，另一部分为邯郸的专营户。主要经营当归、党参、甘草、黄芩等几个大宗饮片，整体行情向好。</p>	
+<p>黄连 近期市价回稳，现价格单支连78-82元，鸡爪连70-72元。</p>	
+<p>桔梗市价回落较大，走动放缓，现家种品33-35元，野生品40-46元。</p>	
+<p>地产市场的老药市即祁州药市，今天是农历腊月23小集，只有几份地产菊花应市，优质新货收购价35-36元，销售38-40元，陈货20-22元，其它品种均无。</p>	
+<p>苍术走动较畅，价坚，现市价毛统货19-21元，光统货24-26元。</p>	
+<p>西洋参近期市场走动较畅，价稳，现市价国产统货软支180-220元，硬支统货150-200元。</p>	
+<p>丹参市价转稳，现市价河北品统货9-10元，山东品的价格8-9元。</p>	
+<p>天麻近期市场走缓，价萎 ，现统货85-95元。</p>	
+<p>紫苑市场价格走坚，现统货价格8-9元，水洗品9.5-11元。</p>"	
+
+;;homePageLetters3Component;"<h1>5月6日亳州中药材市场交易快报</h1>
+<p>冬瓜子今年新货量较大，市场大货走动不快，因有商积极销货，价格再次小幅滑落，目前市场单边统货价格降至2.8元左右。</p>
+<p>地胆草市场货源不多，有商购货，价格上升近1元，目前市场统货价格升至6.5元左右。</p>
+<p>桔梗看好商仍多，近两日行情转稳，大货走动减缓，只有零星交易，目前纯干统货价格稳定在40元左右；含潮货35元左右。</p>
+<p>广郁金市场货少，由于春节临近，市场只有零星走动，统货价格稳定在16.5元左右。</p>
+<p>徐长卿行情止升转稳，现市场全草水洗货15元左右；统货的价格13-14元之间；根24元左右。</p>
+<p>海金砂今年货少，近日行情转稳，江西净货价格稳定在60元左右。</p>
+<p>荆芥近段时间行情较为稳定，现市场全荆芥交易价5.5-6元；荆芥穗 23-28元不等。</p>
+<p>土茯苓产新中期，价格下滑，统货价格由前期的12-13元下滑为11元左右。</p>
+<p>白前行情转稳，市场统货价格12-13元；水洗片子17元。</p>
+<p>葛根行情转稳，市场多为零星交易，现市场优质小丁稳定在10元左右；大丁因质量不等价在5-7元之间。</p>"
+
+;;homePageLetters4Component;"<h1>数字本草通无硫货特供会</h1>
+<p>一、活动介绍</p>
+<p>随着市场对无硫药材品种的需求越来越大，为帮助经营无硫药材的商家扩大宣传，增加商品曝光率，提升交易；同时让买家能买到价格实惠，质量优且无硫的药材品种。数字本草将在3月中旬强势推出“不含硫、价实惠，数字本草无硫货特供会”专场活动。只要您的药材质量好、不含硫、价格实惠即可报名参与本次活动，获得免费的推广和宣传！</p>
+<p>二、商家参与要求：</p>
+<p>1.参与活动的药材均为不含硫药材；</p>
+<p>2.参与活动商家可提供2-3个不含硫药材品种；</p>
+<p>3.参与活动的无硫药材商品需在商品标题里标注【无硫】；</p>
+<p>4.参与活动的商家店铺在售商品不低于4个；</p>
+<p>5.参与活动的商家在数字本草平台无任何违规行为；</p>
+<p>三、活动说明：</p>
+<p>1.推广期内被投诉收到货物含硫或与网上订单描述不一致，则取消推广并根据《违规行为处罚规则》处罚；情节恶劣者纳入《违规卖家曝光台》进行公布；</p>
+<p>2.数字本草有对本次活动的最终解释权！</p>
+<p>四、报名时间及方式：</p>
+<p>1. 报名截止时间：2015年6月14日下午17点整</p>
+<p>2. 电话报名：022-86342634</p>
+<p>注：报名后工作人员会在2个工作日完成审核并通过电话方式确认；</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	数字本草</p>
+  	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;
+  	2015年5月5日</p>"
+
+;;homePageLetters5Component;"<h1>广州德鑫制药采购信息</h1>
+<p>德鑫制药自成立以来就始终专注于现代中药尤其是现代妇科中药的研究、开发、生产和销售。在中药现代化的实践中，公司与国内知名的中药科研机构合作，以传统中医药理论为指导，以现代科研手段为工具，不断寻找突破点。公司在国内率先开发成功妇炎康薄膜衣片并进行了产业化，目前该产品的年销量已经达到14亿片，为广大慢性妇科疾病患者解除了痛苦。公司独家产品妇血安片的年销售量也以40%以上的速度递增，产品在妇科血症治疗领域的影响力日益增强。</p>
+<p>公司一直坚持现代企业管理制度，ERP、CRM等管理工具得到了全面应用。管理团队具有强烈的开拓意识和优秀的学习能力，在他们的带领下，公司充满了朝气和奋发向上的精神。</p>
+<p>公司的生产基地位于国家4A级森林公园内，厂区空气洁净清新。生产管理严格按照GMP规定执行，企业内控标准高于国家标准。生产和质量负责人都具有药学高级职称。良好的外部环境、一流的管理和优秀的员工素质从源头上保证了产品质量。随着人类对自然环境和中医药认识的不断深入，符合传统中医药理论、疗效确切、生产工艺先进、质量可控的现代中药必然在防病治病中发挥更加重要的作用。执著于现代妇科中药实践的德鑫制药一定会在这个历史趋势中迎来更加灿烂的明天，我们也期待着在企业的发展过程中有您一路相随。</p>
+<p>本次广州德鑫制药有限公司现已发布采购需求13个品种，81吨药材采购目录如下：</p>
+<p><img src='/anguostorefront/_ui/desktop/common/images/ango/letters5.jpg' border='0' width='880' /></p>"
+
+;;homePageLetters6Component;"<h1>4月28日玉林中药材市场交易快报</h1>
+<p>荆芥：大货交易顺畅，价格缓慢回升，现市场价统货5-6元，优质荆芥穗26-28元，该品种库存薄弱，估计后市行情仍然向好。</p>
+<p>黄芩：近期上市货量增多，大货交易不如早期，价随之小幅回调，现市场价野生好货33元上下，家种光统条16-17元，药厂统货11-12元，该品种各产区货源尚丰，新货陆续上市，估计后市行情仍有小幅回落。</p>
+<p>泻叶：近期大货交易频频，价格变化较快，现市场价一般统货7.5-8元，关注增家越来越多，估计后市行情持续升温。</p>
+<p>白鲜皮：货源依然显紧，价持续走坚，现市场价优质好货38-40元，一般统货保持在30元上下，该品种缺口明显，后市关注商家增多。</p>"
+	
+;;homePageLetters7Component;"<h1>4月28日成都中药材市场交易快报</h1>	
+<p>目前产区奶芎正值大量产挖，该品今年少有药商加工精片出口，川芎饮片近期市场走动较缓，但价格仍保持平稳，市场饮片售价21元上下。该品后期有商关注。</p>
+<p>甘草市场时有批量走动，虽近期是销售淡季，但该品价格仍平稳于前，市场饮片售价13.5-15元之间。</p>
+<p>谷芽麦芽市场小批量走势较好，现市场售价3元，但因该品供需平稳，后势行情上扬有限。</p>
+<p>无花果近期多商寻购，该品四川货源难寻，市价显升，现荷市零星售价35元左右，后期有商关注。</p>
+<p>沙苑子目前荷市货源难寻，该品有商愿以50元价格购买，市场都无货可供。</p>"
+	
+;;homePageLetters8Component;"<h1>4月28日三棵树中药材市场交易快报</h1>	
+<p>蒲公英：近两年由于行情转好，售价在逐步走高，家种品规模逐渐扩大，野生产量却在逐年减少，近期销势顺畅，产地、市场大货基本没有积压，随到随销，特别是蔬菜市场销势更好，备受客户青睐。现价为：小4-6元，大5-7元，环比上涨0.5-1元。</p>	
+<p>胖大海：前期由于价格升幅过大升速过快，需求有所放缓 ,高价抑制需求是市场经济规律的自身调节，大幅度上涨后，下跌是必然趋势。经过震荡调整后，随着货源的逐步消化，后市行情有望企稳回升，但升幅不会很大。现价为：圆果230-240元，长果250-260元，较上月下跌10-20元左右。</p>	
+<p>太子参：产地近期新品来货量不多，现批量走动增加，大货也时有走动，价格继续慢步上升，多商看好后市，逐步吸货囤积。现价为：安徽统54-56元，福建统57-58元，环比上涨10元和10-12元。</p>	
+<p>天麻：东北主要品种之一，近两年价格从高峰跌落后，一直在低位徘徊，从去年开始价格才逐步走出低谷，渐渐反弹，现东北市场货源量基本充足，销势也大大好于前期，多商继续看好后市，现价已升至105-115元（统货）和120-150元（一二等），环比又涨15元和10元。</p>	
+<p>大青叶：价格继续上涨，而且没有滞涨迹象，大货频繁交易，主要销往各大药厂，生产预防流感药物，现产地大货基本销尽，市场存量也不多，行情继续向好。现价为：7-9元，环比上涨1-2元。</p>"	
+
+;;homePageLetters9Component;"<h1>4月28日安国中药材市场交易快报</h1>		
+<p>大茴香：需求旺季将过，行情迅速大幅下滑，优质大红八角由17-18元降为14-15元，次货降为11-12元。因老库存仍丰，加之春角产新冲击，价格回升还需时日。</p>	
+<p>阿胶：近年需求迅猛增加，又因原材料普遍上涨，价格连年趋升。近期东阿阿胶由前期的420-430元再次上调为450-460元。在旺盛需求拉动下，行情将持续走坚。</p>	
+<p>九节菖蒲：市场货量不大，价格坚挺，现价格70-80元。</p>	
+<p>山慈菇：近期市价较稳，现价为60-65元。</p>	
+<p>菟丝子：市价转稳，走动放缓，现价水洗品28-30元，统货23-25元。</p>	
+<p>威灵仙：走销顺畅行情趋升，近日时有大货成交，成交价水洗货14.5-15元，一般统货13-13.5元。威灵仙野生资源下降减少，且老库存没有，需求反而旺盛，后市向好。</p>	
+<p>决明子：近期市场交易较缓，价格较稳，现统货4-4.5元。</p>	
+<p>石菖蒲：近期市场走畅，价坚，现市价18-19元。</p>"	
+	
+;;homePageLetters10Component;"<h1>4月28日亳州中药材市场交易快报</h1>	
+<p>白术：近期走开始减缓，行情有所降温，市场一般统个降至23元左；片子在26-28元间交易，又加上大年来临，后市走动会进一步减缓，价格有所萎缩。</p>	
+<p>金樱子：产新进入后期，产地有保健酒厂参与收购，致使今年新货量减少，行情上升，目前市场统货价格升至5.5-6元，较前阶段又上浮了近0.5元。该品需求有限，再升幅度有限。</p>	
+<p>广郁金：产地上市量减少，价格较前阶段上升0.5元，目前九成干度货升至15元左右；市场行情暂时保持稳定，统货价16元左右。该品今年新货量少，后市有商看好。</p>	
+<p>黄芩：需求减弱，大货走动不快，价格下滑，目前甘肃产地黄芩个降至10.5-11元、片12.5元；市场个11.5-12元、片13元左右。</p>	
+<p>黄芪：走动也有所减弱，但价格依然保持坚挺，目前市场中条价10.5元；小条9元；统片11元；过筛的12.5元。该品库存减少，后市有商看好。 </p>	
+<p>丹参：山东丹参产地有生产厂家收购，走动好于前期，市场大货走动依然不快，行情暂时稳定，目前统货（含杂3%）市价9.8元左右；精品11元左右。该品今年新货不多，年后可能小幅回升。</p>	
+<p>白叩：大货走动顺畅，产区、市场库存丰厚，价格相对比较稳定，现在市场一般统货在46元左右。后市依然保持平稳。</p>	
+<p>鸭跖草：走动一般，现市场个子价格3元左右。行情无明显变化。</p>	
+<p>贯众：走动不如前期，行情稳定，现统货价格稳定在6元左右。</p>"	
+	
+	
+	
+	
+#homePage Link
+UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang=$lang]
+;;homePageNotice1LinkComponent;"<span class='titles'>银联支付调整通知</span><span class='INdate'>2015-5-17</span>"
+;;homePageNotice2LinkComponent;"<span class='titles'>数字本草网站维护通知</span><span class='INdate'>2015-3-24</span>"
+;;homePageNotice3LinkComponent;"<span class='titles'>关于未进入交收月入库货物可当天申请注册仓单的公告</span><span class='INdate'>2015-3-23</span>"
+;;homePageNotice4LinkComponent;"<span class='titles'>关于《数字本草白芍交收质量标准》的通知</span><span class='INdate'>2015-3-23</span>"
+;;homePageNotice5LinkComponent;"<span class='titles'>关于2015年五一劳动节休市安排的通知</span><span class='INdate'>2015-4-25</span>"
+;;homePageNotice6LinkComponent;"<span class='titles'>关于开展数据库系统升级模拟测试的通知</span><span class='INdate'>2015-4-28</span>"
+;;homePageNotice7LinkComponent;"<span class='titles'>关于商品包邮政策的公告</span><span class='INdate'>2015-5-10</span>"
+;;homePageNotice8LinkComponent;"<span class='titles'>关于数字本草网站试运营的公告</span><span class='INdate'>2015-5-9</span>"
+;;homePageNotice9LinkComponent;"<span class='titles'>关于数字本草电商平台征集业务规则意见的公告</span><span class='INdate'>2015-5-7</span>"
+
+;;homePageRule1LinkComponent;"<span class='titles'>数字本草电子交易中心挂牌交易细则</span><span class='INdate'>2015-4-9</span>"
+;;homePageRule2LinkComponent;"<span class='titles'>数字本草电子交易中心违规违约处理办法</span><span class='INdate'>2015-4-9</span>"
+;;homePageRule3LinkComponent;"<span class='titles'>数字本草电子交易中心信息披露管理办法</span><span class='INdate'>2015-4-9</span>"
+;;homePageRule4LinkComponent;"<span class='titles'>数字本草电子交易中心指定交收仓库管理办法</span><span class='INdate'>2015-4-9</span>"
+
+;;homePageLetters1LinkComponent;"<span class='titles'>5月6日禹州中药材市场交易快报</span><span class='INdate'>2015-5-6</span>"
+;;homePageLetters2LinkComponent;"<span class='titles'>5月6日安国中药材市场交易快报</span><span class='INdate'>2015-5-6</span>"
+;;homePageLetters3LinkComponent;"<span class='titles'>5月6日亳州中药材市场交易快报</span><span class='INdate'>2015-5-6</span>"
+;;homePageLetters4LinkComponent;"<span class='titles'>数字本草通无硫货特供会</span><span class='INdate'>2015-5-5</span>"
+;;homePageLetters5LinkComponent;"<span class='titles'>广州德鑫制药采购信息</span><span class='INdate'>2015-4-9</span>"
+;;homePageLetters6LinkComponent;"<span class='titles'>4月28日玉林中药材市场交易快报</span><span class='INdate'>2015-4-28</span>"
+;;homePageLetters7LinkComponent;"<span class='titles'>4月28日成都中药材市场交易快报</span><span class='INdate'>2015-4-28</span>"
+;;homePageLetters8LinkComponent;"<span class='titles'>4月28日三棵树中药材市场交易快报</span><span class='INdate'>2015-4-28</span>"
+;;homePageLetters9LinkComponent;"<span class='titles'>4月28日安国中药材市场交易快报</span><span class='INdate'>2015-4-28</span>"
+;;homePageLetters10LinkComponent;"<span class='titles'>4月28日安国中药材市场交易快报</span><span class='INdate'>2015-4-28</span>"
+
+
 
 UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];content[lang=$lang]
+;;homePageConvention1Component;"<h1>2015第18届【北京】国际名贵中药材暨高端滋补品展览会</h1>
+<p>世博威•2015第18届健博会暨名贵药材高端滋补品展览会</p>
+<p>时&nbsp;&nbsp;间:&nbsp;&nbsp;&nbsp;&nbsp;2015年4月16日-18日</p>
+<p>地 &nbsp;&nbsp;点:&nbsp;&nbsp;&nbsp;&nbsp;北京-中国国际展览中心【1A 、1B、2、3、4、5、6、7号馆】</p>
+<p>批准单位&nbsp;&nbsp;&nbsp;&nbsp;中华人民共和国商务部</p>
+<p>主办单位&nbsp;&nbsp;&nbsp;&nbsp;北京世博威国际展览有限公司</p>
+<p>协办单位&nbsp;&nbsp;&nbsp;&nbsp;美国伊利诺州政府中国代表处 </p>
+<p>组织单位&nbsp;&nbsp;&nbsp;&nbsp;北京世博威国际展览有限公司</p>
+<p>参展商注意事项：</p>
+<p>1、所有参展企业的参展品种应具备生产者经营有效期内的《食品流通许可证》、《营业执照》、《商标注册证》以及产品批号的合法审批文件和最新的质检报告等复印材料；</p>
+<p>2、确定参展请与组委会工作人员取得联系，选定自己理想展位，再认真填写参展申请及合约表，加盖公章后传真或邮寄至组委会，申请表一经签字盖章后同具合同效力，传真或复印件有效；</p>
+<p>3、展位分配原则: 先申请、先付款、先确认；</p>
+<p>4、为了帮助客户赢取市场荣誉，扩大产品销售，组委会设置评奖活动，凡参加“世博威-中国国际健博产业博览会”的客户均可参与，大会奖项设置“金奖”、 “十佳品牌、诚信标兵”奖；“指定产品、推荐产品、科技创新”奖；“四新”奖；（详细资料请向组委会索取）；</p>
+<p>5、为展现公司实力，树立企业形象，组委会设立了冠名和协办方案，有意向的企业请向组委会索取相关协办赞助方案和回报条例；</p>
+<p>6、为扩大贵公司的宣传力度，组委会免费提供贵公司网站和大会官方网站链接服务；</p>
+<p>组委会:&nbsp;&nbsp;&nbsp;&nbsp;北京世博威国际展览有限公司</p>
+<p>地&nbsp;&nbsp;址：&nbsp;&nbsp;&nbsp;&nbsp;北京市朝阳区朝阳路69号（财满街）1-4-904室</p>
+<p>邮&nbsp;&nbsp;编:&nbsp;&nbsp;&nbsp;&nbsp;100123</p>
+<p>电&nbsp;&nbsp;话:&nbsp;&nbsp;&nbsp;&nbsp;010-85754970(直线)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;QQ:&nbsp;&nbsp;&nbsp;&nbsp;421267652</p>
+<p>传&nbsp;&nbsp;真:&nbsp;&nbsp;&nbsp;&nbsp;010-51413308&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MSN:&nbsp;&nbsp;&nbsp;&nbsp;tianzhen868@hotmail.com</p>
+<p>联系人:&nbsp;&nbsp;&nbsp;&nbsp;田振(先生)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;E-mail:&nbsp;&nbsp;&nbsp;&nbsp;jianbohui888@163.com</p>
+<p>手&nbsp;&nbsp;机：13691567172&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;18600498965</p>"
+ 
+;;homePageConvention2Component;"<h1>2015年全国中药饮片展览会</h1>
+<p>时&nbsp;&nbsp;间:&nbsp;&nbsp;&nbsp;&nbsp;2015年06月04日--2015年06月06日</p>
+<p>场&nbsp;&nbsp;馆:&nbsp;&nbsp;&nbsp;&nbsp;中国进出口商品交易会展馆（广交会展馆）</p>
+<p>行&nbsp;&nbsp;业:&nbsp;&nbsp;&nbsp;&nbsp;生物/医药/保健</p>
+<p><span>展会概述：</span></p>
+<p>中医药历史悠久，渊远流长，是中华民族灿烂文化的瑰宝。中药饮片是中医临床防病、治病重要手段，也是中成药重要原料。随着国家对中医药的重视，加快中医药现代化进程。同时在新医改政策影响下，也出台了“药食同源”药品名单。这对中药饮片及滋补品产</p>
+<p>主办单位:&nbsp;&nbsp;&nbsp;&nbsp;中国医药保健国际贸易促进会&nbsp;&nbsp; 广东省保健食品行业协会&nbsp;&nbsp;广东药店联盟&nbsp;&nbsp;广州市艺帆展览服务有限公司</p>
+<p>承办单位:&nbsp;&nbsp;&nbsp;&nbsp;广州市艺帆展览服务有限公司</p>
+<p>协办单位：</p>
+<p><span>展品范围：</span></p>
+<p>中药饮片类：原生药材、中药饮片、植物提取物、中药产业园、中药材种植基地、中药城等。</p>
+<p>滋补品类：人参、高丽参、西洋参、燕窝、冬虫夏草、鹿茸、灵芝、海参、鱼翅、红景天、藏红花、铁皮石斛、阿胶、蜂蜜、雪蛤油等。</p>
+<p>中药饮片机械：煎药机、切药机、中药粉碎机、制丸机、制粒机、包衣机、中药饮片包装设备及材料等。</p>"
 
-# Cart Page
+;;homePageConvention3Component;"<h1>2015年第十四届香港国际现代中医药及健康产品展览会</h1>
+<p>展会名称：&nbsp;&nbsp;&nbsp;&nbsp;2015年第十四届香港国际现代中医药及健康产品展览会</p>
+<p>展会时间：&nbsp;&nbsp;&nbsp;&nbsp;(2015-08-13)至(2015-08-15)</p>
+<p>地&nbsp;&nbsp;区:&nbsp;&nbsp;&nbsp;&nbsp;中国•香港</p>
+<p>展馆名称：&nbsp;&nbsp;&nbsp;&nbsp;香港会议展览中心</p>
+<p>会议地址：&nbsp;&nbsp;&nbsp;&nbsp;香港会议展览中心</p>
+<p>主办单位：&nbsp;&nbsp;&nbsp;&nbsp;香港贸易发展局&nbsp;&nbsp;现代化中医药国际协会</p>
+<p>承办单位：&nbsp;&nbsp;&nbsp;&nbsp;北京中咨时代国际展览有限公司</p>
+<p>联&nbsp;系&nbsp;人：&nbsp;&nbsp;&nbsp;&nbsp;程小姐</p>
+<p>电&nbsp;&nbsp;话:&nbsp;&nbsp;&nbsp;&nbsp;010-82258800</p>
+<p>传&nbsp;&nbsp;真:&nbsp;&nbsp;&nbsp;&nbsp;010-82250600</p>
+<p>相关网址：&nbsp;&nbsp;&nbsp;&nbsp;www.consultac.com.cn</p>
+<p>邮件地址：&nbsp;&nbsp;&nbsp;&nbsp;consultac@126.com</p>
+<p><span>会议内容 ：</span></p>
+<p>美容及健体、中药、功能食品与产品、保健食品、健康护理与疗法原料、设备及相关服务、科技与研发。</p>"
 
-# Media Content
-INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];folder(qualifier)[default='images'];altText
+;;homePageConvention4Component;"<h1>2014中国（山东）国际生物医药产业博览会</h1>
+<p>内&nbsp;&nbsp;容:&nbsp;&nbsp;&nbsp;&nbsp;2014中国（山东）国际生物医药产业博览会</p>
+<p>开始时间：&nbsp;&nbsp;&nbsp;&nbsp;2014年10月16日-2014年10月18日</p>
+<p>举办地点：&nbsp;&nbsp;&nbsp;&nbsp;济南国际会展中心</p>
+<p>为贯彻落实国务院国发【2012】65号文件《生物产业发展规划》中确定的重点领域及主要任务，实现到2020年把生物产业发展成为国民经济支柱产业的目标。根据山东省《十二五医药产业发展规划》和《关于促进新医药产业加快发展的若干政策》的文件精神，以生物医药为主导产业，以龙头医药企业带动产业发展，通过建设高端生物医药产业园区、整合生物医药企业加速器和孵化器，走出一条“占据高端、扩展领域、集群发展”的发展思路。加快生物医药产业的健康发展，优化产业结构，加大科技创新，提升技术装备水平，提高企业核心竞争力，中国医药生物技术协会、中国医药物资装备协会、山东省经济与信息化委员会、山东省卫生厅、济南市人民政府将于2014年10月16-18日在济南国际会展中心举办“2014’中国(山东)国际生物医药产业博览会”。</p>
+<p><span>展品范围</span></p>
+<p>展览面积3万平方米，分设九个展示交易区，设国际标准展位1000余个。展区规划如下：</p>
+<p>(一)医药展区：化学药品、现代中药、OTC药品、海洋药物、创新药物、基因工程药物、抗体工程药物、试剂、血液制品、疫苗、多肽与蛋白质类、抗生素、抗原、氨基酸类、多糖、酶、核苷酸/寡核苷酸、标准品/对照品等;</p>
+<p>(二)医药原料、中间体、辅料展区：原料药、药用辅料与剂型、中间体、植物提取物、动物提取物、中药原料、功能食品原料、保健品原料、营养健康品原料、补充剂、膳食纤维、美容化妆品原料、兽药原料、天然提取物等;</p>
+<p>(三)功能产品展区：功能性食品、营养品、膳食补充剂、运动营养品、养生滋补品、有机食品、功能性美容产品、抗衰老产品等;</p>
+<p>(四)实验室设备、洁净技术展区：实验室技术及分析仪器、实验室设备与生化分析、测试技术、生物工程过程控制与生产工艺装备、诊断试剂、试剂盒、各种生化试剂、洁净室构架、洁净室设备、洁净用品、检测仪器、净化设备、清洁机械、净化配套、滤材滤料等;</p>
+<p>(五)技术及服务展区：研发类、CRO、投融资、制药工程技术、生物药品研发成果及其他相关技术服务等;</p>
+<p>(六)制药设备、包装设备、医疗设备展区：制药机械、制剂生产设备、医药包装设备、医药包装材料、医疗器械、医疗用品、材料，基础医院设备，环保技术设备等医药检验设备;</p>
+<p>(七)国际展区及海外展团：国外知名企业以展团形式展示领先的生物医药产品及技术;</p>
+<p>(八)山东展团：山东省内100家以上知名企业以展团形式集中展示山东省制药及生物医药最新产品、技术;</p>
+<p>(九)成果展示区：生物医药建设成果展示、医药孵化器、产业园区、寻求技术和产业合作的企业及个人项目展示、地区政府对本地创业环境及优惠政策的推介等。</p>
+<p>联系方式:</p>
+<p>展览承办单位：&nbsp;&nbsp;&nbsp;&nbsp;济南博商展览有限公司</p>
+<p>联&nbsp;系&nbsp;人:&nbsp;&nbsp;&nbsp;&nbsp;付文娟</p>
+<p>电&nbsp;&nbsp;话:&nbsp;&nbsp;&nbsp;&nbsp;0531-86013039</p>
+<p>传&nbsp;&nbsp;真:&nbsp;&nbsp;&nbsp;&nbsp;0531-86088869</p>
+<p>邮&nbsp;&nbsp;箱:&nbsp;&nbsp;&nbsp;&nbsp;swyyexpo@163.com</p>
+<p>地&nbsp;&nbsp;址:&nbsp;&nbsp;&nbsp;&nbsp;济南市市中区顺河东街66号银座晶都国际1号楼3408室</p>
+<p>邮&nbsp;&nbsp;编:&nbsp;&nbsp;&nbsp;&nbsp;250000</p>
+<p>网&nbsp;&nbsp;址:&nbsp;&nbsp;&nbsp;&nbsp;http://www.zgswyy.com/index.asp</p>"
 
-UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];$picture[lang=$lang]
+;;homePageConvention5Component;"<h1>第七届中国(玉林)中医药博览会将于4月16日至18日在玉林市举行</h1>
+<p>届时来自境内外的药商及专家学者将会聚“中国南方药都”，共同为中医药健康产业的壮大和可持续发展献计献策。</p>
+<p>作为华南地区最早的中药材集散地，玉林市已发展成为中国四大中药材产区，拥有全国第三大、南方最大的中药材专业市场，成为中国南药北运的枢纽，中药材产品远销至日本、韩国、泰国、马来西亚等国家。中国(玉林)中医药博览会成为中国—东盟自贸区具有广泛影响力的药材药品贸易会和文化交流促进会。</p>
+<p>李振品介绍，本届药博会内容包括启动仪式、展示展销、学术交流、健康体验等“五大板块”。除了举办威联全国药品保健品(玉林)交易会、“南方药都”中药材种植业展示等，还将举行全国规模最大的中草药种子种苗展示展销。</p>
+<p>广西是八角、肉桂、罗汉果等香料的全国最大种植基地和产地，其中八角占有全国90%的产量，占据世界产量的85%。玉林已经成为全国乃至全球重要的香料集散地。本届药博会新增中国—东盟香药展示展销内容，集中进行具有南药特色的各种香药展示展销。</p>
+<p>学术交流方面，组委会特邀中国工程院院士、中国药科大学教授王广基，国际传统药物学会主席鲍尔教授等知名专家出席“南方药都”论坛，共同探讨大南药如何利用“一路一带”建设机遇更好地服务广大民众健康以及中医药产业发展对策等。此外还将举办中国中药协会2015年度会长会、全国中药材种子种苗基地科技联盟年会、中国药学会中医药资源专业委员会年会等。</p>
+<p>中国(玉林)中医药博览会由玉林市人民政府、中国中药协会、广西卫生和计划生育委员会、广西商务厅、广西食品药品监督管理局等单位联合举办，先后获得“中国优秀品牌展会奖”、“中国十大优秀特色展会奖”等称号。</p>"
 
+;;homePageCompany1Component;"<h1>辽宁森涛参茸股份有限公司简介</h1>
+<p>辽宁森涛参茸股份有限公司成立于2012年12月13日，地处东北长白山南麓，桓仁满族自治县二棚甸子镇四平村，地理位置得天独厚、山林资源丰富。公司前身为桓仁巨户沟森涛山参基地，公司成立注册资本3000万元（正在增资到5000万元），现有职工78人。其中技术人员12人。资产总额40000多万元，厂区占地面积20000平方米，其中建筑面积5000平方米。辽宁森涛参茸股份有限公司现已在全国范围内发展成立了10家分公司，地点分别在北京、上海、长春、深圳、集安、万良、丹东、杭州、温州、沈阳地区。公司采用集种植、研发、生产、包装、销售为一体的经营模式。</p>
+<p>公司始终坚定不移地立足于参茸行业，重视产品品质和诚信服务，汇集一批优秀的专业人才，组建成一流的技术团队，公司自主研发产品“森涛参茸”系列产品在市场上已全面推广，连创佳绩。2012年年末被辽宁省农业产业化协会聘为辽宁省农业产业化协会第二届理事会会员单位。2013年1月被辽宁省企业文化联合会授予“国家级绿色生态示范基地”和“全国文明诚信经营示范单位”荣誉称号。2013年2月“森涛参茸”牌秘制速溶山参粉、秘制速溶西洋参粉、人参、林蛙、鹿茸、山野菜、土特产系列产品被中国国际名牌发展协会、中国品牌企业联合发展促进会授信为“中国著名品牌”。 2013年1月被辽宁省林业产业协会授予“辽宁省名牌林产品”的荣誉称号。2013年6月，为适应世界经济发展趋势，创建绿色环保产业生态环境，在全省范围内，着力推进绿色发展，循环发展，低碳发展，推广绿色生态产业的活动中，被辽宁省新农村惠农八六八工程领导小组办公室评为“官方指定生态产业联盟示范单位”和“官方指定绿色食品示范单位”的荣誉称号。2014年1月被中国中药协会中药材种植养殖专业委员会评为“道地优质药材（林下山参）种植基地”。 公司近年来不断加大管理力度，不断提升产品质量，实现了跨越式发展，为地区的经济发展做出重要贡献。2014年1月，被中共铜锌矿地区委员会授予“企业经济发展贡献奖”的荣誉称号。2014年3月份，被中共二棚甸子镇委员会授予“林下产业示范企业”的荣誉称号。2014年5月被辽宁省企业文化联合会评为“全国十大品牌绿色产品示范中心”、“中国AAAAA级信誉企业”两项荣誉称号。2014年11月份，首届“本溪礼物”旅游商品大赛组委会将我公司“森涛参茸”牌山参粉、哈士蟆油软胶囊授予“本溪礼物”的荣誉称号。2014年11月份，荣获2014第八届中国（山东）国际糖酒食品交易会“最畅销品牌奖”。</p>
+<p>立足创新、注重质量、诚信服务、真诚合作、共同发展，为客户提供优质、安全的产品，是我们的宗旨。我们将不断超越自我，为人类健康事业的发展而努力！</p>"
+
+;;homePageCompany2Component;"<h1>甘肃中天药业有限责任公司</h1>
+<p><span>一、企业基本情况</span></p>
+<p>公司位于素有“千年药乡”、“中国药都”、“天然药仓”之美誉的甘肃省陇西县。成立于2007年，注册资本9100万元，总资产逾6亿元。是一家集中药材种植、中药材购销，中药饮片、中成药、保健食品等的研发、生产、营销为一体的高新技术企业。公司通过了ISO9001《质量管理体系标准》、ISO14001《环境管理体系标准》、OHSAS18001《职业健康安全管理体系标准》“三标一体”国际标准管理体系和相关GMP、GSP认证，是甘肃省农业产业化重点龙头企业，甘肃省陇药产业协会副会长单位，西北天然药物(中藏药)产业技术创新战略联盟副理事长单位，甘肃省技术创新示范企业。被批准设立了甘肃省特色药用植物资源保护与利用工程实验室、甘肃省特色药材规范化可追溯栽培工程技术研究中心、省级企业技术中心、甘肃省中小企业公共服务示范平台。</p>
+<p>下属甘肃中天金丹药业有限公司、甘肃陇原中天物流有限责任公司等全资子公司，公司业务涵盖中药材种植，物流仓储，中药材销售，产品研发、加工、营销，有中药饮片、中药健康产品、土特产礼品、中成药、保健食品等系列产品，已形成中药全产业链发展模式。公司依托全国最大的中药材产地和集散地优势，已建成规范化药源基地、建成静态仓储能力5万吨以上的中药材仓储中心。拥有片剂、散剂、胶囊剂、颗粒剂、合剂等剂型46个国药准字号品种，2个国食健字号产品。其中红芪口服液为拥有完全知识产权的全国独家准字号乙类OTC药品，属甘肃省优秀新产品（新技术），填补了甘肃地产药材红芪没有制剂药品的空白，也填补了甘肃地产药材没有拳头产品的空白，于2005年5月被国家科技部列为国家火炬计划项目。</p>
+<p>全资子公司——甘肃陇原中天物流有限责任公司简介</p>
+<p>公司成立于2008年，注册资本6千万元，总资产2.5亿元，于2010年7月通过国家药品GSP认证，是中国仓储协会常务理事单位、甘肃省物流协会常务理事单位。公司建设的陇西中药材物流园，是目前国内最大的中药材仓储及物流中心。物流园建有会展中心、信息中心、配送中心、仓储中心、检测中心、综合写字楼以及大型停车场等。</p>
+<p>公司信息中心通过引进国家商务部、国家中医药管理局、中药材天地网等设立国家中药材监测与预警平台，现代中药资源动态监测信息和技术服务中心，服务当地中药材产业发展。</p>
+<p>全资子公司——甘肃中天金丹药业有限公司简介</p>
+<p>公司位于中国镍都—金昌市国家级经济技术开发区，在金昌市和定西市陇西县建有国家GMP认证的生产车间，拥有片剂、散剂、胶囊剂、颗粒剂、合剂五条生产线，设有中药材前处理车间、提取车间、口服固体制剂车间、口服液体制剂车间、动力车间和中心化验室及新产品研发中心。年产片剂可达10亿片，胶囊剂10亿粒，颗粒剂1亿袋，散剂1亿袋，合剂1亿支。</p>
+<p><span>二、公司荣誉</span></p>
+<p>公司“中天泰科”、“草木三元”、“陇山渭水”牌产品被评为甘肃省金奖产品，“中天泰科”牌中药饮片被评为甘肃省名牌产品，“中天泰科”被评为甘肃省著名商标。公司通过了黄芪、党参、柴胡无公害产地认证，“中天泰科”黄芪饮片入选中药饮片协会推荐的诚信品牌，被认定为“甘肃省企业质量信用等级AA级企业”，被甘肃省工商局评为“守合同重信用”单位。“秦艽、羌活人工驯化栽培技术集成研究与示范推广”获2013年度甘肃省科学技术奖二等奖，荣获“APEC中小企业最佳创新实践”奖。公司“甘肃特色药品红芪口服液、通便灵胶囊产业化”项目被列为“省上重点推进的100个省列重大项目”名录，公司“中药材质量追溯系统的示范应用”项目入选工信部2013年电子商务集成创新试点工程项目。公司“道地中药材质量追溯系统的示范应用项目”荣获“2014年电子商务集成创新奖”。</p>
+<p><span>三、产品介绍</span></p>
+<p>道地中药材：主要经营党参、当归、红芪、黄芪、柴胡、板蓝根等优质地产药材。</p>
+<p>中药饮片：主要生产传统中药饮片、直接口服中药饮片、精制饮片、地产饮片等。</p>
+<p>中药健康产品：主要生产草本养生茶，药膳、膳食饮片等健康产品系列。</p>
+<p>土特产礼品系列：生产具有代表当地资源和文化的土特产礼品系列。包括地产系列（普通装、精品装），健康产品类礼品（草本养生等），保健品类礼品。</p>
+<p>中成药：有片剂、胶囊剂、颗粒剂、合剂等剂型，拥有肤痒颗粒、小儿咳喘灵颗粒、伤科跌打片、麻杏止咳片、妇康灵片、乙肝扶正胶囊、通便灵胶囊、参苓白术散、健儿消食口服液、红芪口服液等46个国药准字号品种，其中红芪口服液为独家品种。</p>
+<p>保健食品：有胶囊剂、颗粒剂、口服液等剂型，已拥有陇渭堂牌增强免疫力胶囊、肠濡涤胶囊等国食健字号品种。</p>
+<p><span>四、技术和研发</span></p>
+<p>公司与“中国中医科学院中药研究所”、“天津药物研究院”、“北京大学药学院”、“兰州大学”、“甘肃农业大学”、“甘肃中医学院”等高等院校和科研院所合作，全力构筑研发立体网络，积极走产、学、研相结合的道路，致力于新产品、新技术的产业化研究、中药材种质资源研究、中药材储存技术研究以及保健食品开发等，努力将自身打造成为国内知名的现代中药创新平台和技术成果产业化平台。</p>
+<p>在研新药：临床前2个（治疗胃食管反流病新药、红芪为原料的抗肿瘤辅助新药HQ509）、Ⅲ期临床2个（骨质消痛颗粒、降脂颗粒）。在研保健食品5个（抗氧化、抗视疲劳功能保健食品2个，以红芪为主要原料保健食品研发3个）。公司重视技术创新，已取得专利41项，其中“秦艽温室育苗及地膜覆盖栽培技术”获首届甘肃青年创新行动科技发明制作类一等奖，“秦艽、羌活人工驯化栽培技术集成研究与示推广”获2013年度甘肃省科学技术奖二等奖。</p>
+<p>公司参与开展中药材仓储、养护国家标准的研究，其中《中药材仓储管理规范》、《中药材仓库技术规范》已经商务部发布；与西北师范大学合作，开展中药材生产、储存质量安全追溯体系研究；与甘肃省药检所合作，已完成黄芪、当归、党参、大黄、板蓝根、半夏、甘草、柴胡等8种甘肃地产药材的质量标准研究，并获得了专利受理批件，提高了8种甘肃地产药材二氧化硫、重金属及有害元素、有机氯农药残留量标准，确保药材质量稳定。</p>
+<p><span>五、中天中药全产业链</span></p>
+<p>公司以药源基地建设为核心的全中药产业链发展模式——以基地建设为依托，以地产药材贸易为基础，以中药饮片、膳食饮片为附加，以中成药、保健食品为导向的以药源基地建设为核心的中药全产业链发展格局，逐步发展成为中国知名的以具有质量可追溯体系的药源基地为核心的中药全产业链企业。</p>
+<p>中药全产业链模式是公司突出的竞争优势，公司上游整合药材资源，强化药材产地竞争力；中游链接产地加工，推进中药材精深加工，布局中药饮片、中药提取物、保健食品、中成药，做精做细产业链各产品；打造现代中药材贸易和物流平台一体化增值服务提供商；应用市场综合信息化优势，稳定增长中药材贸易业务；下游借道零售药店、中医院等渠道，涉足消费终端，实现中医药和医疗服务的产业链一体化。</p>"
+
+;;homePageCompany3Component;"<h1>百年堂</h1>
+<p>提起阿胶，阿胶行业的元老级业内人士和食用阿胶几十年的老年朋友，都会不约而同地想到三个字——百年堂。</p>
+<p>百年堂是国内最负盛名的阿胶老药铺，百年堂系公元５５０年北齐文宣帝高洋赐名。</p>
+<p>由后世闻名天下的百忍堂张公艺之父张兴受封，迄今已经有1500多年的历史，追溯《百忍堂》张氏熬胶史，则可追溯到公元前486年（鲁哀公九年、楚惠王三年、越勾践十一年、吴夫差十年）傅制胶，据考至今已有2500多年的历史了。</p>
+<p>百年堂是中国最古老的阿胶老作坊，中国最正宗的阿胶文化传承支柱。百年堂在2500多年的风雨历程中，历代百年堂人始终恪守“老字号老地方老产品”，信誉至上，及其类似同仁堂古训“炮制虽繁必不敢省人工，品味虽贵必不敢减物力”的“修合无人见，存心有天知”的“戒欺”古训，做到做阿胶力求“只求药料真实不惜重资， 炮制之术再繁必求其精”做到百年堂阿胶产品以“黑如翳漆凝若脂，透如琥珀润如玉”而享誉海内外。</p>
+<p>把“精圣药炮制之法，明阿胶药性之理；修医家仁德之心，守药者欺妄之戒”同仁志执行到底，严格遵循“采办务真，修治务精，为商务诚，为人必信，言出必行，说到做到”的商训，保持“阿胶修治虽无人见，真胶品质自有天知”的自律意识，严守遵照“遵古训戒见利忘义须堂堂正正做人，求正品忌粗制滥造必道道地地真胶”的企业座右铭，做到每个品种、批次的产品逐批检测， “绝不让一张不合格皮料入厂，绝不让一片不合格胶片上市”的质量把关要求，生产出更多真正 “黑如翳漆凝若脂，透如琥珀润如玉，经夏不湿冬不软，陈年老胶效犹佳”的合格产品，确保“古方、古井、古工艺”、“老字号、老地方、老产品” 的东阿道地阿胶品牌……保证“零缺陷”产品投放市场，以服务大众，造福百姓。</p>
+<p>“国药传承百年堂。”不仅仅是一个口号，更是百年堂和它的新企业所始终遵奉的精神。这一精神，是百年堂文化的精髓，体现了中国阿胶文化的核心价值。</p>
+<p>国药一绝千年香，阿胶一品百年堂。阿胶是国宝！把道地正宗的阿胶发扬光大，推广到全世界,完成阿胶“中国国礼！中华名片！华夏形象！中国的骄傲！”的形象转变，是百年堂存在的价值。所以百年堂的企业使命是让国人和让全世界人民，都能享受上国宝阿胶带来的健康生活，告别那些纯炒作的，低劣的保健品，享受2500年纯生态、纯自然的国宝阿胶带来的纯天然的人体健康，享受健康的生活！</p>"
+
+;;homePageCompany4Component;"<h1>河北祁新中药颗粒饮片有限公司</h1>
+<p>河北祁新中药颗粒饮片有限公司是由香港新世界集团联手河北省建设投资公司共同出资组建的中外合资企业。 公司占地50亩，厂区建筑面积30000平米，拥有6条大型专业化中药饮片（含颗粒饮片）生产线，主要机器设备150多台套，具备年生产加工中药饮片4500吨的能力。项目一期总投资3200万元人民币，系目前国内最大的专业中药材、中药饮片加工、生产、销售的实体性公司，拥有外贸进出口自营权和国家二、三类野生濒危动植物经营权。2005年通过GMP认证。 在东方药城中心交易大厅设有祁新饮片展示交易厅，是公司产品展示的窗口，每天接待来自全国各地的客商，络绎不绝。</p>
+<p>公司主营：中药精制饮片、中药颗粒（粒状）饮片、中药材 公司兼营：中药调料、汤包、药膳、百草茶饮等系列药食同源产品 公司宗旨：以人为本、以真为本、以诚为本、以信为本公司经营团队以积极务实的拼搏精神，本着货真价实，优质高效，以多方共赢为经营理念，借助互联网商务平台，GMP管理平台,全方位为客商服务，努力打造在国内、国际中药饮片行业第一品牌。</p>
+<p>公司根据与时俱进、不断创新的精神，在继承和发扬传统饮片的基础上，研发了颗粒饮片小包装及先煎后下的包煎系列产品；还充分挖掘祖国中药茶疗文化，开发出“祁新百草茶饮系列”、药膳及药食同源产品，迎合了人们返璞归真的需求，成就了一种时尚和潮流。 公司热诚欢迎新老客户前来实地参观考察！</p>"
+
+;;homePageCompany5Component;"<h1>辽宁正大祥和药业集团简介</h1>
+<p>辽宁正大祥和药业集团是近年来组建的大型多元化民营企业集团，由辽宁正大祥和药业集团有限公司、辽宁新康达医药有限公司、辽宁天成贸易有限公司、辽宁正大祥和养殖有限公司4个独立法人企业组成。2005年5月成为中国扶贫开发协会第三届会员。企业先后获得国家级扶贫龙头企业、辽宁省农业产业化龙头企业、朝阳市农业产业化十强龙头企业等多项殊荣。公司总经理丁晓艳是一位远近闻名的民营企业家，近年来相继当选为朝阳市龙城区政协委员、朝阳市农业产业化龙头企业协会副会长。</p>
+<p>集团总部坐落在龙城现代农业园区，建有中药饮片加工生产线一条。年生产中药饮片4000吨，绿色食品鲜鸡蛋5000吨。目前，集团已获得药品、中药材、中药饮片、黑色金属、有色金属、贵金属、服装经营、禽蛋的进出口贸易业务经营权。集团十分注重新产品的开发，与国内多家科研单位组成了产、学、研联盟，成功开展了中药苦参等药材的综合利用、生态养殖项目的科学研究。集团具有完整的质量管理体系，2006年中药饮片营销已通过ISO9001:2000质量体系认证。</p>
+<p>公司已通过GMP认证，正大祥和药业集团有限公司投资1亿多元在龙城现代农业园区开建了新厂区，使公司占地面积达到56064.23平方米，建筑面积15000平方米，中药饮片生产车间面积1500平方米，年设计生产中药饮片4000吨，所生产的中药饮片品种多达691个，其中常年生产的品种25个，成为目前东北地区最大的中药饮片加工企业。　本次认证共涉及检查项目105项，其中关键项目14项，一般项目91项。此外，拟定的GMP文件总数多达666个。这一切，在上级有关部门的严格检测下均获得了通过。</p>
+<p>正大祥和牌生态鸡蛋全部达到了国家出口和绿色食品标准，被消费者称为“神蛋”的新产品功能性保健鸡蛋高硒皇蛋享誉华夏。 </p>"
+
+;;homePageBidding1Component;"<h1>上海华宇药业有限公司</h1>
+<h1>2015年度第一次中药材公开招标采购公告</h1>
+<p><span>尊敬的供货商：</span></p>
+<p>上海华宇药业有限公司是目前国内最大的中药材生产经营企业之一，为了进一步加强与中药材供应商的良好合作，携手面对市场竞争，实现合作双赢，我公司将于2015年 1 月 15 日至2015年 2 月 15 日进行2015年度第一次中药材招标采购，将对6种规格的中药材进行公开招标采购，欢迎全国各地产区的新老客户踊跃参加！</p>
+<p>一、	招标品种及质量要求：</p>
+<p><img src='/anguostorefront/_ui/desktop/common/images/ango/bidding1.png' border='0' width='880' /></p>
+<p>二、	有意参与投标的供应商，请自行下载《公开招标采购竞标书》，并按格式内容，逐项填写，一个品种（规格）一份标书。</p>
+<p>三、       投标的供应商，请准备符合我公司质量要求的大货样品二份（各0.5公斤，计1公斤，贵细品种可少量），携带（或邮寄）我公司一份，自己留存一份（以便与实际来货进行比对，确保参与投标样品与来货质量一致）。样品提交我公司后，我公司公开招标采购工作小组将登记封存。</p>
+<p>四、       参与投标的新增供应商申请投标时，须提供相关证照（包括但不限于营业执照、组织机构证、税务证）等复印件一套；若为专业种植户，需提供身份证、地产证明；如代理商作为投标人还应提供加盖双方公章及法定代表人签字的相关文件，例如授权委托书、经销协议、代理协议、授权书，并加盖单位原印章，与样品、标书一并携带（或邮寄）我公司。以上标书、样品及资质资料（新客户）必须在2015年1月15日至2015年2月15日之间送达我公司，以收寄邮戳日期为准，逾期不得参与本次招标评标。</p>
+<p>五、       我公司接供应商标书和样品后，工作小组将在2015年2月27日开标。</p>
+<p>六、       开标后3个工作日内我公司将书面通知中标客户，落标客户不另行通知。</p>
+<p>七、       凡中标客户，签订合同之前投标人须交纳中标价款总额5%的履约保证金（新客户履约保证金以现金方式支付），中标签订合同后不按合同执行者（包括来货是否与投标样品一致、来货数量和来货时间等）则罚没履约保证金，执行合同后履约保证金在货款中同期无息返还。</p>
+<p>八、       中标客户请于接通知5个工作日之内到我公司交纳履约保证金、签订购销合同，否则视为开标后撤回，我公司保留追溯相关法律责任的权利。合同签订后按合同约定期限送货到我公司指定仓库。</p>
+<p>九、       货到验收、检测合格后三个月付款。</p>
+<p>十、       有关《公开招标采购竞标书》等相关资料请自行下载，或与我公司联系索取。</p>
+<p>投标人应自行承担所有与准备和参加投标有关的全部费用。无论投标结果如何，我公司均无义务和责任承担上述费用。</p>
+<p>公司地址：&nbsp;&nbsp;&nbsp;&nbsp;上海市汉口路239号016室</p>
+<p>招标联系人：&nbsp;&nbsp;&nbsp;&nbsp;市场部</p>
+<p>招标联系电话：&nbsp;&nbsp;&nbsp;&nbsp;021-63232552</p>
+<p>传&nbsp;&nbsp;真：&nbsp;&nbsp;&nbsp;&nbsp;021-63210010&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;邮&nbsp;&nbsp;编：200002</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	上海华宇药业有限公司</p>
+  	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  	二〇一五年一月十五日</p>"
+
+;;homePageBidding2Component;"<h1>吉林敖东中药饮片股份有限公司</h1>
+<h1>面向全国征寻道地药材供应商</h1>
+<p>吉林敖东中药饮片股份有限公司成立于2011年1月27日，注册资本24，980万元，中药饮片加工生产线投资8000万元。公司坐落在吉林省长白山脚下敦化经济开发区敖东工业园区内，交通便利，环境优美，是集中药材GAP种植(养殖)基地、中药材深加工、精加工为一体的大型现代化中药饮片公司。公司于2012年4月28日首次通过中药饮片GMP认证，认证生产经营范围包括净制、切制、炒制、炙制等14种，现生产品种562个，年产量可达4500吨，其中中药饮片3000吨，人参1500吨，年生产总值1.5亿元，利税2000万元，2012年吉林敖东被评为使用地理标志产品专用标志先进企业。</p>
+<h2>吉林敖东中药饮片股份有限公司2015年中药材采购品种</h2>
+<h3>《吉林敖东中药饮片股份有限公司2015年中药材采购品种表 》</h3>
+<table width='200' border='1' border-color='#000'>
+  <tr style='font-weight:bold'>
+    <td width='35' rowspan='2'>序号</td>
+    <td width='35' rowspan='2'>物料名称</td>
+    <td width='35' rowspan='2'>产地</td>
+    <td width='35' rowspan='2'>规格</td>
+    <td height='35' colspan='4'><strong>质量标准(无硫）</strong></td>
+    </tr>
+  <tr style=' font-weight:bold;'>
+    <td width='127' height='90'>杂质</td>
+    <td width='127'>水分</td>
+    <td width='127'>浸出物</td>
+    <td width='127'>含量</td>
+  </tr>
+  <tr>
+    <td height='64'>1</td>
+    <td>丹参 高含</td>
+    <td>山东</td>
+    <td>个</td>
+    <td>不得过2.5%</td>
+    <td>不得过12.0%</td>
+    <td>水溶性不得少于37.0%醇溶性不得少于15.5%</td>
+    <td>丹酚酸B(C36H30O16)不得少于7%</td>
+  </tr>
+  <tr>
+    <td>2</td>
+    <td>五味子</td>
+    <td>吉林</td>
+    <td>个</td>
+    <td>不得过0.8%</td>
+    <td>不得过15.0%</td>
+    <td>&nbsp;</td>
+    <td>五味子醇甲(C24H32O7)不得少于0.44%</td>
+  </tr>
+  <tr>
+    <td>3</td>
+    <td>金银花</td>
+    <td>山东</td>
+    <td>个</td>
+    <td>不得过2.5%</td>
+    <td>不得过11.0%</td>
+    <td>&nbsp;</td>
+    <td>绿原酸(C16H18O9)不得少于2.0%/木犀草苷(C21H20O11)不得少于0.055%</td>
+  </tr>
+  <tr>
+    <td>4</td>
+    <td>川芎</td>
+    <td>四川</td>
+    <td>个</td>
+    <td>不得过2.5%</td>
+    <td>不得过12.9%</td>
+    <td>不得少于12.5%</td>
+    <td>阿魏酸(C10H10O4)不得少于0.11%</td>
+  </tr>
+  <tr>
+    <td>5</td>
+    <td>当归</td>
+    <td>甘肃</td>
+    <td>个</td>
+    <td>不得过2.5%</td>
+    <td>不得过14.0%</td>
+    <td>不得少于47.0%</td>
+    <td>含挥发油不得少于0.44%（ml/g）含阿魏酸（C10H1004）不得少于0.055%</td>
+  </tr>
+  <tr>
+    <td>6</td>
+    <td>板蓝根</td>
+    <td>甘肃河南</td>
+    <td>个</td>
+    <td>不得过2.5%</td>
+    <td>不得过14.0%</td>
+    <td>不得少于27.0%</td>
+    <td>(R,S)-告依春(C5H7NOS)不得少于0.022%</td>
+  </tr>
+  <tr>
+    <td>7</td>
+    <td>连 翘</td>
+    <td>江西</td>
+    <td>个</td>
+    <td>不得过2.8%</td>
+    <td>不得过9.0%</td>
+    <td>不得少于32.0%</td>
+    <td>连翘苷(C27H34O11)不得少于0.17%/连翘酯苷A(C29H36O15)不得少于0.28%</td>
+  </tr>
+  <tr>
+    <td>8</td>
+    <td>半枝莲</td>
+    <td>河南</td>
+    <td>个</td>
+    <td>不得过2.5%</td>
+    <td>不得过12.0%</td>
+    <td>&nbsp;</td>
+    <td>含总黄酮以野黄芩苷(C21H18O12)计，不得少于1.65%</td>
+  </tr>
+  <tr>
+    <td>9</td>
+    <td>红花</td>
+    <td>新疆</td>
+    <td>个</td>
+    <td>不得过1.8%</td>
+    <td>不得过14.0%</td>
+    <td>不得少于32.0%</td>
+    <td>含羟基红花黄色素A  (C27H30O15)不得少于1.1%   含山柰素(C15H10O6)不得少于0.055%</td>
+  </tr>
+  <tr>
+    <td>10</td>
+    <td>灯心草</td>
+    <td>四川</td>
+    <td>个</td>
+    <td>不得过2.5%</td>
+    <td>不得过10.0%</td>
+    <td>不得少于5%</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>11</td>
+    <td>车前子</td>
+    <td>江西</td>
+    <td>个</td>
+    <td>不得过2.5%</td>
+    <td>不得过11.0%</td>
+    <td>&nbsp;</td>
+    <td>含京尼平苷酸（C16H  22O10）不得少于0.55%，毛蕊花糖苷（C29H36O15）不得少于0.44%。</td>
+  </tr>
+</table>
+<p>注：1、征询只限于有一定规模、货源稳定的道地药材供应商、中药材农民专业合作社。具有开据发票等正规资质。</p>
+<p>2、质量要求：所有品种均要求为无硫，同时不得有虫蛀、霉变、泛油、变色等现象；未做提示和要求的均应符合《中国药典》2015版一部及我公司“中药材内控规格标准”。</p>
+<p>3、样品必须与大货一致，报价样品上必须注明样品名称、规格、产地、商家名称等相关信息。</p>
+<p>联系电话：&nbsp;&nbsp;&nbsp;&nbsp;0433-6688088</p>
+<p>工作时间：&nbsp;&nbsp;&nbsp;&nbsp;周一到周五上午8：00~11：00  下午13：00~16：30</p>"
+
+;;homePageBidding3Component;"<h1>四川新绿色药业科技发展股份有限公司</h1>
+<h1>品种求购</h1>
+<p>四川新绿色药业科技发展股份有限公司成立于二〇〇九年一月十六日，是在国家级“农业产业化经营重点龙头企业”和国家级“火炬计划”企业四川绿色药业科技发展股份有限公司的基础上进行资源优化整合重组而建立的。公司注册资本12000万元，拥有进出口经营权，是国家食品药品监督管理局批准的全国(西部地区唯一一家)中药配方颗粒生产企业。</p>
+<p>我公司本着互惠互利原则，力求所需原药材产地直供;欢迎产地经销商联系接洽，质量要求：符合中国药典2010版，规格：统货。</p>
+<p>因公司业务需要，长期求购以下产品：</p>
+<p>黄连、白芷、茯苓、厚朴、黄柏、续断、枳壳、党参、生地、白芍、白术、黄芪、山药、菊花、玄参、三七、人参、桔梗、连翘、山茱萸、北沙参、细辛、蔓荆子、桑寄生、羌活鱼、水蛭、钩藤、碎蛇、紫苏子</p>
+<p>联&nbsp;系&nbsp;人：&nbsp;&nbsp;&nbsp;&nbsp;杨小姐</p>
+<p>联系方式：&nbsp;&nbsp;&nbsp;&nbsp;028-83701802</p>
+<p>公司地址：&nbsp;&nbsp;&nbsp;&nbsp;四川省彭州市工业开发区西河东路</p>
+<p>公司名称：&nbsp;&nbsp;&nbsp;&nbsp;四川新绿色药业科技发展股份有限公司</p>"
+
+;;homePageBidding4Component;"<h1>山东东阿阿胶股份有限公司采购招标</h1>
+<p>山东东阿阿胶股份有限公司前身为山东东阿阿胶厂，1952年建厂，1993年由国有企业改组为股份制企业。1996年成为上市公司，同年7月29日“东阿阿胶”A股股票在深交所挂牌上市。</p>
+<p>科技优势： 1、东阿阿胶独创了全国首部《阿胶生产工艺规程》和《阿胶生产岗位操作法》2、温湿度智能控制常年生产工艺，结束了两千多年来胶类中药半年生产、半年闲状况 3、国家胶类中药工程技术研究中心行业内唯一国家级中心 4、院士工作站 5、国家级企业技术中心 6、博士后科研工作站 7、国家综合性新药研发技术大平台产业化示范企业 8、东阿阿胶国家级非物质文化遗产、炼制技艺唯一传承人企业 9、国家胶类中药标准制定者 10、近三年承担国家科技重大专项16项 11、建立中药行业内领先的近红外在线质控系统 12、建立行业领先的清洁化前处理工艺 13、连续三次荣获山东省科技进步一等奖，一次二等奖 14、国家级创新型企业 15、国家高新技术企业 16、中国商业联合会科技进步一等奖</p>
+<p>经营绩效：“东阿”牌阿胶在全国阿胶厂家唯一3次荣膺国家金质奖、唯一荣获传统药“长城”国际金奖和“全国用户满意产品”称号;荣获上海世博会“千年金奖”;中华老字号全国唯一国家非物质文化遗产—东阿阿胶制作技艺代表性传承人企业“东阿”和“吉祥云”两个商标均为中国驰名商标“东阿”牌荣获首批300家“全国重点保护品牌”、“中国科技名牌500强”、影响世界中国力量品牌500强、中国行业标志性品牌、“最受消费者信赖保健品品牌”、“最具放心企业和最具放心品牌”，并5次入围“中国500最具价值品牌”，品牌价值78亿元;公司系国家级高新技术企业,率先在全国同行业通过GMP、ISO9001质量体系、ISO14001国际环境体系三认证，跨入全国医药百强、全国科技百强、全国中药行业效益十佳企业、山东省中药现代化科技示范企业、“中国最具生命力的企业百强”行列，连续7次入围“中国最具发展力的上市公司50强”。连续四届蝉联中国药品品牌榜补益类第一名，第二届中国最具竞争力医药上市公司20强。东阿阿胶在国内十大补血品牌中“第一提及率、最常服用率、尝试率、品牌忠诚度等7项指标高居榜首。荣获全国中药行业排头兵，全国信息化融合50强，最佳雇主企业，国家综合性新药研发技术大平台(山东)产业化示范企业，全国科普教育基地，中国医药质量管理明星。</p>
+<p>现山东东阿阿胶股份有限公司采购招标表如下：</p>
+<p><img src='/anguostorefront/_ui/desktop/common/images/ango/bidding4.jpg' border='0' width='880' /></p>
+<p><a href='http://www.zyctd.com/upload/zytd/304042/1/%E5%B1%B1%E4%B8%9C%E4%B8%9C%E9%98%BF%E9%98%BF%E8%83%B6%E8%82%A1%E4%BB%BD%E6%9C%89%E9%99%90%E5%85%AC%E5%8F%B8%E9%87%87%E8%B4%AD%E8%A1%A8.xls'>点击下载《山东东阿阿胶股份有限公司采购表》</a></p>
+<p>联&nbsp;系&nbsp;人：&nbsp;&nbsp;&nbsp;&nbsp;杨立民</p>
+<p>联系方式：&nbsp;&nbsp;&nbsp;&nbsp;18663010669</p>"
+
+;;homePageBidding5Component;"<h1>国药乐仁堂河北药业有限公司采购招标</h1>
+<p>国药乐仁堂河北药业有限公司隶属于国药乐仁堂医药有限公司，其前身是有五六十年历史的石家庄市药材公司中药饮片厂。</p>
+<p>为保持中药饮片的“乐仁堂”特色，弘扬企业品牌，2009年通过了饮片生产GMP认证。在日常经营中，不断引进专业技术人员，加大了销售市场的拓展力度，增设了计划营销部，形成了辐射全国各地大宗中药材的销售格局。在此基础上，组建了参茸事业部，重点设计制作精选中药饮片及虫草等贵重饮片的礼品包装，增加了中高端消费市场份额，同时注重做好客户和品种的专项分析，扩大了医疗机构的销售比例，促进中药饮片销售量的稳步提高。</p>
+<p>目前，公司的经营范围包括：中药材批发、中药饮片、毒性中药饮片、口服中药饮片、水果制品、批发预包装食品、农作物种植。</p>
+<p>本次采购品种：黄芪、茯苓、白芍、白术、柴胡、陈皮、当归、党参、山药、薏苡仁、葛根、山茱萸、首乌藤、白芷、丹参、川芎、麦芽、防风、甘草、鸡内金、鸡血藤、决明子、牡蛎、牛膝、枳壳、金银花、桑寄生、板蓝根、杜仲、枸杞子、黄精、女贞子、蒲公英、神曲、香附、续断、半枝莲、茵陈、鱼腥草、艾叶、巴戟天、白花蛇舌草、白茅根、百合、赤芍、地龙、厚朴、黄芩（家种）、龙骨、肉苁蓉、山楂、生地黄、红花、太子参、玄参、石菖蒲、熟地黄、酸枣仁、益母草、郁金、栀子、夏枯草、白扁豆、白鲜皮、北沙参、干姜、瓜蒌、合欢皮、黑顺片、肿节风、荷叶、远志、天麻、枳实、白莲子、车前子、淡竹叶、独活、茯神、钩藤、黄莲（单支）、苦参、芦根、木瓜、木香、茜草、忍冬藤、石斛、土茯苓、菟丝子、延胡索、玉竹、泽泻、浙贝母、桃仁、杏仁、蝉蜕、菊花、沙苑子、天花粉、乌药、仙茅、川牛膝、佛手、骨碎补、桑椹、射干、伸筋草、葶苈子、乌梅、吴茱萸、小茴香、地肤子、白及、白英、柏子仁、海金沙、黑芝麻、重楼、火麻仁、山慈菇、紫河车、桔梗。</p>
+<p>联系电话：&nbsp;&nbsp;&nbsp;&nbsp;0312-3368607</p>
+<p>工作时间：&nbsp;&nbsp;&nbsp;&nbsp;周一到周五上午8：00~11：00  下午13：00~16：30</p>"
+
+
+
+
+
+
+#homePage Link
+UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang=$lang]
+;;homePageConvention1LinkComponent;"2015第18届【北京】国际名贵中药材暨高端滋补品展览会"
+;;homePageConvention2LinkComponent;"2015年全国中药饮片展览会"
+;;homePageConvention3LinkComponent;"2015年第十四届香港国际现代中医药及健康产品展览会"
+;;homePageConvention4LinkComponent;"2014中国（山东）国际生物医药产业博览会"
+;;homePageConvention5LinkComponent;"第七届中国(玉林)中医药博览会将于4月16日至18日在玉林市举行"
+
+;;homePageCompany1LinkComponent;"辽宁森涛参茸股份有限公司"
+;;homePageCompany2LinkComponent;"甘肃中天药业有限责任公司"
+;;homePageCompany3LinkComponent;"百年堂"
+;;homePageCompany4LinkComponent;"河北祁新中药颗粒饮片有限公司"
+;;homePageCompany5LinkComponent;"辽宁正大祥和药业集团"
+
+;;homePageBidding1LinkComponent;"上海华宇药业有限公司"
+;;homePageBidding2LinkComponent;"吉林敖东中药饮片股份有限公司"
+;;homePageBidding3LinkComponent;"四川新绿色药业科技发展股份有限公司"
+;;homePageBidding4LinkComponent;"山东东阿阿胶股份有限公司采购招标"
+;;homePageBidding5LinkComponent;"国药乐仁堂河北药业有限公司采购招标"
+
+
+#homePage Link
+UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang=$lang]
+;;homePageNewsPeople1LinkComponent;"<p>启动会标志着安国数字中药都进入全面建设的新时期。</p>"
+;;homePageNewsPeople2LinkComponent;"<p>天士力成为2015年米兰世博会中国企业联合馆战略合作伙伴签约仪式在天士力大健康城举行。</p>"
+;;homePageNewsPeople3LinkComponent;"<p>第七届中国（玉林）中医药博览会在我市隆重举行。</p>"
+
+
+#homePage newsList
+UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang=$lang]
+;;homePageNewsList1LinkComponent;"更多>"
+;;homePageNewsList2LinkComponent;"更多>"
+;;homePageNewsList3LinkComponent;"更多>"
+
+;;homePageNewsList4LinkComponent;"近期会展"
+;;homePageNewsList5LinkComponent;"新入驻企业"
+;;homePageNewsList6LinkComponent;"采购招标"
+
+
+
+# newsList title
 UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];content[lang=$lang]
+;;newsListTitle1Component;"近期会展"
+;;newsListTitle2Component;"新入驻企业"
+;;newsListTitle3Component;"采购招标"
+
+
+
+
+##homePage scroll img
+UPDATE BannerComponent;$contentCV[unique=true];uid[unique=true];$picture[lang=$lang]
+;;HomePageFirstBanner;/images/homepage/Rbanner1.jpg
+;;HomePageSecondBanner;/images/homepage/Rbanner2.jpg
+;;HomePageThirdBanner;/images/homepage/Rbanner3.jpg
+ 
+
+
+##homePage img
+UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];$picture[lang=$lang]
+;;homePageNewsPeopleImage1Component;/images/homepage/image1.png
+;;homePageNewsPeopleImage2Component;/images/homepage/image2.jpg
+;;homePageNewsPeopleImage3Component;/images/homepage/image3.jpg
+
+
+
+#homePage newsPeople
+UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];content[lang=$lang]
+;;homePageNewsPeople1Component;"<h1>安国数字中药都项目建设启动会召开</h1>
+<p><img src='/anguostorefront/_ui/desktop/common/images/ango/newspeople1.jpg' border='0' width='880' /></p>
+<h3>启动会标志着安国数字中药都进入全面建设的新时期。</h3>
+<p>3月2日下午3点，安国数字中药都项目建设启动动员会在天士力集团北京分公司召开，天士力控股集团董事局主席闫希军，总工程师孙小兵总，安国数字中药都总经理焦银旺，安国数字中药都开发公司副总经理田雨，集团基建中心，招标中心，审计中心领导及安国数字中药都有限公司，宝士力置业相关部门，河北建筑设计院，河北建工集团，中基发展建设工程公司，天津市建设工程监理公司及董教授团队参加了会议。会议确定2015年3月10日进场施工，2016年6月竣工验收。主席提出安国项目施工面积大，时间紧，要求参与施工的各单位和相关职能部门高度合作，高度协调，高度融合。在甲方项目组协调指导下，总包方组织和分工下，设计要一次到位，打造成为样板工程。安国数字中药都项目施工严格实行大项目制管理，完全按照项目进度表的时间来推进，采取倒逼机制，闫主席对项目设计施工工作高度重视，亲任大项目总协调。</p>"
+
+;;homePageNewsPeople2Component;"<h1>天士力成为2015年米兰世博会中国企业联合馆战略合作伙伴签约仪式在津举行</h1>
+<p><img src='/anguostorefront/_ui/desktop/common/images/ango/newspeople2.jpg' border='0' width='880' /></p>
+<p>天士力成为2015年米兰世博会中国企业联合馆战略合作伙伴签约仪式在天士力大健康城举行。</p>
+<p>天士力控股集团成为2015年米兰世博会中国企业联合馆战略合作伙伴签约仪式在天津举行。天士力控股集团董事局主席闫希军，米兰世博会中国企业联合馆执委会副主任黄耀诚，意大利驻华使馆官员Giuseppe PERRICONE，天津市商务委总经济师肖栋出席了本次签约仪式。</p>
+<p>2015年世界博览会即将在文艺之都——意大利米兰开幕，本次世博会以“滋养地球，生命之源”为主题，紧扣当下全球备受关注的生态发展议题，传达出“人类与地球和谐发展、共建稳定生态系统”的美好愿望，势必将成为世人瞩目的焦点。中国企业联合馆以“中国种子”为主题，聚合中国最具代表性的行业领军企业，彰显中国企业在科技创新、保护环境、生态和谐、改善民生、发展智能化生态型企业的综合实力。</p>
+<p>天士力作为大健康领航企业成为“2015年米兰世博会中国企业联合馆合作伙伴”，并以 “健康种子”为主题，彰显天士力“追求天人合一，提高生命质量”的企业理念，“创造健康，人人共享”的企业使命。将聚焦欧洲，面向全球、全方位展现传统东方智慧与现代科技创造出的丰硕健康成果，呈现科技创新带来的生物医药和大健康产品，全面打造人类健康生活方式。</p>
+<p>天士力集团是以大健康产业为主线，以生物医药产业为核心，以健康保健产业、健康管理与服务产业为两翼的高科技国际化企业集团，立足六大核心产业板块，构筑集生物医药产业、中药材产业、健康保健产业、医疗康复与健康管理服务产业、儿童教育与文化产业、国际化产业为一体的大健康产业航母。积极融合全球资源，实施全面国际化，发展大健康产业,是企业发展的重要战略，此次参展世博会对推动国际化发展具有重要作用。与此同时对中国中医药事业的国际化进程产生积极深远的作用，借助本次盛会将加强世界各国对中医药的了解，增进在科研、信息、人才能多方面的共赢合作，为世界人民共享中医药所带来的健康福祉做出贡献。</p>
+<p>此次作为中国中医药企业的代表参展，天士力突出展示以中医诊断现代化、智能信息化为代表的中医检测设备的体验及现代中药的展示。开拓新式中医诊疗途径，推进中医现代化发展。通过中医诊疗设备内涵建设和外延发展，促进现代中医诊疗设备的产业化、国际化。推广具有天士力特色健康管理理念及服务模式的新概念。</p>
+<p>天士力成为2015年米兰世博会中国企业联合馆战略合作伙伴签约仪式在天士力大打造现代化中医功能状态测评设备.</p>
+<p>天士力健康管理中心独家定制开发了现代化、国际化的中医设备，在2015年米兰世博会上将向全球参访者展现传统东方智慧与现代科技完美结合——中医综合检测系统和中医体质辨识系统，运用先进科学技术手段向体验者完美诠释现代中医的望闻问切诊疗法，对身体进行功能性检查，将医学诊疗从对抗性向顺应性转变，配合中医体质辨识系统，发挥中医个体化辩证调养特色优势，展现现代中医魅力。</p>
+<p>补充当今临床注重实体结构检测的不足；使中医辩证体系添加全新信息成为开放系统；使中医药文化走向世界；通过功能状态检测能使医学性医院走向家庭，从对康治疗走向顺势治疗，以有效降低医疗成本。</p>
+<p>开拓大健康产业国际化为了提高生命质量，实现幸福健康人生，做到“治未病”，天士力集团大力开发健康保健产业旗下核心品牌——帝泊洱，并将在欧洲上市推广。</p>
+<p>帝泊洱茶珍用全程标准化数字科技产业链为普洱茶注入了全新的生命活力。针对欧洲消费者的需求，此番开发了专供欧洲市场帝泊洱茶胶囊产品，严选“中国茶源“普洱市核心产区优质大叶种普洱茶为原料，以制药级全产业链生产标准，打造生态、健康、便捷的高品质饮品，创造性地将现代生物技术融入茶产业,研发出符合国际安全标准的无添加、无重金属、无糖、无农残的健康时尚纯茶饮。势必掀起欧洲帝泊洱东方健康生活风潮，同时帝泊洱也被荣幸的被授予为“2015年米兰世博会中国企业联合馆指定茶叶品牌”。</p>
+<p>据悉，本次米兰世博会于2015年5月1日开始，于10月31日闭幕，将吸引全球约2500万游客到访。天士力将于5月31日至6月6日举办“天士力活动周”,期间将展开“大健康论坛”、”帝泊洱欧洲上市启动仪式“等系列活动。与消费者相约米兰，分享健康成果，传递“大健康观、大健康文化、大健康产业”播撒健康种子，爱予无限未来。</p>"
+
+;;homePageNewsPeople3Component;"<h1>玉林市人民政府在第七届药博会期间与康美药业举行签约仪式</h1>
+<p>4月16-18日，第七届中国（玉林）中医药博览会在我市隆重举行。4月16日，玉林市人民政府与康美药业股份有限公司举行中国—东盟（玉林）中药材交易所、康美•玉林医疗健康服务产业战略合作签约仪式。</p>
+<p><img src='/anguostorefront/_ui/desktop/common/images/ango/newspeople3.jpg' border='0' width='880' /></p>
+<p>玉林市人民政府苏海棠市长与康美药业股份有限公司马兴田董事长签署了两个协议。其中，《医疗健康服务产业战略合作框架协议》就康美药业战略性投资玉林医疗健康产业进行深度合作达成协议，投资项目包括投资医院项目,投资总额不低于8亿元、互联网医疗健康服务平台项目投资总额不低于2亿元；《中国-东盟(玉林)中药材交易所合作框架协议》就康美药业在玉林市投资建设和运营中国-东盟(玉林)中药材交易所事项达成协议。交易所投资金额在原中国-东盟康美玉林中药材(香料)交易中心的投资基础上增加投资,交易所项目及其配套总投入不低于2亿元人民币。</p>
+<p>李振品副市长和有关部门领导出席签约仪式。</p>"
+ 
+ 
+ 
+###### Homepage Left Navigation
+ 
+# CMS Link Components
+UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang=zh]
+ ;;HomepageLeftNav1001LinkComponent;"根茎类"
+# ;;HomepageLeftNav1002LinkComponent;"三七"
+ ;;HomepageLeftNav1003LinkComponent;"丹参"
+ ;;HomepageLeftNav1004LinkComponent;"山药"
+ ;;HomepageLeftNav1005LinkComponent;"黄芪"
+ ;;HomepageLeftNav1006LinkComponent;"白芍"
+ ;;HomepageLeftNav1007LinkComponent;"人参"
+ ;;HomepageLeftNav1008LinkComponent;"附子"
+ ;;HomepageLeftNav1009LinkComponent;"白前"
+ ;;HomepageLeftNav1010LinkComponent;"百部"
+ ;;HomepageLeftNav1011LinkComponent;"党参"
+ ;;HomepageLeftNav1012LinkComponent;"巴戟天"
+ ;;HomepageLeftNav1013LinkComponent;"白及"
+ ;;HomepageLeftNav1014LinkComponent;"白茅根"
+ ;;HomepageLeftNav1015LinkComponent;"白蔹"
+ ;;HomepageLeftNav1016LinkComponent;"白薇"
+ ;;HomepageLeftNav1017LinkComponent;"白芷"
+ 
+ ;;HomepageLeftNav2001LinkComponent;"果实籽仁类"
+ ;;HomepageLeftNav2002LinkComponent;"枸杞"
+ ;;HomepageLeftNav2003LinkComponent;"连翘"
+ ;;HomepageLeftNav2004LinkComponent;"山茱萸"
+ ;;HomepageLeftNav2005LinkComponent;"巴豆"
+ ;;HomepageLeftNav2006LinkComponent;"白扁豆"
+ ;;HomepageLeftNav2007LinkComponent;"豆蔻"
+ ;;HomepageLeftNav2008LinkComponent;"白果"
+ ;;HomepageLeftNav2009LinkComponent;"胡椒"
+ ;;HomepageLeftNav2010LinkComponent;"白芥子"
+ ;;HomepageLeftNav2011LinkComponent;"莲子"
+ ;;HomepageLeftNav2012LinkComponent;"槟榔"
+ ;;HomepageLeftNav2013LinkComponent;"补骨脂"
+ ;;HomepageLeftNav2014LinkComponent;"蓖麻子"
+ ;;HomepageLeftNav2015LinkComponent;"荜茇"
+ ;;HomepageLeftNav2016LinkComponent;"香砂"
+ ;;HomepageLeftNav2017LinkComponent;"预知子"
+ 
+ ;;HomepageLeftNav3001LinkComponent;"全草类"
+ ;;HomepageLeftNav3002LinkComponent;"穿心莲"
+ ;;HomepageLeftNav3003LinkComponent;"连钱草"
+ ;;HomepageLeftNav3004LinkComponent;"五味子"
+ ;;HomepageLeftNav3005LinkComponent;"木贼"
+ ;;HomepageLeftNav3006LinkComponent;"淡竹叶"
+ ;;HomepageLeftNav3007LinkComponent;"翼首草"
+ ;;HomepageLeftNav3008LinkComponent;"穿心草"
+ ;;HomepageLeftNav3009LinkComponent;"石斛"
+ ;;HomepageLeftNav3010LinkComponent;"红泽兰"
+ ;;HomepageLeftNav3011LinkComponent;"肉苁蓉"
+ ;;HomepageLeftNav3012LinkComponent;"半边莲"
+ ;;HomepageLeftNav3013LinkComponent;"半枝莲"
+ ;;HomepageLeftNav3014LinkComponent;"筋骨草"
+ ;;HomepageLeftNav3015LinkComponent;"薄荷"
+ ;;HomepageLeftNav3016LinkComponent;"肿节风"
+ ;;HomepageLeftNav3017LinkComponent;"萹蓄"
+
+
+
+ ;;HomepageLeftNav4001LinkComponent;"花类"
+ ;;HomepageLeftNav4002LinkComponent;"菊花"
+ ;;HomepageLeftNav4003LinkComponent;"金银花"
+ ;;HomepageLeftNav4004LinkComponent;"红花"
+ ;;HomepageLeftNav4005LinkComponent;"葛花"
+ ;;HomepageLeftNav4006LinkComponent;"丁香"
+ ;;HomepageLeftNav4007LinkComponent;"谷精草"
+ ;;HomepageLeftNav4008LinkComponent;"槐花"
+ ;;HomepageLeftNav4009LinkComponent;"鸡蛋花"
+ ;;HomepageLeftNav4010LinkComponent;"鸡冠花"
+ ;;HomepageLeftNav4011LinkComponent;"木棉花"
+ ;;HomepageLeftNav4012LinkComponent;"荆芥穗"
+ ;;HomepageLeftNav4013LinkComponent;"月季花"
+ ;;HomepageLeftNav4014LinkComponent;"款冬花"
+ ;;HomepageLeftNav4015LinkComponent;"蜡梅花"
+ ;;HomepageLeftNav4016LinkComponent;"莲房"
+ ;;HomepageLeftNav4017LinkComponent;"莲须"
+
+ ;;HomepageLeftNav5001LinkComponent;"叶类"
+ ;;HomepageLeftNav5002LinkComponent;"淫羊藿"
+ ;;HomepageLeftNav5003LinkComponent;"艾叶"
+ ;;HomepageLeftNav5004LinkComponent;"大青叶"
+ ;;HomepageLeftNav5005LinkComponent;"满山红"
+ ;;HomepageLeftNav5006LinkComponent;"牡荆叶"
+ ;;HomepageLeftNav5007LinkComponent;"布渣叶"
+ ;;HomepageLeftNav5008LinkComponent;"侧柏叶"
+ ;;HomepageLeftNav5009LinkComponent;"麻柳叶"
+ ;;HomepageLeftNav5010LinkComponent;"番泻叶"
+ ;;HomepageLeftNav5011LinkComponent;"木槿叶"
+ ;;HomepageLeftNav5012LinkComponent;"荷叶"
+ ;;HomepageLeftNav5013LinkComponent;"赶风柴"
+ ;;HomepageLeftNav5014LinkComponent;"芦荟"
+ ;;HomepageLeftNav5015LinkComponent;"桃叶"
+ ;;HomepageLeftNav5016LinkComponent;"枇杷叶"
+ ;;HomepageLeftNav5017LinkComponent;"龙脷叶"
+ 
+
+ ;;HomepageLeftNav6001LinkComponent;"树皮类 藤木类"
+ ;;HomepageLeftNav6002LinkComponent;"杜仲"
+ ;;HomepageLeftNav6003LinkComponent;"牡丹皮"
+ ;;HomepageLeftNav6004LinkComponent;"黄柏"
+ ;;HomepageLeftNav6005LinkComponent;"白鲜皮"
+ ;;HomepageLeftNav6006LinkComponent;"苦楝皮"
+ ;;HomepageLeftNav6007LinkComponent;"椿皮"
+ ;;HomepageLeftNav6008LinkComponent;"地骨皮"
+ ;;HomepageLeftNav6009LinkComponent;"肉桂"
+ ;;HomepageLeftNav6010LinkComponent;"海桐皮"
+ ;;HomepageLeftNav6011LinkComponent;"合欢皮"
+ ;;HomepageLeftNav6012LinkComponent;"厚朴"
+ ;;HomepageLeftNav6013LinkComponent;"救必应"
+ ;;HomepageLeftNav6014LinkComponent;"桑白皮"
+ ;;HomepageLeftNav6015LinkComponent;"山黄皮"
+ ;;HomepageLeftNav6016LinkComponent;"土荆皮"
+ ;;HomepageLeftNav6017LinkComponent;"五加皮"
+ 
+
+ 
+ ;;HomepageLeftNav7001LinkComponent;"树脂类 菌藻类"
+ ;;HomepageLeftNav7002LinkComponent;"阿魏"
+ ;;HomepageLeftNav7003LinkComponent;"血竭"
+ ;;HomepageLeftNav7004LinkComponent;"桃胶"
+ ;;HomepageLeftNav7005LinkComponent;"安息香"
+ ;;HomepageLeftNav7006LinkComponent;"琥珀"
+ ;;HomepageLeftNav7007LinkComponent;"没药"
+ ;;HomepageLeftNav7008LinkComponent;"枫香脂"
+ ;;HomepageLeftNav7009LinkComponent;"苏合香"
+ ;;HomepageLeftNav7010LinkComponent;"藤黄"
+ ;;HomepageLeftNav7011LinkComponent;"天竺黄"
+ ;;HomepageLeftNav7012LinkComponent;"松香"
+ ;;HomepageLeftNav7013LinkComponent;"乳香"
+ ;;HomepageLeftNav7014LinkComponent;"虫白蜡"
+ 
+  
+ ;;HomepageLeftNav8001LinkComponent;"动物类"
+ ;;HomepageLeftNav8002LinkComponent;"水蛭"
+ ;;HomepageLeftNav8003LinkComponent;"土鳖虫"
+ ;;HomepageLeftNav8004LinkComponent;"全蝎"
+ ;;HomepageLeftNav8005LinkComponent;"白花蛇"
+ ;;HomepageLeftNav8006LinkComponent;"斑蝥"
+ ;;HomepageLeftNav8007LinkComponent;"鳖甲"
+ ;;HomepageLeftNav8008LinkComponent;"蚕沙"
+ ;;HomepageLeftNav8009LinkComponent;"蛤壳"
+ ;;HomepageLeftNav8010LinkComponent;"蝉蜕"
+ ;;HomepageLeftNav8011LinkComponent;"蟾皮"
+ ;;HomepageLeftNav8012LinkComponent;"蟾酥"
+ ;;HomepageLeftNav8013LinkComponent;"麝香"
+ ;;HomepageLeftNav8014LinkComponent;"玳瑁"
+ ;;HomepageLeftNav8015LinkComponent;"地龙"
+ ;;HomepageLeftNav8016LinkComponent;"猪胆粉"
+ ;;HomepageLeftNav8017LinkComponent;"蜂房"
+ 
+
+ ;;HomepageLeftNav9001LinkComponent;"矿物类"
+ ;;HomepageLeftNav9002LinkComponent;"龙骨"
+ ;;HomepageLeftNav9003LinkComponent;"朱砂"
+ ;;HomepageLeftNav9004LinkComponent;"阳起石"
+ ;;HomepageLeftNav9005LinkComponent;"白降丹"
+ ;;HomepageLeftNav9006LinkComponent;"龙齿"
+ ;;HomepageLeftNav9007LinkComponent;"白石英"
+ ;;HomepageLeftNav9008LinkComponent;"滑石粉"
+ ;;HomepageLeftNav9009LinkComponent;"赤石脂"
+ ;;HomepageLeftNav9010LinkComponent;"磁石"
+ ;;HomepageLeftNav9011LinkComponent;"胆矾"
+ ;;HomepageLeftNav9012LinkComponent;"寒水石"
+ ;;HomepageLeftNav9013LinkComponent;"皂矾"
+ ;;HomepageLeftNav9014LinkComponent;"红升丹"
+ ;;HomepageLeftNav9015LinkComponent;"滑石"
+ ;;HomepageLeftNav9016LinkComponent;"硫黄"
+ ;;HomepageLeftNav9017LinkComponent;"炉甘石"
+ ;;HomepageLeftNav9018LinkComponent;"雌黄"
+ ;;HomepageLeftNav9019LinkComponent;"芒硝"
+ 
+ 
+ ;;HomepageLeftNav10001LinkComponent;"其它加工类"
+ ;;HomepageLeftNav10002LinkComponent;"阿胶"
+ ;;HomepageLeftNav10003LinkComponent;"熟地黄"
+ ;;HomepageLeftNav10004LinkComponent;"青黛"
+ ;;HomepageLeftNav10005LinkComponent;"百药煎"
+ ;;HomepageLeftNav10006LinkComponent;"冰片"
+ ;;HomepageLeftNav10007LinkComponent;"薄荷脑"
+ ;;HomepageLeftNav10008LinkComponent;"制川乌"
+ ;;HomepageLeftNav10009LinkComponent;"胆南星"
+ ;;HomepageLeftNav10010LinkComponent;"淡豆豉"
+ ;;HomepageLeftNav10011LinkComponent;"升药底"
+ ;;HomepageLeftNav10012LinkComponent;"赤铜屑"
+ ;;HomepageLeftNav10013LinkComponent;"儿茶"
+ ;;HomepageLeftNav10014LinkComponent;"干漆"
+ ;;HomepageLeftNav10015LinkComponent;"龟甲胶"
+ ;;HomepageLeftNav10016LinkComponent;"炙黄芪"
+ ;;HomepageLeftNav10017LinkComponent;" 艾片"
+ 
+
+# CMS Paragraph Component
+UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];content[lang=zh]
+ ;;HomepageLeftNav1Component;"<h3> <a href='#'>根茎类<br/><p>丹参  |  山药  |  黄芪</p> </a> </h3><i>></i>"
+ ;;HomepageLeftNav2Component;"<h3> <a href='#'>果实籽仁类<br/><p>枸杞  |  连翘  |  山茱萸</p> </a> </h3><i>></i>"
+ ;;HomepageLeftNav3Component;"<h3> <a href='#'>全草类<br/><p>穿心莲  |  连钱草  |  五味子</p> </a> </h3><i>></i>"
+ ;;HomepageLeftNav4Component;"<h3> <a href='#'>花类<br/><p>菊花  |  金银花  |  红花</p> </a> </h3><i>></i>"
+ ;;HomepageLeftNav5Component;"<h3> <a href='#'>叶类<br/><p>淫羊藿  |  艾叶  |  大青叶</p> </a> </h3><i>></i>"
+ ;;HomepageLeftNav6Component;"<h3> <a href='#'>树皮类 藤木类<br/><p>杜仲  |  牡丹皮  |  黄柏</p> </a> </h3><i>></i>"
+ ;;HomepageLeftNav7Component;"<h3> <a href='#'>树脂类 菌藻类<br/><p>阿魏  |  血竭  |  桃胶</p> </a> </h3><i>></i>"
+ ;;HomepageLeftNav8Component;"<h3> <a href='#'>动物类<br/><p>水蛭  |  土鳖虫  |  全蝎</p> </a> </h3><i>></i>"
+ ;;HomepageLeftNav9Component;"<h3> <a href='#'>矿物类<br/><p>龙骨  |  朱砂  |  阳起石</p> </a> </h3><i>></i>"
+ ;;HomepageLeftNav10Component;"<h3> <a href='#'>其它加工类<br/><p>阿胶  |  熟地黄  |  青黛</p> </a> </h3><i>></i>"
+ 
+
+ 
+ 
+ 
+
+# Homepage Img Information
+UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];$picture[lang=$lang]
+;;HomepageImgBanner1;/images/banners/product/baishao2.jpg
+;;HomepageImgBanner2;/images/banners/product/danshen5.jpg
+;;HomepageImgBanner3;/images/banners/product/gouqi6.jpg
+;;HomepageImgBanner4;/images/banners/product/huangqi3.jpg
+;;HomepageImgBanner5;/images/banners/product/juhua3.jpg
+;;HomepageImgBanner6;/images/banners/product/shanyao2.jpg
+;;HomepageImgBanner7;/images/banners/product/baishao2.jpg
+;;HomepageImgBanner8;/images/banners/product/danshen5.jpg
+;;HomepageImgBanner9;/images/banners/product/gouqi6.jpg
+;;HomepageImgBanner10;/images/banners/product/huangqi3.jpg
+;;HomepageImgBanner11;/images/banners/product/juhua3.jpg
+;;HomepageImgBanner12;/images/banners/product/shanyao2.jpg
+
+# CMS Paragraph Component
+UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang=zh]
+;;HomepageTextComponent1;"<b>白芍</b><p>￥18元/千克<br/>产品规格：统货/选货/二级/三级 /混级<br/>安国数字中药都</p>"
+;;HomepageTextComponent2;"<b>丹参</b><p>￥100元/kg<br/>产品规格：统货/一级选装/统装<br/>安国数字中药都</p>"
+;;HomepageTextComponent3;"<b>枸杞</b><p>￥68元/千克<br/>产品规格：统货<br/>安国数字中药都</p>"
+;;HomepageTextComponent4;"<b>黄芪</b><p>￥15元/千克<br/>产品规格：小斜片/大斜片 /选片/统片<br/>安国数字中药都</p>"
+;;HomepageTextComponent5;"<b>菊花</b><p>￥22元/千克<br/>产品规格：统货/选货<br/>安国数字中药都</p>"
+;;HomepageTextComponent6;"<b>山药</b><p>￥35元/千克<br/>产品规格：光条/统片/毛条/选片<br/>安国数字中药都</p>"
+;;HomepageTextComponent7;"<b>白芍</b><p>￥18元/千克<br/>产品规格：统货/选货/二级/三级 /混级<br/>安国数字中药都</p>"
+;;HomepageTextComponent8;"<b>丹参</b><p>￥100元/kg<br/>产品规格：统货/一级选装/统装<br/>安国数字中药都</p>"
+;;HomepageTextComponent9;"<b>枸杞</b><p>￥68元/千克<br/>产品规格：统货<br/>安国数字中药都</p>"
+;;HomepageTextComponent10;"<b>黄芪</b><p>￥15元/千克<br/>产品规格：小斜片/大斜片 /选片/统片<br/>安国数字中药都</p>"
+;;HomepageTextComponent11;"<b>菊花</b><p>￥22元/千克<br/>产品规格：统货/选货<br/>安国数字中药都</p>"
+;;HomepageTextComponent12;"<b>山药</b><p>￥35元/千克<br/>产品规格：光条/统片/毛条/选片<br/>安国数字中药都</p>"
+
+
+
+ 

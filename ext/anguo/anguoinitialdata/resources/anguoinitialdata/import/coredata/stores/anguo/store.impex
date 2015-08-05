@@ -4,12 +4,12 @@
 
 $productCatalog=anguoProductCatalog
 $classificationCatalog=anguoClassification
-$currencies=CNY,USD
+$currencies=CNY
 $net=false
 $storeUid=anguo
-$defaultCurrency=USD
+$defaultCurrency=CNY
 $languages=ja,en,de,zh
-$defaultLanguage=en
+$defaultLanguage=zh
 $unitedKingdom=GB,GG,IM,JE
 $europeNotUK=AD,AL,AT,BA,BE,BG,BY,CH,CY,CZ,DE,DK,EE,ES,FI,FO,FR,GI,GL,GR,HR,HU,IE,IS,IT,LI,LT,LU,LV,MC,MD,ME,MK,MT,NL,NO,PL,PT,RO,RS,RU,SE,SI,SK,SM,TR,UA,VA
 $asianCountries=CN,JP,VN,HK,KP,KR

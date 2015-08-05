@@ -35,7 +35,56 @@
 			<value code="YELLOW"/>
 		</enumtype>
 		<!-- enumtype for product start -->
+		
+		<enumtype generate="true" code="PackageUnit" autocreate="true" dynamic="true">
+			<value code="PACKAGE"/>
+			<value code="BAG"/>
+		</enumtype>
+		 
+		<enumtype generate="true" code="ProcessMethodType" autocreate="true" dynamic="true">
+			<value code="QIE"/>
+			<value code="HONG"/>
+			<value code="JINGXUAN"/>
+			<value code="TAOXI"/>
+			<value code="PAOZHI"/>
+			<value code="DAN"/>
+			<value code="ZHISHUANG"/>
+			<value code="SHUIFEI"/>
+			<value code="FAYA"/>
+			<value code="FAJIAO"/>
+			<value code="OTHER"/>
+		</enumtype>
+		
+		<enumtype generate="true" code="huiFenType" autocreate="true" dynamic="true">
+			<value code="MORE"/>
+			<value code="MODERATE"/>
+			<value code="LESS"/>
+			<value code="NONE"/>
+			<value code="OTHER"/>
+		</enumtype>
+		
+		<enumtype generate="true" code="ProductStatus" autocreate="true" dynamic="true">
+			<value code="ONLINE"/>
+			<value code="OFFLINE"/>
+			<value code="REJECT"/>
+			<value code="UNCHECK"/>
+			<value code="PROGRESS"/>
+		</enumtype>
+		
 		<!-- enumtype for product end -->
+		
+		
+		<!-- add by Yang for AM-18 start -->
+		<enumtype generate="true" code="StoreApproveStatus" autocreate="true" dynamic="true">
+			<value code="CREATE_WAIT"/>
+			<value code="CREATE_APPROVE"/>
+			<value code="CREATE_REJECT"/>
+			<value code="MODIFY_WAIT"/>
+			<value code="MODIFY_APPROVE"/>
+			<value code="MODIFY_REJECT"/>
+		</enumtype>
+		<!-- add by Yang for AM-18 end -->
+		
 	</enumtypes>
 
 	<relations>
@@ -76,9 +125,28 @@
 			</targetElement>
 		</relation>
 		<!-- relation for product end -->
+		
+		
+	<!-- add by Yang for AM-18 start -->
+        <relation code="AnguoPlatformService2AnguoStoreRelation" generate="true" localized="false" autocreate="true">
+            <description></description>
+            <sourceElement type="AnguoPlatformService" qualifier="anguoPlatformService" cardinality="many">
+                <modifiers read="true" write="true" optional="true" search="true"/>
+            </sourceElement>
+            <targetElement type="AnguoStore" qualifier="anguoStore" cardinality="one">
+                <modifiers read="true" write="true" optional="true" search="true"/>
+            </targetElement>
+        </relation>
+	<!-- add by Yang for AM-18 end -->
+		
 	</relations>
 	
 	<itemtypes>
+	
+	        <itemtype code="HeaderNavigationComponent" autocreate="true" generate="true" extends="NavigationBarComponent"
+                  jaloclass="de.hybris.platform.acceleratorcms.jalo.components.HeaderNavigationComponent">
+            <description>It represents navigation bar component that contains cms navigation node. Nodes structure can be built in a hierarchical way.</description>
+        </itemtype>
 
 		<!-- Add your item definitions here -->
 		<typegroup name="Locations">
@@ -142,6 +210,7 @@
 		</typegroup>
 
 
+
 		<!-- TypeGroups are for structure of this file only -->
 
 		<typegroup name="Apparel">
@@ -197,21 +266,7 @@
 			</itemtype>
 		</typegroup>
 		
-		<typegroup name="Electronics">
-			<itemtype code="ElectronicsColorVariantProduct" extends="VariantProduct"
-          autocreate="true" generate="true"
-          jaloclass="com.tasly.anguo.core.jalo.ElectronicsColorVariantProduct">
-				 <description>Electronics color variant type that contains additional attribute describing variant color.
-				</description>
-				<attributes>
-					<attribute qualifier="color" type="localized:java.lang.String"
-					           metatype="VariantAttributeDescriptor">
-						<description>Color of the product.</description>
-						<modifiers/>
-						<persistence type="property"/>
-					</attribute>
-				</attributes>
-			</itemtype>
+		<typegroup name="Account">
 			<itemtype code="Customer" autocreate="false" generate="false">
 				<description>Extending Customer type with additional attributes.</description>
 				<attributes>
@@ -224,7 +279,19 @@
 						<description>Whether pass the identification.</description>
 						<modifiers/>
 						<persistence type="property"/>
-					</attribute>	
+					</attribute>
+					<!-- add by Yang for AM-18 start -->
+					<attribute qualifier="anguoStore" type="AnguoStore">
+						<description></description>
+						<modifiers/>
+						<persistence type="property"/>
+					</attribute>
+					<attribute qualifier="anguoStoreTemp" type="AnguoStoreTemp">
+						<description></description>
+						<modifiers/>
+						<persistence type="property"/>
+					</attribute>
+					<!-- add by Yang for AM-18 end -->						
 				</attributes>
 			</itemtype>
 			<itemtype code="PersonalAccount" extends="Customer">
@@ -256,7 +323,7 @@
 			<itemtype code="EnterpriseAccount" extends="Customer">
 				<description>EnterpriseUser extend from customer used for Enterprise .</description>
 				<attributes>
-					<attribute qualifier="registeredNo" type="java.lang.Integer">
+					<attribute qualifier="registeredNo" type="java.lang.Long">
 						<persistence type="property" />
 					</attribute>
 				</attributes>
@@ -321,9 +388,8 @@
 					</attribute>
 				</attributes>
 			</itemtype>
-			
 		</typegroup>
-
+		
 		<typegroup name="AnguoProduct">
 			<itemtype code="CategoryAlias" generate="true" autocreate="true">
 				<deployment table="CategoryAlias" typecode="10000"/>
@@ -332,6 +398,73 @@
 						<persistence type="property"></persistence>
 						<description>category alias name</description>
 					</attribute>
+				</attributes>
+			</itemtype>
+
+			
+			<itemtype code="Product" generate="false" autocreate="false">
+				<attributes>
+					<attribute type="localized:java.lang.String" qualifier="specification">
+						<persistence type="property"></persistence>
+						<description>gui ge</description>
+					</attribute>
+
+					<attribute type="AbstractLocationItem" qualifier="madeIn">
+						<persistence type="property"></persistence>
+						<description>chan di</description>
+					</attribute>
+					 
+					<attribute type="java.util.Date" qualifier="produceYear">
+						<persistence type="property"></persistence>
+						<description>sheng chan nian fen</description>
+					</attribute>
+
+					<attribute type="PackageUnit" qualifier="packageUnit">
+						<persistence type="property"></persistence>
+					</attribute>
+					<attribute type="AbstractLocationItem" qualifier="storageLocation">
+						<persistence type="property"></persistence>
+						<description>ku cun di</description>
+					</attribute>
+					<attribute type="java.lang.String" qualifier="warehouse">
+						<persistence type="property"></persistence>
+						<description>cang chu di dian not used</description>
+					</attribute>
+					<attribute type="java.lang.Integer" qualifier="minSalesQuantity">
+						<persistence type="property"></persistence>
+						<description>min sales quantity</description>
+					</attribute>
+					
+					<attribute qualifier="lastestOnlineDate" type="java.util.Date">
+				    	<modifiers read="true" write="true" search="true" optional="true"/>
+					    <persistence type="property"/>
+					</attribute>
+					
+					<!-- 
+				    <attribute type="java.lang.String" qualifier="processMethod">
+						<persistence type="property"></persistence>
+						<description>jia gong fang fa</description>
+					</attribute>
+					<attribute type="java.lang.String" qualifier="huifen">
+						<persistence type="property"></persistence>
+						<description>hui fen</description>
+					</attribute>
+					<attribute type="java.lang.Integer" qualifier="dryness">
+						<persistence type="property"></persistence>
+						<description>gan du</description>
+					</attribute>
+					<attribute qualifier="containLiu" type="java.lang.String">
+				    	<modifiers read="true" write="true" search="true" optional="true"/>
+					    <persistence type="property"/>
+					</attribute>
+					 -->
+					 
+					<attribute qualifier="productStatus" type="ProductStatus">
+				    	<modifiers read="true" write="true" search="true" optional="true"/>
+					    <persistence type="property"/>
+					    <defaultvalue>em().getEnumerationValue("ProductStatus","UNCHECK")</defaultvalue>
+					</attribute>
+					
 				</attributes>
 			</itemtype>
             <itemtype code="Category" generate="false" autocreate="false">
@@ -359,6 +492,167 @@
             	</attributes>
             </itemtype>
 		</typegroup>
+
+		
+		
+		<!-- add by Yang for AM-18 start -->
+		<typegroup name="AnguoStore">
+            <itemtype code="AnguoStore" autocreate="true" generate="true" jaloclass="com.tasly.anguo.core.jalo.AnguoStore">
+					<description> Anguo virtual store </description>
+            	<deployment table="AnguoStore" typecode="6900" />
+						<attributes>
+						<attribute qualifier="uid" type="java.lang.String">
+						<modifiers/>
+						<persistence type="property"/>
+						</attribute>
+						
+						<attribute qualifier="name" type="java.lang.String">
+						<modifiers/>
+						<persistence type="property"/>
+						</attribute>
+						
+						<attribute qualifier="logo" type="Media">
+						<modifiers/>
+						<persistence type="property"/>
+						</attribute>
+						
+						<attribute qualifier="contentCatalog" type="ContentCatalog">
+						<modifiers/>
+						<persistence type="property"/>
+						</attribute>
+						
+						<attribute qualifier="description" type="java.lang.String">
+						<modifiers/>
+						<persistence type="property"/>
+						</attribute>
+						
+						<attribute qualifier="country" type="Country">
+						<modifiers/>
+						<persistence type="property"/>
+						</attribute>
+						
+						<attribute qualifier="region" type="Region">
+						<modifiers/>
+						<persistence type="property"/>
+						</attribute>
+						
+						<attribute qualifier="city" type="City">
+						<modifiers/>
+						<persistence type="property"/>
+						</attribute>
+						
+						<attribute qualifier="cityDistrict" type="District">
+						<modifiers/>
+						<persistence type="property"/>
+						</attribute>
+						
+						<attribute qualifier="street" type="java.lang.String">
+						<modifiers/>
+						<persistence type="property"/>
+						</attribute>
+						
+						<attribute qualifier="contactName1" type="java.lang.String">
+						<modifiers/>
+						<persistence type="property"/>
+						</attribute>
+						
+						<attribute qualifier="contactPhone1" type="java.lang.String">
+						<modifiers/>
+						<persistence type="property"/>
+						</attribute>
+						
+						<attribute qualifier="contactName2" type="java.lang.String">
+						<modifiers/>
+						<persistence type="property"/>
+						</attribute>
+						
+						<attribute qualifier="contactPhone2" type="java.lang.String">
+						<modifiers/>
+						<persistence type="property"/>
+						</attribute>
+						
+						<attribute qualifier="contactName3" type="java.lang.String">
+						<modifiers/>
+						<persistence type="property"/>
+						</attribute>
+						
+						<attribute qualifier="contactPhone3" type="java.lang.String">
+						<modifiers/>
+						<persistence type="property"/>
+						</attribute>
+						
+						<attribute qualifier="qq" type="java.lang.String">
+						<modifiers/>
+						<persistence type="property"/>
+						</attribute>
+						
+						<attribute qualifier="fax" type="java.lang.String">
+						<modifiers/>
+						<persistence type="property"/>
+						</attribute>
+						
+						<attribute qualifier="telephone" type="java.lang.String">
+						<modifiers/>
+						<persistence type="property"/>
+						</attribute>
+						
+						<attribute qualifier="registerDate" type="java.util.Date">
+						<modifiers/>
+						<persistence type="property"/>
+						</attribute>
+						
+						<attribute qualifier="storeLevel" type="java.lang.String">
+						<modifiers/>
+						<persistence type="property"/>
+						</attribute>
+						
+						<attribute qualifier="storeTemplate" type="java.lang.String">
+						<modifiers/>
+						<persistence type="property"/>
+						</attribute>
+						
+
+						
+					</attributes>
+				</itemtype>
+				
+				
+				<itemtype code="AnguoStoreTemp"
+                      extends="AnguoStore"
+                      jaloclass="com.tasly.anguo.core.jalo.AnguoStoreTemp"
+                      autocreate="true"
+                      generate="true"
+                      abstract="false">
+            	<deployment table="AnguoStoreTemp" typecode="6901" />
+            	<attributes>
+						<attribute qualifier="status" type="StoreApproveStatus">
+						<modifiers/>
+						<persistence type="property"/>
+						</attribute>            	
+            	</attributes>
+            	</itemtype>
+				
+				<itemtype code="AnguoPlatformService" autocreate="true" generate="true" jaloclass="com.tasly.anguo.core.jalo.AnguoPlatformService">
+					<description> Anguo platform service </description>
+							<attributes>
+								<attribute qualifier="code" type="java.lang.String">
+								<modifiers/>
+								<persistence type="property"/>
+								</attribute>
+								<attribute qualifier="description" type="java.lang.String">
+								<modifiers/>
+								<persistence type="property"/>
+								</attribute>
+								<attribute qualifier="score" type="java.lang.Integer">
+								<modifiers/>
+								<persistence type="property"/>
+								</attribute>
+							</attributes>
+				</itemtype>
+            
+        </typegroup>
+		<!-- add by Yang for AM-18 end -->
+
 
 	</itemtypes>
 </items>

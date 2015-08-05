@@ -10,7 +10,6 @@
 <%@ taglib prefix="store" tagdir="/WEB-INF/tags/desktop/store" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="nav" tagdir="/WEB-INF/tags/desktop/nav" %>
-<%@ taglib prefix="action" tagdir="/WEB-INF/tags/desktop/action" %>
 
 <c:set value="/store-finder?q=${param.q}" var="searchUrl" />
 <c:if test="${not empty geoPoint}">
@@ -42,9 +41,8 @@
 						</ycommerce:testId>
 					</a>
 					
-					<c:url value="${pos.url}" var="storeUrl" scope="request"/>
-					<action:actions element="div" styleClass="itemName" parentComponent="${component}"/>
-
+					<a href="${posUrl}" class="right button"><spring:theme code="storeFinder.table.view.map"/></a>
+					
 					<div class="details">
 						<div class="itemName">
 							<ycommerce:testId code="storeFinder_result_link">

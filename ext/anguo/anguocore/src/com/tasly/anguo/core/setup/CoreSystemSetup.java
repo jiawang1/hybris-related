@@ -49,6 +49,7 @@ public class CoreSystemSetup extends AbstractSystemSetup
 	{
 		importImpexFile(context, "/anguocore/import/common/essential-data.impex");
 		importImpexFile(context, "/anguocore/import/common/countries.impex");
+		importImpexFile(context, "/anguocore/import/common/locations.impex");
 		importImpexFile(context, "/anguocore/import/common/delivery-modes.impex");
 
 		importImpexFile(context, "/anguocore/import/common/themes.impex");

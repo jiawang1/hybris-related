@@ -2,7 +2,9 @@
 ### Site Search
 ********************************************************************/
 
-
+.siteSearch{
+	float:right;
+}
 
 .siteSearch .control-group{
 	width:290px;
@@ -98,16 +100,14 @@
 	height:auto;
 }
 
-
 .ui-autocomplete .ui-menu-item .desc{
-	margin:10px;
+	margin:10px 10px 0 100px;
 }
-
 
 .ui-autocomplete .ui-menu-item .desc .title{
 	float:left;
 	white-space: normal;
-	width: 200px;
+	width: 115px;
 	display:block;
 }
 
@@ -115,14 +115,3 @@
 	float:right;
 	font-weight:bold  !important;
 }
-
-
-/* products with image */
-.ui-autocomplete .ui-menu-item .thumb + .desc{
-	margin:10px 10px 0 100px;
-}
-
-.ui-autocomplete .ui-menu-item .thumb + .desc .title{
-	width: 115px;
-}
-

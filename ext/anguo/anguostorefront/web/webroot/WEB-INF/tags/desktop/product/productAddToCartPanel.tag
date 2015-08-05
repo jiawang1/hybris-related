@@ -7,46 +7,65 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="theme" tagdir="/WEB-INF/tags/shared/theme" %>
-<%@ taglib prefix="storepickup" tagdir="/WEB-INF/tags/desktop/storepickup" %>
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags" %>
 <%@ taglib prefix="product" tagdir="/WEB-INF/tags/desktop/product" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ taglib prefix="action" tagdir="/WEB-INF/tags/desktop/action" %>
-
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <div class="qty">
 	<c:if test="${product.purchasable}">
-		<label for="qtyInput">
-			<spring:theme code="basket.page.quantity"/>
-		</label>
+		<label for="qtyInput"><spring:theme code="basket.page.quantity"/></label>
 		<input type="text" maxlength="3" size="1" id="qtyInput" name="qtyInput" class="qty" value="1">
 	</c:if>
 
 	<c:if test="${product.stock.stockLevel gt 0}">
-		<c:set var="productStockLevel">${product.stock.stockLevel}&nbsp;
-			<spring:theme code="product.variants.in.stock"/>
-		</c:set>
-	</c:if>
-	<c:if test="${product.stock.stockLevelStatus.code eq 'lowStock'}">
-		<c:set var="productStockLevel">
-			<spring:theme code="product.variants.only.left" arguments="${product.stock.stockLevel}"/>
-		</c:set>
+		<c:set var="productStockLevel">${product.stock.stockLevel}&nbsp;<spring:theme code="product.variants.in.stock"/></c:set>
 	</c:if>
 	<c:if test="${product.stock.stockLevelStatus.code eq 'inStock' and empty product.stock.stockLevel}">
-		<c:set var="productStockLevel">
-			<spring:theme code="product.variants.available"/>
-		</c:set>
+		<c:set var="productStockLevel"><spring:theme code="product.variants.available"/></c:set>
 	</c:if>
 
 	<ycommerce:testId code="productDetails_productInStock_label">
-		<p class="stock_message">${productStockLevel}</p>
+		<%-- <product:productStockThreshold product="${product}"/>  --%>
 	</ycommerce:testId>
 </div>
 
+<product:productFutureAvailability product="${product}" futureStockEnabled="${futureStockEnabled}" />
 
-<div id="actions-container-for-${component.uid}" class="productAddToCartPanelContainer clearfix">
-	<ul class="productAddToCartPanel clearfix">
-		<action:actions element="li" styleClass="productAddToCartPanelItem span-5" parentComponent="${component}"/>
-	</ul>
+<div class="productAddToCartPanel clearfix">
+	<c:if test="${multiDimensionalProduct}" >
+					<sec:authorize ifAnyGranted="ROLE_CUSTOMERGROUP">
+						<c:url value="${product.url}/orderForm" var="productOrderFormUrl"/>
+						<a href="${productOrderFormUrl}" class="button negative" id="productOrderButton" ><spring:theme code="order.form" /></a>
+					</sec:authorize>
+				</c:if>
+	<form id="addToCartForm" class="add_to_cart_form" action="<c:url value="/cart/add"/>" method="post">
+	<input type="hidden" name="CSRFToken" value="${CSRFToken}">
+	<c:if test="${product.purchasable}">
+		<input type="hidden" maxlength="3" size="1" id="qty" name="qty" class="qty" value="1">
+	</c:if>
+	<input type="hidden" name="productCodePost" value="${product.code}"/>
+
+	
+	<c:if test="${allowAddToCart}">
+		<c:set var="buttonType">submit</c:set>
+		<c:if test="${product.purchasable and product.stock.stockLevelStatus.code ne 'outOfStock' }">
+			<c:set var="buttonType">submit</c:set>
+		</c:if>
+
+		<c:choose>
+			<c:when test="${fn:contains(buttonType, 'button')}">
+				<button type="${buttonType}" class="addToCartButton outOfStock" disabled="disabled">
+					<spring:theme code="product.variants.out.of.stock"/>
+				</button>
+			</c:when>
+
+			<c:otherwise>
+				<button id="addToCartButton" type="${buttonType}" class="addToCartButton" disabled="disabled">
+					<spring:theme code="basket.add.to.basket"/>
+				</button>
+			</c:otherwise>
+		</c:choose>
+	</c:if>
+	</form>
+
 </div>
-

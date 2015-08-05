@@ -86,7 +86,8 @@
 		<security:intercept-url pattern="/checkout/multi/billingaddressform" access="hasAnyRole('ROLE_ANONYMOUS','ROLE_CUSTOMERGROUP')" requires-channel="https" />
 		<security:intercept-url pattern="/my-account*" access="hasRole('ROLE_CUSTOMERGROUP')" requires-channel="https" />
 		<security:intercept-url pattern="/my-account/**" access="hasRole('ROLE_CUSTOMERGROUP')" requires-channel="https" />
-
+		<security:intercept-url pattern="/anguo-storemanagerment/**" access="hasRole('ROLE_CUSTOMERGROUP')" requires-channel="https" />
+		<security:intercept-url pattern="/identify/**" access="hasRole('ROLE_CUSTOMERGROUP')" requires-channel="https" />
 		<security:intercept-url pattern="/**" requires-channel="https" /> <!-- Everything should be secure -->
 
 		<security:form-login
@@ -122,9 +123,9 @@
 
 	<bean id="coreUserDetailsService" class="de.hybris.platform.spring.security.CoreUserDetailsService"  />
 
-	<bean id="guidCookieStrategy" class="com.tasly.anguo.storefront.security.impl.DefaultGUIDCookieStrategy"
-	      >
+	<bean id="guidCookieStrategy" class="com.tasly.anguo.storefront.security.impl.DefaultGUIDCookieStrategy" >
 		<property name="cookieGenerator" ref="guidCookieGenerator" />
+		<property name="cookieMaxAge" value="1296000"/>
 	</bean>
 	
 	<alias name="defaultGuestCheckoutCartCleanStrategy" alias="guestCheckoutCartCleanStrategy"/>
@@ -278,11 +279,11 @@
 
 	
 	<alias name="defaultRememberMeServices" alias="rememberMeServices"/>
-	<bean id="defaultRememberMeServices" class="com.tasly.anguo.storefront.security.AcceleratorRememberMeServices" >
+	<bean id="defaultRememberMeServices" class="com.tasly.anguo.storefront.security.AcceleratorRememberMeServices">
 		<property name="userDetailsService" ref="originalUidUserDetailsService" />
 		<property name="key" value="anguostorefront" />
 		<property name="cookieName" value="anguostorefrontRememberMe" />
-		<property name="alwaysRemember" value="true" />
+		<property name="alwaysRemember" value="false" />
 		<property name="userService" ref="userService"/>
 		<property name="useSecureCookie" value="false"/>
 		<property name="customerFacade" ref="customerFacade"/>

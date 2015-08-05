@@ -37,9 +37,11 @@ public class AnguoCustomerFacade extends DefaultCustomerFacade
         CustomerModel newCustomer = null;
         if (registerData.getUserType() == UserType.PERSONAL) {
             newCustomer = getModelService().create(PersonalAccountModel.class);
+            newCustomer.setIdentified(true);
         } else if (registerData.getUserType() == UserType.ENTERPRISE) {
             newCustomer = getModelService()
                     .create(EnterpriseAccountModel.class);
+            newCustomer.setIdentified(false);
         }
         newCustomer.setName(registerData.getLogin());
 
