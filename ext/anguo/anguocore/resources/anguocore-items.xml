@@ -73,7 +73,7 @@
 		
 		<!-- enumtype for product end -->
 		
-		
+		<!-- enumtype for anguostore start -->
 		<!-- add by Yang for AM-18 start -->
 		<enumtype generate="true" code="StoreApproveStatus" autocreate="true" dynamic="true">
 			<value code="CREATE_WAIT"/>
@@ -84,7 +84,18 @@
 			<value code="MODIFY_REJECT"/>
 		</enumtype>
 		<!-- add by Yang for AM-18 end -->
-		
+		<enumtype generate="true" code="StoreMediaSubFolder" autocreate="true" dynamic="true">
+			<value code="PRODUCT"/>
+			<value code="SOURCE"/>
+			<value code="QUALITY"/>
+			<value code="DESCRIPTION"/>
+			<value code="LOGO"/>
+		</enumtype>
+		<enumtype generate="true" code="StoreType" autocreate="true" dynamic="true">
+			<value code="PERSONAL"/>
+			<value code="ENTERPRISE"/>
+		</enumtype>
+		<!-- enumtype for anguostore end -->
 	</enumtypes>
 
 	<relations>
@@ -126,7 +137,7 @@
 		</relation>
 		<!-- relation for product end -->
 		
-		
+	<!-- relation for anguostore start -->	
 	<!-- add by Yang for AM-18 start -->
         <relation code="AnguoPlatformService2AnguoStoreRelation" generate="true" localized="false" autocreate="true">
             <description></description>
@@ -138,7 +149,18 @@
             </targetElement>
         </relation>
 	<!-- add by Yang for AM-18 end -->
-		
+	<!-- add for anguostore and product start -->
+	<relation code="Product2AnguoStoreRelation" generate="true" localized="false" autocreate="true">
+            <description></description>
+            <sourceElement type="Product" qualifier="products" cardinality="many">
+                <modifiers read="true" write="true" optional="true" search="true"/>
+            </sourceElement>
+            <targetElement type="AnguoStore" qualifier="anguoStore" cardinality="one">
+                <modifiers read="true" write="true" optional="true" search="true"/>
+            </targetElement>
+        </relation>
+   <!-- add for anguostore and product end -->
+	<!-- relation for anguostore end -->		
 	</relations>
 	
 	<itemtypes>
@@ -478,124 +500,156 @@
 		</typegroup>
 
 		
-		
+		<!-- type for anguostore start -->
 		<!-- add by Yang for AM-18 start -->
 		<typegroup name="AnguoStore">
             <itemtype code="AnguoStore" autocreate="true" generate="true" jaloclass="com.tasly.anguo.core.jalo.AnguoStore">
 					<description> Anguo virtual store </description>
-            	<deployment table="AnguoStore" typecode="6900" />
+            	<deployment table="AnguoStore" typecode="10101" />
 						<attributes>
 						<attribute qualifier="uid" type="java.lang.String">
-						<modifiers/>
+						<description>10位数字</description>
+						<modifiers optional="false"/>
 						<persistence type="property"/>
 						</attribute>
 						
-						<attribute qualifier="name" type="java.lang.String">
-						<modifiers/>
+						<attribute qualifier="name" type="localized:java.lang.String">
+						<description>100位字符</description>
+						<modifiers optional="false"/>
 						<persistence type="property"/>
 						</attribute>
 						
 						<attribute qualifier="logo" type="Media">
+						<description>jpg,png,bmp,jpeg</description>
 						<modifiers/>
 						<persistence type="property"/>
 						</attribute>
 						
 						<attribute qualifier="contentCatalog" type="ContentCatalog">
+						<description>店铺模版（could be replaced with page template）</description>
 						<modifiers/>
 						<persistence type="property"/>
 						</attribute>
 						
 						<attribute qualifier="description" type="java.lang.String">
-						<modifiers/>
+						<description>店铺简介（2000字符）</description>
+						<modifiers optional="false"/>
 						<persistence type="property"/>
 						</attribute>
 						
 						<attribute qualifier="country" type="Country">
+						<description>国家</description>
 						<modifiers/>
 						<persistence type="property"/>
 						</attribute>
 						
 						<attribute qualifier="region" type="Region">
+						<description>省</description>
 						<modifiers/>
 						<persistence type="property"/>
 						</attribute>
 						
 						<attribute qualifier="city" type="City">
+						<description>市</description>
 						<modifiers/>
 						<persistence type="property"/>
 						</attribute>
 						
 						<attribute qualifier="cityDistrict" type="District">
+						<description>区</description>
 						<modifiers/>
 						<persistence type="property"/>
 						</attribute>
 						
 						<attribute qualifier="street" type="java.lang.String">
+						<description>街道</description>
 						<modifiers/>
 						<persistence type="property"/>
 						</attribute>
 						
 						<attribute qualifier="contactName1" type="java.lang.String">
-						<modifiers/>
+						<description>联系人（1）30个字符</description>
+						<modifiers optional="false"/>
 						<persistence type="property"/>
 						</attribute>
 						
 						<attribute qualifier="contactPhone1" type="java.lang.String">
-						<modifiers/>
+						<description>联系人（1）电话 30个字符</description>
+						<modifiers optional="false"/>
 						<persistence type="property"/>
 						</attribute>
 						
 						<attribute qualifier="contactName2" type="java.lang.String">
+						<description>联系人（2）30个字符</description>
 						<modifiers/>
 						<persistence type="property"/>
 						</attribute>
 						
 						<attribute qualifier="contactPhone2" type="java.lang.String">
+						<description>联系人（2）电话 30个字符</description>
 						<modifiers/>
 						<persistence type="property"/>
 						</attribute>
 						
 						<attribute qualifier="contactName3" type="java.lang.String">
+						<description>联系人（3）30个字符</description>
 						<modifiers/>
 						<persistence type="property"/>
 						</attribute>
 						
 						<attribute qualifier="contactPhone3" type="java.lang.String">
+						<description>联系人（3）电话 30个字符</description>
 						<modifiers/>
 						<persistence type="property"/>
 						</attribute>
 						
 						<attribute qualifier="qq" type="java.lang.String">
+						<description>15位数字</description>
 						<modifiers/>
 						<persistence type="property"/>
 						</attribute>
 						
 						<attribute qualifier="fax" type="java.lang.String">
+						<description>15位数字</description>
 						<modifiers/>
 						<persistence type="property"/>
 						</attribute>
 						
 						<attribute qualifier="telephone" type="java.lang.String">
+						<description>20位字符</description>
 						<modifiers/>
 						<persistence type="property"/>
 						</attribute>
 						
 						<attribute qualifier="registerDate" type="java.util.Date">
+						<description>注册时间 精确到秒</description>
 						<modifiers/>
 						<persistence type="property"/>
 						</attribute>
 						
 						<attribute qualifier="storeLevel" type="java.lang.String">
+						<description>店铺等级</description>
 						<modifiers/>
 						<persistence type="property"/>
 						</attribute>
 						
 						<attribute qualifier="storeTemplate" type="java.lang.String">
+						<description>店铺模版</description>
 						<modifiers/>
 						<persistence type="property"/>
 						</attribute>
 						
-
+						<attribute qualifier="tradeAmount" type="java.lang.String">
+						<description>店铺模版</description>
+						<modifiers/>
+						<persistence type="property"/>
+						</attribute>
+						
+						<attribute qualifier="storeType" type="StoreType">
+						<description>店铺类型</description>
+						<modifiers/>
+						<persistence type="property"/>
+						</attribute>
 						
 					</attributes>
 				</itemtype>
@@ -607,9 +661,16 @@
                       autocreate="true"
                       generate="true"
                       abstract="false">
-            	<deployment table="AnguoStoreTemp" typecode="6901" />
+            	<deployment table="AnguoStoreTemp" typecode="10102" />
             	<attributes>
 						<attribute qualifier="status" type="StoreApproveStatus">
+						<description>审核状态</description>
+						<modifiers/>
+						<persistence type="property"/>
+						</attribute>  
+						
+						<attribute qualifier="message" type="localized:java.lang.String">
+						<description>审核意见</description>
 						<modifiers/>
 						<persistence type="property"/>
 						</attribute>            	
@@ -636,7 +697,7 @@
             
         </typegroup>
 		<!-- add by Yang for AM-18 end -->
-
+		<!-- type for anguostore start -->
 
 	</itemtypes>
 </items>
