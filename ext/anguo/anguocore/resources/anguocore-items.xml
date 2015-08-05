@@ -479,6 +479,11 @@
 					    <defaultvalue>em().getEnumerationValue("ProductStatus","UNCHECK")</defaultvalue>
 					</attribute>
 					
+					<attribute qualifier="anguoStore" type="AnguoStore">
+				    	<modifiers read="true" write="true" search="true" optional="true"/>
+					    <persistence type="property"/>
+					</attribute>
+					
 				</attributes>
 			</itemtype>
             <itemtype code="Category" generate="false" autocreate="false">

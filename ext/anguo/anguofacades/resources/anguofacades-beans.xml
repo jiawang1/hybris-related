@@ -68,6 +68,13 @@
 		<property name="isSuccessFlag" type="Boolean"/>
 		<property name="message" type="String"/>
 	</bean>
+	
+	<bean class="com.tasly.anguo.store.data.ProductListData">
+		<property name="draw" type="int"></property>
+		<property name="recordsFiltered" type="long"></property>
+		<property name="data" type="java.util.List&lt;String[]>"></property>
+	</bean>
+	
 	<!-- beans for product end -->
 	
 	
@@ -99,6 +106,7 @@
 		<property name="telephone" type="String"/>
 		<property name="status" type="com.tasly.anguo.core.enums.StoreApproveStatus"/>
 	</bean>
+	
 	<!-- add by Yang for AM-18 end -->
 	
 </beans>

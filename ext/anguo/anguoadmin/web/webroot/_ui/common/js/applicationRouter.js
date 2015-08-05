@@ -15,6 +15,7 @@ var AppRouter = Backbone.Router.extend({
         routes:{
             "products":"handleProduct",
             "category":"handleCategory",
+            "productList":"handleProductList",
             "category/:id":"handleSubCategory",
             "others":"handleOthers",
             "default":"createFrame" 
@@ -26,10 +27,16 @@ var AppRouter = Backbone.Router.extend({
             });
         },
     
-        handleProduct:function(){
-             $(".main-root").empty().append(new Products().render().$el);
+        handleProductList:function(){
+        	require(["productListView"], function(ProductList){
+             $(".main-root").empty().append(new ProductList().render().$el);
+        	});
         },
-    
+        
+        handleProduct:function(){
+        	$(".main-root").empty().append(new Products().render().$el);
+        },
+        
         handleSubCategory:function(id){
             console.log(id);
         },

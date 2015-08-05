@@ -237,11 +237,21 @@
 	<bean id="defaultAbstractLocationItemPopulator" class="com.tasly.anguo.facades.populators.AbstractLocationItemPopulator" />
 	
 	<alias alias="districtFacade" name="defaultDistrictFacade" />
+
 	<bean id="defaultDistrictFacade" class="com.tasly.anguo.facades.location.impl.DefaultDistrictFacade">
 	  <property name="districtService" ref="districtService"></property>
 	  <property name="abstractLocationItemPopulator" ref="abstractLocationItemPopulator"></property>
 	</bean>
-
+	
+    <alias alias="productFacade" name="defaultAnguoProductFacade" />
+    
+    <alias alias="anguoProductFacade" name="defaultAnguoProductFacade" />
+	<bean id="defaultAnguoProductFacade" class="com.tasly.anguo.facades.product.impl.DefaultAnguoProductFacade" parent="defaultProductFacade">
+		<property name="anguoProductService" ref="anguoProductService"></property>
+		<property name="productListPopulator" ref="productListPopulator"></property>
+	</bean>
+	
+	<bean id="productListPopulator" class="com.tasly.anguo.facades.product.populator.ProductListPopulator"></bean>
 	<!-- beans for product end -->
 	
 	

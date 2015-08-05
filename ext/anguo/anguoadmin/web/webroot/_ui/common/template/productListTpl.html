@@ -1,0 +1,46 @@
+<div>
+	<form id="searchCondition">
+		<label for="storeName">店铺名称</label> <input name="storeNameInput"></input> 
+		<label for="productCode">产品编码</label> <input name="productCodeInput"></input> 
+		<label for="productName">产品名称</label> <input name="productNameInput"></input>
+		<input style="display:none" name="storeName"></input> 
+		<input style="display:none" name="productCode"></input> 
+		<input style="display:none" name="productName"></input>
+		<input style="display:none" name="productStatus"></input>
+		<input id="getProductListButton" type="button"/>
+	</form>
+</div>
+<div id="productListTab">
+	<div class="tabHead">未审批</div>
+	<div class="tabBody" status="UNCHECK" >
+		<table id="uncheckgrid" class="productListTable" cellspacing="0" width="100%">
+			<thead>
+				<tr>
+					<th>缩略图</th>
+					<th>商品ID</th>
+					<th>商品名称</th>
+					<th>所属目录</th>
+					<th>提交时间</th>
+					<th>店铺名称</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+		</table>
+	</div>
+	<div class="tabHead">已提交</div>
+	<div class="tabBody"  status="APPROVED">
+		<table id="approved" class="productListTable" cellspacing="0" width="100%">
+			<thead>
+				<tr>
+					<th>缩略图</th>
+					<th>商品ID</th>
+					<th>商品名称</th>
+					<th>所属目录</th>
+					<th>提交时间</th>
+					<th>店铺名称</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+		</table>
+	</div>
+</div>
