@@ -13,7 +13,7 @@ public interface AnguoStoreService
 {
 	/**
 	 * 根据店铺Id找到店铺模版
-	 * 
+	 *
 	 * @param storeId
 	 * @return contentCatalog 店铺模版
 	 */
@@ -21,7 +21,7 @@ public interface AnguoStoreService
 
 	/**
 	 * 拷贝临时店铺数据到店铺对象中
-	 * 
+	 *
 	 * @param temp
 	 * @param store
 	 * @param approved
@@ -31,16 +31,31 @@ public interface AnguoStoreService
 
 	/**
 	 * 批准店铺创建
-	 * 
+	 *
 	 * @param tempStore
 	 */
 	public void approveAnguoStoreCreation(AnguoStoreTempModel tempStore);
 
 	/**
 	 * 批准店铺修改
-	 * 
+	 *
 	 * @param tempStore
 	 */
 	public void approveAnguoStoreModification(AnguoStoreTempModel tempStore);
 
+	/**
+	 * 根据uid得到AnguoStoreTempModel
+	 * 
+	 * @param uid
+	 * @return
+	 */
+	public AnguoStoreTempModel getAnguoStoreTempById(String uid);
+
+	/**
+	 * 根据uid得到AnguoStoreModel
+	 * 
+	 * @param uid
+	 * @return
+	 */
+	public AnguoStoreModel getAnguoStoreById(String uid);
 }

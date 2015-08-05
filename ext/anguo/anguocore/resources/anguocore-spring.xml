@@ -25,7 +25,8 @@
 	<import resource="classpath:/anguocore/integration/hot-folder-store-electronics-spring.xml"/>
 	<import resource="classpath:/anguocore/integration/hot-folder-store-apparel-spring.xml"/>
 	<import resource="classpath:/anguocore/integration/hot-folder-common-spring.xml"/>
-
+	<import resource="classpath:anguocore-store-spring.xml"/>
+	
 	<!-- SystemSetup for the AnguoCore -->
 	<bean id="acceleratorCoreSystemSetup" class="com.tasly.anguo.core.setup.CoreSystemSetup"
 	       parent="abstractCoreSystemSetup"/>
