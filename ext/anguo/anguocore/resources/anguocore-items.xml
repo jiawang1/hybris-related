@@ -637,6 +637,34 @@
         </typegroup>
 		<!-- add by Yang for AM-18 end -->
 
+		<typegroup name="Components">
+			<itemtype code="BuyerCenterNavigationComponent" autocreate="true"
+				generate="true" extends="SimpleCMSComponent"
+				jaloclass="de.hybris.platform.acceleratorcms.jalo.components.BuyerCenterNavigationComponent">
+				<description>It represents buy center navigation bar component that contains cms navigation node.</description>
+				<attributes>
+		
+					<attribute qualifier="title" type="localized:java.lang.String">
+						<persistence type="property" />
+						<modifiers />
+						<description>Localized title of the component.</description>
+					</attribute>
+					<attribute type="java.lang.String" qualifier="styleClass">
+						<persistence type="property" />
+						<modifiers />
+						<description>CSS style class of this bar component.</description>
+					</attribute>
+		
+					<attribute type="CMSNavigationNode" qualifier="navigationNode">
+						<persistence type="property" />
+						<modifiers />
+						<description>The cms navigation node of this navigation component.</description>
+					</attribute>
+		
+				</attributes>
+			</itemtype>
+		</typegroup>
+		
 
 	</itemtypes>
 </items>
