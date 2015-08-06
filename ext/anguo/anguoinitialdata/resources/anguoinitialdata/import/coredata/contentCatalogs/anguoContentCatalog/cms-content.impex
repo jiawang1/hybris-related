@@ -29,6 +29,7 @@ INSERT_UPDATE PageTemplate;$contentCV[unique=true];uid[unique=true];name;fronten
 ;;LandingPage5Template;Landing Page 5 Template;layout/landingLayout5Page;CategoryPage,ContentPage
 ;;LandingPage6Template;Landing Page 6 Template;layout/landingLayout6Page;CategoryPage,ContentPage
 ;;newsInfoTemplate;newsInfo Template;layout/newsInfo;CategoryPage,ContentPage
+;;MultiStepCheckoutSummaryPageTemplate;Multi Step Checkout Summary Page Template;;ContentPage;
 
 ;;ContentPage1Template;Content Page 1 Template;layout/contentLayout1Page;ContentPage
 ;;CompanyPageTemplate;Company Page Template;account/accountLayoutPage;ContentPage;false;
@@ -72,6 +73,8 @@ UPDATE PageTemplate;$contentCV[unique=true];uid[unique=true];velocityTemplate[tr
 ;;OrderConfirmationPageTemplate;$jarResourceCms/structure-view/structure_orderConfirmationPageTemplate.vm
 ;;LoginPageTemplate         ;$jarResourceCms/structure-view/structure_loginPageTemplate.vm
 ;;CompanyPageTemplate 		;$jarResourceCms/structure-view/structure_accountPageTemplate.vm
+
+;;MultiStepCheckoutSummaryPageTemplate   ;$jarResourceCms/structure-view/structure_multiStepCheckoutSummaryPageTemplate.vm
 
 # Create ContentSlotNames
 # Each PageTemplate has a number of ContentSlotNames, with a list of valid components for the slot.
@@ -895,6 +898,31 @@ INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];po
 ;;TopHeaderSlot-ErrorPage;TopHeaderSlot;;TopHeaderSlot;true
 ;;BottomHeaderSlot-ErrorPage;BottomHeaderSlot;;BottomHeaderSlot;true
 
+# Multi Step Checkout Summary Page Templates
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='MultiStepCheckoutSummaryPageTemplate'];validComponentTypes(code);compTypeGroup(code)
+;SiteLogo;;;logo
+;HeaderLinks;;;headerlinks
+;SearchBox;;;searchbox
+;MiniCart;;;minicart
+;NavigationBar;;;navigation
+;SideContent;;;narrow
+;Footer;;;footer
+;TopHeaderSlot;;;wide
+;BottomHeaderSlot;;;wide
+
+# Bind Content Slots to Multi Step Checkout Summary Page Templates
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='MultiStepCheckoutSummaryPageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;SiteLogo-MultiStepCheckoutSummaryPage;SiteLogo;;SiteLogoSlot;true
+;;HomepageLink-MultiStepCheckoutSummaryPage;HomepageNavLink;;HomepageNavLinkSlot;true
+;;NavigationBar-MultiStepCheckoutSummaryPage;NavigationBar;;NavigationBarSlot;true
+;;MiniCart-MultiStepCheckoutSummaryPage;MiniCart;;MiniCartSlot;true
+;;Footer-MultiStepCheckoutSummaryPage;Footer;;FooterSlot;true
+;;HeaderLinks-MultiStepCheckoutSummaryPage;HeaderLinks;;HeaderLinksSlot;true
+;;SearchBox-MultiStepCheckoutSummaryPage;SearchBox;;SearchBoxSlot;true
+;;TopHeaderSlot-MultiStepCheckoutSummaryPage;TopHeaderSlot;;TopHeaderSlot;true
+;;BottomHeaderSlot-MultiStepCheckoutSummaryPage;BottomHeaderSlot;;BottomHeaderSlot;true
+
+
 
 
 # newsInfo Template    sunyue add it in 2015/04/23
@@ -925,7 +953,8 @@ INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];mime;realfilename;
 
 # Functional Content Pages
 INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);label;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false'];previewImage(code, $contentCV)[default='ContentPageModel__function_preview']
-;;singleStepCheckoutSummaryPage;Single Checkout Summary Page;SingleStepCheckoutSummaryPageTemplate;singleStepCheckoutSummary
+;;multiStepCheckoutSummaryPage;Multi Checkout Summary Page;MultiStepCheckoutSummaryPageTemplate;multiStepCheckoutSummary
+#;;singleStepCheckoutSummaryPage;Single Checkout Summary Page;SingleStepCheckoutSummaryPageTemplate;singleStepCheckoutSummary
 ;;multiStepCheckoutPage;Multi Step Checkout Page;MultiStepCheckoutPageTemplate;multiStepCheckout
 ;;orderConfirmationPage;Order Confirmation Page;OrderConfirmationPageTemplate;orderConfirmation
 ;;cartPage;Cart Page;CartPageTemplate;cart

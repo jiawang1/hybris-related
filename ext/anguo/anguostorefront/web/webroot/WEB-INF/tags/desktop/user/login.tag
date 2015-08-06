@@ -11,7 +11,7 @@
 
 <div class="userLogin">
 
-	<form:form action="${action}" method="post" commandName="anguoLoginForm">
+	<form:form action="${action}" method="post" commandName="loginForm">
 		<c:if test="${not empty message}">
 			<span class="errors">
 				<spring:theme code="${message}"/>

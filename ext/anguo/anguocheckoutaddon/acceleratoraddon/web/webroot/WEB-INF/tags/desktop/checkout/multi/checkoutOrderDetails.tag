@@ -3,8 +3,8 @@
 <%@ attribute name="showPickupDeliveryEntries" required="false" type="java.lang.Boolean" %>
 <%@ attribute name="showTax" required="false" type="java.lang.Boolean" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<%@ taglib prefix="checkout" tagdir="/WEB-INF/tags/addons/b2ccheckoutaddon/desktop/checkout" %>
-<%@ taglib prefix="multi-checkout" tagdir="/WEB-INF/tags/addons/b2ccheckoutaddon/desktop/checkout/multi" %>
+<%@ taglib prefix="checkout" tagdir="/WEB-INF/tags/addons/anguocheckoutaddon/desktop/checkout" %>
+<%@ taglib prefix="multi-checkout" tagdir="/WEB-INF/tags/addons/anguocheckoutaddon/desktop/checkout/multi" %>
 <%@ taglib prefix="cart" tagdir="/WEB-INF/tags/desktop/cart" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags" %>

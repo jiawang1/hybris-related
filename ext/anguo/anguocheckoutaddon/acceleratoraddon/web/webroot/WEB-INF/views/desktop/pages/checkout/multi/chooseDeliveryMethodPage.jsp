@@ -1,9 +1,9 @@
 <%@ page trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="template" tagdir="/WEB-INF/tags/desktop/template" %>
-<%@ taglib prefix="checkout" tagdir="/WEB-INF/tags/addons/b2ccheckoutaddon/desktop/checkout" %>
+<%@ taglib prefix="checkout" tagdir="/WEB-INF/tags/addons/anguocheckoutaddon/desktop/checkout" %>
 <%@ taglib prefix="cart" tagdir="/WEB-INF/tags/desktop/cart" %>
-<%@ taglib prefix="multi-checkout" tagdir="/WEB-INF/tags/addons/b2ccheckoutaddon/desktop/checkout/multi" %>
+<%@ taglib prefix="multi-checkout" tagdir="/WEB-INF/tags/addons/anguocheckoutaddon/desktop/checkout/multi" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="cms" uri="http://hybris.com/tld/cmstags" %>
 <%@ taglib prefix="common" tagdir="/WEB-INF/tags/desktop/common" %>
