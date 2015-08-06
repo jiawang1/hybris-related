@@ -76,13 +76,13 @@ public class DefaultAnguoMediaService extends DefaultMediaService implements Ang
 
 		try
 		{
-			folder = getFolder("test");
+			folder = getFolder(folderId);
 		}
 		catch (final Exception e)
 		{
 			folder = modelService.create(MediaFolderModel.class);
-			folder.setQualifier("test");
-			folder.setPath("test");
+			folder.setQualifier(folderId);
+			folder.setPath(folderId);
 			modelService.save(folder);
 			//setSubfoldersDepthForFolder(folder, Integer.valueOf(4));
 			return folder;

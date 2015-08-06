@@ -201,4 +201,15 @@ public class StorefrontFilter extends OncePerRequestFilter
 		}
 		anguoStoreService.setSessionAnguoStore(anguoStoreId);
 	}
+
+	public AnguoStoreService getAnguoStoreService()
+	{
+		return anguoStoreService;
+	}
+
+	public void setAnguoStoreService(final AnguoStoreService anguoStoreService)
+	{
+		this.anguoStoreService = anguoStoreService;
+	}
+
 }
