@@ -509,7 +509,7 @@
 						<attributes>
 						<attribute qualifier="uid" type="java.lang.String">
 						<description>10位数字</description>
-						<modifiers optional="false"/>
+						<modifiers optional="false" unique="true"/>
 						<persistence type="property"/>
 						</attribute>
 						

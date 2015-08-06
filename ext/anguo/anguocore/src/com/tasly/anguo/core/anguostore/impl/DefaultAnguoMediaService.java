@@ -1,10 +1,12 @@
 package com.tasly.anguo.core.anguostore.impl;
 
+import de.hybris.platform.catalog.model.CatalogUnawareMediaModel;
+import de.hybris.platform.core.model.media.MediaFolderModel;
 import de.hybris.platform.core.model.media.MediaModel;
 import de.hybris.platform.servicelayer.media.MediaService;
 import de.hybris.platform.servicelayer.model.ModelService;
 
-import java.io.File;
+import java.io.InputStream;
 import java.util.List;
 
 import com.tasly.anguo.core.anguostore.AnguoMediaService;
@@ -40,9 +42,10 @@ public class DefaultAnguoMediaService implements AnguoMediaService
 	}
 
 	@Override
-	public boolean uploadMedia(final File file, final String mediaId, final String storeId, final String subfolderPath)
+	public boolean uploadMedia(final InputStream inputStream, final String mediaId, final String storeId,
+			final String subfolderPath)
 	{
-
+		final MediaModel media = createMediaModelInFolder(mediaId, createFolder(storeId));
 		return false;
 	}
 
@@ -60,4 +63,34 @@ public class DefaultAnguoMediaService implements AnguoMediaService
 		return null;
 	}
 
+	private MediaModel createMediaModelInFolder(final String code, final MediaFolderModel folder)
+	{
+		final MediaModel media = modelService.create(CatalogUnawareMediaModel.class);
+		media.setCode(code);
+		media.setFolder(folder);
+		modelService.save(media);
+		return media;
+	}
+
+	private MediaFolderModel createFolder(final String folderId)
+	{
+		MediaFolderModel folder;
+
+		try
+		{
+			folder = mediaService.getFolder("test");
+		}
+		catch (final Exception e)
+		{
+			folder = modelService.create(MediaFolderModel.class);
+			folder.setQualifier("test");
+			folder.setPath("test");
+			modelService.save(folder);
+			setSubfoldersDepthForFolder(folder, Integer.valueOf(4));
+			return folder;
+		}
+
+		return folder;
+
+	}
 }
