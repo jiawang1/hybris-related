@@ -689,6 +689,7 @@
 				
 				<itemtype code="AnguoPlatformService" autocreate="true" generate="true" jaloclass="com.tasly.anguo.core.jalo.AnguoPlatformService">
 					<description> Anguo platform service </description>
+					<deployment table="AnguoPlatformService" typecode="10103" />
 							<attributes>
 								<attribute qualifier="code" type="java.lang.String">
 								<modifiers/>
