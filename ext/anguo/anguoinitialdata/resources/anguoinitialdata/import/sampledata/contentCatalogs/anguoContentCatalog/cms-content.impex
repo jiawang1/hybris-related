@@ -1395,3 +1395,11 @@ INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;c
 
 INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='login'];contentSlot(uid,$contentCV)[unique=true];;;
 ;;RightContentSlot-login;RightContentSlot;;RightContentSlot-login;;;
+
+# add ToBuyAction by Jinli for AM-257
+INSERT_UPDATE ToBuyAction;$contentCV[unique=true];uid[unique=true];url;name;restrictions(uid,$contentCV);&actionRef
+;;ToBuyAction;/my-account/order/cancel/{productCode};To Buy Action;ActionRestriction;ToBuyAction
+
+# add ToByAction in ProductAddToCartComponent by Jinli for AM-257
+INSERT_UPDATE ProductAddToCartComponent;$contentCV[unique=true];uid[unique=true];name;actions(&actionRef);&componentRef
+;;AddToCart;Product Add To Cart;ToBuyAction;AddToCart

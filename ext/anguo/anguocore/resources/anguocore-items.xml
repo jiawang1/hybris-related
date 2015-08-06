@@ -699,5 +699,15 @@
 		<!-- add by Yang for AM-18 end -->
 		<!-- type for anguostore start -->
 
+        <!-- type for anguostore start -->
+        <!-- add by Jinli for AM-257 start -->
+        <typegroup name="CMS Actions">
+            <itemtype code="ToBuyAction"
+                      extends="SimpleCMSAction" autocreate="true" generate="true">
+            </itemtype>
+        </typegroup>
+        <!-- type for anguostore end -->
+        <!-- add by Jinli for AM-257 end -->
+
 	</itemtypes>
 </items>
