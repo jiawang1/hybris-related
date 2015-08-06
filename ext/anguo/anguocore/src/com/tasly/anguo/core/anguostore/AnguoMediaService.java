@@ -5,7 +5,9 @@ import de.hybris.platform.core.model.media.MediaModel;
 import java.io.File;
 import java.util.List;
 
-import com.tasly.anguo.core.constants.GeneratedAnguoCoreConstants.Enumerations.StoreMediaSubFolder;
+import com.tasly.anguo.core.enums.StoreMediaSubFolder;
+
+
 
 
 /**
@@ -15,7 +17,7 @@ public interface AnguoMediaService
 {
 	/**
 	 * 获取店铺相册主目录
-	 * 
+	 *
 	 * @param storeId
 	 * @return 目录
 	 */
@@ -23,7 +25,7 @@ public interface AnguoMediaService
 
 	/**
 	 * 获取店铺相册分目录
-	 * 
+	 *
 	 * @param storeId
 	 * @param subFolder
 	 *           来自枚举类型
@@ -33,7 +35,7 @@ public interface AnguoMediaService
 
 	/**
 	 * 上传media到店铺相册中
-	 * 
+	 *
 	 * @param file
 	 * @param mediaId
 	 * @param storeId
@@ -44,7 +46,7 @@ public interface AnguoMediaService
 
 	/**
 	 * 获取所有media在店铺相册主目录下
-	 * 
+	 *
 	 * @param storeId
 	 * @return mediamodel list
 	 */
@@ -52,7 +54,7 @@ public interface AnguoMediaService
 
 	/**
 	 * 获取所有media在店铺相册分目录下（若指定）
-	 * 
+	 *
 	 * @param storeId
 	 * @param subFolder
 	 * @return mediamodel list

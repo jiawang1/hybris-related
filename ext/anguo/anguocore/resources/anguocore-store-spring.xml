@@ -18,13 +18,24 @@
        http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/context
            http://www.springframework.org/schema/context/spring-context.xsd">
-           
-     <bean id="anguoStoreService" class="com.tasly.anguo.core.anguostore.impl.DefaultAnguoStoreService">
      
+     <alias alias="anguoStoreService" name="defaultAnguoStoreService" />      
+     <bean id="defaultAnguoStoreService" class="com.tasly.anguo.core.anguostore.impl.DefaultAnguoStoreService">
+     		<property name="anguoStoreDao" ref="anguoStoreDao"/>
+     		<property name="modelService" ref="modelService"/>
+     		
      </bean>     
      
-     <bean id="anguoMediaService" class="com.tasly.anguo.core.anguostore.impl.DefaultAnguoMediaService">
+     <alias alias="anguoMediaService" name="defaultAnguoMediaService" /> 
+     <bean id="defaultAnguoMediaService" class="com.tasly.anguo.core.anguostore.impl.DefaultAnguoMediaService">
      
      </bean>   
+     
+     <alias alias="anguoStoreDao" name="defaultAnguoStoreDao" />
+     <bean id="defaultAnguoStoreDao"
+	      class="com.tasly.anguo.core.anguostore.dao.impl.DefaultAnguoStoreDao"
+	      parent="abstractItemDao" >
+		<property name="flexibleSearchService" ref="flexibleSearchService"/>
+	</bean>
            
 </beans>
