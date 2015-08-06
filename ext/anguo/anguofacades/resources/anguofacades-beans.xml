@@ -33,6 +33,7 @@
 	</bean>
 
     <bean class="com.tasly.anguo.facades.user.data.ContactData">
+        <property name="id" type="String"/>
         <property name="name" type="String"/>
         <property name="position" type="String"/>
         <property name="contactInfo" type="String"></property>

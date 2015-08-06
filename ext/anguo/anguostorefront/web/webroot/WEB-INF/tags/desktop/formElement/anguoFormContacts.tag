@@ -17,11 +17,12 @@
 <div class="contacts" style="height:120px;">
    <table>
       <tr><td>
-         <label><spring:theme code="text.account.enterprise.contact"/></label>
+         <label style="margin-left:0px;"><spring:theme code="text.account.enterprise.contact"/></label>
           </td><td id="tdContacts">
             <c:forEach items="${enterpriseInformationForm.contacts}" var="contact" varStatus="loop">
                <template:anguoErrorSpanField path="contacts[${loop.index}].contactInfo">         
-              <div class="contactInfo">&nbsp;
+              <div class="contactInfo" style="margin-left:8px;">
+                <input type="hidden" name="contacts[${loop.index}].id">
                 <div><label><spring:theme code="text.account.enterprise.contact.name"/></label><input type="text" name="contacts[${loop.index}].name" value="${contact.name}"></div>
                 <div><label><spring:theme code="text.account.enterprise.contact.position"/></label><input type="text" name="contacts[${loop.index}].position" value="${contact.position }"></div>
                 <div><label><spring:theme code="text.account.enterprise.contact.phone"/></label><input type="text" name="contacts[${loop.index}].contactInfo" value="${contact.contactInfo }"></div>
@@ -47,9 +48,9 @@ function addContact() {
 		alert('<spring:theme code="text.account.enterprise.contact.cannot.exceed.max"/>');
 		return;
 	}
-	var el = '<div><div class="contactInfo">&nbsp;&nbsp;';
-	el += '<div><label><spring:theme code="text.account.enterprise.contact.name"/></label>&nbsp;<input type="text" name="contacts[' + index +'].name" value=""></div>';
-    el += '<div><label><spring:theme code="text.account.enterprise.contact.position"/></label>&nbsp;<input type="text" name="contacts[' + index +'].posistion" value=""></div>';
+	var el = '<div><div class="contactInfo" style="margin-left:8px;">';
+	el += '<div style="margin-right:19px;"><label><spring:theme code="text.account.enterprise.contact.name"/></label><input type="text" name="contacts[' + index +'].name" value=""></div>';
+    el += '<div style="margin-right:19px;"><label><spring:theme code="text.account.enterprise.contact.position"/></label><input type="text" name="contacts[' + index +'].position" value=""></div>';
     el += '<div><label><spring:theme code="text.account.enterprise.contact.phone"/></label><input type="text" name="contacts[' + index + '].contactInfo" value=""></div>';
     el += '<div><a name="deleteEle" style="cursor:pointer;"><spring:theme code="text.delete"/></a></div>';
     el += '</div></div>';

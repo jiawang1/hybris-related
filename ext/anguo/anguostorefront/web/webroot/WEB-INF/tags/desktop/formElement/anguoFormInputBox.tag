@@ -17,7 +17,7 @@
 <template:anguoErrorSpanField path="${path}">
 	<ycommerce:testId code="LoginPage_Item_${idKey}">
 
-	<label class="control-label ${labelCSS}" for="${idKey}">
+	<label for="${idKey}">
 		<c:if test="${mandatory != null && mandatory == true}">
             <b>*</b>
 		</c:if>

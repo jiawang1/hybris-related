@@ -10,8 +10,7 @@
 <c:choose>
 	<c:when test="${not empty status.errorMessages}">
 		<div class="error">
-			<jsp:doBody/>
-				<form:errors path="${not empty errorPath ? '' : path}" cssStyle="color:red;"/>
+			<jsp:doBody/><form:errors path="${not empty errorPath ? '' : path}" cssStyle="color:red;padding-left:0px;"/>
 		</div>
 	</c:when>
 	<c:otherwise>

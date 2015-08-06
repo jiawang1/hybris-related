@@ -10,11 +10,12 @@ import org.springframework.util.Assert;
 import com.tasly.anguo.core.enums.UserType;
 import com.tasly.anguo.core.model.EnterpriseAccountModel;
 import com.tasly.anguo.core.model.PersonalAccountModel;
-import com.tasly.anguo.facades.populators.EnterpriseInformationData2ModelPopulator;
+import com.tasly.anguo.core.service.impl.AnguoCustomerAccountService;
+import com.tasly.anguo.facades.populators.EnterpriseInformationPopulator;
+import com.tasly.anguo.facades.populators.EnterpriseInformationReversePopulator;
 import com.tasly.anguo.facades.user.data.EnterpriseInformationData;
 
 import de.hybris.platform.commercefacades.customer.impl.DefaultCustomerFacade;
-import de.hybris.platform.commercefacades.user.data.CustomerData;
 import de.hybris.platform.commercefacades.user.data.RegisterData;
 import de.hybris.platform.commerceservices.customer.DuplicateUidException;
 import de.hybris.platform.core.enums.PhoneContactInfoType;
@@ -27,6 +28,17 @@ public class AnguoCustomerFacade extends DefaultCustomerFacade
 {
     private static final Logger LOG = Logger
             .getLogger(AnguoCustomerFacade.class);
+    
+    private EnterpriseInformationReversePopulator enterpriseInformationReversePopulator;
+
+    public EnterpriseInformationReversePopulator getEnterpriseInformationReversePopulator() {
+        return enterpriseInformationReversePopulator;
+    }
+
+    public void setEnterpriseInformationReversePopulator(
+            EnterpriseInformationReversePopulator enterpriseInformationReversePopulator) {
+        this.enterpriseInformationReversePopulator = enterpriseInformationReversePopulator;
+    }
 
     @Override
     public void register(final RegisterData registerData)
@@ -59,8 +71,16 @@ public class AnguoCustomerFacade extends DefaultCustomerFacade
 
     }
     
+    public EnterpriseInformationData getEnterpriseInformation() {
+        EnterpriseAccountModel eam = (EnterpriseAccountModel)getCurrentSessionCustomer();
+        EnterpriseInformationData eid = new EnterpriseInformationData();
+        EnterpriseInformationPopulator populator = new EnterpriseInformationPopulator();
+        populator.populate(eam, eid);
+        return eid;
+    }
+    
     public void updateEnterpriseInformation(
-            final EnterpriseInformationData enterpriseInformationData) {
+            final EnterpriseInformationData enterpriseInformationData) throws DuplicateUidException {
 //        validateDataBeforeUpdate(customerData);
 //
 //        final String name = getCustomerNameStrategy().getName(
@@ -68,10 +88,12 @@ public class AnguoCustomerFacade extends DefaultCustomerFacade
         final CustomerModel customer = getCurrentSessionCustomer();
         if (customer instanceof EnterpriseAccountModel) {
             EnterpriseAccountModel eam = (EnterpriseAccountModel) customer;
-            EnterpriseInformationData2ModelPopulator populator = new EnterpriseInformationData2ModelPopulator();
-            populator.populate(enterpriseInformationData, eam);
-//            getCustomerAccountService().updateProfile(customer,
-//                  customerData.getTitleCode(), name, customerData.getUid());
+            enterpriseInformationReversePopulator.populate(enterpriseInformationData, eam);
+//            eam.setUid("seller");
+//            eam.setOriginalUid("seller");
+           AnguoCustomerAccountService customerAccountService = (AnguoCustomerAccountService)getCustomerAccountService();
+           customerAccountService.saveEnterpriseAccount(eam);
+
         }
 //        customer.setOriginalUid(customerData.getDisplayUid());
 //        getCustomerAccountService().updateProfile(customer,

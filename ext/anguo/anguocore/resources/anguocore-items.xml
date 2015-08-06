@@ -372,7 +372,7 @@
 							</columntype>
 						</persistence>
 					</attribute>
-					<attribute qualifier="posistion" type="java.lang.String">
+					<attribute qualifier="position" type="java.lang.String">
 						<persistence type="property" >
 							 <columntype database="oracle">
 								<value>varchar(100)</value>

@@ -301,24 +301,14 @@ public class AccountPageController extends AbstractSearchPageController
 
         model.addAttribute("breadcrumbs", accountBreadcrumbBuilder.getBreadcrumbs("text.account.enterprise.information.update"));
         model.addAttribute("metaRobots", "noindex,nofollow");
+        EnterpriseInformationData eData = customerFacade.getEnterpriseInformation();
         EnterpriseInformationForm form = new EnterpriseInformationForm();
-        form.setAddress("address");
-        form.setName("companyname");
-        form.setPhone("15311426630");
-        form.setRegisterId("12345566");
-        form.setFax("234555");
-        List<ContactData> contacts = new ArrayList<ContactData>();
-        ContactData contact1 = new ContactData();
-        contact1.setName("name1");
-        contact1.setPosition("position1");
-        contact1.setContactInfo("123456");
-        ContactData contact2 = new ContactData();
-        contact2.setName("name2");
-        contact2.setPosition("position2");
-        contact2.setContactInfo("1234567");        
-        contacts.add(contact1);
-        contacts.add(contact2);
-        form.setContacts(contacts);
+        form.setAddress(eData.getAddress());
+        form.setName(eData.getName());
+        form.setPhone(eData.getPhone());
+        form.setRegisterId(eData.getRegisterId() == null? "" : eData.getRegisterId().toString());
+        form.setFax(eData.getFax());
+        form.setContacts(eData.getContacts());
         model.addAttribute(form);
         return ControllerConstants.Views.Pages.Account.AccountEnterprisePage;
     }
@@ -328,7 +318,7 @@ public class AccountPageController extends AbstractSearchPageController
     public String updateEnterprise(@RequestParam(value = "page", defaultValue = "0") final int page,
             @RequestParam(value = "show", defaultValue = "Page") final ShowMode showMode, final EnterpriseInformationForm form,
             final BindingResult bindingResult, final Model model, final HttpServletRequest request,
-            final HttpServletResponse response, final RedirectAttributes redirectModel) throws CMSItemNotFoundException
+            final HttpServletResponse response, final RedirectAttributes redirectModel) throws CMSItemNotFoundException, DuplicateUidException
     {
         anguoEnterpriseInformationValidator.validate(form, bindingResult);
         if (bindingResult.hasErrors())
@@ -345,8 +335,6 @@ public class AccountPageController extends AbstractSearchPageController
         eid.setFax(form.getFax());
         eid.setContacts(form.getContacts());
         customerFacade.updateEnterpriseInformation(eid);
-        model.addAttribute("breadcrumbs", accountBreadcrumbBuilder.getBreadcrumbs("text.account.enterprise.information.update"));
-        model.addAttribute("metaRobots", "noindex,nofollow");
 
         model.addAttribute(form);
         return ControllerConstants.Views.Pages.Account.AccountEnterprisePage;
