@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+
+<project name="anguo" basedir=".">
+	<property file="build.properties" />
+	<taskdef resource="net/sf/antcontrib/antlib.xml" classpath="${platformhome}/lib/ant-contrib-1.0b3.jar" />
+	
+	<import file="anguomacros.xml" />
+	
+	<checkenv />
+	
+	<target name="baseconfig">
+		<echo message="Start copying common configurations......" />
+		<copy todir="${hybris.config}" overwrite="true">
+			<fileset dir="${project.deploymenthome}/common/"/>
+  		</copy>
+		
+		<echo message="Copy localextensions.xml in develop directory" />
+		<copy todir="${hybris.config}" file="${project.config}/develop/localextensions.xml" overwrite="true" />
+			
+		<echo message="Copy preperties......" />
+		<copy todir="${hybris.config}/properties" overwrite="true">
+			<fileset dir="${project.deploymenthome}/properties" />
+		</copy>
+		
+		<echo message="Copy lib files...." />
+		<copy todir="${platformhome}/lib" overwrite="true">
+			<fileset dir="${project.home}/lib" />
+		</copy>
+		<echo message="End of base configurations" />
+		<echo message="**********************************" />
+	</target>
+	
+	<target name="uat" depends="baseconfig" >
+		<echo message="setting up hybris for UAT" />
+	</target>
+	
+</project>

@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+
+<project name="anguomacros">
+
+	<macrodef name="checkenv">
+		<sequential>
+			<available file="${hybris.home}" type="dir" property="hybrisplatform.present" />
+			<if>
+				<not>
+					<isset property="hybrisplatform.present" />
+				</not>
+				<then> 
+					<fail message="Could not find hybris platform!" />
+				</then>
+			</if>
+			
+			<available file="${hybris.config}" type="dir" property="hybrisconfig.present" />
+			<if>
+				<not>
+					<isset property="hybrisconfig.present" />
+				</not>
+				<then> 
+					<mkdir dir="${hybris.config}" />
+				</then>
+			</if>
+		</sequential>
+	</macrodef>
+	
+</project>
