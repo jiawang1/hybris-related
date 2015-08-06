@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.tasly.anguo.facades.customer.CustomerIdentifyFacade;
 
+import de.hybris.platform.cms2.servicelayer.services.CMSSiteService;
 import de.hybris.platform.commercefacades.product.data.ImageData;
 import de.hybris.platform.core.model.media.MediaFolderModel;
 import de.hybris.platform.core.model.media.MediaModel;
@@ -27,12 +28,12 @@ public class DefaultCustomerIdentifyFacade implements CustomerIdentifyFacade{
 	
 	@Resource
 	private ModelService modelService;
-	
 	@Resource
 	private MediaService mediaService;
-	
 	@Resource
 	private UserService userService;
+	@Resource
+	private CMSSiteService cmsSiteService;
 	
 	@Resource
 	private CustomerIdentifyFacade customerIdentifyFacade;
@@ -87,6 +88,7 @@ public class DefaultCustomerIdentifyFacade implements CustomerIdentifyFacade{
 		mediaModel.setAltText(StringUtils.substring(file.getOriginalFilename(), 0,StringUtils.lastIndexOf(file.getOriginalFilename(), ".")));
 		mediaModel.setFolder(createMediaFoler());
 		mediaModel.setMime("image/jpeg");
+		mediaModel.setCatalogVersion(cmsSiteService.getCurrentSite().getDefaultCatalog().getActiveCatalogVersion());
 		modelService.save(mediaModel);
 		try
 		{

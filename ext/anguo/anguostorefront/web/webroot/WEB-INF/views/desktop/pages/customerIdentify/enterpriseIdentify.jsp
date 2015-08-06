@@ -28,31 +28,20 @@
 <formElement:formInputBox idKey="accountNumber" labelKey="identify.accountNumber" path="accountNumber" inputCSS="text" mandatory="true"/>
 <formElement:formInputBox idKey="legalRepr" labelKey="identify.legalRepr" path="legalRepr" inputCSS="text" mandatory="true"/>
 	<div class="input_hint">
-		<input type="text" placeholder="Browse..." id="upload_document"
-			name="upload_btn" />
-		<p>allowed format: jpg, pdf, doc / max file size 2MB</p>
+		<p><spring:theme code="allowed.format"/>:jpg,png,bmp,jpeg / <spring:theme code="allowed.maxSize"/>: 2MB</p>
 	</div>
 	<div id="docfileuploader">Upload</div>
 			<div class="clearDiv"></div>
-			<div class="uploadedFiles">
+			<div class="uploadedFiles" >
 				<c:if test="${ not empty headOfficeDetailForm.uploadedDocuments }">
-					<p>Uploaded Documents</p>
 						<table>
 							<tbody>
-								<c:forEach items="${headOfficeDetailForm.uploadedDocuments }" var="docfile">
-									<tr>
-										<td class="fileName">Documents File</td>
-										<td class="filePath">
-											<a target="_blank" href="${docfile.url}">${docfile.altText}</a>
-											<input type="hidden" name="docfile.code" value="${docfile.code}">
-										</td>
-										<td class="fileAction"><button type="button">Delete</button></td>
-									</tr>
-								</c:forEach>
 							</tbody>
 						</table>
 				</c:if>
 			</div>	
+<div id="licensesDiv" style="display:none;"></div>
+<div id="errorMsg" style="color:red;display:none;"></div>
 <button id="identifyButton" type="submit" name="identifyButton" class="positive"><spring:theme code="text.identify"/></button>
 </form:form>
 </div>

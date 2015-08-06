@@ -16,19 +16,19 @@ function addSingleFile(obj, data, fieldName, hideName) {
 	$td2.append($a1);
 	var $hide = $("<input type='hidden' name='"+hideName+"' value='"+data.media.code+"' />");
 	$td2.append($hide);
-	var $td3 = $("<td class='fileAction'><button type='button'>Delete</button></td>"); 
+	var $td3 = $("<td class='fileAction'><button type='button'>删除</button></td>"); 
 	$td3.on('click', removeFile);
 	$tr.append($td1);
 	$tr.append($td2);
 	$tr.append($td3);
 	$table.append($tr);
-	$(obj).parent().find("div[class=uploadedFiles]").append($("<p>Uploaded Documents</p>"));
 	$(obj).parent().find("div[class=uploadedFiles]").append($table);
 }
 
 function addMultiFile(obj, data) {
 	var $div = $(obj).parent().find("div[class=uploadedFiles]");
 	var index = $div.children("table").length;
+	$("#licensesDiv").append("<input id='licenses' name='licenses' value='"+data.media.code+"'>")
 	if($div.children("table").length == 0){
 		addSingleFile(obj, data,data.media.name,data.media.code);
 	}else{
@@ -38,9 +38,7 @@ function addMultiFile(obj, data) {
 		var $td2 = $("<td class='filePath'></td>"); 
 		var $a1 = $("<a target='_blank' href='"+data.media.url+"'>"+data.media.altText+"</q>");
 		$td2.append($a1);
-		var $hide = $("<input type='hidden' name='"+"uploadedDocuments["+index+"].code"+"' value='"+data.media.code+"' />");
-		$td2.append($hide);
-		var $td3 = $("<td class='fileAction'><button type='button'>Delete</button></td>"); 
+		var $td3 = $("<td class='fileAction'><button type='button'>删除</button></td>"); 
 		$td3.on('click', removeFile);
 		$tr.append($td1);
 		$tr.append($td2);
