@@ -55,12 +55,13 @@ public class ProductManagementController {
 	 */
 	@RequestMapping(value=GET_PRODUCT_LIST)
 	public 	@ResponseBody Object getProductList(String productCode,String productName,String storeName,String productStatus,
-			String draw,String start,String length)
+			Integer draw,String start,String length)
 	{
 		
         PageableData pageableData = createPageableData(start,length);
        
         ProductListData resultList = anguoProductFacade.getProductList(storeName, productCode, productName, productStatus, pageableData);
+        resultList.setDraw(draw);
         
 		return resultList;
 		

@@ -24,11 +24,8 @@ public class DefaultAnguoProductFacade extends DefaultProductFacade implements A
 	{
 		ProductStatus status = ProductStatus.valueOf(productStatus);
 		SearchPageData searchPageData =  this.anguoProductService.getProductList(productCode, productName, storeName, status, pageableData);
-		
-		if(searchPageData==null||CollectionUtils.isEmpty(searchPageData.getResults()))
-			return null;
-		
 		ProductListData resultList = new ProductListData();
+		
 		productListPopulator.populate(searchPageData, resultList);
 		
 		return resultList;

@@ -1,19 +1,19 @@
+<style>
+td img{width:60px;height:60px};
+</style>
+
 <div>
 	<form id="searchCondition">
-		<label for="storeName">店铺名称</label> <input name="storeNameInput"></input> 
-		<label for="productCode">产品编码</label> <input name="productCodeInput"></input> 
-		<label for="productName">产品名称</label> <input name="productNameInput"></input>
-		<input style="display:none" name="storeName"></input> 
-		<input style="display:none" name="productCode"></input> 
-		<input style="display:none" name="productName"></input>
-		<input style="display:none" name="productStatus"></input>
-		<input id="getProductListButton" type="button"/>
+		<label for="storeName">店铺名称</label> <input name="storeName"></input> 
+		<label for="productCode">产品编码</label> <input name="productCode"></input> 
+		<label for="productName">产品名称</label> <input name="productName"></input>
+		<button id="getProductListButton">查询</button>
 	</form>
 </div>
 <div id="productListTab">
 	<div class="tabHead">未审批</div>
 	<div class="tabBody" status="UNCHECK" >
-		<table id="uncheckgrid" class="productListTable" cellspacing="0" width="100%">
+		<table id="datagrid" class="productListTable" cellspacing="0" width="100%">
 			<thead>
 				<tr>
 					<th>缩略图</th>

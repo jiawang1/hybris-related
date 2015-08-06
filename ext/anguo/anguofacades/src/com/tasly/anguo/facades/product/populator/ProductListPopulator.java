@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang.time.FastDateFormat;
 
 import com.tasly.anguo.store.data.ProductListData;
 
@@ -14,13 +15,14 @@ import de.hybris.platform.core.model.product.ProductModel;
 import de.hybris.platform.servicelayer.dto.converter.ConversionException;
 
 public class ProductListPopulator implements Populator<SearchPageData, ProductListData>{
-
+	 public static final FastDateFormat ISO_DATETIME_FORMAT  = FastDateFormat.getInstance("yyyy年MM月dd日 HH:mm:ss");
 	@Override
 	public void populate(SearchPageData source, ProductListData target)
 			throws ConversionException 
 	{
 		int currentpage = source.getPagination().getCurrentPage()+1;
-		target.setDraw(currentpage);
+		//draw is for front end display,is set in controller,this is required by dataTable plugin
+		//target.setDraw(currentpage);
 		target.setRecordsFiltered(source.getPagination().getTotalNumberOfResults());
 		List<String[]> data = new ArrayList<String[]>();
 		
@@ -29,11 +31,16 @@ public class ProductListPopulator implements Populator<SearchPageData, ProductLi
 		  {
 			  String[] element = new String[7];
 			  ProductModel product = (ProductModel) source.getResults().get(i);
-			  element[0] = product.getCode();
+			  if(product.getThumbnail()!=null)
+			  element[0] = product.getThumbnail().getUrl();
 			  element[1] = product.getCode();
 			  element[2] = product.getName();
 			  element[3] = getCategoryPath(product);
-			  element[4] = product.getLastestOnlineDate().toString();
+			  
+			  if(product.getLastestOnlineDate()!=null)
+			  element[4] = ISO_DATETIME_FORMAT.format(product.getLastestOnlineDate());
+			  
+			  if(product.getAnguoStore()!=null)
 			  element[5] = product.getAnguoStore().getName();
 			  element[6] = product.getCode();
 			  
@@ -52,13 +59,13 @@ public class ProductListPopulator implements Populator<SearchPageData, ProductLi
 		  {
 	          CategoryModel category = product.getSupercategories().iterator().next();
 			  categoryPath.append(category.getName());
-			  if(CollectionUtils.isNotEmpty(category.getSupercategories()))
+			  if(CollectionUtils.isNotEmpty(category.getSupercategories())&&category.getLevel()==3)
 			  {
-				  categoryPath.append(">").append(category.getSupercategories().get(0));
+				  categoryPath.append("<").append(category.getSupercategories().get(0).getName());
 			  }
 		  }else
 		  {
-			  //TODO:need to handle the UNCHECK and UNAPPROVE case,maybe there is no category
+			  //TODO:need to handle if there is no category?
 		  }
 		  
 		  return categoryPath.toString();

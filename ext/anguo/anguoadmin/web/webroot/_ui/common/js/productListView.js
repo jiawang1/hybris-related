@@ -26,8 +26,10 @@ define(['jquery','backbone', 'underscore','accessible','datatables','text!./../t
             this.$('#uncheckgrid').dataTable({
     	    	'oLanguage': {
     	    		'sZeroRecords': '抱歉， 没有找到',
-    	    		'sInfoEmpty': '没有数据',
+    	    		'sInfoEmpty': '无数据',
+    	    		'sEmptyTable': '抱歉,没有找到符合要求的数据',
     	    		'sInfo': '从 _START_ 到 _END_ /共 _TOTAL_ 条数据',
+    	    		'sInfoFiltered':'',
     	    		'oPaginate': {
         	    		'sPrevious':'上一页',
         	    		'sNext':'下一页'
@@ -38,7 +40,12 @@ define(['jquery','backbone', 'underscore','accessible','datatables','text!./../t
     	    	'bLengthChange': false,
     	    	'bFilter': false,
     	    	'iDeferLoading':1,
-    	    	'pageLength':1,
+    	    	'pageLength':2,
+    	    	"createdRow": function ( row, data, index ) {
+    	             $('td', row).eq(0).html('<img src="'+data[0]+'"/>');
+    	             $('td', row).eq(6).html('<a href="/anguoadmin/#products?productCode='+data[1]+'">查看</a>');
+    	             
+    	        },
     	    	'fnServerData':function ( sSource, aoData, fnCallback ) {
     	    		var requesturl = '/anguoadmin/productManagement/getProductList';
     	    		var productStatus;
@@ -46,18 +53,17 @@ define(['jquery','backbone', 'underscore','accessible','datatables','text!./../t
     	        		productStatus = $(this).attr('status');
     	        	});
     	        	
-    	    		aoData.push({ 'name': 'productCode', 'value': this.$('input[name="productCode"]').val()});
-    	    		aoData.push({ 'name': 'productName', 'value': this.$('input[name="productName"]').val()});
-    	    		aoData.push({ 'name': 'storeName', 'value': this.$('input[name="storeName"]').val()});
+    	    		aoData.push({ 'name': 'productCode', 'value': $('input[name="productCode"]').val()});
+    	    		aoData.push({ 'name': 'productName', 'value': $('input[name="productName"]').val()});
+    	    		aoData.push({ 'name': 'storeName', 'value': $('input[name="storeName"]').val()});
     	    		aoData.push({ 'name': 'productStatus', 'value': 'UNCHECK'});
-    	    		
+//                  local test data   	    		
 //    	    		var serverdata = {
-//    	    				  "draw": 1,
-//    	    				  "recordsTotal": 57,
-//    	    				  "recordsFiltered": 57,
+//    	    				  "draw": 2,
+//    	    				  "recordsTotal": 0,
+//    	    				  "recordsFiltered": 0,
 //    	    				  "data": [
-//    	    				       ['8','2','3','4','5','6','7'],
-//    	    				       ['8','2','3','4','5','6','7']
+//    	    				      
 //    	    		]};
     	    		//fnCallback(serverdata);
     	    		$.getJSON( requesturl, aoData, 
@@ -72,18 +78,8 @@ define(['jquery','backbone', 'underscore','accessible','datatables','text!./../t
         getProductList:function(){
         	var productStatus; 
 
-        	$('#uncheckgrid').dataTable().fnDraw();
+        	this.$('#datagrid').dataTable().fnDraw();
         	
-        	
-//        	$('input[name="productCode"]').val(
-//        			$('input[name="productCodeInput"]').val()
-//            );
-//        	$('input[name="productName"]').val(
-//        			$('input[name="productNameInput"]').val()
-//        	);
-//        	$('input[name="storeName"]').val(
-//        			$('input[name="storeNameInput"]').val()
-//        	);
         }
     });
     
