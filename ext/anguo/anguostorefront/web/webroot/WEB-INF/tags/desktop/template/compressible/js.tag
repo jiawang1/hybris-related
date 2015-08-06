@@ -99,10 +99,17 @@
 <script type="text/javascript" src="${commonResourcePath}/js/acc.skiplinks.js"></script>
 
 <%-- Anguo Store page related AM-26 by liyao  --%>
-<script type="text/javascript" src="${commonResourcePath}/js/anguostore.js"></script>
+<%-- <script type="text/javascript" src="${commonResourcePath}/js/anguostore.js"></script> --%>
 
 <script type="text/javascript" src="${commonResourcePath}/js/97zzw.js"></script>
 <script type="text/javascript" src="${commonResourcePath}/js/index.js"></script>
 <script type="text/javascript" src="${commonResourcePath}/js/agPro.js"></script>
 
 <script type="text/javascript" src="${commonResourcePath}/js/digitalHerbal.js"></script>
+
+<%--image upload --%>
+<script type="text/javascript" src="${commonResourcePath}/js/jquery.uploadfile.js"></script>
+<script type="text/javascript" src="${commonResourcePath}/js/multiple_image_upload.js"></script>
+<script type="text/javascript" src="${commonResourcePath}/js/jquery.form.js"></script>
+<script type="text/javascript" src="${commonResourcePath}/js/anguo.uploadfile.js"></script>
+

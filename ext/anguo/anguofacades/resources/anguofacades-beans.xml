@@ -101,4 +101,9 @@
 	</bean>
 	<!-- add by Yang for AM-18 end -->
 	
+	<bean class="de.hybris.platform.commercefacades.product.data.ImageData">
+		<property name="code" type="java.lang.String" />
+		<property name="name" type="java.lang.String" />
+	</bean>
+	
 </beans>

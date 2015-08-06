@@ -275,4 +275,7 @@
 	</bean>
 	<!-- add by Yang for AM-18 end -->
 	
+	<bean id="customerIdentifyFacade" class="com.tasly.anguo.facades.customer.impl.DefaultCustomerIdentifyFacade">
+		<property name="imageConverter" ref="imageConverter"/>
+	</bean>
 </beans>

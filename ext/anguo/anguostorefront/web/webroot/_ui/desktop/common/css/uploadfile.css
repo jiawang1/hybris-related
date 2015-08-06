@@ -1,0 +1,118 @@
+.ajax-file-upload-statusbar {
+}
+
+.ajax-file-upload-filename {
+	width: 100%;
+	height: auto;
+	margin: 0 5px 5px 10px;
+	color: #807579;
+	display: none
+}
+
+.ajax-file-upload-progress {
+	margin: 10px;
+	position: relative;
+	width: 95%;
+	border: 2px solid #f3f3f3;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	display: inline-block
+}
+
+.ajax-file-upload-bar {
+	background-color: #feda4c;
+	width: 0;
+	height: 10px;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	color: #FFFFFF;
+}
+
+.ajax-file-upload-percent {
+	position: absolute;
+	display: inline-block;
+	top: 3px;
+	left: 48%
+}
+
+.ajax-file-upload-red {
+	-moz-box-shadow: inset 0 39px 0 -24px #e67a73;
+	-webkit-box-shadow: inset 0 39px 0 -24px #e67a73;
+	box-shadow: inset 0 39px 0 -24px #e67a73;
+	background-color: #e4685d;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	border-radius: 4px;
+	display: inline-block;
+	color: #fff;
+	font-family: arial;
+	font-size: 13px;
+	font-weight: normal;
+	padding: 4px 15px;
+	text-decoration: none;
+	text-shadow: 0 1px 0 #b23e35;
+	cursor: pointer;
+	vertical-align: top;
+	margin-right: 5px;
+}
+
+.ajax-file-upload-green {
+	background-color: #77b55a;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	border-radius: 4px;
+	margin: 0;
+	padding: 0;
+	display: inline-block;
+	color: #fff;
+	font-family: arial;
+	font-size: 13px;
+	font-weight: normal;
+	padding: 4px 15px;
+	text-decoration: none;
+	cursor: pointer;
+	text-shadow: 0 1px 0 #5b8a3c;
+	vertical-align: top;
+	margin-right: 5px;
+}
+
+.ajax-file-upload {
+	background-color: #FFFFFF;
+    border: 1px solid #666666;
+    border-radius: 25px 25px 25px 25px;
+    color: #666666;
+    font-size: 0.875em;
+    height: 35px;
+    line-height: 2.5em;
+    padding: 2px 10px 0 0;
+    text-transform: uppercase;
+    text-align:center;
+}
+
+.ajax-file-upload:after{
+	background: url("/anguostorefront/_ui/desktop/common/images/upload_icon_22x22.png") no-repeat scroll right top rgba(0, 0, 0, 0);
+    content: "";
+    cursor: pointer;
+    display: inline-block;
+    height: 22px;
+    margin: -60px -15px 10px 130px;
+    vertical-align: middle;
+    width: 22px;
+}
+.ajax-file-upload:hover {
+}
+
+.ajax-upload-dragdrop {
+	height: inherit;
+	width: inherit;
+}
+
+.ajax-upload-dragdrop.state-hover {
+	border: 1px dashed #A5A5C7;
+}
+
+.ajax-file-upload-error {
+	color: red;
+}
