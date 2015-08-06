@@ -2,6 +2,7 @@ package com.tasly.anguo.core.anguostore.impl;
 
 import de.hybris.platform.cms2.model.contents.ContentCatalogModel;
 import de.hybris.platform.servicelayer.internal.converter.util.ModelUtils;
+import de.hybris.platform.servicelayer.internal.service.AbstractBusinessService;
 import de.hybris.platform.servicelayer.model.ModelService;
 import de.hybris.platform.util.Config;
 
@@ -9,6 +10,7 @@ import org.apache.commons.lang.ArrayUtils;
 
 import com.tasly.anguo.core.anguostore.AnguoStoreService;
 import com.tasly.anguo.core.anguostore.dao.AnguoStoreDao;
+import com.tasly.anguo.core.constants.AnguoCoreConstants;
 import com.tasly.anguo.core.enums.StoreApproveStatus;
 import com.tasly.anguo.core.model.AnguoStoreModel;
 import com.tasly.anguo.core.model.AnguoStoreTempModel;
@@ -17,7 +19,7 @@ import com.tasly.anguo.core.model.AnguoStoreTempModel;
 /**
  *
  */
-public class DefaultAnguoStoreService implements AnguoStoreService
+public class DefaultAnguoStoreService extends AbstractBusinessService implements AnguoStoreService
 {
 
 	/**
@@ -115,6 +117,20 @@ public class DefaultAnguoStoreService implements AnguoStoreService
 		return anguoStoreDao.findAnguoStoreById(uid);
 	}
 
+	@Override
+	public void setSessionAnguoStore(final String storeId)
+	{
+		getSessionService().setAttribute(AnguoCoreConstants.ANGUO_STORE_SESSION, storeId);
+	}
+
+	@Override
+	public String getSessionAnguoStore()
+	{
+		final String anguoStoreId = getSessionService().getAttribute(AnguoCoreConstants.ANGUO_STORE_SESSION);
+		return anguoStoreId == null ? "" : anguoStoreId;
+	}
+
+
 	public AnguoStoreDao getAnguoStoreDao()
 	{
 		return anguoStoreDao;
@@ -125,14 +141,18 @@ public class DefaultAnguoStoreService implements AnguoStoreService
 		this.anguoStoreDao = anguoStoreDao;
 	}
 
+	@Override
 	public ModelService getModelService()
 	{
 		return modelService;
 	}
 
+	@Override
 	public void setModelService(final ModelService modelService)
 	{
 		this.modelService = modelService;
 	}
+
+
 
 }

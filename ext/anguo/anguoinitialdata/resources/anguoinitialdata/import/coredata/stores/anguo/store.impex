@@ -35,7 +35,3 @@ INSERT_UPDATE AnguoStore; uid[unique=true]; name; description; contactname1; con
 ;0000000002; teststore2; test ah haha; contact #1; 12345678901;
 ;0000000003; teststore3; test ah haha; contact #1; 12345678901;
 
-INSERT_UPDATE AnguoStoreTemp; uid[unique=true]; name; description; contactname1; contactphone1; 
-;0000000001; teststoretemp1; test ah haha; contact #1; 12345678901;
-;0000000002; teststoretemp2; test ah haha; contact #1; 12345678901;
-;0000000003; teststoretemp3; test ah haha; contact #1; 12345678901;

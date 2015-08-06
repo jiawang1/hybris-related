@@ -3,7 +3,7 @@ package com.tasly.anguo.core.anguostore.impl;
 import de.hybris.platform.catalog.model.CatalogUnawareMediaModel;
 import de.hybris.platform.core.model.media.MediaFolderModel;
 import de.hybris.platform.core.model.media.MediaModel;
-import de.hybris.platform.servicelayer.media.MediaService;
+import de.hybris.platform.servicelayer.media.impl.DefaultMediaService;
 import de.hybris.platform.servicelayer.model.ModelService;
 
 import java.io.InputStream;
@@ -17,11 +17,9 @@ import com.tasly.anguo.core.enums.StoreMediaSubFolder;
 /**
  *
  */
-public class DefaultAnguoMediaService implements AnguoMediaService
+public class DefaultAnguoMediaService extends DefaultMediaService implements AnguoMediaService
 {
 	private AnguoStoreDao anguoStoreDao;
-
-	private MediaService mediaService;
 
 	private ModelService modelService;
 
@@ -78,7 +76,7 @@ public class DefaultAnguoMediaService implements AnguoMediaService
 
 		try
 		{
-			folder = mediaService.getFolder("test");
+			folder = getFolder("test");
 		}
 		catch (final Exception e)
 		{
@@ -86,7 +84,7 @@ public class DefaultAnguoMediaService implements AnguoMediaService
 			folder.setQualifier("test");
 			folder.setPath("test");
 			modelService.save(folder);
-			setSubfoldersDepthForFolder(folder, Integer.valueOf(4));
+			//setSubfoldersDepthForFolder(folder, Integer.valueOf(4));
 			return folder;
 		}
 
