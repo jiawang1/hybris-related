@@ -191,6 +191,28 @@
 	<bean id="anguoCustomerFacade" class="com.tasly.anguo.facades.customer.impl.AnguoCustomerFacade" parent= "defaultCustomerFacade"/>
 	
 	<!-- beans for product start -->
+	<bean id="enumUtils" class="com.tasly.anguo.facades.utils.EnumUtils">
+		<property name="enumerationService" ref="enumerationService"/>
+	</bean>
+	
+	<bean id="unitPopulator" class="com.tasly.anguo.facades.populators.UnitPopulator" />
+	
+	<bean id="unitFacade" class="com.tasly.anguo.facades.product.impl.DefaultUnitFacade">
+		<property name="unitService" ref="unitService"/>
+		<property name="unitPopulator" ref="unitPopulator"/>
+	</bean>
+	
+	<bean id="anguoProductFacade" class="com.tasly.anguo.facades.product.impl.DefaultAnguoProductFacade" parent="defaultProductFacade">
+		<property name="anguoCategoryService" ref="anguoCategoryService"></property>
+		<property name="modelService" ref="modelService"></property>
+		<property name="unitService" ref="unitService"></property>
+		<property name="districtService" ref="districtService"></property>
+		<property name="classificationService" ref="classificationService"></property>
+		<property name="warehouseService" ref="warehouseService"></property>
+		<property name="createProductCodeStrategy" ref="createProductCodeStrategy"></property>
+		<property name="commonI18NService" ref="commonI18NService"></property>
+	</bean>
+	
 	<alias name="anguoCategoryFacade" alias="categoryFacade"/>
 	<bean id="anguoCategoryFacade" class="com.tasly.anguo.facades.category.impl.DefaultAnguoCategoryFacade">
 		<property name="categoryService" ref="anguoCategoryService"></property>
@@ -275,4 +297,7 @@
 	</bean>
 	<!-- add by Yang for AM-18 end -->
 	
+	<bean id="customerIdentifyFacade" class="com.tasly.anguo.facades.customer.impl.DefaultCustomerIdentifyFacade">
+		<property name="imageConverter" ref="imageConverter"/>
+	</bean>
 </beans>

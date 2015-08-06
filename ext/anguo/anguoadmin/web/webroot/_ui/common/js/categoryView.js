@@ -27,9 +27,9 @@ define(['jquery','backbone', 'underscore', 'jstree','datatables','text!./../temp
     				url:'/anguoadmin/categoryManagement/getCategoryDetail',
     				data:{'categoryCode':selected_node_id},
     				success:function(data){
-    			    	$('#category-detail-form :input').attr('value','');
-    					$('#categoryCode').attr("value",data.categoryCode);
-    					$('#categoryName').attr("value",data.name);
+    			    	$('#category-detail-form :input').val('');
+    					$('#categoryCode').val(data.categoryCode);
+    					$('#categoryName').val(data.name);
     					
     					$('#aliasGrid').dataTable().fnClearTable();
     					var aliasName = data.alias;
@@ -123,7 +123,6 @@ define(['jquery','backbone', 'underscore', 'jstree','datatables','text!./../temp
 				{
 					'categoryCode':	$('input[name="categoryCode"]').val(),
 					'name':$('input[name="categoryName"]').val(),
-					'superCategory':$('input[name="superCategory"]').val(),
 					'alias':aliasArray
 				};
 			
@@ -191,9 +190,6 @@ function getCustomMenu(node) {
         'separator_after': true,
         'label': '添加子类目',
         'action': function (obj) {
-        	$('#category-detail-form :input').attr('value','');
-			$('#aliasGrid').dataTable().fnClearTable();
-        	$('input[name="superCategory"]').attr("value",node.id);
         	
         	$.ajax({
         		type:'POST',
@@ -221,7 +217,7 @@ function getCustomMenu(node) {
         			}
         			
         	        $('#category-tree-div').jstree().delete_node(node);
-        	        $('#category-detail-form :input').attr('value','');
+        	        $('#category-detail-form :input').val('');
         	        $('#aliasGrid').dataTable().fnClearTable();
         		}
         	});

@@ -102,17 +102,9 @@ public class LoginPageController extends AbstractLoginPageController
 		{
 			storeReferer(referer, request, response);
 		}
+		AnguoLoginForm anguoLoginForm = new AnguoLoginForm();
 		model.addAttribute(new AnguoRegisterForm());
-		return getDefaultLoginPage(loginError, session, model,request);
-	}
-	
-	protected String getDefaultLoginPage(final boolean loginError, final HttpSession session, final Model model,final HttpServletRequest request)
-			throws CMSItemNotFoundException
-	{
-		final AnguoLoginForm anguoLoginForm = new AnguoLoginForm();
 		model.addAttribute(anguoLoginForm);
-		model.addAttribute(new RegisterForm());
-		model.addAttribute(new GuestForm());
 
 		Cookie[] cookies = request.getCookies();
 		for(Cookie cookie : cookies) {
@@ -121,21 +113,7 @@ public class LoginPageController extends AbstractLoginPageController
 				break;
 			}
 		}
-		storeCmsPageInModel(model, getCmsPage());
-		setUpMetaDataForContentPage(model, (ContentPageModel) getCmsPage());
-		model.addAttribute("metaRobots", "index,nofollow");
-
-		final Breadcrumb loginBreadcrumbEntry = new Breadcrumb("#", getMessageSource().getMessage("header.link.login", null,
-				"header.link.login", getI18nService().getCurrentLocale()), null);
-		model.addAttribute("breadcrumbs", Collections.singletonList(loginBreadcrumbEntry));
-
-		if (loginError)
-		{
-			model.addAttribute("loginError", Boolean.valueOf(loginError));
-			GlobalMessages.addErrorMessage(model, "login.error.account.not.found.title");
-		}
-
-		return getView();
+		return getDefaultLoginPage(loginError, session, model);
 	}
 	
 	protected void storeReferer(final String referer, final HttpServletRequest request, final HttpServletResponse response)
