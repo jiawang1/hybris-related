@@ -24,9 +24,8 @@ public class ProductListPopulator implements Populator<SearchPageData, ProductLi
 		//draw is for front end display,is set in controller,this is required by dataTable plugin
 		//target.setDraw(currentpage);
 		//below two fields is for plugin display
-		target.setRecordsFiltered(source.getPagination().getTotalNumberOfResults());
-		target.setRecordsTotal(source.getPagination().getTotalNumberOfResults());
-		
+		target.setTotalRecords(source.getPagination().getTotalNumberOfResults());
+	    target.setTotalPage(source.getPagination().getNumberOfPages());
 		List<String[]> data = new ArrayList<String[]>();
 		
 		if(CollectionUtils.isNotEmpty(source.getResults()))

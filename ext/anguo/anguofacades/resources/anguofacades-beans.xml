@@ -70,9 +70,8 @@
 	</bean>
 	
 	<bean class="com.tasly.anguo.store.data.ProductListData">
-		<property name="draw" type="int"></property>
-		<property name="recordsTotal" type="long"></property>
-		<property name="recordsFiltered" type="long"></property>
+		<property name="totalRecords" type="long"></property>
+		<property name="totalPage" type="int"></property>
 		<property name="data" type="java.util.List&lt;String[]>"></property>
 	</bean>
 	
