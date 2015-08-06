@@ -23,7 +23,7 @@ define(['jquery','backbone', 'underscore','accessible','datatables','text!./../t
             });
             
             
-            this.$('#uncheckgrid').dataTable({
+            this.$('#productListGrid').dataTable({
     	    	'oLanguage': {
     	    		'sZeroRecords': '抱歉， 没有找到',
     	    		'sInfoEmpty': '无数据',
@@ -78,7 +78,7 @@ define(['jquery','backbone', 'underscore','accessible','datatables','text!./../t
         getProductList:function(){
         	var productStatus; 
 
-        	this.$('#datagrid').dataTable().fnDraw();
+        	this.$('#productListGrid').dataTable().fnDraw();
         	
         }
     });

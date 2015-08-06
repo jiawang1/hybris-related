@@ -7,13 +7,13 @@ td img{width:60px;height:60px};
 		<label for="storeName">店铺名称</label> <input name="storeName"></input> 
 		<label for="productCode">产品编码</label> <input name="productCode"></input> 
 		<label for="productName">产品名称</label> <input name="productName"></input>
-		<button id="getProductListButton">查询</button>
+		<input type="button" id="getProductListButton" value="查询"></input>
 	</form>
 </div>
 <div id="productListTab">
 	<div class="tabHead">未审批</div>
 	<div class="tabBody" status="UNCHECK" >
-		<table id="datagrid" class="productListTable" cellspacing="0" width="100%">
+		<table id="productListGrid" class="productListTable" cellspacing="0" width="100%">
 			<thead>
 				<tr>
 					<th>缩略图</th>
