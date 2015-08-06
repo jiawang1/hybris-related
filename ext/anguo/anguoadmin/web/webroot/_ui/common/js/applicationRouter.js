@@ -1,4 +1,4 @@
-define(['jquery','backbone', 'underscore','navigationMenu','productsView' ],function($,Backbone,_, Navigation, Products){
+define(['jquery','backbone', 'underscore','navigationMenu','productsView','widget/inputList' ],function($,Backbone,_, Navigation, Products){
     "use strict";
     
     
@@ -27,6 +27,10 @@ var AppRouter = Backbone.Router.extend({
         },
     
         handleProduct:function(){
+             $(".main-root").empty().append(new Products().render().$el);
+        },
+    
+        handleOthers:function(){
              $(".main-root").empty().append(new Products().render().$el);
         },
     
