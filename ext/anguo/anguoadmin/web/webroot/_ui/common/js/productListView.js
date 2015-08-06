@@ -140,7 +140,7 @@ AM.grid = {
 	},
 	updateData: function(datas){
 		if(datas.length == 0){
-			alert('无记录');
+			//alert('无记录');
 			return;
 		}
 		for(var i = 0;i < datas.length;i++)
