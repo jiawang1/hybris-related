@@ -1,7 +1,7 @@
 #!/bin/bash
 
 CONFIG_URL=`pwd`
-BASE_URL=$CONFIG_URL"/properties"
+BASE_URL=$CONFIG_URL
 HOST_NAME=`hostname`
 HOST_CONFIG=$BASE_URL
 ENV_CONFIG=$BASE_URL
