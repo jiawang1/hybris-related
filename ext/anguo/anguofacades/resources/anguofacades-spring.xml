@@ -202,6 +202,17 @@
 		<property name="unitPopulator" ref="unitPopulator"/>
 	</bean>
 	
+	<bean id="anguoProductFacade" class="com.tasly.anguo.facades.product.impl.DefaultAnguoProductFacade" parent="defaultProductFacade">
+		<property name="anguoCategoryService" ref="anguoCategoryService"></property>
+		<property name="modelService" ref="modelService"></property>
+		<property name="unitService" ref="unitService"></property>
+		<property name="districtService" ref="districtService"></property>
+		<property name="classificationService" ref="classificationService"></property>
+		<property name="warehouseService" ref="warehouseService"></property>
+		<property name="createProductCodeStrategy" ref="createProductCodeStrategy"></property>
+		<property name="commonI18NService" ref="commonI18NService"></property>
+	</bean>
+	
 	<alias name="anguoCategoryFacade" alias="categoryFacade"/>
 	<bean id="anguoCategoryFacade" class="com.tasly.anguo.facades.category.impl.DefaultAnguoCategoryFacade">
 		<property name="categoryService" ref="anguoCategoryService"></property>

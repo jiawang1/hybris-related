@@ -18,7 +18,6 @@ import org.mockito.MockitoAnnotations;
 import com.tasly.anguo.core.enums.PackageUnit;
 import com.tasly.anguo.facades.product.data.EnumData;
 
-import de.hybris.platform.core.HybrisEnumValue;
 import de.hybris.platform.enumeration.EnumerationService;
 
 /**

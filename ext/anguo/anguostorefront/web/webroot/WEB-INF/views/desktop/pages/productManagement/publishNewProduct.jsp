@@ -110,7 +110,7 @@
 						<option value="shuifei">水飞</option>
 						<option value="faya">发芽</option>
 						<option value="fajiao">发酵</option>
-						<option value="others" id="processMethodOthersOption">其他</option>
+						<option value="others">其他</option>
 				</select>
 				</td>
 			</tr>
@@ -127,7 +127,7 @@
 						<option value="medium">适中</option>
 						<option value="few">较少</option>
 						<option value="none">无</option>
-						<option value="others" id="huifenPersOption">自定义百分比</option>
+						<option value="others">自定义百分比</option>
 				</select>
 				</td>
 			</tr>
@@ -167,13 +167,13 @@
 				<td>
 					<div id="priceScalesDiv">
 						<div class="priceLineDiv">
-							<input type="text" id="minPriceScaleQuantityInput"
-								class="intInput salesQuntityInput" /> 公斤以上 <input type="text"
-								class="floatInput" style="display: inline" /> 元/公斤
+							<input type="text" id="minPriceScaleQuantity1Input"
+								class="intInput salesQuntityInput" /> 公斤以上 <input type="text" id="priceScale1Input"
+								class="doubleInput priceInput" style="display: inline" /> 元/公斤
 						</div>
 						<div class="priceLineDiv">
 							<br> <input type="text" class="intInput salesQuntityInput" />
-							公斤以上 <input type="text" class="floatInput"
+							公斤以上 <input type="text" class="doubleInput priceInput"
 								style="display: inline" /> 元/公斤 <input type="button"
 								class="deletePriceScaleBtn" value="删除" style="display: inline" />
 						</div>
