@@ -105,5 +105,15 @@
 	<bean class="de.hybris.platform.commercefacades.order.data.OrderHistoryData">
 		<property name="entries" type="java.util.List&lt;de.hybris.platform.commercefacades.order.data.OrderEntryData>"/>
 	</bean>
+	
+	<bean class="com.tasly.anguo.order.data.AnguoOrderStatusCountData">
+		<property name="wait_for_payment" type="Long"/>
+		<property name="wait_for_ship" type="Long"/>
+		<property name="wait_for_receive" type="Long"/>
+		<property name="completed" type="Long"/>
+		<property name="returning" type="Long"/>
+		<property name="cancelled" type="Long"/>
+		<property name="system_processing" type="Long"/>
+	</bean>
 	<!-- add by Yang for AM-58 end -->
 </beans>

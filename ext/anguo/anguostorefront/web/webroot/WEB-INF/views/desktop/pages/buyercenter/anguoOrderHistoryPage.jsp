@@ -11,11 +11,7 @@
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags" %>
 <%@ taglib prefix="breadcrumb" tagdir="/WEB-INF/tags/desktop/nav/breadcrumb" %>
 
-<template:page pageTitle="${pageTitle}">
 
-	<div id="breadcrumb" class="breadcrumb">
-		<breadcrumb:breadcrumb breadcrumbs="${breadcrumbs}"/>
-	</div>
 	<div id="globalMessages">
 		<common:globalMessages/>
 	</div>
@@ -24,29 +20,29 @@
 		<div class="headline"><spring:theme code="text.account.orderHistory" text="Order History"/></div>
 		
 		<div class="walletBox">
-			<c:url value="/my-account/viewMembershipCardHistory" var="encodedUrl" />
+			<c:url value="/anguo-buyercenter/orders" var="encodedUrl" />
 			<a href="${encodedUrl}"><spring:theme code="text.buyercenter.link.order.all" text="Update personal details"/></a>&nbsp;&nbsp;|&nbsp;&nbsp;
 			
-			<c:url value="/my-account/freeze-record?transType=Payment" var="encodedUrlPayment" />
-			<a href="${encodedUrlPayment}"><spring:theme code="text.buyercenter.link.order.waitforpayment" text="Update personal details" arguments="1"/></a>&nbsp;&nbsp;|&nbsp;&nbsp;
+			<c:url value="/anguo-buyercenter/orders?status=wait_for_payment" var="waitforpayment" />
+			<a href="${waitforpayment}"><spring:theme code="text.buyercenter.link.order.waitforpayment" text="Update personal details" arguments="${anguoOrderStatusCountData.wait_for_payment == null ? 0 : anguoOrderStatusCountData.wait_for_payment}"/></a>&nbsp;&nbsp;|&nbsp;&nbsp;
 			
-			<c:url value="/my-account/freeze-record?transType=Refund" var="encodedUrlRefund" />
-			<a href="${encodedUrlRefund}"><spring:theme code="text.buyercenter.link.order.waitforship" text="Update personal details" arguments="0"/></a>&nbsp;&nbsp;|&nbsp;&nbsp;
+			<c:url value="/anguo-buyercenter/orders?status=wait_for_ship" var="waitforship" />
+			<a href="${waitforship}"><spring:theme code="text.buyercenter.link.order.waitforship" text="Update personal details" arguments="${anguoOrderStatusCountData.wait_for_ship == null ? 0 : anguoOrderStatusCountData.wait_for_ship}"/></a>&nbsp;&nbsp;|&nbsp;&nbsp;
 			
-			<c:url value="/my-account/freeze-record?transType=ReplaceBlock" var="encodedUrlReplaceBlock" />
-			<a href="${encodedUrlReplaceBlock}"><spring:theme code="text.buyercenter.link.order.waitforreceive" text="Update personal details" arguments="0"/></a>&nbsp;&nbsp;|&nbsp;&nbsp;
+			<c:url value="/anguo-buyercenter/orders?status=wait_for_receive" var="waitforreceive" />
+			<a href="${waitforreceive}"><spring:theme code="text.buyercenter.link.order.waitforreceive" text="Update personal details" arguments="${anguoOrderStatusCountData.wait_for_receive == null ? 0 : anguoOrderStatusCountData.wait_for_receive}"/></a>&nbsp;&nbsp;|&nbsp;&nbsp;
 			
-			<c:url value="/my-account/freeze-record?transType=CashOutBlock" var="encodedUrlCashOutBlock" />
-			<a href="${encodedUrlCashOutBlock}"><spring:theme code="text.buyercenter.link.order.done" text="Update personal details" arguments="0"/></a>&nbsp;&nbsp;|&nbsp;&nbsp;
+			<c:url value="/anguo-buyercenter/orders?status=completed" var="done" />
+			<a href="${done}"><spring:theme code="text.buyercenter.link.order.done" text="Update personal details" arguments="${anguoOrderStatusCountData.completed == null ? 0 : anguoOrderStatusCountData.completed == null}"/></a>&nbsp;&nbsp;|&nbsp;&nbsp;
 			
-			<c:url value="/my-account/freeze-record?transType=CashOutBlock" var="encodedUrlCashOutBlock" />
-			<a href="${encodedUrlCashOutBlock}"><spring:theme code="text.buyercenter.link.order.return" text="Update personal details" arguments="0"/></a>&nbsp;&nbsp;|&nbsp;&nbsp;
+			<c:url value="/anguo-buyercenter/orders?status=returning" var="returning" />
+			<a href="${returning}"><spring:theme code="text.buyercenter.link.order.return" text="Update personal details" arguments="${anguoOrderStatusCountData.returning == null ? 0 : anguoOrderStatusCountData.returning == null}"/></a>&nbsp;&nbsp;|&nbsp;&nbsp;
 			
-			<c:url value="/my-account/freeze-record?transType=CashOutBlock" var="encodedUrlCashOutBlock" />
-			<a href="${encodedUrlCashOutBlock}"><spring:theme code="text.buyercenter.link.order.close" text="Update personal details" arguments="0"/></a>&nbsp;&nbsp;|&nbsp;&nbsp;
+			<c:url value="/anguo-buyercenter/orders?status=cancelled" var="close" />
+			<a href="${close}"><spring:theme code="text.buyercenter.link.order.close" text="Update personal details" arguments="${anguoOrderStatusCountData.cancelled == null ? 0 : anguoOrderStatusCountData.cancelled == null}"/></a>&nbsp;&nbsp;|&nbsp;&nbsp;
 			
-			<c:url value="/my-account/freeze-record?transType=CashOutBlock" var="encodedUrlCashOutBlock" />
-			<a href="${encodedUrlCashOutBlock}"><spring:theme code="text.buyercenter.link.order.processing" text="Update personal details" arguments="0"/></a>
+			<c:url value="/anguo-buyercenter/orders?status=system_processing" var="processing" />
+			<a href="${processing}"><spring:theme code="text.buyercenter.link.order.processing" text="Update personal details" arguments="${anguoOrderStatusCountData.system_processing == null ? 0 : anguoOrderStatusCountData.system_processing}"/></a>
 		</div>
 		</br>
 		<c:if test="${not empty searchPageData.results}">
@@ -109,7 +105,7 @@
 	
 										<td headers="header5">
 											<ycommerce:testId code="orderHistory_orderStatus_label">
-												<p><spring:theme code="text.account.order.status.display.${order.statusDisplay}"/></p>
+												<p><spring:theme code="text.buyercenter.order.status.display.${order.status}"/></p>
 											</ycommerce:testId>
 										</td>
 									</c:if>
@@ -120,7 +116,7 @@
 				</tbody>
 			</table>
 
-			<nav:pagination top="false" supportShowPaged="${isShowPageAllowed}"  supportShowAll="${isShowAllAllowed}" searchPageData="${searchPageData}" searchUrl="/my-account/orders?sort=${searchPageData.pagination.sort}" msgKey="text.account.orderHistory.page"  numberPagesShown="${numberPagesShown}"/>
+			<nav:pagination top="false" supportShowPaged="${isShowPageAllowed}"  supportShowAll="${isShowAllAllowed}" searchPageData="${searchPageData}" searchUrl="/anguo-buyercenter/orders?sort=${searchPageData.pagination.sort}" msgKey="text.account.orderHistory.page"  numberPagesShown="${numberPagesShown}"/>
 
 		</c:if>
 		<c:if test="${empty searchPageData.results}">
@@ -129,5 +125,4 @@
 	</div>
 	
 
-</template:page>
 

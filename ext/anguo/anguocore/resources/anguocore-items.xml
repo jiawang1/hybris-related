@@ -20,6 +20,17 @@
 	</collectiontypes>
 	
 	<enumtypes>
+	
+		<!-- add by Yang for AM-58 start -->
+		<enumtype code="OrderStatus" autocreate="false" generate="true" dynamic="true">
+			<value code="RETURNING" />
+			<value code="WAIT_FOR_PAYMENT" />
+			<value code="WAIT_FOR_SHIP" />
+			<value code="WAIT_FOR_RECEIVE" />
+			<value code="SYSTEM_PROCESSING" />
+		</enumtype>
+		<!-- add by Yang for AM-58 end -->
+	
 		<enumtype generate="true" code="SwatchColorEnum" autocreate="true" dynamic="true">
 			<value code="BLACK"/>
 			<value code="BLUE"/>

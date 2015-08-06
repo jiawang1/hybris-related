@@ -128,7 +128,7 @@ INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;url
 
 # An guo CMS Link Components - Buyer Center
 INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;&linkRef;&componentRef;target(code)[default='sameWindow']
-;;BuyerCenterOrderManagementLink;Buyer Center Order Management Link;/anguo-buyercenter/ordermanage;BuyerCenterOrderManagementLink;BuyerCenterOrderManagementLink;;;;
+;;BuyerCenterOrderManagementLink;Buyer Center Order Management Link;/anguo-buyercenter/orders;BuyerCenterOrderManagementLink;BuyerCenterOrderManagementLink;;;;
 
 
 # CMS User Group Restrictions
@@ -558,7 +558,7 @@ INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;c
 ###### Buyer Center Order Manage Page #######
 
 INSERT_UPDATE JspIncludeComponent;$contentCV[unique=true];uid[unique=true];name;page;actions(uid,$contentCV);&componentRef
-;;BuyerCenterOrderManagementComponent;Buyer Center Order Management Component;buyercenterOrderHistoryPage.jsp;;BuyerCenterOrderManagementComponent
+;;BuyerCenterOrderManagementComponent;Buyer Center Order Management Component;anguoOrderHistoryPage.jsp;;BuyerCenterOrderManagementComponent
 
 # ContentSlot
 INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef);;;
