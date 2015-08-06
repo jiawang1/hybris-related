@@ -20,6 +20,8 @@ import de.hybris.platform.commercefacades.storesession.StoreSessionFacade;
 
 import java.io.IOException;
 import java.util.Collections;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -32,19 +34,28 @@ import org.springframework.beans.factory.annotation.Required;
 import org.springframework.web.filter.OncePerRequestFilter;
 import org.springframework.web.util.CookieGenerator;
 
+import com.tasly.anguo.core.anguostore.AnguoStoreService;
+
 
 /**
- * Filter that initializes the session for the anguostorefront. This is a spring configured filter that is
- * executed by the PlatformFilterChain.
+ * Filter that initializes the session for the anguostorefront. This is a spring configured filter that is executed by
+ * the PlatformFilterChain.
  */
 public class StorefrontFilter extends OncePerRequestFilter
 {
 	public static final String AJAX_REQUEST_HEADER_NAME = "X-Requested-With";
 	public static final String ORIGINAL_REFERER = "originalReferer";
 
+	private static final String STORE_URL_PATTERN = "/.*/.*/[\\d]{10}[/]?.*"; //[$|/]{1}.*
+	private static final Pattern STORE_NAME_PATTERN = Pattern.compile("[\\d]{10}");
+
+
 	private StoreSessionFacade storeSessionFacade;
 	private BrowseHistory browseHistory;
 	private CookieGenerator cookieGenerator;
+
+	private AnguoStoreService anguoStoreService;
+
 
 	@Override
 	public void doFilterInternal(final HttpServletRequest request, final HttpServletResponse response,
@@ -52,6 +63,14 @@ public class StorefrontFilter extends OncePerRequestFilter
 	{
 		final HttpSession session = request.getSession();
 		final String queryString = request.getQueryString();
+
+		//Add by Ming start
+		String canonicalURL = request.getServletPath().toString();
+		if (StringUtils.contains(canonicalURL, "/?"))
+		{
+			canonicalURL = StringUtils.substringBefore(canonicalURL, "/?");
+		}
+		setSessionAnguoStore(canonicalURL);
 
 		if (isSessionNotInitialized(session, queryString))
 		{
@@ -70,9 +89,9 @@ public class StorefrontFilter extends OncePerRequestFilter
 		{
 			if (StringUtils.isBlank(request.getHeader(AJAX_REQUEST_HEADER_NAME)))
 			{
-				String requestURL = request.getRequestURL().toString();
-				session.setAttribute(ORIGINAL_REFERER, StringUtils.isNotBlank(queryString) ? requestURL + "?"
-						+ queryString : requestURL);
+				final String requestURL = request.getRequestURL().toString();
+				session.setAttribute(ORIGINAL_REFERER, StringUtils.isNotBlank(queryString) ? requestURL + "?" + queryString
+						: requestURL);
 			}
 
 			getBrowseHistory().addBrowseHistoryEntry(new BrowseHistoryEntry(request.getRequestURI(), null));
@@ -159,4 +178,38 @@ public class StorefrontFilter extends OncePerRequestFilter
 	{
 		this.cookieGenerator = cookieGenerator;
 	}
+
+	/**
+	 * set session to anguo store
+	 *
+	 * @param url
+	 * @param session
+	 * @param siteModel
+	 * @author i313879
+	 */
+	private void setSessionAnguoStore(final String url)
+	{
+		//get anguo store ID
+		String anguoStoreId = "";
+		if (url.matches(STORE_URL_PATTERN))
+		{
+			final Matcher m = STORE_NAME_PATTERN.matcher(url);
+			if (m.find())
+			{
+				anguoStoreId = m.group();
+			}
+		}
+		anguoStoreService.setSessionAnguoStore(anguoStoreId);
+	}
+
+	public AnguoStoreService getAnguoStoreService()
+	{
+		return anguoStoreService;
+	}
+
+	public void setAnguoStoreService(final AnguoStoreService anguoStoreService)
+	{
+		this.anguoStoreService = anguoStoreService;
+	}
+
 }

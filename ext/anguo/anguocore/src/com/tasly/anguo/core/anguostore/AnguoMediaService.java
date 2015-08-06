@@ -2,7 +2,7 @@ package com.tasly.anguo.core.anguostore;
 
 import de.hybris.platform.core.model.media.MediaModel;
 
-import java.io.File;
+import java.io.InputStream;
 import java.util.List;
 
 import com.tasly.anguo.core.enums.StoreMediaSubFolder;
@@ -35,14 +35,15 @@ public interface AnguoMediaService
 
 	/**
 	 * 上传media到店铺相册中
+	 * 
+	 * @param inputStream
 	 *
-	 * @param file
 	 * @param mediaId
 	 * @param storeId
 	 * @param subfolderPath
 	 * @return true 如果上传成功；false 失败。
 	 */
-	public boolean uploadMedia(File file, String mediaId, String storeId, String subfolderPath);
+	public boolean uploadMedia(InputStream inputStream, String mediaId, String storeId, String subfolderPath);
 
 	/**
 	 * 获取所有media在店铺相册主目录下

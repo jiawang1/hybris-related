@@ -95,6 +95,16 @@
 			<value code="PERSONAL"/>
 			<value code="ENTERPRISE"/>
 		</enumtype>
+		<enumtype generate="true" code="StoreLevel" autocreate="true" dynamic="true">
+			<value code="NORMAL"/>
+			<value code="GOLDEN"/>
+			<value code="DIAMOND"/>
+		</enumtype>
+		<enumtype generate="true" code="StoreTemplate" autocreate="true" dynamic="true">
+			<value code="NORMAL"/>
+			<value code="ADMIRAL"/>
+			<value code="ENTERPRISE_ADMIRAL"/>
+		</enumtype>
 		<!-- enumtype for anguostore end -->
 	</enumtypes>
 
@@ -509,7 +519,7 @@
 						<attributes>
 						<attribute qualifier="uid" type="java.lang.String">
 						<description>10位数字</description>
-						<modifiers optional="false"/>
+						<modifiers optional="false" unique="true"/>
 						<persistence type="property"/>
 						</attribute>
 						
@@ -627,13 +637,13 @@
 						<persistence type="property"/>
 						</attribute>
 						
-						<attribute qualifier="storeLevel" type="java.lang.String">
+						<attribute qualifier="storeLevel" type="StoreLevel">
 						<description>店铺等级</description>
 						<modifiers/>
 						<persistence type="property"/>
 						</attribute>
 						
-						<attribute qualifier="storeTemplate" type="java.lang.String">
+						<attribute qualifier="storeTemplate" type="StoreTemplate">
 						<description>店铺模版</description>
 						<modifiers/>
 						<persistence type="property"/>

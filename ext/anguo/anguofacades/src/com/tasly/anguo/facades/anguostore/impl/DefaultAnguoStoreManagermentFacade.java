@@ -32,7 +32,7 @@ import de.hybris.platform.util.Config;
 
 
 /**
- * 
+ *
  * @author i313919, Yang
  * @since 2015-07-24 10:23:08
  *
@@ -57,12 +57,12 @@ public class DefaultAnguoStoreManagermentFacade implements AnguoStoreManagerment
 	private Populator<AnguoStoreManagermentData, AnguoStoreTempModel> anguoStoreReversePopulator;
 
 	@Override
-	public void addStore(AnguoStoreManagermentData storeData) throws MediaIOException, IllegalArgumentException, IOException
+	public void addStore(final AnguoStoreManagermentData storeData) throws MediaIOException, IllegalArgumentException, IOException
 	{
 		final AnguoStoreTempModel newStore = getModelService().create(AnguoStoreTempModel.class);
 		getAnguoStoreReversePopulator().populate(storeData, newStore);
 
-		CustomerModel customer = (CustomerModel) getUserService().getCurrentUser();
+		final CustomerModel customer = (CustomerModel) getUserService().getCurrentUser();
 		newStore.setOwner(customer);
 		newStore.setUid(anguoStoreCodeGenerator.generate().toString());
 		newStore.setRegisterDate(timeService.getCurrentTime());
@@ -72,7 +72,7 @@ public class DefaultAnguoStoreManagermentFacade implements AnguoStoreManagerment
 		final MediaModel media = createEmptyMediaModelInFolder(code, createTestFolder());
 		media.setMime("image/jpeg");
 		CatalogVersionModel catalogVersionModel = null;
-		for (CatalogVersionModel model : catalogVersionService.getSessionCatalogVersions())
+		for (final CatalogVersionModel model : catalogVersionService.getSessionCatalogVersions())
 		{
 			catalogVersionModel = model;
 		}
@@ -84,20 +84,20 @@ public class DefaultAnguoStoreManagermentFacade implements AnguoStoreManagerment
 		mediaService.setStreamForMedia(media, storeData.getLogo().getInputStream(), storeData.getLogo().getName(), "image/jpeg");
 
 		newStore.setLogo(media);
-		
+
 		//AM-26 mock data add by liyao -start
-		List<AnguoPlatformServiceModel> mockPlatformService = new ArrayList<AnguoPlatformServiceModel>();
-		AnguoPlatformServiceModel anguoPlatformServiceModel01 = new AnguoPlatformServiceModel();
+		final List<AnguoPlatformServiceModel> mockPlatformService = new ArrayList<AnguoPlatformServiceModel>();
+		final AnguoPlatformServiceModel anguoPlatformServiceModel01 = new AnguoPlatformServiceModel();
 		anguoPlatformServiceModel01.setDescription("实名认证");
-		AnguoPlatformServiceModel anguoPlatformServiceModel02 = new AnguoPlatformServiceModel();
+		final AnguoPlatformServiceModel anguoPlatformServiceModel02 = new AnguoPlatformServiceModel();
 		anguoPlatformServiceModel02.setDescription("七天无条件退货");
 		mockPlatformService.add(anguoPlatformServiceModel01);
 		mockPlatformService.add(anguoPlatformServiceModel02);
 		newStore.setAnguoPlatformService(mockPlatformService);
-		newStore.setStoreLevel("中级");
-		newStore.setStoreTemplate("基础");
+//		newStore.setStoreLevel("中级");
+//		newStore.setStoreTemplate("基础");
 		//AM-26 mock data add by liyao -end
-		
+
 		customer.setAnguoStoreTemp(newStore);
 
 		getModelService().save(customer);
@@ -115,12 +115,12 @@ public class DefaultAnguoStoreManagermentFacade implements AnguoStoreManagerment
 	private MediaFolderModel createTestFolder()
 	{
 		MediaFolderModel folder;
-		
+
 		try
 		{
 			folder = mediaService.getFolder("test");
 		}
-		catch (Exception e)
+		catch (final Exception e)
 		{
 			folder = modelService.create(MediaFolderModel.class);
 			folder.setQualifier("test");
@@ -145,7 +145,7 @@ public class DefaultAnguoStoreManagermentFacade implements AnguoStoreManagerment
 		return timeService;
 	}
 
-	public void setTimeService(TimeService timeService)
+	public void setTimeService(final TimeService timeService)
 	{
 		this.timeService = timeService;
 	}
@@ -155,7 +155,7 @@ public class DefaultAnguoStoreManagermentFacade implements AnguoStoreManagerment
 		return anguoStoreCodeGenerator;
 	}
 
-	public void setAnguoStoreCodeGenerator(KeyGenerator anguoStoreCodeGenerator)
+	public void setAnguoStoreCodeGenerator(final KeyGenerator anguoStoreCodeGenerator)
 	{
 		this.anguoStoreCodeGenerator = anguoStoreCodeGenerator;
 	}
@@ -165,7 +165,7 @@ public class DefaultAnguoStoreManagermentFacade implements AnguoStoreManagerment
 		return userService;
 	}
 
-	public void setUserService(UserService userService)
+	public void setUserService(final UserService userService)
 	{
 		this.userService = userService;
 	}
@@ -186,7 +186,7 @@ public class DefaultAnguoStoreManagermentFacade implements AnguoStoreManagerment
 		return anguoStoreReversePopulator;
 	}
 
-	public void setAnguoStoreReversePopulator(Populator<AnguoStoreManagermentData, AnguoStoreTempModel> anguoStoreReversePopulator)
+	public void setAnguoStoreReversePopulator(final Populator<AnguoStoreManagermentData, AnguoStoreTempModel> anguoStoreReversePopulator)
 	{
 		this.anguoStoreReversePopulator = anguoStoreReversePopulator;
 	}
@@ -196,7 +196,7 @@ public class DefaultAnguoStoreManagermentFacade implements AnguoStoreManagerment
 		return mediaService;
 	}
 
-	public void setMediaService(MediaService mediaService)
+	public void setMediaService(final MediaService mediaService)
 	{
 		this.mediaService = mediaService;
 	}
@@ -206,7 +206,7 @@ public class DefaultAnguoStoreManagermentFacade implements AnguoStoreManagerment
 		return catalogVersionService;
 	}
 
-	public void setCatalogVersionService(CatalogVersionService catalogVersionService)
+	public void setCatalogVersionService(final CatalogVersionService catalogVersionService)
 	{
 		this.catalogVersionService = catalogVersionService;
 	}
@@ -216,25 +216,25 @@ public class DefaultAnguoStoreManagermentFacade implements AnguoStoreManagerment
 		return mediaStorageConfigService;
 	}
 
-	public void setMediaStorageConfigService(MediaStorageConfigService mediaStorageConfigService)
+	public void setMediaStorageConfigService(final MediaStorageConfigService mediaStorageConfigService)
 	{
 		this.mediaStorageConfigService = mediaStorageConfigService;
 	}
 
 	@Override
-	public void updateStore(AnguoStoreManagermentData storeData) throws MediaIOException, IllegalArgumentException, IOException {
-		CustomerModel customer = (CustomerModel) getUserService().getCurrentUser();
-		AnguoStoreTempModel anguoStoreTempModel = customer.getAnguoStoreTemp();
+	public void updateStore(final AnguoStoreManagermentData storeData) throws MediaIOException, IllegalArgumentException, IOException {
+		final CustomerModel customer = (CustomerModel) getUserService().getCurrentUser();
+		final AnguoStoreTempModel anguoStoreTempModel = customer.getAnguoStoreTemp();
 		AnguoStoreModel anguoStoreModel = customer.getAnguoStore();
-		
-		String logoName = storeData.getLogo().getName();
+
+		final String logoName = storeData.getLogo().getName();
 		if (logoName != null && !logoName.isEmpty()) {
 			mediaService.setStreamForMedia(anguoStoreTempModel.getLogo(), storeData.getLogo().getInputStream(), logoName, "image/jpeg");
 		}
 
 		getAnguoStoreReversePopulator().populate(storeData, anguoStoreTempModel);
-		anguoStoreModel = (AnguoStoreModel)anguoStoreTempModel;
-		
+		anguoStoreModel = anguoStoreTempModel;
+
 		if (StoreApproveStatus.MODIFY_APPROVE.equals(anguoStoreTempModel.getStatus())) {
 			getModelService().save(anguoStoreTempModel);
 			getModelService().save(anguoStoreModel);

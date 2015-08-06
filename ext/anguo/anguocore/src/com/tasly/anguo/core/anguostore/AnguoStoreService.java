@@ -58,4 +58,18 @@ public interface AnguoStoreService
 	 * @return
 	 */
 	public AnguoStoreModel getAnguoStoreById(String uid);
+
+	/**
+	 * 设置anguostore ID到session中
+	 * 
+	 * @param storeId
+	 */
+	public void setSessionAnguoStore(String storeId);
+
+	/**
+	 * 从session中获取当前anguostore ID。
+	 * 
+	 * @return
+	 */
+	public String getSessionAnguoStore();
 }

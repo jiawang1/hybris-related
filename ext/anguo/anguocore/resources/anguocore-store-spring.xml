@@ -20,14 +20,13 @@
            http://www.springframework.org/schema/context/spring-context.xsd">
      
      <alias alias="anguoStoreService" name="defaultAnguoStoreService" />      
-     <bean id="defaultAnguoStoreService" class="com.tasly.anguo.core.anguostore.impl.DefaultAnguoStoreService">
+     <bean id="defaultAnguoStoreService" class="com.tasly.anguo.core.anguostore.impl.DefaultAnguoStoreService" parent="abstractBusinessService">
      		<property name="anguoStoreDao" ref="anguoStoreDao"/>
-     		<property name="modelService" ref="modelService"/>
      		
      </bean>     
      
      <alias alias="anguoMediaService" name="defaultAnguoMediaService" /> 
-     <bean id="defaultAnguoMediaService" class="com.tasly.anguo.core.anguostore.impl.DefaultAnguoMediaService">
+     <bean id="defaultAnguoMediaService" class="com.tasly.anguo.core.anguostore.impl.DefaultAnguoMediaService" parent="mediaService">
      
      </bean>   
      
