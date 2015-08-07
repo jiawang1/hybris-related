@@ -44,43 +44,55 @@ public class FileUploadController
 
 	@SuppressWarnings("rawtypes")
 	@RequestMapping(method = RequestMethod.POST)
-	public @ResponseBody Map uploadFile(@RequestParam final MultipartFile[] uploadFiles) throws IOException
+	public @ResponseBody Map uploadFile(@RequestParam final MultipartFile[] uploadFiles) throws Exception
 	{
-		Map map = null;
-		if (uploadFiles.length <= 0)
-		{
-			map = getReturnMap(-1, l10NService.getLocalizedString("upload.no.file"));
-		}
-		else
-		{
-			for (final MultipartFile uploadFile : uploadFiles)
+		try{
+			Map map = null;
+			if (uploadFiles.length <= 0)
 			{
-				if (uploadFile.isEmpty())
+				map = getReturnMap(-1, l10NService.getLocalizedString("upload.no.file"));
+			}
+			else
+			{
+				for (final MultipartFile uploadFile : uploadFiles)
 				{
-					map = getReturnMap(-1, l10NService.getLocalizedString("upload.no.file"));
-					break;
-				}
-				else
-				{
-					map = this.validateFile(uploadFile);
-					if (map != null)
+					if (uploadFile.isEmpty())
 					{
+						map = getReturnMap(-1, l10NService.getLocalizedString("upload.no.file"));
 						break;
 					}
-					map = this.uploadMedia( uploadFile);
+					else
+					{
+						map = this.validateFile(uploadFile);
+						if (map != null)
+						{
+							break;
+						}
+						map = this.uploadMedia( uploadFile);
+					}
 				}
 			}
+			return map;
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+			throw e;
 		}
-		return map;
+		
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	private Map uploadMedia(final MultipartFile uploadFile)
+	private Map uploadMedia(final MultipartFile uploadFile) throws Exception
 	{
-		final Map map = getReturnMap(1, "success");
-		final ImageData imageData = customerIdentifyFacade.uploadEnterpriseLiceneses(uploadFile);
-		map.put("media", imageData);
-		return map;
+		try{
+			final Map map = getReturnMap(1, "success");
+			final ImageData imageData = customerIdentifyFacade.uploadEnterpriseLiceneses(uploadFile);
+			map.put("media", imageData);
+			return map;
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+			throw e;
+		}
+		
 	}
 
 	@SuppressWarnings("rawtypes")
