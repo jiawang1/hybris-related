@@ -7,6 +7,7 @@
         <link rel="stylesheet" type="text/css" href="./_ui/common/css/jquery.dataTables.css" />
         <link rel="stylesheet" type="text/css" href="./_ui/common/css/dataTables.editor.min.css" />
         <link rel="stylesheet" type="text/css" href="./_ui/common/css/dataTables.tableTools.css" />
+        <link rel="stylesheet" type="text/css" href="./_ui/common/css/productListTab.css" />
     </head>
 <body>
       <div class="container">
@@ -29,7 +30,8 @@
                             backbone: 'lib/backbone-1.1.2',
                             bootstrap: 'lib/bootstrap',
                             jstree:'lib/jstree',
-                            datatables:'lib/jquery.dataTables'
+                            datatables:'lib/jquery.dataTables',
+                            accessible:'lib/jquery.accessible-tabs-1.9.7.min'
 //                             dataTablesEditor:'lib/dataTables.editor',
 //                             tableTools:'lib/dataTables.tableTools.min',
 //                             dataTablesEditable:'lib/jquery.dataTables.editable'
@@ -53,6 +55,9 @@
                                 exports: 'jstree'
                             },
                             datatables:{
+                            	deps: ['jquery']
+                            },
+                            accessible:{
                             	deps: ['jquery']
                             }
                         }

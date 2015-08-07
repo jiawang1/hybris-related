@@ -3,11 +3,15 @@ package com.tasly.anguo.storefront.forms.validation;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.annotation.Resource;
+
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 
 import com.tasly.anguo.core.enums.UserType;
+import com.tasly.anguo.core.service.ICaptchaService;
+import com.tasly.anguo.core.service.items.CaptchaVerifyStatus;
 import com.tasly.anguo.storefront.forms.AnguoRegisterForm;
 
 import de.hybris.platform.acceleratorstorefrontcommons.forms.validation.RegistrationValidator;
@@ -18,8 +22,19 @@ public class AnguoRegistrationValidator extends RegistrationValidator
 	public static final String EMAIL_REGEX = "\\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}\\b";
 	public static final String USER_NAME_INVALID_SUBSTRING_COMPANY = "公司";
 	public static final String USER_NAME_INVALID_SUBSTRING_STOCK   = "股份";
+	
+	@Resource(name="captchaService")
+	private ICaptchaService captchaService;
 
-	@Override
+	public ICaptchaService getCaptchaService() {
+        return captchaService;
+    }
+
+    public void setCaptchaService(ICaptchaService captchaService) {
+        this.captchaService = captchaService;
+    }
+
+    @Override
 	public boolean supports(final Class<?> aClass)
 	{
 		return AnguoRegisterForm.class.equals(aClass);
@@ -40,7 +55,7 @@ public class AnguoRegistrationValidator extends RegistrationValidator
 		{
 			errors.rejectValue("userId", "register.username.isBlank");
 		}
-		else if (StringUtils.length(userId) > 255)
+		else if (StringUtils.length(userId) > 30)
 		{
 			errors.rejectValue("userId", "register.username.overLength");
 		}
@@ -88,7 +103,11 @@ public class AnguoRegistrationValidator extends RegistrationValidator
 		if (StringUtils.isEmpty(captcha))
 		{
 			errors.rejectValue("captcha", "register.captcha.invalid");			
-		}
+		} 
+//		else if (captchaService.verifyCaptcha(mobileNumber, captcha) != CaptchaVerifyStatus.CORRECT)
+//		{
+//            errors.rejectValue("captcha", "register.captcha.invalid");          
+//		}
 	}
 
 	public boolean validateEmailAddress(final String email)

@@ -33,7 +33,7 @@
 		<property name="code" type="String"/>
 		<property name="name" type="String"/>
 	</bean>
-	
+
 	<bean class="com.tasly.anguo.facades.product.data.UnitData">
 		<property name="code" type="String"/>
 		<property name="name" type="String"/>
@@ -60,6 +60,22 @@
 		<property name="unit" type="com.tasly.anguo.facades.product.data.UnitData"/>
 		<property name="stockLevels" type="String"></property>
 	</bean>
+
+    <bean class="com.tasly.anguo.facades.user.data.ContactData">
+        <property name="id" type="String"/>
+        <property name="name" type="String"/>
+        <property name="position" type="String"/>
+        <property name="contactInfo" type="String"></property>
+    </bean>
+
+    <bean class="com.tasly.anguo.facades.user.data.EnterpriseInformationData">
+        <property name="name" type="String"/>
+        <property name="registerId" type="Long"/>
+        <property name="address" type="String"/>
+        <property name="phone" type="String"/>
+        <property name="fax" type="String"/>
+        <property name="contacts" type="java.util.List&lt;com.tasly.anguo.facades.user.data.ContactData>"/>
+    </bean>    
 
 	<bean class="com.tasly.anguo.facades.product.data.CategoryNodeData">
 		<property name="id" type="String"></property>
@@ -97,6 +113,13 @@
 		<property name="isSuccessFlag" type="Boolean"/>
 		<property name="message" type="String"/>
 	</bean>
+	
+	<bean class="com.tasly.anguo.facades.product.data.ProductListData">
+		<property name="totalRecords" type="long"></property>
+		<property name="totalPage" type="int"></property>
+		<property name="data" type="java.util.List&lt;String[]>"></property>
+	</bean>
+	
 	<!-- beans for product end -->
 	
 	
@@ -128,8 +151,25 @@
 		<property name="telephone" type="String"/>
 		<property name="status" type="com.tasly.anguo.core.enums.StoreApproveStatus"/>
 	</bean>
+	
 	<!-- add by Yang for AM-18 end -->
 	
+	<!-- add by Yang for AM-58 start -->
+	<bean class="de.hybris.platform.commercefacades.order.data.OrderHistoryData">
+		<property name="entries" type="java.util.List&lt;de.hybris.platform.commercefacades.order.data.OrderEntryData>"/>
+	</bean>
+	
+	<bean class="com.tasly.anguo.order.data.AnguoOrderStatusCountData">
+		<property name="wait_for_payment" type="Long"/>
+		<property name="wait_for_ship" type="Long"/>
+		<property name="wait_for_receive" type="Long"/>
+		<property name="completed" type="Long"/>
+		<property name="returning" type="Long"/>
+		<property name="cancelled" type="Long"/>
+		<property name="system_processing" type="Long"/>
+	</bean>
+	<!-- add by Yang for AM-58 end -->
+
 	<bean class="de.hybris.platform.commercefacades.product.data.ImageData">
 		<property name="code" type="java.lang.String" />
 		<property name="name" type="java.lang.String" />

@@ -188,7 +188,9 @@
 	<bean id="genderData" class="com.tasly.anguo.facades.product.data.GenderData" scope="prototype"/>
 	
 	<alias name="anguoCustomerFacade" alias="customerFacade"/>
-	<bean id="anguoCustomerFacade" class="com.tasly.anguo.facades.customer.impl.AnguoCustomerFacade" parent= "defaultCustomerFacade"/>
+	<bean id="anguoCustomerFacade" class="com.tasly.anguo.facades.customer.impl.AnguoCustomerFacade" parent= "defaultCustomerFacade">
+            <property name="enterpriseInformationReversePopulator" ref="enterpriseInformationReversePopulator"/>
+    </bean>
 	
 	<!-- beans for product start -->
 	<bean id="enumUtils" class="com.tasly.anguo.facades.utils.EnumUtils">
@@ -259,11 +261,21 @@
 	<bean id="defaultAbstractLocationItemPopulator" class="com.tasly.anguo.facades.populators.AbstractLocationItemPopulator" />
 	
 	<alias alias="districtFacade" name="defaultDistrictFacade" />
+
 	<bean id="defaultDistrictFacade" class="com.tasly.anguo.facades.location.impl.DefaultDistrictFacade">
 	  <property name="districtService" ref="districtService"></property>
 	  <property name="abstractLocationItemPopulator" ref="abstractLocationItemPopulator"></property>
 	</bean>
-
+	
+    <alias alias="productFacade" name="defaultAnguoProductFacade" />
+    
+    <alias alias="anguoProductFacade" name="defaultAnguoProductFacade" />
+	<bean id="defaultAnguoProductFacade" class="com.tasly.anguo.facades.product.impl.DefaultAnguoProductFacade" parent="defaultProductFacade">
+		<property name="anguoProductService" ref="anguoProductService"></property>
+		<property name="productListPopulator" ref="productListPopulator"></property>
+	</bean>
+	
+	<bean id="productListPopulator" class="com.tasly.anguo.facades.product.populator.ProductListPopulator"></bean>
 	<!-- beans for product end -->
 	
 	
@@ -296,8 +308,35 @@
 		<property name="numeric" value="true"/>
 	</bean>
 	<!-- add by Yang for AM-18 end -->
+    
+    <bean id="contactReverseConverter" class="com.tasly.anguo.facades.converters.ContactReverseConverter" >
+        <property name="modelService" ref="modelService"/>
+    </bean>
+    <bean id="enterpriseInformationReversePopulator" class="com.tasly.anguo.facades.populators.EnterpriseInformationReversePopulator" >
+        <property name="contactReverseConverter" ref="contactReverseConverter"/>
+    </bean>
 	
+
+	<!-- add by Yang for AM-58 start -->
+	<alias name="defaultAnguoOrderHistoryPopulator" alias="anguoOrderHistoryPopulator"/>
+	<bean id="defaultAnguoOrderHistoryPopulator" class="com.tasly.anguo.facades.populators.AnguoOrderHistoryPopulator">
+		<property name="orderEntryConverter" ref="orderEntryConverter"/>
+	</bean>
+	
+	<bean parent="modifyPopulatorList">
+		<property name="list" ref="orderHistoryConverter"/>
+		<property name="add" ref="anguoOrderHistoryPopulator"/>
+	</bean>
+	
+	<alias name="defaultAnguoOrderFacade" alias="anguoOrderFacade"/>
+	<bean id="defaultAnguoOrderFacade" class="com.tasly.anguo.facades.order.impl.DefaultAnguoOrderFacade" parent="orderFacade">
+		<property name="anguoOrderService" ref="anguoOrderService"/>
+	</bean>
+	<!-- add by Yang for AM-58 end -->
+	
+
 	<bean id="customerIdentifyFacade" class="com.tasly.anguo.facades.customer.impl.DefaultCustomerIdentifyFacade">
 		<property name="imageConverter" ref="imageConverter"/>
 	</bean>
+
 </beans>
