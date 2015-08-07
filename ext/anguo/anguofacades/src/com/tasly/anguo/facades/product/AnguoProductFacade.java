@@ -1,6 +1,7 @@
 package com.tasly.anguo.facades.product;
 
-import com.tasly.anguo.store.data.ProductListData;
+
+import com.tasly.anguo.facades.product.data.ProductListData;
 
 import de.hybris.platform.commercefacades.product.ProductFacade;
 import de.hybris.platform.commerceservices.search.pagedata.PageableData;

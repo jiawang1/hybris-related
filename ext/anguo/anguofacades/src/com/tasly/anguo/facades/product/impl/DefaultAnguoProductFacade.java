@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Required;
 import com.tasly.anguo.core.enums.ProductStatus;
 import com.tasly.anguo.core.product.AnguoProductService;
 import com.tasly.anguo.facades.product.AnguoProductFacade;
+import com.tasly.anguo.facades.product.data.ProductListData;
 import com.tasly.anguo.facades.product.populator.ProductListPopulator;
-import com.tasly.anguo.store.data.ProductListData;
 
 import de.hybris.platform.commercefacades.product.impl.DefaultProductFacade;
 import de.hybris.platform.commerceservices.search.pagedata.PageableData;

@@ -25,7 +25,7 @@ import com.tasly.anguo.facades.constants.AnguoFacadesConstants;
 import com.tasly.anguo.facades.data.AjaxMessageData;
 import com.tasly.anguo.facades.product.AnguoProductFacade;
 import com.tasly.anguo.facades.product.data.MgmtCategoryData;
-import com.tasly.anguo.store.data.ProductListData;
+import com.tasly.anguo.facades.product.data.ProductListData;
 
 import de.hybris.platform.catalog.CatalogVersionService;
 import de.hybris.platform.catalog.model.CatalogVersionModel;
@@ -54,26 +54,23 @@ public class ProductManagementController {
 	 * @return
 	 */
 	@RequestMapping(value=GET_PRODUCT_LIST)
-	public 	@ResponseBody Object getProductList(String productCode,String productName,String storeName,String productStatus,
-			Integer draw,String start,String length)
+	public 	@ResponseBody Object getProductList(String productCode,String productName,String storeName,String productStatus,Integer currentPage,Integer length)
 	{
 		
-        PageableData pageableData = createPageableData(start,length);
+        PageableData pageableData = createPageableData(currentPage,length);
        
         ProductListData resultList = anguoProductFacade.getProductList(storeName, productCode, productName, productStatus, pageableData);
-        resultList.setDraw(draw);
         
 		return resultList;
 		
 	}
 
-	private PageableData createPageableData(String start,
-			String length)
+	private PageableData createPageableData(Integer currentPage,
+			Integer pageSize)
 	{
-		Integer currentPage = Integer.valueOf(start)/Integer.valueOf(length) ;
 		PageableData pageableData = new PageableData();
 		pageableData.setCurrentPage(currentPage);
-		pageableData.setPageSize(Integer.valueOf(length));
+		pageableData.setPageSize(pageSize);
 		return pageableData;
 	}
 

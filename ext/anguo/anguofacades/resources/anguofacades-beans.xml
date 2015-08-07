@@ -69,7 +69,7 @@
 		<property name="message" type="String"/>
 	</bean>
 	
-	<bean class="com.tasly.anguo.store.data.ProductListData">
+	<bean class="com.tasly.anguo.facades.product.data.ProductListData">
 		<property name="totalRecords" type="long"></property>
 		<property name="totalPage" type="int"></property>
 		<property name="data" type="java.util.List&lt;String[]>"></property>

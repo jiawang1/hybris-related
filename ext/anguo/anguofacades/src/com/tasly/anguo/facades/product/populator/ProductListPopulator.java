@@ -6,7 +6,7 @@ import java.util.List;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.time.FastDateFormat;
 
-import com.tasly.anguo.store.data.ProductListData;
+import com.tasly.anguo.facades.product.data.ProductListData;
 
 import de.hybris.platform.category.model.CategoryModel;
 import de.hybris.platform.commerceservices.search.pagedata.SearchPageData;
@@ -23,7 +23,9 @@ public class ProductListPopulator implements Populator<SearchPageData, ProductLi
 		int currentpage = source.getPagination().getCurrentPage()+1;
 		//draw is for front end display,is set in controller,this is required by dataTable plugin
 		//target.setDraw(currentpage);
-		target.setRecordsFiltered(source.getPagination().getTotalNumberOfResults());
+		//below two fields is for plugin display
+		target.setTotalRecords(source.getPagination().getTotalNumberOfResults());
+	    target.setTotalPage(source.getPagination().getNumberOfPages());
 		List<String[]> data = new ArrayList<String[]>();
 		
 		if(CollectionUtils.isNotEmpty(source.getResults()))
@@ -46,7 +48,6 @@ public class ProductListPopulator implements Populator<SearchPageData, ProductLi
 			  
 			  data.add(element);
 		  }
-		
 		target.setData(data);
 		
 	}
@@ -61,7 +62,7 @@ public class ProductListPopulator implements Populator<SearchPageData, ProductLi
 			  categoryPath.append(category.getName());
 			  if(CollectionUtils.isNotEmpty(category.getSupercategories())&&category.getLevel()==3)
 			  {
-				  categoryPath.append("<").append(category.getSupercategories().get(0).getName());
+				  categoryPath.insert(0,">").insert(0, category.getSupercategories().get(0).getName());
 			  }
 		  }else
 		  {
