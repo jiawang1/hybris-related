@@ -32,12 +32,6 @@
 	<div id="docfileuploader">Upload</div>
 			<div class="clearDiv"></div>
 			<div class="uploadedFiles" >
-				<c:if test="${ not empty headOfficeDetailForm.uploadedDocuments }">
-						<table>
-							<tbody>
-							</tbody>
-						</table>
-				</c:if>
 			</div>	
 <div id="licensesDiv" style="display:none;"></div>
 <div id="errorMsg" style="color:red;display:none;"></div>
