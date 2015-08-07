@@ -34,6 +34,13 @@
 			<value code="WHITE"/>
 			<value code="YELLOW"/>
 		</enumtype>
+		
+		<enumtype code="CustomerStatus" autocreate="true" generate="true">
+            <value code="UNIDENTIFIED"/>
+            <value code="AUDITING"/>
+            <value code="PASS"/>
+            <value code="ABJECT"/>
+        </enumtype>
 		<!-- enumtype for product start -->
 		
 		<enumtype generate="true" code="PackageUnit" autocreate="true" dynamic="true">
@@ -307,7 +314,7 @@
 						<modifiers/>
 						<persistence type="property"/>
 					</attribute>
-					<attribute qualifier="identified" type="java.lang.Boolean">
+					<attribute qualifier="status" type="CustomerStatus">
 						<description>Whether pass the identification.</description>
 						<modifiers/>
 						<persistence type="property"/>

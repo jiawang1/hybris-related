@@ -23,7 +23,7 @@ $(document).ready(function(){
 	    },
 	    onSelect:function(files)
 		{
-			$("#docfileuploader").parent().find("input[name=upload_btn]").val(files[0].name);
+			//$("#docfileuploader").parent().find("input[name=upload_btn]").val(files[0].name);
 		    return true; 
 		},
 	    onSuccess:function(files,data,xhr)
@@ -33,7 +33,8 @@ $(document).ready(function(){
 	    		addMultiFile($("#docfileuploader"), data);
             i = i+1;
 	    	}else{
-				// TODO deal with error msg	    	
+				$("#errorMsg").text(data.msg);
+				$("#errorMsg").show();
 	    	}
 	    },
 	    onError: function(files,status,errMsg)

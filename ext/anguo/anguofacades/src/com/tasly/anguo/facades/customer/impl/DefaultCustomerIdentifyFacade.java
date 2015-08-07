@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.tasly.anguo.facades.customer.CustomerIdentifyFacade;
 
+import de.hybris.platform.cms2.servicelayer.services.CMSSiteService;
 import de.hybris.platform.commercefacades.product.data.ImageData;
 import de.hybris.platform.core.model.media.MediaFolderModel;
 import de.hybris.platform.core.model.media.MediaModel;
@@ -27,12 +28,12 @@ public class DefaultCustomerIdentifyFacade implements CustomerIdentifyFacade{
 	
 	@Resource
 	private ModelService modelService;
-	
 	@Resource
 	private MediaService mediaService;
-	
 	@Resource
 	private UserService userService;
+	@Resource
+	private CMSSiteService cmsSiteService;
 	
 	@Resource
 	private CustomerIdentifyFacade customerIdentifyFacade;
@@ -45,8 +46,9 @@ public class DefaultCustomerIdentifyFacade implements CustomerIdentifyFacade{
 	 * upload enterprise licenses image
 	 * @param file
 	 * @return
+	 * @throws Exception 
 	 */
-	public ImageData uploadEnterpriseLiceneses(final MultipartFile file) {
+	public ImageData uploadEnterpriseLiceneses(final MultipartFile file) throws Exception {
 		final MediaModel mediaModel = createMedia(file);
 		final ImageData imageData = imageConverter.convert(mediaModel);
 		imageData.setCode(mediaModel.getCode());
@@ -54,22 +56,24 @@ public class DefaultCustomerIdentifyFacade implements CustomerIdentifyFacade{
 		return imageData;
 	}
 	
-	private MediaFolderModel createMediaFoler() {
+	private MediaFolderModel createMediaFoler() throws Exception{
 		MediaFolderModel folder = null;
 		try
 		{
 			folder = mediaService.getFolder(LICENSE_FOLDER);
+			if(folder == null) {
+				folder = modelService.create(MediaFolderModel.class);
+				folder.setQualifier(LICENSE_FOLDER);
+				folder.setPath(LICENSE_FOLDER);
+				modelService.save(folder);
+				setSubfoldersDepthForFolder(folder, Integer.valueOf(4));
+			}
 		}
 		catch (Exception e)
 		{
-			folder = modelService.create(MediaFolderModel.class);
-			folder.setQualifier(LICENSE_FOLDER);
-			folder.setPath(LICENSE_FOLDER);
-			modelService.save(folder);
-			setSubfoldersDepthForFolder(folder, Integer.valueOf(4));
-			return folder;
+			LOG.error(e.getMessage());
+			throw e;
 		}
-
 		return folder;
 	}
 	
@@ -80,13 +84,14 @@ public class DefaultCustomerIdentifyFacade implements CustomerIdentifyFacade{
 				hashingDepth == null ? null : hashingDepth.toString());
 	}
 	
-	private MediaModel createMedia(MultipartFile file) {
+	private MediaModel createMedia(MultipartFile file) throws Exception {
 		final MediaModel mediaModel = modelService.create(MediaModel.class);
 		mediaModel.setCode(UUID.randomUUID().toString());
-		mediaModel.setRealFileName(userService.getCurrentUser().getName()+file.getOriginalFilename());
+		mediaModel.setRealFileName(file.getOriginalFilename());
 		mediaModel.setAltText(StringUtils.substring(file.getOriginalFilename(), 0,StringUtils.lastIndexOf(file.getOriginalFilename(), ".")));
 		mediaModel.setFolder(createMediaFoler());
 		mediaModel.setMime("image/jpeg");
+		mediaModel.setCatalogVersion(cmsSiteService.getCurrentSite().getDefaultCatalog().getActiveCatalogVersion());
 		modelService.save(mediaModel);
 		try
 		{
