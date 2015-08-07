@@ -85,3 +85,7 @@
 
 <%-- digitalHerbal CSS files --%>
 <link rel="stylesheet" type="text/css" media="all" href="${commonResourcePath}/css/digitalHerbal.css"/>
+
+<%--image upload --%>
+<link rel="stylesheet" type="text/css" media="all" href="${commonResourcePath}/css/uploadfile.css"/>
+

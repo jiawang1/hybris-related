@@ -33,6 +33,9 @@ INSERT_UPDATE PageTemplate;$contentCV[unique=true];uid[unique=true];name;fronten
 ;;ContentPage1Template;Content Page 1 Template;layout/contentLayout1Page;ContentPage
 ;;CompanyPageTemplate;Company Page Template;account/accountLayoutPage;ContentPage;false;
 ;;AccountPageTemplate;Account Page Template;account/accountLayoutPage;ContentPage;false;
+#An guo buyer center page template
+;;BuyerCenterPageTemplate;Buyer Center Page Template;buyercenter/buyercenterLayoutPage;ContentPage
+#An guo buyer center page template end
 
 # Templates without a frontendTemplateName
 ;;CartPageTemplate;Cart Page Template;;ContentPage
@@ -468,6 +471,7 @@ INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=
 ;NavigationBar;;;navigation
 ;TopContent;;;wide
 ;SideContent;;;narrow
+;RightContentSlot;;;wide
 ;MerchantContact;;CMSParagraphComponent
 ;Footer;;;footer
 ;TopHeaderSlot;;;wide
@@ -596,7 +600,7 @@ INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active
 ;;MerchantContactSlot;MerchantContact;true
 ;;TopHeaderSlot;Top Header;true
 ;;BottomHeaderSlot;Bottom Header;true
-
+;;RightContentSlot;Right Content Slot;true
 
 
 # newsInfo Template    sunyue add it in 2015/04/23
@@ -811,6 +815,7 @@ INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];po
 ;;MerchantContactContent-LoginPage;MerchantContactContent;;MerchantContactSlot;true
 ;;TopHeaderSlot-LoginPage;TopHeaderSlot;;TopHeaderSlot;true
 ;;BottomHeaderSlot-LoginPage;BottomHeaderSlot;;BottomHeaderSlot;true
+;;RightContentSlot-LoginPage;RightContentSlot;;RightContentSlot;true
 
 # Bind Content Slots to Single Step Checkout Summary Page Templates
 INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='SingleStepCheckoutSummaryPageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
@@ -908,7 +913,18 @@ INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];po
 ;;BottomHeaderSlot-newsInfo;BottomHeaderSlot;;BottomHeaderSlot;true
 
 
-
+#An guo contentslots buyer center page template start
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='BuyerCenterPageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;SiteLogo-SellerCenterPage;SiteLogo;;SiteLogoSlot;true
+;;HomepageLink-SellerCenterPage;HomepageNavLink;;HomepageNavLinkSlot;true
+;;NavigationBar-SellerCenterPage;NavigationBar;;NavigationBarSlot;true
+;;MiniCart-SellerCenterPage;MiniCart;;MiniCartSlot;true
+;;Footer-SellerCenterPage;Footer;;FooterSlot;true
+;;HeaderLinks-SellerCenterPage;HeaderLinks;;HeaderLinksSlot;true
+;;SearchBox-SellerCenterPage;SearchBox;;SearchBoxSlot;true
+;;TopHeaderSlot-SellerCenterPage;TopHeaderSlot;;TopHeaderSlot;true
+;;BottomHeaderSlot-SellerCenterPage;BottomHeaderSlot;;BottomHeaderSlot;true
+#An guo contentslots buyer center page template end
 
 
 # Create Content Pages
@@ -1027,7 +1043,9 @@ INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTe
 ;;homePageNewsList1-ContentPage;homePage NewsList1 Link;newsInfoTemplate;homePageNewsList1-ContentPage
 ;;homePageNewsList2-ContentPage;homePage NewsList2 Link;newsInfoTemplate;homePageNewsList2-ContentPage
 ;;homePageNewsList3-ContentPage;homePage NewsList3 Link;newsInfoTemplate;homePageNewsList3-ContentPage
-
-
+#An guo buyer center page start
+;;buyercenter;Buyer Center Page;BuyerCenterPageTemplate;buyercenter
+;;buyercenterordermanage;Order Manage Page For Buyer Center;BuyerCenterPageTemplate;buyercenterordermanage
+#An guo buyer center page end
 
 

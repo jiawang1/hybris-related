@@ -1,14 +1,13 @@
 package com.tasly.anguo.initialdata.service;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-
 import de.hybris.platform.commerceservices.dataimport.impl.SampleDataImportService;
 import de.hybris.platform.commerceservices.setup.AbstractSystemSetup;
 import de.hybris.platform.commerceservices.setup.data.ImportData;
 import de.hybris.platform.core.initialization.SystemSetupContext;
 import de.hybris.platform.validation.services.ValidationService;
+
+import java.util.Iterator;
+import java.util.List;
 
 public class AnguoSampleDataImportService extends SampleDataImportService {
 	
@@ -51,7 +50,12 @@ public class AnguoSampleDataImportService extends SampleDataImportService {
 			  List<String> storeNameList = data.getStoreNames();			  
 			  for(int i = 0; i < storeNameList.size();i++)
 			      this.importStore(extensionName, storeNameList.get(i), data.getProductCatalogName()); 
-			  
+			  /* AM-255 wangqingxiang@tasly.com add solr and job into initializing */
+                for(int i = 0; i < storeNameList.size();i++) {
+                    this.importSolrIndex(extensionName, storeNameList.get(i));
+                    this.importJobs(extensionName, storeNameList.get(i));
+                }
+              /*end */
 		    }
 
 			ValidationService validation = (ValidationService) getBeanForName("validationService");

@@ -1,11 +1,9 @@
-This repository is for Tasly anguo project.
+This repository is for Tasly Anguo project.
 
 To setup the development environment:
 1. git clone git@github.wdf.sap.corp:DevFactory/anguo.git
-2. copy hybris 5.5 into the root directory of this repository with name "hybris".
-3. run "cd anguo"
-4. run ". setantenv.sh"
-5. run "ant develop"
-6. run ". createDB.sh", input root password of mysql when prompt.
-7. run "cd hybris/bin/platform"
-8. run "ant all"
+2. copy hybris 5.6.0 into the root directory with name "hybris".
+3. run ". setup.sh"
+4. run ". createDB.sh", input root password of mysql when prompt to create anguo db.
+5. run "cd hybris/bin/platform"
+6. run "./hybrisserver.sh" to start hybris server.

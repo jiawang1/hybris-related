@@ -27,7 +27,6 @@
      <div class="Zong"><spring:theme code="ango.top.navigation.classification"/></div>
      <div class="nav">
       <ul>
-       <li><a href="/anguostorefront/powertools/zh/USD/"><spring:theme code="ango.top.navigation.homepage"/></a></li>
        <li><spring:theme code="ango.top.navigation.store"/></li>
        <li><spring:theme code="ango.top.navigation.supply.demand.information"/></li>
        <li><spring:theme code="ango.top.navigation.auction"/></li>
