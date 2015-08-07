@@ -1,5 +1,5 @@
-define(['jquery','backbone', 'underscore','navigationMenu','productsView','ordersView','paymentView','widget/inputList' ],
-       function($,Backbone,_, Navigation, Products,Orders,Payment){
+define(['jquery','backbone', 'underscore','navigationMenu','productsView','ordersView','paymentView','sampleView','widget/inputList' ],
+       function($,Backbone,_, Navigation, Products,Orders,Payment,Sample){
     "use strict";
 
     var __config = [
@@ -8,7 +8,8 @@ define(['jquery','backbone', 'underscore','navigationMenu','productsView','order
          {"label":"订单管理", "link": "#orders"},
          {"label":"支付管理", "link": "#payment"},
          {"label":"目录管理", "link": "#category"},
-         {"label":"商品管理", "link": "#products",children:[{"label":"商品审核", "link": "/check"},{"label":"商品推荐", "link": "/recommend"}]}
+         {"label":"商品管理", "link": "#products",children:[{"label":"商品审核", "link": "/check"},{"label":"商品推荐", "link": "/recommend"}]},
+         {"label":"示例", "link": "#sample"}
     ];
 
     var i = 0;
@@ -18,7 +19,7 @@ var AppRouter = Backbone.Router.extend({
             "products":"handleProduct",
             "category":"handleCategory",
             "category/:id":"handleSubCategory",
-            "others":"handleOthers",
+            "sample":"handleSample",
             "default":"createFrame" ,
             "payment":"handlePaymentmManagement" ,
             "orders":"handleOrderManagement" ,
@@ -94,6 +95,9 @@ var AppRouter = Backbone.Router.extend({
             require(["enterpriseView"], function(SellerView){
                 $(".main-root").empty().append(new SellerView().render().$el);
             });
+        },
+        handleSample:function(){
+             $(".main-root").empty().append(new Sample().render().$el);
         },
         
         initialize:function(){

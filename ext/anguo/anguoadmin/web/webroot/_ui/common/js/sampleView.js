@@ -1,7 +1,7 @@
-define(['jquery','backbone', 'underscore','productModel','text!../template/otherTpl.html'],function($,Backbone,_,ProductModel,sProductTemplate){
+define(['jquery','backbone', 'underscore','productModel','text!../template/sampleTpl.html'],function($,Backbone,_,ProductModel,sProductTemplate){
     "use strict";
     
-    var ProductsView = Backbone.View.extend({     /* create view class*/
+    var SampleView = Backbone.View.extend({     /* create view class*/
         
         $el:$("<div>"),
         initialize:function(){                      /* constructor for this class*/
@@ -30,5 +30,5 @@ define(['jquery','backbone', 'underscore','productModel','text!../template/other
     
     });
     
-    return ProductsView;                           /* expose class */
+    return SampleView;                           /* expose class */
 });
