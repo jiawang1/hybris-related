@@ -205,7 +205,7 @@ public class CustomerIdentifyController extends AbstractSearchPageController {
 		paymentInfo.setUser(userService.getCurrentUser());
 		paymentInfo.setAccountNumber(form.getAccountNumber());
 		paymentInfo.setCode(UUID.randomUUID().toString());
-		paymentInfo.setBankIDNumber(RandomStringUtils.random(16));
+		paymentInfo.setBankIDNumber(RandomStringUtils.randomNumeric(16));
 		Collection<PaymentInfoModel> paymentInfos = new ArrayList<PaymentInfoModel>();
 		paymentInfos.add(paymentInfo);
 		return paymentInfos;

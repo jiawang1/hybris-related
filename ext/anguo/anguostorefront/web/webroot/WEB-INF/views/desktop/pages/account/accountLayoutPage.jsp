@@ -27,11 +27,11 @@
             <cms:pageSlot position="TopContent" var="feature" element="div" class="accountTopContentSlot">
                 <cms:component component="${feature}" element="div" class="clearfix" />
             </cms:pageSlot>
-
+			
             <cms:pageSlot position="BodyContent" var="feature" element="div" class="accountBodyContentSlot">
                 <cms:component component="${feature}" element="div" class="clearfix" />
             </cms:pageSlot>
-
+			<a href="${contextPath }/identify">sdfsfsd</a>
             <cms:pageSlot position="BottomContent" var="feature" element="div" class="accountBottomContentSlot">
                 <cms:component component="${feature}" element="div" class="clearfix" />
             </cms:pageSlot>
