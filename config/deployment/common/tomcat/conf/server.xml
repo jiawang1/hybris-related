@@ -85,10 +85,11 @@
     <Connector protocol="AJP/1.3" port="${tomcat.ajp.port}" proxyPort="${proxy.http.port}" redirectPort="${proxy.ssl.port}" useIPVHosts="${tomcat.ajp.useipv}" />  
     where the tomcat.ajp.port is mandatory property to render this connector. 
      --> 
-	${tomcat.connectors.ajp.plain}	
-
-    <Engine name="Catalina" defaultHost="localhost">
-
+	<!--  ${tomcat.connectors.ajp.plain} -->	
+	<Connector protocol="AJP/1.3" maxThreads="${tomcat.maxThreads}" port="${tomcat.ajp.port}" proxyPort="${proxy.http.port}" redirectPort="${proxy.ssl.port}" URIEncoding="UTF-8" />
+	<Connector protocol="AJP/1.3" maxThreads="${tomcat.maxThreads}" port="${tomcat.ajp.secureport}" proxyPort="${proxy.ssl.port}" scheme="https" secure="true" URIEncoding="UTF-8" />
+    
+    <Engine name="Catalina" defaultHost="localhost" jvmRoute="app${cluster.id}">
 			<Valve 	className="org.apache.catalina.valves.AccessLogValve"
              		directory="${HYBRIS_LOG_DIR}/tomcat"
 	      		 	prefix="access."
