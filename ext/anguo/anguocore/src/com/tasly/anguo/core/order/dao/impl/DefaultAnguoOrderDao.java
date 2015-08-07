@@ -21,13 +21,15 @@ import de.hybris.platform.servicelayer.search.SearchResult;
 public class DefaultAnguoOrderDao extends AbstractItemDao implements AnguoOrderDao
 {
 	
+	private static final String FIND_ORDER_COUNT_BY_STATUS_QUERY ="select {o:" + OrderModel.STATUS + "} as status,count(" + OrderModel.PK + ") as count from {order as o} group by {o:" + OrderModel.STATUS + "}";
+	
 	@SuppressWarnings("unused")
 	private static final Logger LOG = Logger.getLogger(DefaultAnguoOrderDao.class);
 
 	@Override
 	public List<List<?>> getStatusCount()
 	{
-		final FlexibleSearchQuery query = new FlexibleSearchQuery("select {o:" + OrderModel.STATUS + "} as status,count(" + OrderModel.PK + ") as count from {order as o} group by {o:status}");
+		final FlexibleSearchQuery query = new FlexibleSearchQuery(FIND_ORDER_COUNT_BY_STATUS_QUERY);
 		query.setResultClassList(Arrays.asList(OrderStatus.class, Long.class));
 		final SearchResult<List<?>> result = getFlexibleSearchService().search(query);
 		

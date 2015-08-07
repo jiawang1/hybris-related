@@ -33,13 +33,13 @@
 			<a href="${waitforreceive}"><spring:theme code="text.buyercenter.link.order.waitforreceive" text="Update personal details" arguments="${anguoOrderStatusCountData.wait_for_receive == null ? 0 : anguoOrderStatusCountData.wait_for_receive}"/></a>&nbsp;&nbsp;|&nbsp;&nbsp;
 			
 			<c:url value="/anguo-buyercenter/orders?status=completed" var="done" />
-			<a href="${done}"><spring:theme code="text.buyercenter.link.order.done" text="Update personal details" arguments="${anguoOrderStatusCountData.completed == null ? 0 : anguoOrderStatusCountData.completed == null}"/></a>&nbsp;&nbsp;|&nbsp;&nbsp;
+			<a href="${done}"><spring:theme code="text.buyercenter.link.order.done" text="Update personal details" arguments="${anguoOrderStatusCountData.completed == null ? 0 : anguoOrderStatusCountData.completed}"/></a>&nbsp;&nbsp;|&nbsp;&nbsp;
 			
 			<c:url value="/anguo-buyercenter/orders?status=returning" var="returning" />
-			<a href="${returning}"><spring:theme code="text.buyercenter.link.order.return" text="Update personal details" arguments="${anguoOrderStatusCountData.returning == null ? 0 : anguoOrderStatusCountData.returning == null}"/></a>&nbsp;&nbsp;|&nbsp;&nbsp;
+			<a href="${returning}"><spring:theme code="text.buyercenter.link.order.return" text="Update personal details" arguments="${anguoOrderStatusCountData.returning == null ? 0 : anguoOrderStatusCountData.returning}"/></a>&nbsp;&nbsp;|&nbsp;&nbsp;
 			
 			<c:url value="/anguo-buyercenter/orders?status=cancelled" var="close" />
-			<a href="${close}"><spring:theme code="text.buyercenter.link.order.close" text="Update personal details" arguments="${anguoOrderStatusCountData.cancelled == null ? 0 : anguoOrderStatusCountData.cancelled == null}"/></a>&nbsp;&nbsp;|&nbsp;&nbsp;
+			<a href="${close}"><spring:theme code="text.buyercenter.link.order.close" text="Update personal details" arguments="${anguoOrderStatusCountData.cancelled == null ? 0 : anguoOrderStatusCountData.cancelled}"/></a>&nbsp;&nbsp;|&nbsp;&nbsp;
 			
 			<c:url value="/anguo-buyercenter/orders?status=system_processing" var="processing" />
 			<a href="${processing}"><spring:theme code="text.buyercenter.link.order.processing" text="Update personal details" arguments="${anguoOrderStatusCountData.system_processing == null ? 0 : anguoOrderStatusCountData.system_processing}"/></a>
@@ -72,21 +72,23 @@
 						<c:forEach items="${order.entries}" var="entry">  
 						
 								<tr>
-									<td headers="header1">
-									<c:forEach items="${entry.product.images}" var="image">
+									<td headers="header1" style="max-width:270px">
+										<div style="vertical-align:middle;">
+										<c:forEach items="${entry.product.images}" var="image">
 												<c:if test="${image.format=='cartIcon'}">
-													<a href="${myAccountOrderDetailsUrl}"><img src="${image.url}" /></a>
+													<a href="${myAccountOrderDetailsUrl}"><img src="${image.url}" align="left"/></a>
 												</c:if>
-									</c:forEach>
+										</c:forEach>
 									
 										<ycommerce:testId code="orderHistory_orderStatus_label">
-											${entry.product.name}
+											<p>${entry.product.name}</p>
 										</ycommerce:testId>
+										</div>
 									</td>
 									
 									<td headers="header2">
 										<ycommerce:testId code="orderHistory_orderStatus_label">
-											${entry.basePrice.formattedValue}
+											<p>${entry.basePrice.formattedValue}</p>
 										</ycommerce:testId>
 									</td>
 									
