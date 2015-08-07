@@ -3,7 +3,7 @@
 # Macros / Replacement Parameter definitions
 $productCatalog=anguoProductCatalog
 
-$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Online'])[unique=true,default='$productCatalog:Online']
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Online'])[unique=true,default=$productCatalog]
 $media=@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator]
 $thumbnail=thumbnail(code, $catalogVersion)
 $picture=picture(code, $catalogVersion)
@@ -12,22 +12,88 @@ $detail=detail(code, $catalogVersion)
 $normal=normal(code, $catalogVersion)
 $others=others(code, $catalogVersion)
 $data_sheet=data_sheet(code, $catalogVersion)
+$qualityImage=qualityImage(code, $catalogVersion)
+$sourceImage=sourceImage(code, $catalogVersion)
 $medias=medias(code, $catalogVersion)
 $galleryImages=galleryImages(qualifier, $catalogVersion)
-$siteResource=jar:com.tasly.anguo.initialdata.setup.InitialDataSystemSetup&/anguoinitialdata/import/productCatalogs/$productCatalog
-
+$siteResource=jar:com.tasly.anguo.initialdata.constants.AnguoInitialDataConstants&/anguoinitialdata/import/sampledata/productCatalogs/$productCatalog
 
 INSERT_UPDATE MediaFolder;qualifier[unique=true];path[unique=true]
 ;images;images
 
 # Create Media
-INSERT_UPDATE Media;mediaFormat(qualifier);code[unique=true];$media;mime[default='image/jpeg'];$catalogVersion;folder(qualifier)
-				   ;300Wx300H;/300Wx300H/1GJL02-danshen.jpg;$siteResource/images/300Wx300H/1GJL02-danshen.jpg
+INSERT_UPDATE Media;mediaFormat(qualifier);code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];$catalogVersion;
+;60Wx60H;/60Wx60H/1101690-1334.png;$siteResource/images/60Wx60H/1101690-1334.png
+;60Wx60H;/60Wx60H/1101695-7498.png;$siteResource/images/60Wx60H/1101695-7498.png
+;60Wx60H;/60Wx60H/1128762-6838.png;$siteResource/images/60Wx60H/1128762-6838.png
+;60Wx60H;/60Wx60H/1128763-2470.png;$siteResource/images/60Wx60H/1128763-2470.png
+;60Wx60H;/60Wx60H/1128763-2471.png;$siteResource/images/60Wx60H/1128763-2471.png
+;60Wx60H;/60Wx60H/1128763-2472.png;$siteResource/images/60Wx60H/1128763-2472.png
+;60Wx60H;/60Wx60H/1128763-2473.png;$siteResource/images/60Wx60H/1128763-2473.png
+;60Wx60H;/60Wx60H/1128763-2474.png;$siteResource/images/60Wx60H/1128763-2474.png
+;60Wx60H;/60Wx60H/1128763-2475.png;$siteResource/images/60Wx60H/1128763-2475.png
+;60Wx60H;/60Wx60H/1128763-2476.png;$siteResource/images/60Wx60H/1128763-2476.png
+;60Wx60H;/60Wx60H/1128763-2477.png;$siteResource/images/60Wx60H/1128763-2477.png
+;60Wx60H;/60Wx60H/1128763-2478.png;$siteResource/images/60Wx60H/1128763-2478.png
+;60Wx60H;/60Wx60H/1128763-2479.png;$siteResource/images/60Wx60H/1128763-2479.png
+;60Wx60H;/60Wx60H/1128763-2480.png;$siteResource/images/60Wx60H/1128763-2480.png
+;60Wx60H;/60Wx60H/1128763-2481.png;$siteResource/images/60Wx60H/1128763-2481.png
+;60Wx60H;/60Wx60H/1128763-2482.png;$siteResource/images/60Wx60H/1128763-2482.png
+;60Wx60H;/60Wx60H/1128763-2483.png;$siteResource/images/60Wx60H/1128763-2483.png
+;320Wx320H;/320Wx320H/1101690-1334.png;$siteResource/images/320Wx320H/1101690-1334.png
+;320Wx320H;/320Wx320H/1101695-7498.png;$siteResource/images/320Wx320H/1101695-7498.png
+;320Wx320H;/320Wx320H/1128762-6838.png;$siteResource/images/320Wx320H/1128762-6838.png
+;320Wx320H;/320Wx320H/1128763-2470.png;$siteResource/images/320Wx320H/1128763-2470.png
+;320Wx320H;/320Wx320H/1128763-2471.png;$siteResource/images/320Wx320H/1128763-2471.png
+;320Wx320H;/320Wx320H/1128763-2472.png;$siteResource/images/320Wx320H/1128763-2472.png
+;320Wx320H;/320Wx320H/1128763-2473.png;$siteResource/images/320Wx320H/1128763-2473.png
+;320Wx320H;/320Wx320H/1128763-2474.png;$siteResource/images/320Wx320H/1128763-2474.png
+;320Wx320H;/320Wx320H/1128763-2475.png;$siteResource/images/320Wx320H/1128763-2475.png
+;320Wx320H;/320Wx320H/1128763-2476.png;$siteResource/images/320Wx320H/1128763-2476.png
+;320Wx320H;/320Wx320H/1128763-2477.png;$siteResource/images/320Wx320H/1128763-2477.png
+;320Wx320H;/320Wx320H/1128763-2478.png;$siteResource/images/320Wx320H/1128763-2478.png
+;320Wx320H;/320Wx320H/1128763-2479.png;$siteResource/images/320Wx320H/1128763-2479.png
+;320Wx320H;/320Wx320H/1128763-2480.png;$siteResource/images/320Wx320H/1128763-2480.png
+;320Wx320H;/320Wx320H/1128763-2481.png;$siteResource/images/320Wx320H/1128763-2481.png
+;320Wx320H;/320Wx320H/1128763-2482.png;$siteResource/images/320Wx320H/1128763-2482.png
+;320Wx320H;/320Wx320H/1128763-2483.png;$siteResource/images/320Wx320H/1128763-2483.png
 
 # Create Media Containers
 INSERT_UPDATE MediaContainer;qualifier[unique=true];$medias;$catalogVersion
-			  人参1;/300Wx300H/1GJL02-danshen.jpg
+;1101690-1334;/320Wx320H/1101690-1334.png,/60Wx60H/1101690-1334.png;
+;1101695-7498;/320Wx320H/1101695-7498.png,/60Wx60H/1101695-7498.png;
+;1128762-6838;/320Wx320H/1128762-6838.png,/60Wx60H/1128762-6838.png;
+;1128763-2470;/320Wx320H/1128763-2470.png,/60Wx60H/1128763-2470.png;
+;1128763-2471;/320Wx320H/1128763-2471.png,/60Wx60H/1128763-2471.png;
+;1128763-2472;/320Wx320H/1128763-2472.png,/60Wx60H/1128763-2472.png;
+;1128763-2473;/320Wx320H/1128763-2473.png,/60Wx60H/1128763-2473.png;
+;1128763-2474;/320Wx320H/1128763-2474.png,/60Wx60H/1128763-2474.png;
+;1128763-2475;/320Wx320H/1128763-2475.png,/60Wx60H/1128763-2475.png;
+;1128763-2476;/320Wx320H/1128763-2476.png,/60Wx60H/1128763-2476.png;
+;1128763-2477;/320Wx320H/1128763-2477.png,/60Wx60H/1128763-2477.png;
+;1128763-2478;/320Wx320H/1128763-2478.png,/60Wx60H/1128763-2478.png;
+;1128763-2479;/320Wx320H/1128763-2479.png,/60Wx60H/1128763-2479.png;
+;1128763-2480;/320Wx320H/1128763-2480.png,/60Wx60H/1128763-2480.png;
+;1128763-2481;/320Wx320H/1128763-2481.png,/60Wx60H/1128763-2481.png;
+;1128763-2482;/320Wx320H/1128763-2482.png,/60Wx60H/1128763-2482.png;
+;1128763-2483;/320Wx320H/1128763-2483.png,/60Wx60H/1128763-2483.png;
 
 # Update Products with Media and Media Containers
-UPDATE Product;code[unique=true];$picture;$thumbnail;$detail;$others;$normal;$thumbnails;$galleryImages;$catalogVersion
-;千年人参;/300Wx300H/1GJL02-danshen.jpg;/96Wx96H/1GJL02-danshen.jpg;/1200Wx1200H/1GJL02-danshen.jpg;/515Wx515H/1GJL02-danshen.jpg,/65Wx65H/1GJL02-danshen.jpg,/30Wx30H/1GJL02-danshen.jpg;/300Wx300H/1GJL02-danshen.jpg;/96Wx96H/1GJL02-danshen.jpg;1GJL02-danshen,codeTest-danshen,codeReview-danshen
+UPDATE Product;code[unique=true];$sourceImage;$qualityImage;$thumbnail;$thumbnails;$galleryImages;$catalogVersion
+;千年人参;/320Wx320H/1101690-1334.png;/320Wx320H/1101690-1334.png;/60Wx60H/1101690-1334.png;/60Wx60H/1101690-1334.png;1101690-1334
+;泽兰;/320Wx320H/1101695-7498.png;/320Wx320H/1101695-7498.png;/60Wx60H/1101695-7498.png;/60Wx60H/1101695-7498.png;1101695-7498
+;薄片白芍;/320Wx320H/1128762-6838.png;/320Wx320H/1128762-6838.png;/60Wx60H/1128762-6838.png;/60Wx60H/1128762-6838.png;1128762-6838
+;炙白芍,炒白芍;/320Wx320H/1128763-2470.png;/320Wx320H/1128763-2470.png;/60Wx60H/1128763-2470.png;/60Wx60H/1128763-2470.png;1128763-2470
+;野生川贝;/320Wx320H/1128763-2471.png;/320Wx320H/1128763-2471.png;/60Wx60H/1128763-2471.png;/60Wx60H/1128763-2471.png;1128763-2471
+;松贝母（川贝母）;/320Wx320H/1128763-2472.png;/320Wx320H/1128763-2472.png;/60Wx60H/1128763-2472.png;/60Wx60H/1128763-2472.png;1128763-2472
+;炒王不留行;/320Wx320H/1128763-2473.png;/320Wx320H/1128763-2473.png;/60Wx60H/1128763-2473.png;/60Wx60H/1128763-2473.png;1128763-2473
+;世元药业 炒王不留行;/320Wx320H/1128763-2474.png;/320Wx320H/1128763-2474.png;/60Wx60H/1128763-2474.png;/60Wx60H/1128763-2474.png;1128763-2474
+;正品白莲子;/320Wx320H/1128763-2475.png;/320Wx320H/1128763-2475.png;/60Wx60H/1128763-2475.png;/60Wx60H/1128763-2475.png;1128763-2475
+;红莲子;/320Wx320H/1128763-2476.png;/320Wx320H/1128763-2476.png;/60Wx60H/1128763-2476.png;/60Wx60H/1128763-2476.png;1128763-2476
+;世元药业 莲子 白莲子;/320Wx320H/1128763-2477.png;/320Wx320H/1128763-2477.png;/60Wx60H/1128763-2477.png;/60Wx60H/1128763-2477.png;1128763-2477
+;正品三年陈皮;/320Wx320H/1128763-2478.png;/320Wx320H/1128763-2478.png;/60Wx60H/1128763-2478.png;/60Wx60H/1128763-2478.png;1128763-2478
+;杂皮、陈皮 统;/320Wx320H/1128763-2479.png;/320Wx320H/1128763-2479.png;/60Wx60H/1128763-2479.png;/60Wx60H/1128763-2479.png;1128763-2479
+;艾叶 医草 艾蒿 灸草 五月艾 统货;/320Wx320H/1128763-2480.png;/320Wx320H/1128763-2480.png;/60Wx60H/1128763-2480.png;/60Wx60H/1128763-2480.png;1128763-2480
+;百川药业 艾叶;/320Wx320H/1128763-2481.png;/320Wx320H/1128763-2481.png;/60Wx60H/1128763-2481.png;/60Wx60H/1128763-2481.png;1128763-2481
+;大叶映山红;/320Wx320H/1128763-2482.png;/320Wx320H/1128763-2482.png;/60Wx60H/1128763-2482.png;/60Wx60H/1128763-2482.png;1128763-2482
+;手剪荷叶茶方块荷叶茶;/320Wx320H/1128763-2483.png;/320Wx320H/1128763-2483.png;/60Wx60H/1128763-2483.png;/60Wx60H/1128763-2483.png;1128763-2483

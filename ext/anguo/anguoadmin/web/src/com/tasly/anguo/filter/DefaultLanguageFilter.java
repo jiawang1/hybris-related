@@ -23,9 +23,9 @@ import de.hybris.platform.util.Config;
 public class DefaultLanguageFilter extends GenericFilterBean{
 
 	private static final Logger LOG = Logger.getLogger(DefaultLanguageFilter.class);
-    //commonI18nService can not be introduced by spring.xml,very werid,need to explore
+    
 	@Resource
-    private CommonI18NService commonI18nService;
+    private CommonI18NService commonI18NService;
 
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response,
@@ -38,13 +38,13 @@ public class DefaultLanguageFilter extends GenericFilterBean{
 		final HttpServletResponse httpResponse = (HttpServletResponse) response;
 		final HttpSession httpSession = httpRequest.getSession();
 		
-		LanguageModel language = commonI18nService.getCurrentLanguage();
+		LanguageModel language = commonI18NService.getCurrentLanguage();
 		if(language!=null&&!language.getIsocode().equals(Config.getParameter(AnguoadminConstants.EXTENSIONNAME+".defaultlanguage"))){
-			commonI18nService.setCurrentLanguage(
-					commonI18nService.getLanguage(Config.getParameter(AnguoadminConstants.EXTENSIONNAME+".defaultlanguage"))
+			commonI18NService.setCurrentLanguage(
+					commonI18NService.getLanguage(Config.getParameter(AnguoadminConstants.EXTENSIONNAME+".defaultlanguage"))
 					);
 			
-			LOG.debug("default langue was set to " + commonI18nService.getCurrentLanguage().getIsocode());
+			LOG.debug("default langue was set to " + commonI18NService.getCurrentLanguage().getIsocode());
 		}
 		
 		filterChain.doFilter(httpRequest, httpResponse);

@@ -1,12 +1,11 @@
 package com.tasly.anguo.facades.customer.impl;
 
-import static de.hybris.platform.servicelayer.util.ServicesUtil.validateParameterNotNullStandardMessage;
-
 import java.util.ArrayList;
 
 import org.apache.log4j.Logger;
 import org.springframework.util.Assert;
 
+import com.tasly.anguo.core.enums.CustomerStatus;
 import com.tasly.anguo.core.enums.UserType;
 import com.tasly.anguo.core.exceptions.DuplicateEnterpriseRegisterIdException;
 import com.tasly.anguo.core.model.EnterpriseAccountModel;
@@ -46,17 +45,17 @@ public class AnguoCustomerFacade extends DefaultCustomerFacade
     public void register(final RegisterData registerData)
             throws DuplicateUidException
     {
-        validateParameterNotNullStandardMessage("registerData", registerData);
+//        validateParameterNotNullStandardMessage("registerData", registerData);
         Assert.hasText(registerData.getLogin(),
                 "The field [Login] cannot be empty");
         CustomerModel newCustomer = null;
         if (registerData.getUserType() == UserType.PERSONAL) {
             newCustomer = getModelService().create(PersonalAccountModel.class);
-            newCustomer.setIdentified(true);
+            newCustomer.setStatus(CustomerStatus.UNIDENTIFIED);
         } else if (registerData.getUserType() == UserType.ENTERPRISE) {
             newCustomer = getModelService()
                     .create(EnterpriseAccountModel.class);
-            newCustomer.setIdentified(false);
+            newCustomer.setStatus(CustomerStatus.UNIDENTIFIED);
         }
         newCustomer.setName(registerData.getLogin());
         setUidForRegister(registerData, newCustomer);

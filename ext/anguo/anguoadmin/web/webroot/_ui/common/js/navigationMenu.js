@@ -10,7 +10,12 @@ define(['jquery','backbone', 'underscore',"text!./../template/navigationTpl.html
         },
         
         render:function(){
-            this.$el.html(_.template(sTemplate,{"data":[{"label": "Products", "link":"#products"},{"label": "Category", "link":"#category"},{"label": "Others", "link":"#others"}]}));
+            this.$el.html(_.template(sTemplate,{"data":[
+                     {"label": "Products", "link":"#products"},
+                     {"label": "Category", "link":"#category"},
+                     {"label": "Others", "link":"#others"},
+                     {"label": "ProductList", "link":"#productList"}
+                     ]}));
             return this;
         },
         

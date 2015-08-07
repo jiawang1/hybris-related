@@ -21,10 +21,10 @@
 <title><spring:theme code="text.account.enterprise.information.update"/></title>
 <meta name="keywords" content=""/>
 <meta name="description" content=""/>
-    <link rel="stylesheet" href="/anguostorefront/_ui/desktop/common/css/resetUser.css">
-    <link rel="stylesheet" href="/anguostorefront/_ui/desktop/common/css/commonUser.css">
-    <link rel="stylesheet" href="/anguostorefront/_ui/desktop/common/css/login.css">
-    <link rel="stylesheet" href="/anguostorefront/_ui/desktop/common/css/register.css"/>
+    <link rel="stylesheet" href="/_ui/desktop/common/css/resetUser.css">
+    <link rel="stylesheet" href="/_ui/desktop/common/css/commonUser.css">
+    <link rel="stylesheet" href="/_ui/desktop/common/css/login.css">
+    <link rel="stylesheet" href="/_ui/desktop/common/css/register.css"/>
 </head>
 <body>
 <div id="register"> 

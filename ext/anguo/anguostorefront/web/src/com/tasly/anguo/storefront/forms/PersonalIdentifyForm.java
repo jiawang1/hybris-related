@@ -1,13 +1,11 @@
 package com.tasly.anguo.storefront.forms;
 
 
-public class PersonalIdentifyForm {
+public class PersonalIdentifyForm  extends AccountIdentifyForm{
 
 	private String idName;
 	private String idCard;
-	private String bank;
 	private String accountOwer;
-	private String accountNumber;
 
 	/**
 	 * @return the idName
@@ -40,21 +38,6 @@ public class PersonalIdentifyForm {
 	}
 
 	/**
-	 * @return the bank
-	 */
-	public String getBank() {
-		return bank;
-	}
-
-	/**
-	 * @param bank
-	 *            the bank to set
-	 */
-	public void setBank(String bank) {
-		this.bank = bank;
-	}
-
-	/**
 	 * @return the accountOwer
 	 */
 	public String getAccountOwer() {
@@ -67,21 +50,6 @@ public class PersonalIdentifyForm {
 	 */
 	public void setAccountOwer(String accountOwer) {
 		this.accountOwer = accountOwer;
-	}
-
-	/**
-	 * @return the accountNumber
-	 */
-	public String getAccountNumber() {
-		return accountNumber;
-	}
-
-	/**
-	 * @param accountNumber
-	 *            the accountNumber to set
-	 */
-	public void setAccountNumber(String accountNumber) {
-		this.accountNumber = accountNumber;
 	}
 
 }

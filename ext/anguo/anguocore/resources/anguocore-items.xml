@@ -20,6 +20,17 @@
 	</collectiontypes>
 	
 	<enumtypes>
+	
+		<!-- add by Yang for AM-58 start -->
+		<enumtype code="OrderStatus" autocreate="false" generate="true" dynamic="true">
+			<value code="RETURNING" />
+			<value code="WAIT_FOR_PAYMENT" />
+			<value code="WAIT_FOR_SHIP" />
+			<value code="WAIT_FOR_RECEIVE" />
+			<value code="SYSTEM_PROCESSING" />
+		</enumtype>
+		<!-- add by Yang for AM-58 end -->
+	
 		<enumtype generate="true" code="SwatchColorEnum" autocreate="true" dynamic="true">
 			<value code="BLACK"/>
 			<value code="BLUE"/>
@@ -34,6 +45,13 @@
 			<value code="WHITE"/>
 			<value code="YELLOW"/>
 		</enumtype>
+		
+		<enumtype code="CustomerStatus" autocreate="true" generate="true">
+            <value code="UNIDENTIFIED"/>
+            <value code="AUDITING"/>
+            <value code="PASS"/>
+            <value code="ABJECT"/>
+        </enumtype>
 		<!-- enumtype for product start -->
 		
 		<enumtype generate="true" code="PackageUnit" autocreate="true" dynamic="true">
@@ -307,7 +325,7 @@
 						<modifiers/>
 						<persistence type="property"/>
 					</attribute>
-					<attribute qualifier="identified" type="java.lang.Boolean">
+					<attribute qualifier="status" type="CustomerStatus">
 						<description>Whether pass the identification.</description>
 						<modifiers/>
 						<persistence type="property"/>
@@ -502,6 +520,11 @@
 					    <defaultvalue>em().getEnumerationValue("ProductStatus","UNCHECK")</defaultvalue>
 					</attribute>
 					
+					<attribute qualifier="anguoStore" type="AnguoStore">
+				    	<modifiers read="true" write="true" search="true" optional="true"/>
+					    <persistence type="property"/>
+					</attribute>
+					
 				</attributes>
 			</itemtype>
             <itemtype code="Category" generate="false" autocreate="false">
@@ -692,6 +715,7 @@
 				
 				<itemtype code="AnguoPlatformService" autocreate="true" generate="true" jaloclass="com.tasly.anguo.core.jalo.AnguoPlatformService">
 					<description> Anguo platform service </description>
+					<deployment table="AnguoPlatformService" typecode="10118"></deployment>
 							<attributes>
 								<attribute qualifier="code" type="java.lang.String">
 								<modifiers/>
@@ -710,7 +734,35 @@
             
         </typegroup>
 		<!-- add by Yang for AM-18 end -->
-		<!-- type for anguostore start -->
+
+		<typegroup name="Components">
+			<itemtype code="BuyerCenterNavigationComponent" autocreate="true"
+				generate="true" extends="SimpleCMSComponent"
+				jaloclass="de.hybris.platform.acceleratorcms.jalo.components.BuyerCenterNavigationComponent">
+				<description>It represents buy center navigation bar component that contains cms navigation node.</description>
+				<attributes>
+		
+					<attribute qualifier="title" type="localized:java.lang.String">
+						<persistence type="property" />
+						<modifiers />
+						<description>Localized title of the component.</description>
+					</attribute>
+					<attribute type="java.lang.String" qualifier="styleClass">
+						<persistence type="property" />
+						<modifiers />
+						<description>CSS style class of this bar component.</description>
+					</attribute>
+		
+					<attribute type="CMSNavigationNode" qualifier="navigationNode">
+						<persistence type="property" />
+						<modifiers />
+						<description>The cms navigation node of this navigation component.</description>
+					</attribute>
+		
+				</attributes>
+			</itemtype>
+		</typegroup>
+		
 
 	</itemtypes>
 </items>

@@ -3,14 +3,13 @@
  */
 package com.tasly.anguo.storefront.controllers.pages;
 
-import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.imageio.ImageIO;
+import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
@@ -23,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.tasly.anguo.facades.customer.CustomerIdentifyFacade;
 
 import de.hybris.platform.commercefacades.product.data.ImageData;
+import de.hybris.platform.servicelayer.i18n.L10NService;
 import de.hybris.platform.util.Config;
 
 
@@ -37,47 +37,62 @@ public class FileUploadController
 	private static String CONF_IMAGE_MAX_HEIGHT_KEY = "uploadfile.imageMaxHeight";
 	private static String CONF_IMAGE_LEGAL_TYPE_KEY = "uploadfile.imageLegalType";
 	
+	@Resource
 	private CustomerIdentifyFacade customerIdentifyFacade;
+	@Resource
+	private L10NService l10NService;
 
 	@SuppressWarnings("rawtypes")
 	@RequestMapping(method = RequestMethod.POST)
-	public @ResponseBody Map uploadFile(@RequestParam final MultipartFile[] uploadFiles) throws IOException
+	public @ResponseBody Map uploadFile(@RequestParam final MultipartFile[] uploadFiles) throws Exception
 	{
-		Map map = null;
-		if (uploadFiles.length <= 0)
-		{
-			map = getReturnMap(-1, "no file upload");
-		}
-		else
-		{
-			for (final MultipartFile uploadFile : uploadFiles)
+		try{
+			Map map = null;
+			if (uploadFiles.length <= 0)
 			{
-				if (uploadFile.isEmpty())
+				map = getReturnMap(-1, l10NService.getLocalizedString("upload.no.file"));
+			}
+			else
+			{
+				for (final MultipartFile uploadFile : uploadFiles)
 				{
-					map = getReturnMap(-1, "uploaded file is null");
-					break;
-				}
-				else
-				{
-					map = this.validateFile(uploadFile);
-					if (map != null)
+					if (uploadFile.isEmpty())
 					{
+						map = getReturnMap(-1, l10NService.getLocalizedString("upload.no.file"));
 						break;
 					}
-					map = this.uploadMedia( uploadFile);
+					else
+					{
+						map = this.validateFile(uploadFile);
+						if (map != null)
+						{
+							break;
+						}
+						map = this.uploadMedia( uploadFile);
+					}
 				}
 			}
+			return map;
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+			throw e;
 		}
-		return map;
+		
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	private Map uploadMedia(final MultipartFile uploadFile)
+	private Map uploadMedia(final MultipartFile uploadFile) throws Exception
 	{
-		final Map map = getReturnMap(1, "success");
-		final ImageData imageData = customerIdentifyFacade.uploadEnterpriseLiceneses(uploadFile);
-		map.put("media", imageData);
-		return map;
+		try{
+			final Map map = getReturnMap(1, "success");
+			final ImageData imageData = customerIdentifyFacade.uploadEnterpriseLiceneses(uploadFile);
+			map.put("media", imageData);
+			return map;
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+			throw e;
+		}
+		
 	}
 
 	@SuppressWarnings("rawtypes")
@@ -86,7 +101,7 @@ public class FileUploadController
 		final int maxSize = Integer.parseInt(Config.getParameter(CONF_FILE_MAX_SIZE_KEY)); 
 		if (uploadFile.getInputStream().available() / (1024 * 1024) > maxSize)
 		{
-			return getReturnMap(-1, "file size is too large");
+			return getReturnMap(-1, l10NService.getLocalizedString("upload.file.toolarge"));
 		}
 		return validateImageFile(uploadFile);
 	}
@@ -94,19 +109,19 @@ public class FileUploadController
 	@SuppressWarnings("rawtypes")
 	private Map validateImageFile(final MultipartFile uploadFile) throws IOException
 	{
-		final int imageMaxWidth = Integer.parseInt(Config.getParameter(CONF_IMAGE_MAX_WIDTH_KEY)); // PX
-		final int imageMaxHeight = Integer.parseInt(Config.getParameter(CONF_IMAGE_MAX_HEIGHT_KEY)); // PX
+//		final int imageMaxWidth = Integer.parseInt(Config.getParameter(CONF_IMAGE_MAX_WIDTH_KEY)); // PX
+//		final int imageMaxHeight = Integer.parseInt(Config.getParameter(CONF_IMAGE_MAX_HEIGHT_KEY)); // PX
 		final String imageLegalType = Config.getParameter(CONF_IMAGE_LEGAL_TYPE_KEY);
 		final List types = Arrays.asList(imageLegalType.split(","));
 		if (!types.contains(uploadFile.getContentType()))
 		{
-			return getReturnMap(-1, "file type is not supported");
+			return getReturnMap(-1, l10NService.getLocalizedString("upload.file.notsupported"));
 		}
-		final BufferedImage image = ImageIO.read(uploadFile.getInputStream());
-		if (image.getWidth() > imageMaxWidth || image.getHeight() > imageMaxHeight)
-		{
-			return getReturnMap(-1, "pixel is too large");
-		}
+//		final BufferedImage image = ImageIO.read(uploadFile.getInputStream());
+//		if (image.getWidth() > imageMaxWidth || image.getHeight() > imageMaxHeight)
+//		{
+//			return getReturnMap(-1, l10NService.getLocalizedString("upload.file.toolarge"));
+//		}
 		return null;
 	}
 
