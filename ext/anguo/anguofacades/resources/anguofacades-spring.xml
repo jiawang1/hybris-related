@@ -188,7 +188,9 @@
 	<bean id="genderData" class="com.tasly.anguo.facades.product.data.GenderData" scope="prototype"/>
 	
 	<alias name="anguoCustomerFacade" alias="customerFacade"/>
-	<bean id="anguoCustomerFacade" class="com.tasly.anguo.facades.customer.impl.AnguoCustomerFacade" parent= "defaultCustomerFacade"/>
+	<bean id="anguoCustomerFacade" class="com.tasly.anguo.facades.customer.impl.AnguoCustomerFacade" parent= "defaultCustomerFacade">
+            <property name="enterpriseInformationReversePopulator" ref="enterpriseInformationReversePopulator"/>
+    </bean>
 	
 	<!-- beans for product start -->
 	<bean id="enumUtils" class="com.tasly.anguo.facades.utils.EnumUtils">
@@ -306,6 +308,13 @@
 		<property name="numeric" value="true"/>
 	</bean>
 	<!-- add by Yang for AM-18 end -->
+    
+    <bean id="contactReverseConverter" class="com.tasly.anguo.facades.converters.ContactReverseConverter" >
+        <property name="modelService" ref="modelService"/>
+    </bean>
+    <bean id="enterpriseInformationReversePopulator" class="com.tasly.anguo.facades.populators.EnterpriseInformationReversePopulator" >
+        <property name="contactReverseConverter" ref="contactReverseConverter"/>
+    </bean>
 	
 
 	<!-- add by Yang for AM-58 start -->

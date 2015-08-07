@@ -373,9 +373,20 @@
 			<itemtype code="EnterpriseAccount" extends="Customer">
 				<description>EnterpriseUser extend from customer used for Enterprise .</description>
 				<attributes>
+                   <attribute qualifier="enterpriseAddress" type="java.lang.String">
+                        <persistence type="property" />
+                    </attribute>
 					<attribute qualifier="registeredNo" type="java.lang.Long">
 						<persistence type="property" />
+                        <modifiers read="true" write="true" search="true"
+                            optional="true" unique="true"/>
 					</attribute>
+                   <attribute qualifier="enterprisePhone" type="java.lang.String">
+                        <persistence type="property" />
+                    </attribute>
+                    <attribute qualifier="enterpriseFax" type="java.lang.String">
+                        <persistence type="property" />
+                    </attribute>
 				</attributes>
 			</itemtype>
 			
@@ -396,8 +407,6 @@
 				<deployment table="Contact" typecode="30000" />
 				<attributes>
 					<attribute qualifier="name" type="java.lang.String">
-						<modifiers read="true" write="true" search="true"
-							optional="false" unique="true" />
 						<persistence type="property">
 							 <columntype database="oracle">
 								<value>varchar(30)</value>
@@ -413,7 +422,7 @@
 							</columntype>
 						</persistence>
 					</attribute>
-					<attribute qualifier="posistion" type="java.lang.String">
+					<attribute qualifier="position" type="java.lang.String">
 						<persistence type="property" >
 							 <columntype database="oracle">
 								<value>varchar(100)</value>
@@ -428,13 +437,9 @@
 								<value>HYBRIS.LONG_STRING</value>
 							</columntype>
 						</persistence>
-						<modifiers read="true" write="true" search="true"
-							optional="false" unique="true" />
 					</attribute>
 					<attribute qualifier="contactInfo" type="java.lang.String">
 						<persistence type="property" />
-						<modifiers read="true" write="true" search="true"
-							optional="true" />
 					</attribute>
 				</attributes>
 			</itemtype>
@@ -545,13 +550,11 @@
 						<modifiers optional="false" unique="true"/>
 						<persistence type="property"/>
 						</attribute>
-						
 						<attribute qualifier="name" type="localized:java.lang.String">
 						<description>100位字符</description>
 						<modifiers optional="false"/>
 						<persistence type="property"/>
-						</attribute>
-						
+						</attribute>						
 						<attribute qualifier="logo" type="Media">
 						<description>jpg,png,bmp,jpeg</description>
 						<modifiers/>

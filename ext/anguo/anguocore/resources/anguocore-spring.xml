@@ -518,7 +518,9 @@
 	<bean id="categoryRemovalValidatorMapping" class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
 		<property name="interceptor" ref="anguoCategoryRemovalValidator" />
 		<property name="typeCode" value="Category" />
-	</bean>
+	</bean>    
+    <bean id="captchaService" class="com.tasly.anguo.core.service.impl.DefaultCaptchaService">
+    </bean>
 
 	<!-- add by LiuJi for AM-128 start -->
 	<!-- product -->
@@ -544,6 +546,17 @@
 	<bean id="anguoProductModelUrlResolver" class="com.tasly.anguo.core.util.AnguoProductModelUrlResolver"
 			parent="defaultProductModelUrlResolver">
 	</bean>
+    
+    <alias alias="customerAccountService" name="anguoCustomerAccountService"/>
+    <bean id="anguoCustomerAccountService"
+            class="com.tasly.anguo.core.service.impl.AnguoCustomerAccountService" parent="defaultCustomerAccountService">    
+    </bean>
+    
+    <alias alias="customerAccountDao" name="anguoCustomerAccountDao"/>
+    <bean id="anguoCustomerAccountDao"
+            class="com.tasly.anguo.core.customer.dao.impl.AnguoCustomerAccountDao" parent="defaultCustomerAccountDao">    
+    </bean>    
+
 	
 	<!-- add by Yang for AM-58 start -->
 	<alias name="defaultAnguoOrderDao" alias="anguoOrderDao"/>

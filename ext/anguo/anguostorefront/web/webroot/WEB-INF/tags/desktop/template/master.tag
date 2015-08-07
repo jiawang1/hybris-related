@@ -37,12 +37,13 @@
 
 	<%-- Inject any additional CSS required by the page --%>
 	<jsp:invoke fragment="pageCss"/>
+    <!-- 
 	<analytics:analytics/>
 
-<c:if test="${!empty googleApiVersion}">
-	<!-- <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?v=${googleApiVersion}&amp;key=${googleApiKey}&amp;sensor=false"></script> -->
-</c:if>
-
+	<c:if test="${!empty googleApiVersion}">
+		<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=${googleApiVersion}&amp;key=${googleApiKey}&amp;sensor=false"></script>
+	</c:if>
+ -->
 
 </head>
 

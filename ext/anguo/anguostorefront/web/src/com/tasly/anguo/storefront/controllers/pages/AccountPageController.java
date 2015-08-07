@@ -13,6 +13,41 @@
  */
 package com.tasly.anguo.storefront.controllers.pages;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.lang.StringUtils;
+import org.apache.log4j.Logger;
+import org.springframework.context.annotation.Scope;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.tasly.anguo.core.exceptions.DuplicateEnterpriseRegisterIdException;
+import com.tasly.anguo.facades.customer.impl.AnguoCustomerFacade;
+import com.tasly.anguo.facades.user.data.ContactData;
+import com.tasly.anguo.facades.user.data.EnterpriseInformationData;
+import com.tasly.anguo.storefront.controllers.ControllerConstants;
+import com.tasly.anguo.storefront.forms.EnterpriseInformationForm;
+import com.tasly.anguo.storefront.forms.validation.AnguoEnterpriseInformationValidator;
+
 import de.hybris.platform.acceleratorstorefrontcommons.annotations.RequireHardLogIn;
 import de.hybris.platform.acceleratorstorefrontcommons.breadcrumb.Breadcrumb;
 import de.hybris.platform.acceleratorstorefrontcommons.breadcrumb.ResourceBreadcrumbBuilder;
@@ -30,7 +65,6 @@ import de.hybris.platform.acceleratorstorefrontcommons.forms.verification.Addres
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.address.AddressVerificationFacade;
 import de.hybris.platform.commercefacades.address.data.AddressVerificationResult;
-import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.i18n.I18NFacade;
 import de.hybris.platform.commercefacades.order.CheckoutFacade;
 import de.hybris.platform.commercefacades.order.OrderFacade;
@@ -50,32 +84,6 @@ import de.hybris.platform.commerceservices.search.pagedata.PageableData;
 import de.hybris.platform.commerceservices.search.pagedata.SearchPageData;
 import de.hybris.platform.servicelayer.exceptions.UnknownIdentifierException;
 import de.hybris.platform.util.Config;
-import com.tasly.anguo.storefront.controllers.ControllerConstants;
-
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-
-import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
-import org.springframework.context.annotation.Scope;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 /**
@@ -123,7 +131,7 @@ public class AccountPageController extends AbstractSearchPageController
 	protected UserFacade userFacade;
 
 	@Resource(name = "customerFacade")
-	protected CustomerFacade customerFacade;
+	protected AnguoCustomerFacade customerFacade;
 
 	@Resource(name = "accountBreadcrumbBuilder")
 	private ResourceBreadcrumbBuilder accountBreadcrumbBuilder;
@@ -148,8 +156,16 @@ public class AccountPageController extends AbstractSearchPageController
 
 	@Resource(name = "addressVerificationResultHandler")
 	private AddressVerificationResultHandler addressVerificationResultHandler;
+	
+    @Resource(name = "anguoEnterpriseInformationValidator")
+    private AnguoEnterpriseInformationValidator anguoEnterpriseInformationValidator;
+	
 
-	protected PasswordValidator getPasswordValidator()
+	public AnguoEnterpriseInformationValidator getAnguoEnterpriseInformationValidator() {
+        return anguoEnterpriseInformationValidator;
+    }
+
+    protected PasswordValidator getPasswordValidator()
 	{
 		return passwordValidator;
 	}
@@ -276,6 +292,69 @@ public class AccountPageController extends AbstractSearchPageController
 		return getViewForPage(model);
 	}
 
+    @RequestMapping(value = "/enterprise", method = RequestMethod.GET)
+    @RequireHardLogIn
+    public String enterprise(@RequestParam(value = "page", defaultValue = "0") final int page,
+            @RequestParam(value = "show", defaultValue = "Page") final ShowMode showMode,
+            @RequestParam(value = "sort", required = false) final String sortCode, final Model model)
+            throws CMSItemNotFoundException
+    {
+
+        model.addAttribute("breadcrumbs", accountBreadcrumbBuilder.getBreadcrumbs("text.account.enterprise.information.update"));
+        model.addAttribute("metaRobots", "noindex,nofollow");
+        EnterpriseInformationData eData = customerFacade.getEnterpriseInformation();
+        EnterpriseInformationForm form = new EnterpriseInformationForm();
+        form.setAddress(eData.getAddress());
+        form.setName(eData.getName());
+        form.setPhone(eData.getPhone());
+        form.setRegisterId(eData.getRegisterId() == null? "" : eData.getRegisterId().toString());
+        form.setFax(eData.getFax());
+        form.setContacts(eData.getContacts());
+        form.setFirstTimeUpdate(StringUtils.isEmpty(eData.getName())? "true":"false");
+        model.addAttribute(form);
+        return ControllerConstants.Views.Pages.Account.AccountEnterprisePage;
+    }
+    
+    @RequestMapping(value = "/enterprise", method = RequestMethod.POST)
+    @RequireHardLogIn
+    public String updateEnterprise(@RequestParam(value = "page", defaultValue = "0") final int page,
+            @RequestParam(value = "show", defaultValue = "Page") final ShowMode showMode, final EnterpriseInformationForm form,
+            final BindingResult bindingResult, final Model model, final HttpServletRequest request,
+            final HttpServletResponse response, final RedirectAttributes redirectModel) throws CMSItemNotFoundException, DuplicateUidException
+    {
+        EnterpriseInformationData eData = customerFacade.getEnterpriseInformation();
+        if (!StringUtils.isEmpty(eData.getName())) {
+            form.setName(eData.getName());
+        }
+        if (eData.getRegisterId() != null) {
+            form.setRegisterId(eData.getRegisterId().toString());
+        }
+        anguoEnterpriseInformationValidator.validate(form, bindingResult);
+        if (bindingResult.hasErrors())
+        {
+            model.addAttribute(form);
+            GlobalMessages.addErrorMessage(model, "form.global.error");
+            return ControllerConstants.Views.Pages.Account.AccountEnterprisePage;
+        }
+        EnterpriseInformationData eid = new EnterpriseInformationData();
+        eid.setName(form.getName());
+        eid.setRegisterId(Long.parseLong(form.getRegisterId()));
+        eid.setAddress(form.getAddress());
+        eid.setPhone(form.getPhone());
+        eid.setFax(form.getFax());
+        eid.setContacts(form.getContacts());
+        try {
+            customerFacade.updateEnterpriseInformation(eid);
+        } catch (DuplicateEnterpriseRegisterIdException e) {
+            bindingResult.rejectValue("registerId", "text.account.enterprise.register.id.duplicated");
+            model.addAttribute(form);
+            GlobalMessages.addErrorMessage(model, "form.global.error");
+            return ControllerConstants.Views.Pages.Account.AccountEnterprisePage;
+        }
+
+        return REDIRECT_PREFIX + "/identify";
+    }
+	
 	@RequestMapping(value = "/order/" + ORDER_CODE_PATH_VARIABLE_PATTERN, method = RequestMethod.GET)
 	@RequireHardLogIn
 	public String order(@PathVariable("orderCode") final String orderCode, final Model model) throws CMSItemNotFoundException
