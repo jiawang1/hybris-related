@@ -23,9 +23,7 @@ public class ProductListPopulator implements Populator<SearchPageData, ProductLi
 		int currentpage = source.getPagination().getCurrentPage()+1;
 		//draw is for front end display,is set in controller,this is required by dataTable plugin
 		//target.setDraw(currentpage);
-		//below two fields is for plugin display
-		target.setTotalRecords(source.getPagination().getTotalNumberOfResults());
-	    target.setTotalPage(source.getPagination().getNumberOfPages());
+		target.setRecordsFiltered(source.getPagination().getTotalNumberOfResults());
 		List<String[]> data = new ArrayList<String[]>();
 		
 		if(CollectionUtils.isNotEmpty(source.getResults()))
@@ -48,6 +46,7 @@ public class ProductListPopulator implements Populator<SearchPageData, ProductLi
 			  
 			  data.add(element);
 		  }
+		
 		target.setData(data);
 		
 	}
@@ -62,7 +61,7 @@ public class ProductListPopulator implements Populator<SearchPageData, ProductLi
 			  categoryPath.append(category.getName());
 			  if(CollectionUtils.isNotEmpty(category.getSupercategories())&&category.getLevel()==3)
 			  {
-				  categoryPath.insert(0,">").insert(0, category.getSupercategories().get(0).getName());
+				  categoryPath.append("<").append(category.getSupercategories().get(0).getName());
 			  }
 		  }else
 		  {

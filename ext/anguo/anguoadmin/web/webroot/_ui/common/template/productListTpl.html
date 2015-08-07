@@ -4,55 +4,43 @@ td img{width:60px;height:60px};
 
 <div>
 	<form id="searchCondition">
-		<label for="storeName">店铺名称</label> <input type="text" name="storeName"></input> 
-		<label for="productCode">产品编码</label> <input type="text" name="productCode"></input> 
-		<label for="productName">产品名称</label> <input type="text" name="productName"></input>
-		<input type="button" id="getProductListButton" value="查询"></input>
-		<input type="hidden" name="storeNameHidden" ></input>
-		<input type="hidden" name="productCodeHidden"></input>
-		<input type="hidden" name="productNameHidden"></input>
-		<input type="hidden" id="productStatus" name="productStatus" value="UNCHECK"></input>
+		<label for="storeName">店铺名称</label> <input name="storeName"></input> 
+		<label for="productCode">产品编码</label> <input name="productCode"></input> 
+		<label for="productName">产品名称</label> <input name="productName"></input>
+		<button id="getProductListButton">查询</button>
 	</form>
 </div>
 <div id="productListTab">
 	<div class="tabHead">未审批</div>
-	<div class="tabBody" status="UNCHECK"/>
+	<div class="tabBody" status="UNCHECK" >
+		<table id="datagrid" class="productListTable" cellspacing="0" width="100%">
+			<thead>
+				<tr>
+					<th>缩略图</th>
+					<th>商品ID</th>
+					<th>商品名称</th>
+					<th>所属目录</th>
+					<th>提交时间</th>
+					<th>店铺名称</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+		</table>
+	</div>
 	<div class="tabHead">已提交</div>
-	<div class="tabBody"  status="PROGRESS"/>
-	<div class="tabHead">审批未过</div>
-	<div class="tabBody"  status="REJECTED"/>
-	<div class="tabHead">已上架</div>
-	<div class="tabBody"  status="ONLINE"/>
-	<div class="tabHead">已下架</div>
-	<div class="tabBody"  status="OFFLINE"/>
-	<table id="productListGrid" class="productListTable" cellpadding="50px"
-		width="100%">
-		<thead>
-			<tr>
-				<th>缩略图</th>
-				<th>商品ID</th>
-				<th>商品名称</th>
-				<th>所属目录</th>
-				<th>提交时间</th>
-				<th>店铺名称</th>
-				<th>操作</th>
-			</tr>
-		</thead>
-		<tbody>
-		</tbody>
-		<tfoot>
-			<tr>
-				<td>
-			</tr>
-		</tfoot>
-	</table>
-	<span>
-	    <span class="totalpagetext">共0页</span>
-	    <span>|</span>
-	    <span class="totalrecordstext">共0多少条记录</span>
-	    <span>|</span>
-		<button class="lastpage">上一页</button> <a class="currentpage" href="#">1</a>
-		<button class="nextpage">下一页</button>
-		</td>
-	</span>
+	<div class="tabBody"  status="APPROVED">
+		<table id="approved" class="productListTable" cellspacing="0" width="100%">
+			<thead>
+				<tr>
+					<th>缩略图</th>
+					<th>商品ID</th>
+					<th>商品名称</th>
+					<th>所属目录</th>
+					<th>提交时间</th>
+					<th>店铺名称</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+		</table>
+	</div>
 </div>
