@@ -514,22 +514,6 @@
 					</attribute>
 				</attributes>
             </itemtype>
-            <itemtype code="Product" generate="false" autocreate="false">
-            	<attributes>
-            		<attribute qualifier="lastestStatusChangeDate" type="java.util.Date">
-				    	<modifiers read="true" write="true" search="true" optional="true"/>
-					    <persistence type="property"/>
-					</attribute>
-					<attribute generate="true" autocreate="true" qualifier="qualityImage" type="MediaCollection">
-						<persistence type="property" qualifier=""/>
-						<modifiers read="true" write="true" search="true" encrypted="false" optional="true" removable="true" initial="false" unique="false" private="false" partof="false"/>
-					</attribute>
-					<attribute generate="true" autocreate="true" qualifier="sourceImage" type="MediaCollection">
-						<persistence type="property" qualifier=""/>
-						<modifiers read="true" write="true" search="true" encrypted="false" optional="true" removable="true" initial="false" unique="false" private="false" partof="false"/>
-					</attribute>
-            	</attributes>
-            </itemtype>
 		</typegroup>
 
 		
@@ -712,7 +696,7 @@
 				
 				<itemtype code="AnguoPlatformService" autocreate="true" generate="true" jaloclass="com.tasly.anguo.core.jalo.AnguoPlatformService">
 					<description> Anguo platform service </description>
-					<deployment table="AnguoPlatformService" typecode="10103" />
+					<deployment table="AnguoPlatformService" typecode="10118"></deployment>
 							<attributes>
 								<attribute qualifier="code" type="java.lang.String">
 								<modifiers/>

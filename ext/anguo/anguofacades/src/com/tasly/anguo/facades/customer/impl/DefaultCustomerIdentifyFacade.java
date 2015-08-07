@@ -49,11 +49,16 @@ public class DefaultCustomerIdentifyFacade implements CustomerIdentifyFacade{
 	 * @throws Exception 
 	 */
 	public ImageData uploadEnterpriseLiceneses(final MultipartFile file) throws Exception {
-		final MediaModel mediaModel = createMedia(file);
-		final ImageData imageData = imageConverter.convert(mediaModel);
-		imageData.setCode(mediaModel.getCode());
-		imageData.setName(file.getOriginalFilename());
-		return imageData;
+		try{
+			final MediaModel mediaModel = createMedia(file);
+			final ImageData imageData = imageConverter.convert(mediaModel);
+			imageData.setCode(mediaModel.getCode());
+			imageData.setName(file.getOriginalFilename());
+			return imageData;
+		}catch(Exception e){
+			throw e;
+		}
+		
 	}
 	
 	private MediaFolderModel createMediaFoler() throws Exception{
@@ -85,23 +90,24 @@ public class DefaultCustomerIdentifyFacade implements CustomerIdentifyFacade{
 	}
 	
 	private MediaModel createMedia(MultipartFile file) throws Exception {
-		final MediaModel mediaModel = modelService.create(MediaModel.class);
-		mediaModel.setCode(UUID.randomUUID().toString());
-		mediaModel.setRealFileName(file.getOriginalFilename());
-		mediaModel.setAltText(StringUtils.substring(file.getOriginalFilename(), 0,StringUtils.lastIndexOf(file.getOriginalFilename(), ".")));
-		mediaModel.setFolder(createMediaFoler());
-		mediaModel.setMime("image/jpeg");
-		mediaModel.setCatalogVersion(cmsSiteService.getCurrentSite().getDefaultCatalog().getActiveCatalogVersion());
-		modelService.save(mediaModel);
 		try
 		{
+			final MediaModel mediaModel = modelService.create(MediaModel.class);
+			mediaModel.setCode(UUID.randomUUID().toString());
+			mediaModel.setRealFileName(file.getOriginalFilename());
+			mediaModel.setAltText(StringUtils.substring(file.getOriginalFilename(), 0,StringUtils.lastIndexOf(file.getOriginalFilename(), ".")));
+			mediaModel.setFolder(createMediaFoler());
+			mediaModel.setMime("image/jpeg");
+			mediaModel.setCatalogVersion(cmsSiteService.getCurrentSite().getDefaultCatalog().getActiveCatalogVersion());
+			modelService.save(mediaModel);
 			mediaService.setStreamForMedia(mediaModel, file.getInputStream());
+			return mediaModel;
 		}
 		catch (MediaIOException | IllegalArgumentException | IOException e)
 		{
 			LOG.error(e.getMessage());
+			throw e;
 		}
-		return mediaModel;
 	}
 
 	/**
