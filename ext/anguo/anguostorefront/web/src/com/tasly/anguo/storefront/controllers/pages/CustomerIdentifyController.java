@@ -19,9 +19,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.tasly.anguo.core.enums.CustomerStatus;
 import com.tasly.anguo.core.enums.UserType;
 import com.tasly.anguo.core.model.EnterpriseAccountModel;
 import com.tasly.anguo.core.model.PersonalAccountModel;
+import com.tasly.anguo.facades.constants.AnguoFacadesConstants;
 import com.tasly.anguo.storefront.controllers.ControllerConstants;
 import com.tasly.anguo.storefront.forms.AccountIdentifyForm;
 import com.tasly.anguo.storefront.forms.EnterpriseIdentifyForm;
@@ -137,7 +139,7 @@ public class CustomerIdentifyController extends AbstractSearchPageController {
 		if(userType.equals(UserType.PERSONAL.toString())) {
 			PersonalAccountModel user = (PersonalAccountModel)userService.getCurrentUser();
 			user.setPaymentInfos(getPaymentInfo(form));
-			user.setIdentified(true);
+			user.setStatus(CustomerStatus.PASS);
 			modelService.save(user);
 		}
 		//TODO
@@ -167,6 +169,13 @@ public class CustomerIdentifyController extends AbstractSearchPageController {
 	
 	private void updateEnterpriseAccountInfo(final EnterpriseIdentifyForm form) {
 		EnterpriseAccountModel user = (EnterpriseAccountModel)userService.getCurrentUser();
+		//if it's not the first time to identify,then remove all the old license pictures 
+		if(user.getStatus().toString().equals(CustomerStatus.ABJECT.toString())) {
+			Set<MediaModel> medias = user.getMedias();
+			modelService.removeAll(medias);
+			modelService.removeAll(user.getPaymentInfos());
+		}
+		user.setStatus(CustomerStatus.AUDITING);
 		user.setCompanyName(form.getCompanyName());
 		user.setPaymentInfos(getPaymentInfo(form));
 		user.setMedias(getLicenses(form));

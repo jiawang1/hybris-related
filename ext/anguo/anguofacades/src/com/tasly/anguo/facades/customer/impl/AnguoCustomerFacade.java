@@ -7,9 +7,11 @@ import java.util.ArrayList;
 import org.apache.log4j.Logger;
 import org.springframework.util.Assert;
 
+import com.tasly.anguo.core.enums.CustomerStatus;
 import com.tasly.anguo.core.enums.UserType;
 import com.tasly.anguo.core.model.EnterpriseAccountModel;
 import com.tasly.anguo.core.model.PersonalAccountModel;
+import com.tasly.anguo.facades.constants.AnguoFacadesConstants;
 
 import de.hybris.platform.commercefacades.customer.impl.DefaultCustomerFacade;
 import de.hybris.platform.commercefacades.user.data.RegisterData;
@@ -37,11 +39,11 @@ public class AnguoCustomerFacade extends DefaultCustomerFacade
         CustomerModel newCustomer = null;
         if (registerData.getUserType() == UserType.PERSONAL) {
             newCustomer = getModelService().create(PersonalAccountModel.class);
-            newCustomer.setIdentified(true);
+            newCustomer.setStatus(CustomerStatus.UNIDENTIFIED);
         } else if (registerData.getUserType() == UserType.ENTERPRISE) {
             newCustomer = getModelService()
                     .create(EnterpriseAccountModel.class);
-            newCustomer.setIdentified(false);
+            newCustomer.setStatus(CustomerStatus.UNIDENTIFIED);
         }
         newCustomer.setName(registerData.getLogin());
 
