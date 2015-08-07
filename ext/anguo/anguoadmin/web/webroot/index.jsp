@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+    <link rel="stylesheet" type="text/css" href="./_ui/common/js/widget/inputList.css" />
         <link rel="stylesheet" type="text/css" href="./_ui/common/css/bootstrap.css" />
         <link rel="stylesheet" type="text/css" href="./_ui/common/css/relayout.css" />
         <link rel="stylesheet" type="text/css" href="./_ui/common/css/style.css" />
@@ -30,11 +31,6 @@
                             bootstrap: 'lib/bootstrap',
                             jstree:'lib/jstree',
                             datatables:'lib/jquery.dataTables'
-//                             dataTablesEditor:'lib/dataTables.editor',
-//                             tableTools:'lib/dataTables.tableTools.min',
-//                             dataTablesEditable:'lib/jquery.dataTables.editable'
-                           // jdataTableEditor:'lib/jquery.dataTables.editable.js',
-                           // dataTableTools:'lib/dataTables.tableTools.min.js'
                         },
                         shim: {
                             underscore: {

@@ -3,14 +3,24 @@ define(['jquery','backbone', 'underscore',"text!./../template/navigationTpl.html
     
     var NavigationMenu = Backbone.View.extend({
         $el:$("<ul>"),
-        initialize: function(){
+        initialize: function(aCongig){
+            this.__aConfig = aCongig;
             
-            this.$el.on("click", ">ul",this.menuClickHandler);
+            $.each(this.__aConfig,function(index, item){
+                item.children&&$.each(item.children, function(index,child){
+                    if(child.link.indexOf("#") !== 0){
+                        child.link = item.link + child.link; 
+                    }
+                });
+            
+            });
+            this.$el.on("click", ">ul",$.proxy(this.menuClickHandler, this));
 
         },
         
         render:function(){
-            this.$el.html(_.template(sTemplate,{"data":[{"label": "Products", "link":"#products"},{"label": "Category", "link":"#category"},{"label": "Others", "link":"#others"}]}));
+            this.$el.html(_.template(sTemplate,{"data":this.__aConfig}));
+
             return this;
         },
         
@@ -18,10 +28,10 @@ define(['jquery','backbone', 'underscore',"text!./../template/navigationTpl.html
             
             e = e || window.event;
             var $element = $(e.target);
+            var targetURL;
             
-           function findTarget($element, finalDom){
+           function findTarget($element){
             
-               if($element[0] == finalDom) return;
                if($element.attr("data-link")){
                     return $element;
                }else{
@@ -29,37 +39,47 @@ define(['jquery','backbone', 'underscore',"text!./../template/navigationTpl.html
                }
            }
             
-            if($element.hasClass("glyphicon")){
-                var $subFrame =  $element.parent().next();
+//            if($element.hasClass("glyphicon")){
+//                var $subFrame =  $element.parent().next();
+//                
+//                if($element.hasClass("glyphicon-plus")){
+//                    $element.removeClass("glyphicon-plus").addClass("glyphicon-minus");
+//                    $subFrame.slideDown("fast");
+//                }else{
+//                    $element.removeClass("glyphicon-minus").addClass("glyphicon-plus");
+//                    $subFrame.slideUp("fast");
+//                    $subFrame.find("li.active").removeClass("active");
+//                }
+//                
+//                return false;
+//            }
+            
+            var $target = findTarget($(e.target));
+            
+            if($target.hasClass("active")) return false;    /* click itself*/
+            
+            if($target.hasClass("nav-super")){
                 
-                if($element.hasClass("glyphicon-plus")){
-                    $element.removeClass("glyphicon-plus").addClass("glyphicon-minus");
-//                    $subFrame.removeClass("relayout-hide");
-                    $subFrame.slideDown("fast");
+                var $icon = $target.children(".glyphicon");
+                var $subFrame = $target.next();
+                if($icon.hasClass("glyphicon-plus")){
+                    $icon.removeClass("glyphicon-plus").addClass("glyphicon-minus");
+                    $subFrame.hasClass("nav-sub")&&$subFrame.slideDown("fast");
                 }else{
-                    $element.removeClass("glyphicon-minus").addClass("glyphicon-plus");
-//                    $subFrame.addClass("relayout-hide");
-                    $subFrame.slideUp("fast");
-                    $subFrame.find("li.active").removeClass("active");
+                    $icon.removeClass("glyphicon-minus").addClass("glyphicon-plus");
+                    $subFrame.hasClass("nav-sub")&&$subFrame.slideUp("fast");
                 }
-                
-                return false;
+            } else {
+                $(".active", this.$el).removeClass("active");
+                $target.addClass("active");
+                targetURL = $target.attr("data-link");
             }
             
-            var $target = findTarget($(e.target), this);
-            
-            if(!$target) return false;
-
-            $target.siblings(".active").removeClass("active");
-            $target.addClass("active");
-            
-            
-            require(["applicationRouter"], function(oRouter){
-                 var targetLink = $target.attr("data-link");
-                 
-                targetLink&&oRouter.navigate(targetLink,{trigger: true});
+            targetURL&&require(["applicationRouter"], function(oRouter){
+                oRouter.navigate(targetURL,{trigger: true});
                 
             });
+
         }
         
         

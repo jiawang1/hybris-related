@@ -1,5 +1,5 @@
 var nEditing;
-define(['jquery','backbone', 'underscore', 'jstree','datatables','text!./../template/categoryTpl.html'],function($,Backbone,_, jstree,dataTable,sCategoryTpl){
+define(['jquery','backbone', 'underscore', 'lib/jstree','datatables','text!./../template/categoryTpl.html'],function($,Backbone,_, jstree,dataTable,sCategoryTpl){
     "use strict";
     var CategoryView = Backbone.View.extend({
         $el: $("div"),

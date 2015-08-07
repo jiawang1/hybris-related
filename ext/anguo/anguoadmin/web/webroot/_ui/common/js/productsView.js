@@ -22,9 +22,6 @@ define(['jquery','backbone', 'underscore','productModel','text!../template/produ
       	 
             that.$el.html(_.template(sProductTemplate,{"model": model}));
 
-            $(".input-list",that.$el).inputList({"label":'category'},['a','b']);
-           
-
          });
 
            return this;
