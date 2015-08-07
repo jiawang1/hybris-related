@@ -1,6 +1,5 @@
 package com.tasly.anguo.storefront.forms;
 
-import de.hybris.platform.validation.annotations.NotBlank;
 
 public class PersonalIdentifyForm {
 

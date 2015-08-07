@@ -36,6 +36,14 @@
 </div>
 <script type="text/javascript">
 $(function(){
+function updateDeleteButtonValue() {
+    var index = $("#tdContacts").children().length;
+    if (index == 1) {
+    	$("#tdContacts").first().find("a[name='deleteEle']").text('<spring:theme code="text.clear"/>')	
+    } else {
+        $("#tdContacts").first().find("a[name='deleteEle']").text('<spring:theme code="text.delete"/>')      	
+    }
+}
 $("a[name='addEle']").on("click", function(){
 	addContact();
 });	
@@ -58,6 +66,7 @@ function addContact() {
 	$("#tdContacts").last().find("a[name='deleteEle']").click(function(){
 		deleteContact(this);
 	});
+	updateDeleteButtonValue();
 }
 
 function deleteContact(ele) {
@@ -74,6 +83,7 @@ function deleteContact(ele) {
     	    $(e).val("");
     	});
     }
+    updateDeleteButtonValue();
 	
 }
 function updateContactIndex(el) {
@@ -86,5 +96,6 @@ function updateContactIndex(el) {
 if ($("#tdContacts").children().length == 0) {
     addContact();
 }
+updateDeleteButtonValue();
 })
 </script>

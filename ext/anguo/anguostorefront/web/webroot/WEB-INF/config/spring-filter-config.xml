@@ -131,6 +131,7 @@
 		<property name="storeSessionFacade" ref="storeSessionFacade"/>
 		<property name="browseHistory" ref="browseHistory"/>
 		<property name="cookieGenerator" ref="sessionCookieGenerator"/>
+		<property name="anguoStoreService" ref="anguoStoreService"/>
 	</bean>
 	
 	<bean id="cartRestorationFilter" class="com.tasly.anguo.storefront.filters.CartRestorationFilter" >

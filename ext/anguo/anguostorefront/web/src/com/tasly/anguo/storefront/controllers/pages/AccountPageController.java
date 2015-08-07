@@ -40,6 +40,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.tasly.anguo.core.exceptions.DuplicateEnterpriseRegisterIdException;
 import com.tasly.anguo.facades.customer.impl.AnguoCustomerFacade;
 import com.tasly.anguo.facades.user.data.ContactData;
 import com.tasly.anguo.facades.user.data.EnterpriseInformationData;
@@ -309,6 +310,7 @@ public class AccountPageController extends AbstractSearchPageController
         form.setRegisterId(eData.getRegisterId() == null? "" : eData.getRegisterId().toString());
         form.setFax(eData.getFax());
         form.setContacts(eData.getContacts());
+        form.setFirstTimeUpdate(StringUtils.isEmpty(eData.getName())? "true":"false");
         model.addAttribute(form);
         return ControllerConstants.Views.Pages.Account.AccountEnterprisePage;
     }
@@ -320,6 +322,13 @@ public class AccountPageController extends AbstractSearchPageController
             final BindingResult bindingResult, final Model model, final HttpServletRequest request,
             final HttpServletResponse response, final RedirectAttributes redirectModel) throws CMSItemNotFoundException, DuplicateUidException
     {
+        EnterpriseInformationData eData = customerFacade.getEnterpriseInformation();
+        if (!StringUtils.isEmpty(eData.getName())) {
+            form.setName(eData.getName());
+        }
+        if (eData.getRegisterId() != null) {
+            form.setRegisterId(eData.getRegisterId().toString());
+        }
         anguoEnterpriseInformationValidator.validate(form, bindingResult);
         if (bindingResult.hasErrors())
         {
@@ -334,10 +343,16 @@ public class AccountPageController extends AbstractSearchPageController
         eid.setPhone(form.getPhone());
         eid.setFax(form.getFax());
         eid.setContacts(form.getContacts());
-        customerFacade.updateEnterpriseInformation(eid);
+        try {
+            customerFacade.updateEnterpriseInformation(eid);
+        } catch (DuplicateEnterpriseRegisterIdException e) {
+            bindingResult.rejectValue("registerId", "text.account.enterprise.register.id.duplicated");
+            model.addAttribute(form);
+            GlobalMessages.addErrorMessage(model, "form.global.error");
+            return ControllerConstants.Views.Pages.Account.AccountEnterprisePage;
+        }
 
-        model.addAttribute(form);
-        return ControllerConstants.Views.Pages.Account.AccountEnterprisePage;
+        return REDIRECT_PREFIX + "/identify";
     }
 	
 	@RequestMapping(value = "/order/" + ORDER_CODE_PATH_VARIABLE_PATTERN, method = RequestMethod.GET)

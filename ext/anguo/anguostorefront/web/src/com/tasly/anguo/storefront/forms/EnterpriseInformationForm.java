@@ -3,12 +3,20 @@ package com.tasly.anguo.storefront.forms;
 import java.util.List;
 import com.tasly.anguo.facades.user.data.ContactData;
 public class EnterpriseInformationForm {
+    private String firstTimeUpdate;
+    public String getFirstTimeUpdate() {
+        return firstTimeUpdate;
+    }
+    public void setFirstTimeUpdate(String firstTimeUpdate) {
+        this.firstTimeUpdate = firstTimeUpdate;
+    }
     private String name;
     private String registerId;
     private String address;
     private String phone;
     private String fax;
     private List<ContactData> contacts;
+
     public List<ContactData> getContacts() {
         return contacts;
     }

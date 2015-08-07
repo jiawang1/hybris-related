@@ -13,10 +13,11 @@ $(function(){
 //		   });		
 		
 		if ($("#approveStatus").val() == "CREATE_WAIT") {
-			$('#anguoStoreDiv').find(':input').prop('disabled', true);
-			$('#anguoStoreDiv a').click(function(e) {
-			    e.preventDefault();
-			});
+//TODO For test only, uncomment it for the product use.			
+//			$('#anguoStoreDiv').find(':input').prop('disabled', true);
+//			$('#anguoStoreDiv a').click(function(e) {
+//			    e.preventDefault();
+//			});
 		}else if($("#approveStatus").val() == "MODIFY_WAIT"){
 			jQuery.each(fieldsNeedApprove, function(index, value) {
 			       console.log(this);

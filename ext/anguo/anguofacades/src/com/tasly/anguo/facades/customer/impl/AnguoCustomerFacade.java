@@ -8,6 +8,7 @@ import org.apache.log4j.Logger;
 import org.springframework.util.Assert;
 
 import com.tasly.anguo.core.enums.UserType;
+import com.tasly.anguo.core.exceptions.DuplicateEnterpriseRegisterIdException;
 import com.tasly.anguo.core.model.EnterpriseAccountModel;
 import com.tasly.anguo.core.model.PersonalAccountModel;
 import com.tasly.anguo.core.service.impl.AnguoCustomerAccountService;
@@ -22,6 +23,7 @@ import de.hybris.platform.core.enums.PhoneContactInfoType;
 import de.hybris.platform.core.model.user.AbstractContactInfoModel;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.core.model.user.PhoneContactInfoModel;
+import de.hybris.platform.core.model.user.UserModel;
 
 public class AnguoCustomerFacade extends DefaultCustomerFacade
 
@@ -71,6 +73,17 @@ public class AnguoCustomerFacade extends DefaultCustomerFacade
 
     }
     
+    @Override
+    public void loginSuccess() {
+        super.loginSuccess();
+        UserModel user = getUserService().getCurrentUser();
+        if(user != null && user instanceof EnterpriseAccountModel) {
+            getSessionService().setAttribute("userType", UserType.ENTERPRISE.toString());
+        }else if(user != null && user instanceof PersonalAccountModel) {
+            getSessionService().setAttribute("userType", UserType.PERSONAL.toString());
+        }
+    }
+    
     public EnterpriseInformationData getEnterpriseInformation() {
         EnterpriseAccountModel eam = (EnterpriseAccountModel)getCurrentSessionCustomer();
         EnterpriseInformationData eid = new EnterpriseInformationData();
@@ -80,7 +93,7 @@ public class AnguoCustomerFacade extends DefaultCustomerFacade
     }
     
     public void updateEnterpriseInformation(
-            final EnterpriseInformationData enterpriseInformationData) throws DuplicateUidException {
+            final EnterpriseInformationData enterpriseInformationData) throws DuplicateUidException, DuplicateEnterpriseRegisterIdException {
 //        validateDataBeforeUpdate(customerData);
 //
 //        final String name = getCustomerNameStrategy().getName(
@@ -99,5 +112,7 @@ public class AnguoCustomerFacade extends DefaultCustomerFacade
 //        getCustomerAccountService().updateProfile(customer,
 //                customerData.getTitleCode(), name, customerData.getUid());
     }
+    
+    
 
 }

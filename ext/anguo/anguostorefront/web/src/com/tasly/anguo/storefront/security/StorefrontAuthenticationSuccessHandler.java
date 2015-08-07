@@ -74,9 +74,7 @@ public class StorefrontAuthenticationSuccessHandler extends SavedRequestAwareAut
 	@Override
 	public void onAuthenticationSuccess(final HttpServletRequest request, final HttpServletResponse response,
 			final Authentication authentication) throws IOException, ServletException
-	{
-		setSessionInfoForStorefront();
-		
+	{		
 		getCustomerFacade().loginSuccess();
 		request.setAttribute(CART_MERGED, Boolean.FALSE);
 
@@ -117,15 +115,6 @@ public class StorefrontAuthenticationSuccessHandler extends SavedRequestAwareAut
 		}
 		getBruteForceAttackCounter().resetUserCounter(getCustomerFacade().getCurrentCustomer().getUid());
 		super.onAuthenticationSuccess(request, response, authentication);
-	}
-
-	private void setSessionInfoForStorefront() {
-		UserModel user = userService.getCurrentUser();
-		if(user != null && user instanceof EnterpriseAccountModel) {
-			getSessionService().setAttribute("userType", UserType.ENTERPRISE.toString());
-		}else if(user != null && user instanceof PersonalAccountModel) {
-			getSessionService().setAttribute("userType", UserType.PERSONAL.toString());
-		}
 	}
 
 	protected List<String> getRestrictedPages()

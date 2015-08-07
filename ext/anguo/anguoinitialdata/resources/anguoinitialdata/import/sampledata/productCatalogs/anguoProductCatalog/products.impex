@@ -8,18 +8,34 @@ $catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[defa
 $supercategories=supercategories(code, $catalogVersion)
 $approved=approvalstatus(code)[default='approved']
 
-$productStatus=productStatus(code)[default='ONSALE']
+$productStatus=productStatus(code)[default='ONLINE']
 $packageUnit=packageUnit(code)[default='PACKAGE']
 
+$lang=zh
+$anguostore1 = anguostore(uid)[default='0000000001']
+$anguostore2 = anguostore(uid)[default='0000000002']
+$anguostore3 = anguostore(uid)[default='0000000003']
+
 # Insert Products
+INSERT_UPDATE Product;code[unique=true];$supercategories;unit(code);$catalogVersion;$approved;$productStatus;$packageUnit;$anguostore1
+;千年人参;人参;KG
+;泽兰;泽兰;KG
+;薄片白芍;白芍;KG
+;炙白芍,炒白芍;白芍;KG
+;野生川贝;川贝母;KG
 
-INSERT_UPDATE Product;code[unique=true];$supercategories;unit(code)[default=pieces];$catalogVersion;$approved[default=approved]
-;千年人参;人参;
+INSERT_UPDATE Product;code[unique=true];$supercategories;unit(code);$catalogVersion;$approved;$productStatus;$packageUnit;$anguostore2
+;松贝母（川贝母）;川贝母;KG
+;炒王不留行;王不留行;KG
+;世元药业 炒王不留行;王不留行;KG
+;正品白莲子;莲子;KG
+;红莲子;莲子;KG
+;世元药业 莲子 白莲子;莲子;KG
+;正品三年陈皮;陈皮;KG
+;杂皮、陈皮 统;陈皮;KG
 
-INSERT_UPDATE Product;code[unique=true];$supercategories;unit(code);$catalogVersion;$approved;$productStatus;$packageUnit
-
-;泽兰;泽兰;
-;薄片白芍;白芍;
-;炙白芍,炒白芍;白芍;
-;野生川贝;川贝母
-;松贝母（川贝母）;川贝母
+INSERT_UPDATE Product;code[unique=true];$supercategories;unit(code);$catalogVersion;$approved;$productStatus;$packageUnit;$anguostore3
+;艾叶 医草 艾蒿 灸草 五月艾 统货;艾叶;KG
+;百川药业 艾叶;艾叶;KG
+;大叶映山红;满山红;KG
+;手剪荷叶茶方块荷叶茶;荷叶;KG

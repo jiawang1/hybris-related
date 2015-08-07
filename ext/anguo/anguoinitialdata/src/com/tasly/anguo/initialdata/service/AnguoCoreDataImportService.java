@@ -1,13 +1,13 @@
 package com.tasly.anguo.initialdata.service;
 
-import java.util.Iterator;
-import java.util.List;
-
 import de.hybris.platform.commerceservices.dataimport.impl.CoreDataImportService;
 import de.hybris.platform.commerceservices.setup.AbstractSystemSetup;
 import de.hybris.platform.commerceservices.setup.data.ImportData;
 import de.hybris.platform.core.initialization.SystemSetupContext;
 import de.hybris.platform.validation.services.ValidationService;
+
+import java.util.Iterator;
+import java.util.List;
 
 public class AnguoCoreDataImportService extends CoreDataImportService {
 
@@ -52,9 +52,15 @@ public class AnguoCoreDataImportService extends CoreDataImportService {
 			  /* AM-206 Bo Lou add content catalog into initializing and synchronize from stage to online end */
 			  List<String> storeNameList = data.getStoreNames();			  
 			  for(int i = 0; i < storeNameList.size();i++)
-			      this.importStore(extensionName, storeNameList.get(i), data.getProductCatalogName()); 
-			  
-		    }
+				  this.importStore(extensionName, storeNameList.get(i), data.getProductCatalogName());
+
+			  /* AM-255 wangqingxiang@tasly.com add solr and job into initializing */
+              for(int i = 0; i < storeNameList.size();i++) {
+				this.importSolrIndex(extensionName, storeNameList.get(i));
+				this.importJobs(extensionName, storeNameList.get(i));
+              }
+              /*end */
+            }
 
 			ValidationService validation = (ValidationService) getBeanForName("validationService");
 			

@@ -15,6 +15,8 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.tasly.anguo.core.constants.GeneratedAnguoCoreConstants.Attributes.DebitPaymentInfo;
@@ -22,6 +24,7 @@ import com.tasly.anguo.core.enums.UserType;
 import com.tasly.anguo.core.model.EnterpriseAccountModel;
 import com.tasly.anguo.core.model.PersonalAccountModel;
 import com.tasly.anguo.storefront.controllers.ControllerConstants;
+import com.tasly.anguo.storefront.forms.EnterpriseIdentifyForm;
 import com.tasly.anguo.storefront.forms.PersonalIdentifyForm;
 import com.tasly.anguo.storefront.forms.validation.AccountNumberValidator;
 import com.tasly.anguo.storefront.forms.validation.IdCardValidator;
@@ -72,7 +75,8 @@ public class CustomerIdentifyController extends AbstractSearchPageController {
 			model.addAttribute(new PersonalIdentifyForm());
 			return ControllerConstants.Views.Pages.CustomerIdentify.IdCardIdentify;
 		}else {
-			return "";
+			model.addAttribute(new EnterpriseIdentifyForm());
+			return ControllerConstants.Views.Pages.CustomerIdentify.EnterpriseIdentify;
 		}
 	}
 	
@@ -94,13 +98,12 @@ public class CustomerIdentifyController extends AbstractSearchPageController {
 			return ControllerConstants.Views.Pages.CustomerIdentify.IdCardIdentify;
 		}
 		String userType = sessionService.getAttribute("userType");
-		if(userType.equals(UserType.PERSONAL)) {
+		if(userType.equals(UserType.PERSONAL.toString())) {
 			PersonalAccountModel user = (PersonalAccountModel)userService.getCurrentUser();
 			user.setIdCard(form.getIdCard());
 			user.setIdName(form.getIdName());
 			modelService.save(user);
 		}
-		
 		return ControllerConstants.Views.Pages.CustomerIdentify.AccountNumberIdentify;
 	}
 	
@@ -123,18 +126,24 @@ public class CustomerIdentifyController extends AbstractSearchPageController {
 		}
 		
 		String userType = sessionService.getAttribute("userType");
-		if(userType.equals(UserType.PERSONAL)) {
-			PersonalAccountModel user = (PersonalAccountModel)userService.getCurrentUser();
-			DebitPaymentInfoModel paymentInfo =  modelService.create(DebitPaymentInfoModel.class);
-			paymentInfo.setBank(form.getBank());
-			paymentInfo.setAccountNumber(form.getAccountNumber());
-			paymentInfo.setBaOwner(form.getAccountOwer());
-			Collection<PaymentInfoModel> paymentInfos = new ArrayList<PaymentInfoModel>();
-			paymentInfos.add(paymentInfo);
-			user.setPaymentInfos(paymentInfos);
-			modelService.save(user);
+		if(userType.equals(UserType.PERSONAL.toString())) {
+			setPaymentInfo(form);
 		}
+		//TODO
 		return ControllerConstants.Views.Pages.CustomerIdentify.AccountNumberIdentify;
+	}
+
+	private void setPaymentInfo(final PersonalIdentifyForm form) {
+		PersonalAccountModel user = (PersonalAccountModel)userService.getCurrentUser();
+		DebitPaymentInfoModel paymentInfo =  modelService.create(DebitPaymentInfoModel.class);
+		paymentInfo.setBank(form.getBank());
+		paymentInfo.setAccountNumber(form.getAccountNumber());
+		paymentInfo.setBaOwner(form.getAccountOwer());
+		Collection<PaymentInfoModel> paymentInfos = new ArrayList<PaymentInfoModel>();
+		paymentInfos.add(paymentInfo);
+		user.setPaymentInfos(paymentInfos);
+		user.setIdentified(true);
+		modelService.save(user);
 	}
 	
 	/**
@@ -143,11 +152,12 @@ public class CustomerIdentifyController extends AbstractSearchPageController {
 	 * @return
 	 * @throws CMSItemNotFoundException
 	 */
-	@RequestMapping(value="enterpriseIdentify", method = RequestMethod.POST)
-	public String enterpriseIdentify(final Model model) throws CMSItemNotFoundException
+	@RequestMapping(value="identifyEnterprise", method = RequestMethod.POST)
+	public String identifyEnterprise(@RequestParam final MultipartFile[] uploadFiles, final BindingResult bindingResult,
+			final HttpServletRequest request, final HttpServletResponse response,final RedirectAttributes redirectModel) throws CMSItemNotFoundException
 	{
 		
-		return "";
+	     return ControllerConstants.Views.Pages.CustomerIdentify.EnterpriseIdentify;
 	}
 	
 	

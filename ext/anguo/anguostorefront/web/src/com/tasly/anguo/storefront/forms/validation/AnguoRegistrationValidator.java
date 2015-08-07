@@ -103,10 +103,11 @@ public class AnguoRegistrationValidator extends RegistrationValidator
 		if (StringUtils.isEmpty(captcha))
 		{
 			errors.rejectValue("captcha", "register.captcha.invalid");			
-		} else if (captchaService.verifyCaptcha(mobileNumber, captcha) != CaptchaVerifyStatus.CORRECT)
-		{
-            errors.rejectValue("captcha", "register.captcha.invalid");          
-		}
+		} 
+//		else if (captchaService.verifyCaptcha(mobileNumber, captcha) != CaptchaVerifyStatus.CORRECT)
+//		{
+//            errors.rejectValue("captcha", "register.captcha.invalid");          
+//		}
 	}
 
 	public boolean validateEmailAddress(final String email)

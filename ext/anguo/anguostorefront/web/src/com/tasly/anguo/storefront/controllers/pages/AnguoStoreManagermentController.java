@@ -1,5 +1,25 @@
 package com.tasly.anguo.storefront.controllers.pages;
 
+import de.hybris.platform.acceleratorstorefrontcommons.annotations.RequireHardLogIn;
+import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractSearchPageController;
+import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
+import de.hybris.platform.catalog.CatalogVersionService;
+import de.hybris.platform.chinaaccelerator.services.model.location.CityModel;
+import de.hybris.platform.chinaaccelerator.services.model.location.DistrictModel;
+import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
+import de.hybris.platform.commercefacades.i18n.I18NFacade;
+import de.hybris.platform.commercefacades.order.CheckoutFacade;
+import de.hybris.platform.commercefacades.user.data.CountryData;
+import de.hybris.platform.commercefacades.user.data.RegionData;
+import de.hybris.platform.core.model.c2l.CountryModel;
+import de.hybris.platform.core.model.c2l.RegionModel;
+import de.hybris.platform.core.model.user.CustomerModel;
+import de.hybris.platform.core.model.user.UserModel;
+import de.hybris.platform.servicelayer.media.MediaService;
+import de.hybris.platform.servicelayer.model.ModelService;
+import de.hybris.platform.servicelayer.user.UserService;
+import de.hybris.platform.util.Config;
+
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Calendar;
@@ -31,32 +51,12 @@ import com.tasly.anguo.core.model.AnguoPlatformServiceModel;
 import com.tasly.anguo.core.model.AnguoStoreModel;
 import com.tasly.anguo.core.model.AnguoStoreTempModel;
 import com.tasly.anguo.facades.anguostore.AnguoStoreManagermentFacade;
+import com.tasly.anguo.facades.data.AbstractLocationItemData;
 import com.tasly.anguo.facades.data.RegionResultData;
 import com.tasly.anguo.facades.location.CityFacade;
 import com.tasly.anguo.facades.location.DistrictFacade;
 import com.tasly.anguo.store.data.AnguoStoreManagermentData;
 import com.tasly.anguo.storefront.forms.AnguoStoreApplyForm;
-
-import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
-import de.hybris.platform.acceleratorstorefrontcommons.annotations.RequireHardLogIn;
-import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractSearchPageController;
-import de.hybris.platform.catalog.CatalogVersionService;
-import de.hybris.platform.chinaaccelerator.services.model.location.CityModel;
-import de.hybris.platform.chinaaccelerator.services.model.location.DistrictModel;
-import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
-import de.hybris.platform.commercefacades.i18n.I18NFacade;
-import de.hybris.platform.commercefacades.order.CheckoutFacade;
-import de.hybris.platform.commercefacades.user.data.CountryData;
-import de.hybris.platform.commercefacades.user.data.RegionData;
-import com.tasly.anguo.facades.data.AbstractLocationItemData;
-import de.hybris.platform.core.model.c2l.CountryModel;
-import de.hybris.platform.core.model.c2l.RegionModel;
-import de.hybris.platform.core.model.user.CustomerModel;
-import de.hybris.platform.core.model.user.UserModel;
-import de.hybris.platform.servicelayer.media.MediaService;
-import de.hybris.platform.servicelayer.model.ModelService;
-import de.hybris.platform.servicelayer.user.UserService;
-import de.hybris.platform.util.Config;
 
 
 @Controller
@@ -75,11 +75,15 @@ public class AnguoStoreManagermentController extends AbstractSearchPageControlle
 
 	@Resource(name = "districtFacade")
 	private DistrictFacade districtFacade;
-	
+
 	@Resource(name = "userService")
-	private UserService userService;		
-	
-	private static final String REDIRECT_SHOW_ANGUOSTORE_MANAGE = REDIRECT_PREFIX + "/anguo-storemanagerment/show-anguostore-manage";
+	private UserService userService;
+
+	private static final String REDIRECT_SHOW_ANGUOSTORE_MANAGE = REDIRECT_PREFIX
+			+ "/anguo-storemanagerment/show-anguostore-manage";
+
+	private static final String FORWARD_SHOW_ANGUOSTORE_MANAGE = FORWARD_PREFIX + "/anguo-storemanagerment/show-anguostore-manage";
+
 
 	@Resource(name = "anguoStoreManagermentFacade")
 	private AnguoStoreManagermentFacade anguoStoreManagermentFacade;
@@ -95,82 +99,85 @@ public class AnguoStoreManagermentController extends AbstractSearchPageControlle
 
 	@Resource(name = "anguoStoreApplyValidator")
 	private Validator anguoStoreApplyValidator;
-	
+
 	@Resource(name = "acceleratorCheckoutFacade")
 	private CheckoutFacade checkoutFacade;
 
 	@RequestMapping(value = "/saveStore", method = RequestMethod.POST)
-	public String addStore(AnguoStoreApplyForm anguoStoreApplyForm, final HttpServletRequest request,
+	public String addStore(final AnguoStoreApplyForm anguoStoreApplyForm, final HttpServletRequest request,
 			final BindingResult bindingResult, final Model model) throws Exception
 	{
-		// 判断enctype属性是否为multipart/form-data   
-		boolean isMultipart = ServletFileUpload.isMultipartContent(request);
-		String encoding = request.getCharacterEncoding();
+		// 判断enctype属性是否为multipart/form-data
+		final boolean isMultipart = ServletFileUpload.isMultipartContent(request);
+		final String encoding = request.getCharacterEncoding();
 
-		CustomerModel customer = (CustomerModel)userService.getCurrentUser();
-		AnguoStoreModel anguoStore = customer.getAnguoStore();
-		AnguoStoreTempModel anguoTempStore = customer.getAnguoStoreTemp();
-		
+		final CustomerModel customer = (CustomerModel) userService.getCurrentUser();
+		final AnguoStoreModel anguoStore = customer.getAnguoStore();
+		final AnguoStoreTempModel anguoTempStore = customer.getAnguoStoreTemp();
+
 		StoreApproveStatus approveStatus = null;
-		// Create a factory for disk-based file items   
-		DiskFileItemFactory factory = new DiskFileItemFactory();
+		// Create a factory for disk-based file items
+		final DiskFileItemFactory factory = new DiskFileItemFactory();
 
-		// 当上传文件太大时，因为虚拟机能使用的内存是有限的，所以此时要通过临时文件来实现上传文件的保存   
-		// 此方法是设置是否使用临时文件的临界值（单位：字节）   
-		//		factory.setSizeThreshold(yourMaxMemorySize);  
+		// 当上传文件太大时，因为虚拟机能使用的内存是有限的，所以此时要通过临时文件来实现上传文件的保存
+		// 此方法是设置是否使用临时文件的临界值（单位：字节）
+		//		factory.setSizeThreshold(yourMaxMemorySize);
 
-		// 与上一个结合使用，设置临时文件的路径（绝对路径）   
-		//		factory.setRepository(yourTempDirectory);  
+		// 与上一个结合使用，设置临时文件的路径（绝对路径）
+		//		factory.setRepository(yourTempDirectory);
 
-		// Create a new file upload handler   
-		ServletFileUpload upload = new ServletFileUpload(factory);
+		// Create a new file upload handler
+		final ServletFileUpload upload = new ServletFileUpload(factory);
 
-		// 设置上传内容的大小限制（单位：字节）   
-		//		upload.setSizeMax(yourMaxRequestSize);  
+		// 设置上传内容的大小限制（单位：字节）
+		//		upload.setSizeMax(yourMaxRequestSize);
 
 		upload.setHeaderEncoding(encoding);
 
-		// Parse the request   
-		List<?> items = upload.parseRequest(request);
+		// Parse the request
+		final List<?> items = upload.parseRequest(request);
 
-		AnguoStoreManagermentData anguoStoreData = new AnguoStoreManagermentData();
+		final AnguoStoreManagermentData anguoStoreData = new AnguoStoreManagermentData();
 
-		Iterator iter = items.iterator();
+		final Iterator iter = items.iterator();
 		while (iter.hasNext())
 		{
-			FileItem item = (FileItem) iter.next();
+			final FileItem item = (FileItem) iter.next();
 
 			buildAnguoStoreApplyForm(anguoStoreApplyForm, item, encoding);
 		}
 
 		getAnguoStoreApplyValidator().validate(anguoStoreApplyForm, bindingResult);
-		
+
 		if (bindingResult.hasErrors())
 		{
 			GlobalMessages.addErrorMessage(model, "form.global.error");
-			return "pages/store/anguoStoreApplyPage";
+			return FORWARD_SHOW_ANGUOSTORE_MANAGE;
 		}
 
-		BeanUtils.copyProperties(anguoStoreApplyForm, anguoStoreData);		
-		
-		if (anguoTempStore != null) {
+		BeanUtils.copyProperties(anguoStoreApplyForm, anguoStoreData);
+
+		if (anguoTempStore != null)
+		{
 			approveStatus = anguoTempStore.getStatus();
-//			if (StoreApproveStatus.CREATE_APPROVE.equals(approveStatus) || StoreApproveStatus.MODIFY_APPROVE.equals(approveStatus)) {
-				anguoStoreData.setStatus(StoreApproveStatus.MODIFY_WAIT);
-				getAnguoStoreManagermentFacade().updateStore(anguoStoreData);
-//			}
-			
-		}else if(anguoTempStore == null){
+			//			if (StoreApproveStatus.CREATE_APPROVE.equals(approveStatus) || StoreApproveStatus.MODIFY_APPROVE.equals(approveStatus)) {
+			anguoStoreData.setStatus(StoreApproveStatus.MODIFY_WAIT);
+			getAnguoStoreManagermentFacade().updateStore(anguoStoreData);
+			//			}
+
+		}
+		else if (anguoTempStore == null)
+		{
 			anguoStoreData.setStatus(StoreApproveStatus.CREATE_WAIT);
 			anguoStoreData.setRegisterDate(Calendar.getInstance().getTime());
-			getAnguoStoreManagermentFacade().addStore(anguoStoreData);			
+			getAnguoStoreManagermentFacade().addStore(anguoStoreData);
 		}
 
-//		return "pages/store/anguoStoreApplyPage";
+		//		return "pages/store/anguoStoreApplyPage";
 		return REDIRECT_SHOW_ANGUOSTORE_MANAGE;
 	}
 
-	private void buildAnguoStoreApplyForm(AnguoStoreApplyForm newStore, FileItem item, String encoding)
+	private void buildAnguoStoreApplyForm(final AnguoStoreApplyForm newStore, final FileItem item, final String encoding)
 			throws UnsupportedEncodingException
 	{
 		if ("name".equals(item.getFieldName()))
@@ -250,15 +257,15 @@ public class AnguoStoreManagermentController extends AbstractSearchPageControlle
 	{
 
 		model.addAttribute("formActionURL", "teststoreapplypage");
-		AnguoStoreApplyForm anguoStoreApplyForm = new AnguoStoreApplyForm();
+		final AnguoStoreApplyForm anguoStoreApplyForm = new AnguoStoreApplyForm();
 		anguoStoreApplyForm.setApproveStatus("CREATE_NEW");
 		model.addAttribute(anguoStoreApplyForm);
-		
-//		model.addAttribute("regions", getI18NFacade().getRegionsForCountryIso("CN"));
+
+		//		model.addAttribute("regions", getI18NFacade().getRegionsForCountryIso("CN"));
 		model.addAttribute("countries", getCountries());
 		return "pages/store/anguoStoreApplyPage";
 	}
-	
+
 	@ModelAttribute("countries")
 	public Collection<CountryData> getCountries()
 	{
@@ -281,7 +288,8 @@ public class AnguoStoreManagermentController extends AbstractSearchPageControlle
 
 		if (incomingAddressForm.getRegionIso() != null && !incomingAddressForm.getRegionIso().isEmpty())
 		{
-			final List<AbstractLocationItemData> cityDTOs = getCityFacade().getCitiesByRegionCode(incomingAddressForm.getRegionIso());
+			final List<AbstractLocationItemData> cityDTOs = getCityFacade()
+					.getCitiesByRegionCode(incomingAddressForm.getRegionIso());
 			data.setCities(cityDTOs);
 		}
 
@@ -294,56 +302,62 @@ public class AnguoStoreManagermentController extends AbstractSearchPageControlle
 
 		return data;
 	}
-	
+
 	/**
 	 * Show the store info modify page.
-	 * 
+	 *
 	 * @param isModify
 	 * @param model
 	 * @return
-	 * @throws InvocationTargetException 
-	 * @throws IllegalAccessException 
+	 * @throws InvocationTargetException
+	 * @throws IllegalAccessException
 	 */
-	@RequestMapping(value = "/show-anguostore-manage", method = RequestMethod.GET)
+	@RequestMapping(value = "/show-anguostore-manage")
 	@RequireHardLogIn
 	public String showStoreInfoManage(final Model model) throws IllegalAccessException, InvocationTargetException
 	{
-		
-		UserModel currentUser = userService.getCurrentUser();
-		CustomerModel customer = (CustomerModel)currentUser;
+
+		final UserModel currentUser = userService.getCurrentUser();
+		final CustomerModel customer = (CustomerModel) currentUser;
 		AnguoStoreModel anguoStore = null;
 		AnguoStoreTempModel anguoStoreTemp = null;
 		StoreApproveStatus approveStatus = null;
-		StringBuffer platformServiceStr = new StringBuffer();
-		
+		final StringBuffer platformServiceStr = new StringBuffer();
+
 		AnguoStoreApplyForm storeApplyForm = new AnguoStoreApplyForm();
 		CountryModel country = null;
 		RegionModel region = null;
 		CityModel city = null;
 		DistrictModel cityDistrict = null;
-		
+
 		anguoStore = customer.getAnguoStore();
 		anguoStoreTemp = customer.getAnguoStoreTemp();
-		
-		
-		if (anguoStoreTemp != null) {
+
+
+		if (anguoStoreTemp != null)
+		{
 			approveStatus = anguoStoreTemp.getStatus();
-			
-			if (!StoreApproveStatus.CREATE_REJECT.equals(approveStatus)) {
+
+			if (!StoreApproveStatus.CREATE_REJECT.equals(approveStatus))
+			{
 				city = anguoStoreTemp.getCity();
-				if (city != null) {
+				if (city != null)
+				{
 					storeApplyForm.setCityCode(city.getCode());
 				}
 				cityDistrict = anguoStoreTemp.getCityDistrict();
-				if (cityDistrict != null) {
+				if (cityDistrict != null)
+				{
 					storeApplyForm.setCityDistrictCode(cityDistrict.getCode());
 				}
 				region = anguoStoreTemp.getRegion();
-				if (region != null) {
+				if (region != null)
+				{
 					storeApplyForm.setRegionIso(region.getIsocode());
 				}
 				country = anguoStoreTemp.getCountry();
-				if (country != null) {
+				if (country != null)
+				{
 					storeApplyForm.setCountryIso(country.getIsocode());
 				}
 
@@ -355,45 +369,56 @@ public class AnguoStoreManagermentController extends AbstractSearchPageControlle
 				storeApplyForm.setContactPhone3(anguoStoreTemp.getContactPhone3());
 				storeApplyForm.setDescription(anguoStoreTemp.getDescription());
 				storeApplyForm.setFax(anguoStoreTemp.getFax());
-//				storeApplyForm.setLogo(anguoStore.getLogo());
+				//				storeApplyForm.setLogo(anguoStore.getLogo());
 				storeApplyForm.setLogoUrl(anguoStoreTemp.getLogo().getURL());
 				storeApplyForm.setName(anguoStoreTemp.getName());
 				storeApplyForm.setQq(anguoStoreTemp.getQq());
 				storeApplyForm.setStreet(anguoStoreTemp.getStreet());
 				storeApplyForm.setTelephone(anguoStoreTemp.getTelephone());
 				storeApplyForm.setRegisterTime(anguoStoreTemp.getRegisterDate().toString());
-				storeApplyForm.setStoreLevel(anguoStoreTemp.getStoreLevel());
-				storeApplyForm.setStoreTemplate(anguoStoreTemp.getStoreTemplate());
-				
-				for (AnguoPlatformServiceModel anguoPlatformServiceModel : anguoStoreTemp.getAnguoPlatformService()) {
+				//				storeApplyForm.setStoreLevel(anguoStoreTemp.getStoreLevel());
+				//				storeApplyForm.setStoreTemplate(anguoStoreTemp.getStoreTemplate());
+
+				for (final AnguoPlatformServiceModel anguoPlatformServiceModel : anguoStoreTemp.getAnguoPlatformService())
+				{
 					platformServiceStr.append(anguoPlatformServiceModel.getDescription() + " ");
 				}
 				storeApplyForm.setAnguoPlatformService(platformServiceStr.toString());
-				
+
 			}
-			
+
 			storeApplyForm.setApproveStatus(anguoStoreTemp.getStatus().getCode());
-		}else{
+		}
+		else
+		{
 			storeApplyForm = new AnguoStoreApplyForm();
 			storeApplyForm.setApproveStatus("CREATE_NEW");
 		}
-		
-		
-		
-		String fieldsNeedApprove = Config.getParameter("anguostore.fields.need.approve");
+
+
+
+		final String fieldsNeedApprove = Config.getParameter("anguostore.fields.need.approve");
 		storeApplyForm.setFieldsNeedApprove(fieldsNeedApprove);
-		
+
 		model.addAttribute("anguoStoreApplyForm", storeApplyForm);
-		
+
 		//Add common address data
 		model.addAttribute("countries", getCountries());
 		model.addAttribute("regions", getI18NFacade().getRegionsForCountryIso("CN"));
-		model.addAttribute("cities", getCityFacade().getCitiesByRegionCode(storeApplyForm.getRegionIso()));
-		model.addAttribute("cityDistricts", getDistrictFacade().getDistrictsByCityCode(storeApplyForm.getCityCode()));
-		
+
+		if (storeApplyForm.getRegionIso() != null && !(storeApplyForm.getRegionIso().isEmpty()))
+		{
+			model.addAttribute("cities", getCityFacade().getCitiesByRegionCode(storeApplyForm.getRegionIso()));
+		}
+
+		if (storeApplyForm.getCityCode() != null && !(storeApplyForm.getCityCode().isEmpty()))
+		{
+			model.addAttribute("cityDistricts", getDistrictFacade().getDistrictsByCityCode(storeApplyForm.getCityCode()));
+		}
+
 		return "pages/store/anguoStoreApplyPage";
-	}		
-	
+	}
+
 
 	public ModelService getModelService()
 	{

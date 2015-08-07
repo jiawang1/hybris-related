@@ -51,6 +51,7 @@
     <formElement:anguoFormInputBox idKey="phone" labelKey="text.account.enterprise.phone" path="phone" inputCSS="text"/>
     <formElement:anguoFormInputBox idKey="fax" labelKey="text.account.enterprise.fax" path="fax" inputCSS="text"/>
     <formElement:anguoFormContacts path="contacts"/>
+    <form:hidden path="firstTimeUpdate"/>
         <div class="btn">
            <button class="authenBtn" type="submit"><spring:theme code="text.account.enterprise.auth"></spring:theme></button>
         </div>
@@ -84,6 +85,15 @@
             <div class="tel fr"></div>
         </footer>
 </div>
+
+<script type="text/javascript">
+$(function(){
+	if ($("#firstTimeUpdate").val() != "true") {
+		$("#name").attr("disabled", "disabled");
+	    $("#registerId").attr("disabled", "disabled");
+	}
+}) 
+</script>
 
 </body>
 

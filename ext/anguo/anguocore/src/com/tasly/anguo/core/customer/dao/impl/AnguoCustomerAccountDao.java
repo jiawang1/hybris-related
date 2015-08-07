@@ -23,4 +23,17 @@ public class AnguoCustomerAccountDao extends DefaultCustomerAccountDao {
         SearchResult<ContactModel> result = getFlexibleSearchService().<ContactModel>search(query, queryParams);
         return result.getResult();
     }
+    
+    public boolean isRegisterIdDuplicated(EnterpriseAccountModel enterpriseAccount)
+    {
+        ServicesUtil.validateParameterNotNull(enterpriseAccount, "Customer must not be null");
+        Map queryParams = new HashMap();
+        queryParams.put("registerNo", enterpriseAccount.getRegisteredNo());
+        queryParams.put("uid", enterpriseAccount.getUid());
+        String query;
+        query = "select {pk} FROM {EnterpriseAccount} WHERE {registeredNo} = ?registerNo and {uid}!=?uid";// AND {versionID} IS NULL AND {store} = ?store AND {status} IN (?statusList)";
+        @SuppressWarnings("unchecked")
+        SearchResult<ContactModel> result = getFlexibleSearchService().<ContactModel>search(query, queryParams);
+        return result.getResult().size() > 0;
+    }
 }
