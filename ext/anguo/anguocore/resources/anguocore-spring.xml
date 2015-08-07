@@ -532,4 +532,14 @@
 	<bean id="anguoProductModelUrlResolver" class="com.tasly.anguo.core.util.AnguoProductModelUrlResolver"
 			parent="defaultProductModelUrlResolver">
 	</bean>
+	
+	<!-- add by Yang for AM-58 start -->
+	<alias name="defaultAnguoOrderDao" alias="anguoOrderDao"/>
+	<bean id="defaultAnguoOrderDao" class="com.tasly.anguo.core.order.dao.impl.DefaultAnguoOrderDao" parent="abstractItemDao"></bean>
+	
+	<alias name="defaultAnguoOrderService" alias="anguoOrderService"/>
+	<bean id="defaultAnguoOrderService" class="com.tasly.anguo.core.order.impl.DefaultAnguoOrderService">
+		<property name="AnguoOrderDao" ref="anguoOrderDao"/>
+	</bean>
+	<!-- add by Yang for AM-58 end -->
 </beans>

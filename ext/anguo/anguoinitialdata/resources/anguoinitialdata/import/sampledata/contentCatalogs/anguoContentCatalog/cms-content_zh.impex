@@ -51,6 +51,9 @@ UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang=z
  ;;UserLoginLink;"[登录]"
  ;;UserLoginRightLink;"登录"
  ;;ReleaseRightLink;"发布中药材"
+#An guo start
+ ;;BuyerCenterOrderManagementLink;"买家订单管理"
+#An guo end
 
 # Lightbox Banner for Mini Cart (banner is not localizable so we must create a separate banner per language)
 INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];&imageRef;altText
@@ -100,6 +103,9 @@ UPDATE CMSNavigationNode;$contentCV[unique=true];uid[unique=true];title[lang=zh]
  ;;SandersNavNode;"砂磨机"
  ;;ScrewdriversNavNode;"起子机"
  ;;SiteRootNode;"站点根目录"
+#An guo navigation start
+ ;;BuyerCenterOrderManagementNavNode;"买家订单管理"
+#An guo navigation end
 
 # Powertools Terms and Conditions Page
 
