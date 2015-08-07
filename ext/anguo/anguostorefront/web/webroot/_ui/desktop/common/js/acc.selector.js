@@ -1,9 +1,25 @@
 ACC.selector = {
-	bindRegion : function(master, slave) {
-		var masterselector = $("#countrySelector");
-		var slaveselector = $("#regionSelector");
-		var slaveselectorCity = $("#citySelector");
-		var slaveselectorDistrict = $("#districtSelector");
+	bindCountry : function(master) {
+		var masterselector = $("#" + master);
+		$.ajax({
+			type : "GET",
+			url : ACC.config.contextPath + "/productzone/getCountry",
+			async : true,
+			success : function(data) {
+				masterselector.append("<option>--</option>");
+				for (var int = 0; int < data.length; int++) {
+					masterselector.append("<option value=" + data[int].isocode
+							+ ">" + data[int].name + "</option>");
+				}
+			}
+		});
+	},
+
+	bindRegion : function(master, slave, slave2, slave3) {
+		var masterselector = $("#" + master);
+		var slaveselector = $("#" + slave);
+		var slaveselectorCity = $("#" + slave2);
+		var slaveselectorDistrict = $("#" + slave3);
 		masterselector.change(function() {
 			var country = masterselector.val();
 			$.ajax({
@@ -31,10 +47,10 @@ ACC.selector = {
 
 	},
 
-	bindCity : function(master, slave) {
-		var masterselector = $("#regionSelector");
-		var slaveselector = $("#citySelector");
-		var slaveselectorDistrict = $("#districtSelector");
+	bindCity : function(master, slave, slave2) {
+		var masterselector = $("#" + master);
+		var slaveselector = $("#" + slave);
+		var slaveselector2 = $("#" + slave2);
 		masterselector.change(function() {
 			var region = masterselector.val();
 			$.ajax({
@@ -46,9 +62,9 @@ ACC.selector = {
 				},
 				success : function(data) {
 					slaveselector.html("");
-					slaveselectorDistrict.html("");
+					slaveselector2.html("");
 					slaveselector.append("<option>--</option>");
-					slaveselectorDistrict.append("<option>--</option>");
+					slaveselector2.append("<option>--</option>");
 					for (var int = 0; int < data.length; int++) {
 						slaveselector.append("<option value=" + data[int].code
 								+ ">" + data[int].name + "</option>");
@@ -58,10 +74,10 @@ ACC.selector = {
 		});
 
 	},
-	
+
 	bindDistrict : function(master, slave) {
-		var masterselector = $("#citySelector");
-		var slaveselector = $("#districtSelector");
+		var masterselector = $("#" + master);
+		var slaveselector = $("#" + slave);
 		masterselector.change(function() {
 			var city = masterselector.val();
 			$.ajax({
@@ -83,14 +99,17 @@ ACC.selector = {
 		});
 
 	},
-	
-	bindAll : function() {
-		ACC.selector.bindRegion();
-		ACC.selector.bindCity();
-		ACC.selector.bindDistrict();
+
+	bindAll : function(div) {
+		ACC.selector.bindCountry(div + "_countrySelector");
+		ACC.selector.bindRegion(div + "_countrySelector", div + "_regionSelector",
+				div+"_citySelector", div+"_districtSelector");
+		ACC.selector.bindCity(div+"_regionSelector", div+"_citySelector",
+				div+"_districtSelector");
+		ACC.selector.bindDistrict(div+"_citySelector", div+"_districtSelector");
 	}
 }
 
-$(document).ready(function() {
-	ACC.selector.bindAll();
-});
+//$(document).ready(function() {
+//	ACC.selector.bindAll("address");
+//});

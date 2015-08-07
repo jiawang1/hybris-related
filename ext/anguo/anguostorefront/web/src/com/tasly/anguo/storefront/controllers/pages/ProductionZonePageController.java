@@ -45,9 +45,17 @@ public class ProductionZonePageController extends AbstractPageController {
 	{
 //		List<RegionData> regions = regionFacade.getRegionsForCountryCode("CN");
 //		model.addAttribute("regions", regions);
-		List<CountryData> countries = countryFacade.getAllCountries();
-		model.addAttribute("countries", countries);
+//		List<CountryData> countries = countryFacade.getAllCountries();
+//		model.addAttribute("countries", countries);
 		return ControllerConstants.Views.Pages.Product.ProductionZone;
+	}
+	
+	@RequestMapping(value = "/getCountry", method = RequestMethod.GET)
+	@ResponseBody
+	public List<CountryData> getCountry()
+	{
+		List<CountryData> countries = countryFacade.getAllCountries();
+		return countries;
 	}
 	
 	@RequestMapping(value = "/getRegion", method = RequestMethod.GET)

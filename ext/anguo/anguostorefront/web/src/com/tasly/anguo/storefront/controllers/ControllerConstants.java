@@ -96,6 +96,7 @@ public interface ControllerConstants
 			{
 				String IdCardIdentify = "pages/customerIdentify/idCardIdentify";
 				String AccountNumberIdentify = "pages/customerIdentify/accountNumberIdentify";
+				String EnterpriseIdentify = "pages/customerIdentify/enterpriseIdentify";
 			}
 
 			interface Checkout
@@ -150,7 +151,7 @@ public interface ControllerConstants
 			interface ProductManagement
 			{
 				String CategoryManagement = "pages/productManagement/categoryManagement";
-				String CategorySelect = "pages/productManagement/categorySelect";
+				String CategorySelect = "pages/productManagement/publishNewProduct";
 			}
 		}
 
