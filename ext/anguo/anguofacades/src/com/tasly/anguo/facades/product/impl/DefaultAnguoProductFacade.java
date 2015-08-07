@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.tasly.anguo.facades.product.impl;
 
 import java.util.ArrayList;
@@ -10,12 +7,17 @@ import java.util.List;
 import java.util.Locale;
 
 import org.apache.commons.lang.StringUtils;
+import org.springframework.beans.factory.annotation.Required;
 
 import com.tasly.anguo.core.category.AnguoCategoryService;
 import com.tasly.anguo.core.enums.PackageUnit;
+import com.tasly.anguo.core.enums.ProductStatus;
 import com.tasly.anguo.core.location.DistrictService;
+import com.tasly.anguo.core.product.AnguoProductService;
 import com.tasly.anguo.core.product.strategies.CreateProductCodeStrategy;
 import com.tasly.anguo.facades.product.AnguoProductFacade;
+import com.tasly.anguo.facades.product.data.ProductListData;
+import com.tasly.anguo.facades.product.populator.ProductListPopulator;
 
 import de.hybris.platform.catalog.enums.ArticleApprovalStatus;
 import de.hybris.platform.catalog.model.CatalogVersionModel;
@@ -26,6 +28,8 @@ import de.hybris.platform.classification.features.Feature;
 import de.hybris.platform.classification.features.FeatureList;
 import de.hybris.platform.classification.features.FeatureValue;
 import de.hybris.platform.commercefacades.product.impl.DefaultProductFacade;
+import de.hybris.platform.commerceservices.search.pagedata.PageableData;
+import de.hybris.platform.commerceservices.search.pagedata.SearchPageData;
 import de.hybris.platform.core.model.c2l.CurrencyModel;
 import de.hybris.platform.core.model.product.ProductModel;
 import de.hybris.platform.core.model.product.UnitModel;
@@ -38,7 +42,7 @@ import de.hybris.platform.servicelayer.i18n.CommonI18NService;
 import de.hybris.platform.servicelayer.model.ModelService;
 
 /**
- * @author i319019
+ * @author Yu Jack
  *
  */
 
@@ -53,128 +57,8 @@ public class DefaultAnguoProductFacade extends DefaultProductFacade implements
 	private ClassificationService classificationService;
 	private CreateProductCodeStrategy createProductCodeStrategy;
 	private CommonI18NService commonI18NService;
-
-	/**
-	 * @return the anguoCategoryService
-	 */
-	public AnguoCategoryService getAnguoCategoryService()
-	{
-		return anguoCategoryService;
-	}
-
-	/**
-	 * @param anguoCategoryService
-	 *            the anguoCategoryService to set
-	 */
-	public void setAnguoCategoryService(
-			AnguoCategoryService anguoCategoryService)
-	{
-		this.anguoCategoryService = anguoCategoryService;
-	}
-
-	/**
-	 * @return the modelService
-	 */
-	public ModelService getModelService()
-	{
-		return modelService;
-	}
-
-	/**
-	 * @param modelService
-	 *            the modelService to set
-	 */
-	public void setModelService(ModelService modelService)
-	{
-		this.modelService = modelService;
-	}
-
-	/**
-	 * @return the districtService
-	 */
-	public DistrictService getDistrictService()
-	{
-		return districtService;
-	}
-
-	/**
-	 * @param districtService
-	 *            the districtService to set
-	 */
-	public void setDistrictService(DistrictService districtService)
-	{
-		this.districtService = districtService;
-	}
-
-	/**
-	 * @return the unitService
-	 */
-	public UnitService getUnitService()
-	{
-		return unitService;
-	}
-
-	/**
-	 * @param unitService
-	 *            the unitService to set
-	 */
-	public void setUnitService(UnitService unitService)
-	{
-		this.unitService = unitService;
-	}
-
-	/**
-	 * @return the warehouseService
-	 */
-	public WarehouseService getWarehouseService()
-	{
-		return warehouseService;
-	}
-
-	/**
-	 * @param warehouseService
-	 *            the warehouseService to set
-	 */
-	public void setWarehouseService(WarehouseService warehouseService)
-	{
-		this.warehouseService = warehouseService;
-	}
-
-	/**
-	 * @return the classificationService
-	 */
-	public ClassificationService getClassificationService()
-	{
-		return classificationService;
-	}
-
-	/**
-	 * @param classificationService
-	 *            the classificationService to set
-	 */
-	public void setClassificationService(
-			ClassificationService classificationService)
-	{
-		this.classificationService = classificationService;
-	}
-
-	/**
-	 * @return the createProductCodeStrategy
-	 */
-	public CreateProductCodeStrategy getCreateProductCodeStrategy()
-	{
-		return createProductCodeStrategy;
-	}
-
-	/**
-	 * @param createProductCodeStrategy
-	 *            the createProductCodeStrategy to set
-	 */
-	public void setCreateProductCodeStrategy(
-			CreateProductCodeStrategy createProductCodeStrategy)
-	{
-		this.createProductCodeStrategy = createProductCodeStrategy;
-	}
+	private AnguoProductService anguoProductService;
+	private ProductListPopulator productListPopulator;
 
 	/*
 	 * (non-Javadoc)
@@ -187,23 +71,6 @@ public class DefaultAnguoProductFacade extends DefaultProductFacade implements
 	 * int, int, java.lang.String,
 	 * de.hybris.platform.catalog.enums.ArticleApprovalStatus)
 	 */
-	/**
-	 * @return the commonI18NService
-	 */
-	public CommonI18NService getCommonI18NService()
-	{
-		return commonI18NService;
-	}
-
-	/**
-	 * @param commonI18NService
-	 *            the commonI18NService to set
-	 */
-	public void setCommonI18NService(CommonI18NService commonI18NService)
-	{
-		this.commonI18NService = commonI18NService;
-	}
-
 	@Override
 	public boolean createProduct(String categoryCode, String productName,
 			String specification, String madeIn, String storageLocation,
@@ -357,4 +224,171 @@ public class DefaultAnguoProductFacade extends DefaultProductFacade implements
 			modelService.save(priceRModel);
 		}
 	}
+	
+	
+	@Override
+	public ProductListData getProductList(String storeName, String productCode,
+			String productName, String productStatus,PageableData pageableData)
+	{
+		ProductStatus status = ProductStatus.valueOf(productStatus);
+		SearchPageData searchPageData =  this.anguoProductService.getProductList(productCode, productName, storeName, status, pageableData);
+		ProductListData resultList = new ProductListData();
+		
+		productListPopulator.populate(searchPageData, resultList);
+		
+		return resultList;
+	}
+
+	@Required
+	public void setAnguoProductService(AnguoProductService anguoProductService)
+	{
+		this.anguoProductService = anguoProductService;
+	}
+
+	@Required
+	public void setProductListPopulator(ProductListPopulator productListPopulator)
+	{
+		this.productListPopulator = productListPopulator;
+	}
+	
+	/**
+	 * @return the anguoCategoryService
+	 */
+	public AnguoCategoryService getAnguoCategoryService()
+	{
+		return anguoCategoryService;
+	}
+
+	/**
+	 * @param anguoCategoryService
+	 *            the anguoCategoryService to set
+	 */
+	public void setAnguoCategoryService(
+			AnguoCategoryService anguoCategoryService)
+	{
+		this.anguoCategoryService = anguoCategoryService;
+	}
+
+	/**
+	 * @return the modelService
+	 */
+	public ModelService getModelService()
+	{
+		return modelService;
+	}
+
+	/**
+	 * @param modelService
+	 *            the modelService to set
+	 */
+	public void setModelService(ModelService modelService)
+	{
+		this.modelService = modelService;
+	}
+
+	/**
+	 * @return the districtService
+	 */
+	public DistrictService getDistrictService()
+	{
+		return districtService;
+	}
+
+	/**
+	 * @param districtService
+	 *            the districtService to set
+	 */
+	public void setDistrictService(DistrictService districtService)
+	{
+		this.districtService = districtService;
+	}
+
+	/**
+	 * @return the unitService
+	 */
+	public UnitService getUnitService()
+	{
+		return unitService;
+	}
+
+	/**
+	 * @param unitService
+	 *            the unitService to set
+	 */
+	public void setUnitService(UnitService unitService)
+	{
+		this.unitService = unitService;
+	}
+
+	/**
+	 * @return the warehouseService
+	 */
+	public WarehouseService getWarehouseService()
+	{
+		return warehouseService;
+	}
+
+	/**
+	 * @param warehouseService
+	 *            the warehouseService to set
+	 */
+	public void setWarehouseService(WarehouseService warehouseService)
+	{
+		this.warehouseService = warehouseService;
+	}
+
+	/**
+	 * @return the classificationService
+	 */
+	public ClassificationService getClassificationService()
+	{
+		return classificationService;
+	}
+
+	/**
+	 * @param classificationService
+	 *            the classificationService to set
+	 */
+	public void setClassificationService(
+			ClassificationService classificationService)
+	{
+		this.classificationService = classificationService;
+	}
+
+	/**
+	 * @return the createProductCodeStrategy
+	 */
+	public CreateProductCodeStrategy getCreateProductCodeStrategy()
+	{
+		return createProductCodeStrategy;
+	}
+
+	/**
+	 * @param createProductCodeStrategy
+	 *            the createProductCodeStrategy to set
+	 */
+	public void setCreateProductCodeStrategy(
+			CreateProductCodeStrategy createProductCodeStrategy)
+	{
+		this.createProductCodeStrategy = createProductCodeStrategy;
+	}
+
+
+	/**
+	 * @return the commonI18NService
+	 */
+	public CommonI18NService getCommonI18NService()
+	{
+		return commonI18NService;
+	}
+
+	/**
+	 * @param commonI18NService
+	 *            the commonI18NService to set
+	 */
+	public void setCommonI18NService(CommonI18NService commonI18NService)
+	{
+		this.commonI18NService = commonI18NService;
+	}
+	
 }
