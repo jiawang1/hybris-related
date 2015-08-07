@@ -6,7 +6,7 @@
 	</projects>
 	<buildSpec>
 		<buildCommand>
-		<name>org.eclipse.ui.externaltools.ExternalToolBuilder</name>
+			<name>org.eclipse.ui.externaltools.ExternalToolBuilder</name>
 			<triggers>auto,full,</triggers>
 			<arguments>
 				<dictionary>
