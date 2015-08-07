@@ -130,12 +130,12 @@ public class AnguoStoreApplyValidator implements Validator
 		
 		if((!StringUtils.isEmpty(storeApply.getContactName2()) && StringUtils.isEmpty(storeApply.getContactPhone2())) || 
 				(StringUtils.isEmpty(storeApply.getContactName2()) && !StringUtils.isEmpty(storeApply.getContactPhone2()))){
-			errors.rejectValue("contactPhone2Pairs", "storeapply.contactPhone2Pairs.invalid");
+			errors.rejectValue("contactName2", "storeapply.contactPhone2Pairs.invalid");
 		}
 		
 		if((!StringUtils.isEmpty(storeApply.getContactName3()) && StringUtils.isEmpty(storeApply.getContactPhone3())) || 
 				(StringUtils.isEmpty(storeApply.getContactName3()) && !StringUtils.isEmpty(storeApply.getContactPhone3()))){
-			errors.rejectValue("contactPhone3Pairs", "storeapply.contactPhone3Pairs.invalid");
+			errors.rejectValue("contactName3", "storeapply.contactPhone3Pairs.invalid");
 		}
 
 		if (StringUtils.isEmpty(storeApply.getDescription()) || StringUtils.length(storeApply.getDescription()) > 2000)
@@ -143,20 +143,19 @@ public class AnguoStoreApplyValidator implements Validator
 			errors.rejectValue("description", "storeapply.description.invalid");
 		}
 
-		if (StringUtils.isEmpty(storeApply.getQq()) || StringUtils.length(storeApply.getQq()) > 15
-				|| !StringUtils.isNumeric(storeApply.getQq()))
+		if (!StringUtils.isEmpty(storeApply.getQq()) && (StringUtils.length(storeApply.getQq()) > 15
+				|| !StringUtils.isNumeric(storeApply.getQq())))
 		{
 			errors.rejectValue("qq", "storeapply.qq.invalid");
 		}
 
-		if (StringUtils.isEmpty(storeApply.getFax()) || StringUtils.length(storeApply.getFax()) > 15
-				|| !StringUtils.isNumeric(storeApply.getFax()))
+		if (!StringUtils.isEmpty(storeApply.getFax()) && (StringUtils.length(storeApply.getFax()) > 15
+				|| !StringUtils.isNumeric(storeApply.getFax())))
 		{
 			errors.rejectValue("fax", "storeapply.fax.invalid");
 		}
 
-		if (StringUtils.isEmpty(storeApply.getTelephone()) || StringUtils.length(storeApply.getTelephone()) > 20
-				|| !StringUtils.isNumeric(storeApply.getTelephone()))
+		if (!StringUtils.isEmpty(storeApply.getTelephone()) && StringUtils.length(storeApply.getTelephone()) > 20)
 		{
 			errors.rejectValue("telephone", "storeapply.telephone.invalid");
 		}
