@@ -28,6 +28,7 @@ import com.tasly.anguo.facades.order.AnguoOrderFacade;
 import de.hybris.platform.acceleratorstorefrontcommons.annotations.RequireHardLogIn;
 import de.hybris.platform.acceleratorstorefrontcommons.breadcrumb.ResourceBreadcrumbBuilder;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractSearchPageController;
+import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.order.data.OrderHistoryData;
@@ -86,18 +87,31 @@ public class AnguoBuyerCenterController extends AbstractSearchPageController
 			@RequestParam(value = "sort", required = false) final String sortCode, final Model model, final String status) throws CMSItemNotFoundException
 	{
 		final PageableData pageableData = createPageableData(page, 5, sortCode, showMode);
-		final SearchPageData<OrderHistoryData> searchPageData = status == null ? anguoOrderFacade
-				.getPagedOrderHistoryForStatuses(pageableData) : anguoOrderFacade.getPagedOrderHistoryForStatuses(pageableData, OrderStatus.valueOf(status));
+		SearchPageData<OrderHistoryData> searchPageData = null;
 		
-				
-		populateModel(model, searchPageData, showMode);
 		
-		model.addAttribute("anguoOrderStatusCountData", anguoOrderFacade.getStatusCount());
-
 		storeCmsPageInModel(model, getContentPageForLabelOrId(ORDERMANAGE_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(ORDERMANAGE_CMS_PAGE));
 		model.addAttribute("breadcrumbs", buyerCenterBreadcrumbBuilder.getBreadcrumbs("text.buyercenter.ordermanage"));
 		model.addAttribute("metaRobots", "noindex,nofollow");
+		
+		if (status == null)
+		{
+			searchPageData = anguoOrderFacade.getPagedOrderHistoryForStatuses(pageableData);
+		}
+		else
+		{
+			if (OrderStatus.valueOf(status.toLowerCase()).getCode().equals(status.toLowerCase()))
+			{
+				GlobalMessages.addErrorMessage(model, "lawlessness.global.error");
+				return getViewForPage(model);
+			}
+			searchPageData = anguoOrderFacade.getPagedOrderHistoryForStatuses(pageableData, OrderStatus.valueOf(status));
+		}
+				
+		populateModel(model, searchPageData, showMode);
+		model.addAttribute("anguoOrderStatusCountData", anguoOrderFacade.getStatusCount());
+
 		return getViewForPage(model);
 	}
 
