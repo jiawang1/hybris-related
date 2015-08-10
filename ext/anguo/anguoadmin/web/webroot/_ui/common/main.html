@@ -30,7 +30,8 @@
                             Backbone: 'lib/backbone-1.1.2',
                             bootstrap: 'lib/bootstrap',
                             backbone: 'lib/ninth',
-                            datatables:'lib/jquery.dataTables'
+                            datatables:'lib/jquery.dataTables',
+                            json:'lib/json'
                         },
                         shim: {
                             underscore: {
@@ -54,7 +55,6 @@
                         }
                     });
                     require(["applicationRouter"], function (router) {
-                        var data = router;
                     });
                 }
             };
