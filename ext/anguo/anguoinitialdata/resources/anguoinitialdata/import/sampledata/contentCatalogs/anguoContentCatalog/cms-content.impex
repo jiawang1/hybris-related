@@ -1430,7 +1430,7 @@ INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];positi
 
 # add ToBuyAction by Jinli for AM-257
 INSERT_UPDATE ToBuyAction;$contentCV[unique=true];uid[unique=true];url;name;restrictions(uid,$contentCV);&actionRef
-;;ToBuyAction;/my-account/order/cancel/{productCode};To Buy Action;ActionRestriction;ToBuyAction
+;;ToBuyAction;javascript:getNowBuyUrl();To Buy Action;ActionRestriction;ToBuyAction
 
 # add ToByAction in ProductAddToCartComponent by Jinli for AM-257
 INSERT_UPDATE ProductAddToCartComponent;$contentCV[unique=true];uid[unique=true];name;actions(&actionRef);&componentRef
