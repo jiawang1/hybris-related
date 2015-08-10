@@ -10,6 +10,7 @@
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags" %>
 <%@ taglib prefix="product" tagdir="/WEB-INF/tags/desktop/product" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="action" tagdir="/WEB-INF/tags/desktop/action" %>
 
 <div class="qty">
 	<c:if test="${product.purchasable}">
@@ -60,9 +61,12 @@
 			</c:when>
 
 			<c:otherwise>
-				<button id="addToCartButton" type="${buttonType}" class="addToCartButton" disabled="disabled">
+
+                <button id="addToCartButton" type="${buttonType}" class="addToCartButton" disabled="disabled">
 					<spring:theme code="basket.add.to.basket"/>
 				</button>
+
+                <action:actions element="li" styleClass="productAddToCartPanelItem span-5" parentComponent="${component}"/>
 			</c:otherwise>
 		</c:choose>
 	</c:if>

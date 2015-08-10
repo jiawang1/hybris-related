@@ -1428,3 +1428,12 @@ INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];positi
 ;;BodyContent-buyerCenterOM;BodyContent;;BodyContent-buyerCenterOM;;;
 # An guo buyer center ContentSlotForPage end
 
+# add ToBuyAction by Jinli for AM-257
+INSERT_UPDATE ToBuyAction;$contentCV[unique=true];uid[unique=true];url;name;restrictions(uid,$contentCV);&actionRef
+;;ToBuyAction;javascript:getNowBuyUrl();To Buy Action;ActionRestriction;ToBuyAction
+
+# add ToByAction in ProductAddToCartComponent by Jinli for AM-257
+INSERT_UPDATE ProductAddToCartComponent;$contentCV[unique=true];uid[unique=true];name;actions(&actionRef);&componentRef
+;;AddToCart;Product Add To Cart;ToBuyAction;AddToCart
+
+
