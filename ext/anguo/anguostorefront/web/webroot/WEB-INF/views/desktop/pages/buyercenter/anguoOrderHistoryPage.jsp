@@ -10,11 +10,6 @@
 <%@ taglib prefix="common" tagdir="/WEB-INF/tags/desktop/common" %>
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags" %>
 <%@ taglib prefix="breadcrumb" tagdir="/WEB-INF/tags/desktop/nav/breadcrumb" %>
-
-
-	<div id="globalMessages">
-		<common:globalMessages/>
-	</div>
 	
 	<div class="column accountContentPane clearfix orderList">
 		<div class="headline"><spring:theme code="text.account.orderHistory" text="Order History"/></div>
@@ -69,7 +64,7 @@
 								<fmt:formatDate value="${order.placed}" dateStyle="long" timeStyle="short" type="both"/>
 							</td>
 						</tr>
-						<c:forEach items="${order.entries}" var="entry">  
+						<c:forEach items="${order.entries}" var="entry" varStatus="loop">  
 						
 								<tr>
 									<td headers="header1" style="max-width:270px">
@@ -97,8 +92,7 @@
 											<p>${entry.quantity}</p>
 										</ycommerce:testId>
 									</td>
-									
-									<c:if test="${ entry.entryNumber == '0'}">
+									<c:if test="${ loop.index == 0}">
 										<td headers="header4">
 											<ycommerce:testId code="orderHistory_orderStatus_label">
 												<p>${order.total.formattedValue}</p>
