@@ -13,6 +13,8 @@
 <%@ taglib prefix="breadcrumb" tagdir="/WEB-INF/tags/desktop/nav/breadcrumb" %>
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="footer" tagdir="/WEB-INF/tags/desktop/common/footer" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -60,26 +62,27 @@
 </div>
 
 <footer class="wrap clearfix">
+
             <ul class="fl clearfix">
-                <li class="fl">
-                    <b>买家指南</b>
-                    <a href="">会员须知</a>
-                    <a href="">买家攻略</a>
-                    <a href="">买家交易规则</a>
+                            <li class="fl">
+                    <b><spring:theme code="ango.footer.buyer.sguide"/></b>
+                    <a href=""><spring:theme code="ango.footer.membership"/></a>
+                    <a href=""><spring:theme code="ango.footer.buyer.sraiders"/></a>
+                    <a href=""><spring:theme code="ango.footer.buyer.transactions"/></a>
                 </li>
                 <li class="fl">
-                    <b>卖家指南</b>
-                    <a href="">会员须知</a>
-                    <a href="">卖家攻略</a>
-                    <a href="">卖家交易规则</a>
-                    <a href="">开通店铺</a>
+                    <b><spring:theme code="ango.footer.seller.sguide"/></b>
+                    <a href=""><spring:theme code="ango.footer.membership"/></a>
+                    <a href=""><spring:theme code="ango.footer.seller.raiders"/></a>
+                    <a href=""><spring:theme code="ango.footer.seller.transaction.code"/></a>
+                    <a href=""><spring:theme code="ango.footer.openstore"/></a>
                 </li>
                 <li class="fl">
-                    <b>提货须知</b>
-                    <a href="">委托流程</a>
-                    <a href="">自提流程</a>
-                    <a href="">自助一体机提货</a>
-                    <a href="">赎货交易规则</a>
+                    <b><spring:theme code="ango.footer.delivery.notice"/></b>
+                    <a href=""><spring:theme code="ango.footer.client.processes"/></a>
+                    <a href=""><spring:theme code="ango.footer.extraction.process"/></a>
+                    <a href=""><spring:theme code="ango.footer.integratedmachine.delivery"/></a>
+                    <a href=""><spring:theme code="ango.footer.foreclosuregoods.tradingrules"/></a>
                 </li>
             </ul>
             <div class="tel fr"></div>

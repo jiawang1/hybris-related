@@ -11,7 +11,7 @@
  *
  *  
  */
-package tasly.anguo.storefront.tags;
+package com.tasly.anguo.storefront.tags;
 
 import de.hybris.platform.acceleratorcms.component.slot.CMSPageSlotComponentService;
 import de.hybris.platform.acceleratorcms.data.CmsPageRequestContextData;
