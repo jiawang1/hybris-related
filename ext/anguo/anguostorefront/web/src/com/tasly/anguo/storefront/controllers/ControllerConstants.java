@@ -90,12 +90,14 @@ public interface ControllerConstants
 				String AccountEditAddressPage = "pages/account/accountEditAddressPage";
 				String AccountPaymentInfoPage = "pages/account/accountPaymentInfoPage";
 				String AccountRegisterPage = "pages/account/accountRegisterPage";
+				String AccountEnterprisePage = "pages/account/accountEnterprisePage";
 			}
 			
 			interface CustomerIdentify 
 			{
 				String IdCardIdentify = "pages/customerIdentify/idCardIdentify";
 				String AccountNumberIdentify = "pages/customerIdentify/accountNumberIdentify";
+				String EnterpriseIdentify = "pages/customerIdentify/enterpriseIdentify";
 			}
 
 			interface Checkout
@@ -150,7 +152,7 @@ public interface ControllerConstants
 			interface ProductManagement
 			{
 				String CategoryManagement = "pages/productManagement/categoryManagement";
-				String CategorySelect = "pages/productManagement/categorySelect";
+				String CategorySelect = "pages/productManagement/publishNewProduct";
 			}
 		}
 

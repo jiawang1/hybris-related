@@ -21,16 +21,24 @@ public class AnguoCategoryPopulator extends CategoryPopulator {
 	{
 		super.populate(source, target);
 		StringBuilder catPath = new StringBuilder(source.getName());
+		String superCatCode = "";
 		if (CollectionUtils.isNotEmpty(source.getSupercategories()))
 		{
 			CategoryModel catParent = source.getSupercategories().get(0);
-			catPath.insert(0, catParent.getName() + StringEscapeUtils.escapeHtml(" >> "));
+			superCatCode = catParent.getCode();
+			catPath.insert(0,
+					catParent.getName() + StringEscapeUtils.escapeHtml(" >> "));
 			if (CollectionUtils.isNotEmpty(catParent.getSupercategories()))
 			{
-				CategoryModel catGrandparent = catParent.getSupercategories().get(0);
-				catPath.insert(0, catGrandparent.getName() + StringEscapeUtils.escapeHtml(" >> "));
+				CategoryModel catGrandparent = catParent.getSupercategories()
+						.get(0);
+				catPath.insert(
+						0,
+						catGrandparent.getName()
+								+ StringEscapeUtils.escapeHtml(" >> "));
 			}
 		}
 		target.setCategoryPath(catPath.toString());
+		target.setSuperCategoryCode(superCatCode);
 	}
 }

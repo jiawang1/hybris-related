@@ -13,10 +13,6 @@
 <%@ taglib prefix="template" tagdir="/WEB-INF/tags/desktop/template" %>
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags" %>
  
-
-
-
-
 <template:errorSpanField path="${path}">
 	<ycommerce:testId code="LoginPage_Item_${idKey}">
 

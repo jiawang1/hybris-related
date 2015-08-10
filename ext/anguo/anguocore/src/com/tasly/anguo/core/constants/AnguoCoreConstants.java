@@ -19,6 +19,9 @@ package com.tasly.anguo.core.constants;
 public final class AnguoCoreConstants extends GeneratedAnguoCoreConstants
 {
 	public static final String EXTENSIONNAME = "anguocore";
+	public static final String ANGUO_STORE_SESSION = "anguostore";
+	public static final String ACTIVEPRODUCTCATALOG = "anguoProductCatalog";
+	public static final String ACTIVEPRODUCTCATALOGVERSION = "Online";
 
 	private AnguoCoreConstants()
 	{

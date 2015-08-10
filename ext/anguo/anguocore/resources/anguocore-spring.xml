@@ -500,6 +500,17 @@
 	<bean id="anguoCategoryService" class="com.tasly.anguo.core.category.impl.DefaultAnguoCategoryService" parent="categoryService">
 		<property name="anguoCategoryDao" ref="anguoCategoryDao"></property>
 	</bean>	
+	
+	<bean id="anguoProductDao" class="com.tasly.anguo.core.product.dao.impl.DefaultAnguoProductDao" parent="defaultProductDao">
+		<property name="pagedFlexibleSearchService" ref="pagedFlexibleSearchService"></property>
+	</bean>
+    <alias name="anguoProductDao" alias="productDao"/>
+	
+	<bean id="anguoProductService" class="com.tasly.anguo.core.product.impl.DefaultAnguoProductService" parent="defaultProductService">
+		<property name="anguoProductDao" ref="anguoProductDao"></property>
+		<property name="typeService" ref="typeService"></property>
+	</bean>
+	<alias name="anguoProductService" alias="productService"/>
 
 	<bean id="anguoCategoryRemovalValidator" class="com.tasly.anguo.core.category.interceptors.AnguoCategoryRemovalValidator">
 	</bean>
@@ -507,7 +518,9 @@
 	<bean id="categoryRemovalValidatorMapping" class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
 		<property name="interceptor" ref="anguoCategoryRemovalValidator" />
 		<property name="typeCode" value="Category" />
-	</bean>
+	</bean>    
+    <bean id="captchaService" class="com.tasly.anguo.core.service.impl.DefaultCaptchaService">
+    </bean>
 
 	<!-- add by LiuJi for AM-128 start -->
 	<!-- product -->
@@ -526,10 +539,32 @@
 					 ref="#{configurationService.configuration.getProperty('anguocore.productCode.keyGenerator')}"/>
 	</bean>
 	<!-- add by LiuJi for AM-128 end -->
+	
 	<!-- beans for product end -->
 
 	<alias name="anguoProductModelUrlResolver" alias="productModelUrlResolver"/>
 	<bean id="anguoProductModelUrlResolver" class="com.tasly.anguo.core.util.AnguoProductModelUrlResolver"
 			parent="defaultProductModelUrlResolver">
 	</bean>
+    
+    <alias alias="customerAccountService" name="anguoCustomerAccountService"/>
+    <bean id="anguoCustomerAccountService"
+            class="com.tasly.anguo.core.service.impl.AnguoCustomerAccountService" parent="defaultCustomerAccountService">    
+    </bean>
+    
+    <alias alias="customerAccountDao" name="anguoCustomerAccountDao"/>
+    <bean id="anguoCustomerAccountDao"
+            class="com.tasly.anguo.core.customer.dao.impl.AnguoCustomerAccountDao" parent="defaultCustomerAccountDao">    
+    </bean>    
+
+	
+	<!-- add by Yang for AM-58 start -->
+	<alias name="defaultAnguoOrderDao" alias="anguoOrderDao"/>
+	<bean id="defaultAnguoOrderDao" class="com.tasly.anguo.core.order.dao.impl.DefaultAnguoOrderDao" parent="abstractItemDao"></bean>
+	
+	<alias name="defaultAnguoOrderService" alias="anguoOrderService"/>
+	<bean id="defaultAnguoOrderService" class="com.tasly.anguo.core.order.impl.DefaultAnguoOrderService">
+		<property name="AnguoOrderDao" ref="anguoOrderDao"/>
+	</bean>
+	<!-- add by Yang for AM-58 end -->
 </beans>

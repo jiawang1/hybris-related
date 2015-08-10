@@ -32,9 +32,12 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.tasly.anguo.core.enums.UserType;
+import com.tasly.anguo.core.service.ICaptchaService;
+import com.tasly.anguo.core.service.items.CaptchaSendStatus;
 import com.tasly.anguo.storefront.controllers.ControllerConstants;
 import com.tasly.anguo.storefront.forms.AnguoLoginForm;
 import com.tasly.anguo.storefront.forms.AnguoRegisterForm;
@@ -62,8 +65,20 @@ public class LoginPageController extends AbstractLoginPageController
 	private HttpSessionRequestCache httpSessionRequestCache;
 	@Resource(name = "anguoRegistrationValidator")
 	private Validator registrationValidator;
+	
+	@Resource(name = "captchaService")
+	private ICaptchaService captchaService;
+	
 
-	@Override
+	public ICaptchaService getCaptchaService() {
+        return captchaService;
+    }
+
+    public void setCaptchaService(ICaptchaService captchaService) {
+        this.captchaService = captchaService;
+    }
+
+    @Override
 	protected String getView()
 	{
 		return ControllerConstants.Views.Pages.Account.AccountLoginPage;
@@ -102,17 +117,9 @@ public class LoginPageController extends AbstractLoginPageController
 		{
 			storeReferer(referer, request, response);
 		}
+		AnguoLoginForm anguoLoginForm = new AnguoLoginForm();
 		model.addAttribute(new AnguoRegisterForm());
-		return getDefaultLoginPage(loginError, session, model,request);
-	}
-	
-	protected String getDefaultLoginPage(final boolean loginError, final HttpSession session, final Model model,final HttpServletRequest request)
-			throws CMSItemNotFoundException
-	{
-		final AnguoLoginForm anguoLoginForm = new AnguoLoginForm();
 		model.addAttribute(anguoLoginForm);
-		model.addAttribute(new RegisterForm());
-		model.addAttribute(new GuestForm());
 
 		Cookie[] cookies = request.getCookies();
 		for(Cookie cookie : cookies) {
@@ -121,21 +128,7 @@ public class LoginPageController extends AbstractLoginPageController
 				break;
 			}
 		}
-		storeCmsPageInModel(model, getCmsPage());
-		setUpMetaDataForContentPage(model, (ContentPageModel) getCmsPage());
-		model.addAttribute("metaRobots", "index,nofollow");
-
-		final Breadcrumb loginBreadcrumbEntry = new Breadcrumb("#", getMessageSource().getMessage("header.link.login", null,
-				"header.link.login", getI18nService().getCurrentLocale()), null);
-		model.addAttribute("breadcrumbs", Collections.singletonList(loginBreadcrumbEntry));
-
-		if (loginError)
-		{
-			model.addAttribute("loginError", Boolean.valueOf(loginError));
-			GlobalMessages.addErrorMessage(model, "login.error.account.not.found.title");
-		}
-
-		return getView();
+		return getDefaultLoginPage(loginError, session, model);
 	}
 	
 	protected void storeReferer(final String referer, final HttpServletRequest request, final HttpServletResponse response)
@@ -153,6 +146,13 @@ public class LoginPageController extends AbstractLoginPageController
 	{
 		getRegistrationValidator().validate(form, bindingResult);
 		return processRegisterUserRequest(referer, form, bindingResult, model, request, response, redirectModel);
+	}
+	
+	@RequestMapping(value="/sendCaptcha", method = RequestMethod.POST)
+	@ResponseBody
+	public CaptchaSendStatus sendCaptcha(@RequestParam String mobileNumber, final HttpServletRequest request,
+            final HttpServletResponse response) {
+	    return captchaService.sendCaptcha(mobileNumber);
 	}
 	
 	@Override
@@ -187,17 +187,6 @@ public class LoginPageController extends AbstractLoginPageController
 			getCustomerFacade().register(data);
 			getAutoLoginStrategy().login(iForm.getUserId().toLowerCase(), form.getPwd(), request, response);
 
-			switch(data.getUserType())
-			{
-			case ENTERPRISE: 
-		         GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.CONF_MESSAGES_HOLDER,
-		                    "registration.confirmation.message.enterprise.title"); 
-		         break;
-			case PERSONAL:
-		         GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.CONF_MESSAGES_HOLDER,
-		                    "registration.confirmation.message.personal.title");
-		         break;
-			}
 
 		}
 		catch (final DuplicateUidException e)
@@ -210,7 +199,19 @@ public class LoginPageController extends AbstractLoginPageController
 			GlobalMessages.addErrorMessage(model, "form.global.error");
 			return handleRegistrationError(model);
 		}
+		
 
+        switch(data.getUserType())
+        {
+        case ENTERPRISE: 
+             GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.CONF_MESSAGES_HOLDER,
+                        "registration.confirmation.message.enterprise.title"); 
+             return REDIRECT_PREFIX + "/my-account/enterprise";
+        case PERSONAL:
+             GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.CONF_MESSAGES_HOLDER,
+                        "registration.confirmation.message.personal.title");
+             break;
+        }
 		return REDIRECT_PREFIX + getSuccessRedirect(request, response);
 	}
 }

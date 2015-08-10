@@ -13,18 +13,8 @@
  */
 package com.tasly.anguo.storefront.controllers.pages;
 
-import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractLoginPageController;
-import de.hybris.platform.acceleratorstorefrontcommons.forms.GuestForm;
-import de.hybris.platform.acceleratorstorefrontcommons.forms.RegisterForm;
-import de.hybris.platform.acceleratorstorefrontcommons.forms.validation.GuestValidator;
-import de.hybris.platform.acceleratorstorefrontcommons.security.GUIDCookieStrategy;
-import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
-import de.hybris.platform.cms2.model.pages.AbstractPageModel;
-import de.hybris.platform.commercefacades.order.data.CartData;
-import de.hybris.platform.acceleratorfacades.flow.CheckoutFlowFacade;
-import com.tasly.anguo.storefront.controllers.ControllerConstants;
-
 import javax.annotation.Resource;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -38,6 +28,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.tasly.anguo.storefront.controllers.ControllerConstants;
+import com.tasly.anguo.storefront.forms.AnguoLoginForm;
+import com.tasly.anguo.storefront.forms.AnguoRegisterForm;
+
+import de.hybris.platform.acceleratorfacades.flow.CheckoutFlowFacade;
+import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractLoginPageController;
+import de.hybris.platform.acceleratorstorefrontcommons.forms.GuestForm;
+import de.hybris.platform.acceleratorstorefrontcommons.forms.validation.GuestValidator;
+import de.hybris.platform.acceleratorstorefrontcommons.security.GUIDCookieStrategy;
+import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
+import de.hybris.platform.cms2.model.pages.AbstractPageModel;
+import de.hybris.platform.commercefacades.order.data.CartData;
 
 
 /**
@@ -71,11 +74,21 @@ public class CheckoutLoginController extends AbstractLoginPageController
 			final HttpSession session, final Model model, final HttpServletRequest request) throws CMSItemNotFoundException
 	{
 		model.addAttribute("expressCheckoutAllowed", Boolean.valueOf(checkoutFlowFacade.isExpressCheckoutEnabledForStore()));
+		AnguoLoginForm anguoLoginForm = new AnguoLoginForm();
+		model.addAttribute(new AnguoRegisterForm());
+		model.addAttribute(anguoLoginForm);
+		Cookie[] cookies = request.getCookies();
+		for(Cookie cookie : cookies) {
+			if(cookie.getName().equals("rememberMeCookie")) {
+				anguoLoginForm.setJ_username(cookie.getValue());
+				break;
+			}
+		}
 		return getDefaultLoginPage(loginError, session, model);
 	}
-
+	
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
-	public String doCheckoutRegister(final RegisterForm form, final BindingResult bindingResult, final Model model,
+	public String doCheckoutRegister(final AnguoRegisterForm form, final BindingResult bindingResult, final Model model,
 			final HttpServletRequest request, final HttpServletResponse response, final RedirectAttributes redirectModel)
 			throws CMSItemNotFoundException
 	{
