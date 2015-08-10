@@ -9,7 +9,7 @@
 	<display-name>anguoadmin</display-name>
 	
 	<welcome-file-list>
-		<welcome-file></welcome-file>
+		<welcome-file>_ui/common/main.html</welcome-file>
 	</welcome-file-list>
 	
 	<login-config>

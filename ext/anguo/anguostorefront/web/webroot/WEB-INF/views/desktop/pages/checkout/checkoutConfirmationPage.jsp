@@ -44,7 +44,7 @@
 			<order:paymentMethodItem order="${orderData}"/>
 		</div>
 		<c:forEach items="${orderData.deliveryOrderGroups}" var="orderGroup">
-			<order:orderDetailsItem order="${orderData}" orderGroup="${orderGroup}" />
+			<order:orderDetailsItem order="${orderData}" isOrderDetailsPage="false" />
 		</c:forEach>		
 		<c:forEach items="${orderData.pickupOrderGroups}" var="orderGroup">
 			<order:orderPickupDetailsItem order="${orderData}" orderGroup="${orderGroup}" />

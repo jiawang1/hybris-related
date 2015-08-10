@@ -13,12 +13,12 @@
 
 <div class="orderBox payment">
 	<div class="headline"><spring:theme code="text.paymentMethod" text="Payment Method" /></div>
-	<c:if test="${order.paymentType.code eq 'CARD'}">
+<%-- 	<c:if test="${order.paymentType.code eq 'CARD'}">
 		<order:paymentMethodItemOnCreditCard order="${order}"/>
 	</c:if>
 	<c:if test="${order.paymentType.code eq 'ACCOUNT'}">
 		<order:paymentMethodItemOnAccount order="${order}"/>
-	</c:if>
+	</c:if> --%>
 </div>
 
 

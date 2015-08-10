@@ -16,15 +16,13 @@ define(['jquery','backbone', 'underscore','productModel','text!../template/produ
 //                interpolate: /\{\{(.+?)\}\}/g
 //            };
 
-           $.when(new ProductModel().fetch()).done(function(model){
-        	   
-        	  console.log("productview: " + model);
-        	 
-              that.$el.html(_.template(sProductTemplate,{"model": model}));
-              
-              console.log(that.$el.html());
+        $.when(new ProductModel().fetch()).done(function(model){
+     	   
+      	  console.log("productview: " + model);
+      	 
+            that.$el.html(_.template(sProductTemplate,{"model": model}));
 
-           });
+         });
 
            return this;
         }

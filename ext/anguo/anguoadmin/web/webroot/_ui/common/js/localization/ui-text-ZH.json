@@ -1,0 +1,44 @@
+{
+	"app":{
+
+		"user":{
+				"userManagement":"用户管理",
+			    "enterprise":{
+			   		"userManagement":"企业用户管理",
+			   		"sellerReview":"个人卖家审核"
+
+			   }
+			},
+
+		"store":{
+				"storeManagement":"店铺管理",
+				"store":{
+					"newStore":"新店铺申请审核",
+					"changeStore":"店铺信息修改审核",
+					"recStore":"店铺推荐"
+				}
+
+			},
+
+		"order":{
+
+				},
+
+		"product":{
+
+		},
+		"products":{
+			"pageTitle":"产品列表"
+
+		},
+		"category":{
+
+		},
+		"seller":{
+
+		}
+
+	}
+
+
+}

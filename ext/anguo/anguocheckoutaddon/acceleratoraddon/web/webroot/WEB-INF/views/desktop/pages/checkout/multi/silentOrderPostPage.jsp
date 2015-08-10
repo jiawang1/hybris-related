@@ -10,7 +10,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="common" tagdir="/WEB-INF/tags/desktop/common" %>
-<%@ taglib prefix="multi-checkout" tagdir="/WEB-INF/tags/addons/b2ccheckoutaddon/desktop/checkout/multi" %>
+<%@ taglib prefix="multi-checkout" tagdir="/WEB-INF/tags/addons/anguocheckoutaddon/desktop/checkout/multi" %>
 <%@ taglib prefix="address" tagdir="/WEB-INF/tags/desktop/address" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags" %>

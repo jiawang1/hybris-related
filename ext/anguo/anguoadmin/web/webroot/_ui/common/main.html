@@ -1,58 +1,64 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
     <head>
-        <link rel="stylesheet" type="text/css" href="./css/bootstrap.css" />
-        <link rel="stylesheet" type="text/css" href="./css/relayout.css" />
-        <link rel="stylesheet" href="./js/lib/themes/default/style.min.css" />
-        <link rel="stylesheet" href="./css/jquery.dataTables.css" />
-        <link rel="stylesheet" href="./css/dataTables.editor.min.css" />
-        <link rel="stylesheet" href="./css/dataTables.tableTools.css" />
-        <script type="text/javascript" src="./js/lib/jstree.min.js"></script>
-        <script type="text/javascript" src="./js/lib/jquery.dataTables.js"></script>
-        <script type="text/javascript" src="./js/lib/jquery.dataTables.editable.js"></script>
-        <script type="text/javascript" src="./js/lib/dataTables.tableTools.min.js"></script>
-        <script type="text/javascript" src="./js/lib/dataTables.editor.js"></script>
+    <link rel="stylesheet" type="text/css" href="./_ui/common/js/widget/inputList.css" />
+        <link rel="stylesheet" type="text/css" href="./_ui/common/css/bootstrap.css" />
+        <link rel="stylesheet" type="text/css" href="./_ui/common/css/relayout.css" />
+        <link rel="stylesheet" type="text/css" href="./_ui/common/css/style.css" />
+        <link rel="stylesheet" type="text/css" href="./_ui/common/css/jquery.dataTables.css" />
+        <link rel="stylesheet" type="text/css" href="./_ui/common/css/dataTables.editor.min.css" />
+        <link rel="stylesheet" type="text/css" href="./_ui/common/css/dataTables.tableTools.css" />
     </head>
-
 <body>
       <div class="container">
    <div class="row">
-    <div class="nav-root col-xs-4"></div>
-    <div class="main-root col-xs-8"></div>
+    <div class="nav-root col-xs-3"></div>
+    <div class="main-root col-xs-9"></div>
        </div>
     </div>
     <script type="application/javascript">
         var loadScriptHandler = function () {
             var loadScript = document.createElement("script");
-            loadScript.src = "./js/lib/require-2.1.19.js";
+            loadScript.src = "_ui/common/js/lib/require-2.1.19.js";
             loadScript.onload = function () {
                 if (!this.readyState || this.readyState === "loaded" || this.readyState === "complete") {
                     require.config({
-                        baseUrl: "./js",
+                        baseUrl: "_ui/common/js",
                         paths: {
                             jquery: 'lib/jquery-1.11.2', // resolve jquery double load issue
                             underscore: 'lib/underscore',
-                            backbone: 'lib/backbone-1.1.2',
-                            bootstrap: 'lib/bootstrap'
+                            Backbone: 'lib/backbone-1.1.2',
+                            bootstrap: 'lib/bootstrap',
+                            backbone: 'lib/ninth',
+                            datatables:'lib/jquery.dataTables',
+                            accessible:'lib/jquery.accessible-tabs-1.9.7.min',
+                            json:'lib/json'
                         },
                         shim: {
                             underscore: {
                                 exports: '_'
                             },
-                            backbone: {
+                            Backbone: {
                                 deps: ["underscore", "jquery"],
+                                exports: "Backbone"
+                            },
+                            backbone:{
+                                deps: ["Backbone", "jquery"],
                                 exports: "backbone"
                             },
                             bootstrap:{
                                 deps: ["jquery"],
                                 exports: "bootstrap"
+                            },
+                            datatables:{
+                            	deps: ['jquery']
+                            },
+                            accessible:{
+                                deps: ['jquery']
                             }
-                            
                         }
                     });
                     require(["applicationRouter"], function (router) {
-                        var data = router;
-
                     });
                 }
             };

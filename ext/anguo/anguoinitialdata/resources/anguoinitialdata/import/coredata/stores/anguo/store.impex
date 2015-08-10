@@ -26,12 +26,26 @@ INSERT_UPDATE PromotionGroup;Identifier[unique=true];
 
 # Base Store
 INSERT_UPDATE BaseStore;uid[unique=true];catalogs(id);currencies(isocode);net;taxGroup(code);storelocatorDistanceUnit(code);defaultCurrency(isocode);languages(isocode);defaultLanguage(isocode);deliveryCountries(isocode);submitOrderProcessCode;pickupInStoreMode(code);customerAllowedToIgnoreSuggestions;paymentProvider;checkoutFlowGroup;
-;$storeUid;$productCatalog,$classificationCatalog;$currencies;$net;jp-taxes;km;$defaultCurrency;$languages;$defaultLanguage;$deliveryCountries;$orderProcessCode;$pickupInStoreMode;$customerAllowedToIgnoreSuggestions;$paymentProvider;$checkoutFlowGroup;
+ ;$storeUid;$productCatalog,$classificationCatalog;$currencies;$net;             jp-taxes;        km;                        $defaultCurrency;           $languages;       $defaultLanguage;        $deliveryCountries;          $orderProcessCode;$pickupInStoreMode;        $customerAllowedToIgnoreSuggestions;$paymentProvider;$checkoutFlowGroup;
+
 
 INSERT_UPDATE BaseStore2DeliveryModeRel;source(uid)[unique=true];target(code)[unique=true]
+;$storeUid;premium-net 
+;$storeUid;standard-net
+;$storeUid;premium-gross
+;$storeUid;standard-gross
+;$storeUid;free-standard-shipping
+			
+
 
 INSERT_UPDATE AnguoStore; uid[unique=true]; name; description; contactname1; contactphone1; 
 ;0000000001; teststore1; test ah haha; contact #1; 12345678901;
 ;0000000002; teststore2; test ah haha; contact #1; 12345678901;
 ;0000000003; teststore3; test ah haha; contact #1; 12345678901;
+
+
+INSERT_UPDATE AnguoStoreTemp; uid[unique=true]; name; description; contactname1; contactphone1; 
+#;0000000001; teststoretemp1; test ah haha; contact #1; 12345678901;
+#;0000000002; teststoretemp2; test ah haha; contact #1; 12345678901;
+#;0000000003; teststoretemp3; test ah haha; contact #1; 12345678901;
 

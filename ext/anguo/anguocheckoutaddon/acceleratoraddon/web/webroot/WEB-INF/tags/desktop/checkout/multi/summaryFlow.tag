@@ -5,7 +5,7 @@
 <%@ attribute name="requestSecurityCode" required="true" type="java.lang.Boolean" %>
 <%@ attribute name="cartData" required="false" type="de.hybris.platform.commercefacades.order.data.CartData" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<%@ taglib prefix="multi-checkout" tagdir="/WEB-INF/tags/addons/b2ccheckoutaddon/desktop/checkout/multi" %>
+<%@ taglib prefix="multi-checkout" tagdir="/WEB-INF/tags/addons/anguocheckoutaddon/desktop/checkout/multi" %>
 
 
 <div id="checkoutContentPanel" class="clearfix summaryFlow">

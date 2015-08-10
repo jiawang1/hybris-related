@@ -77,7 +77,7 @@ define(['jquery','backbone', 'underscore','accessible','datatables','text!./../t
         	AM.grid.reset();
         	AM.grid.requestData();
         },
-        resetSearchCondition(){
+        resetSearchCondition:function(){
 //        	$('input[name="productCodeHidden"]').val('');
 //            $('input[name="productCode"]').val('');
 //        	$('input[name="productNameHidden"]').val('');

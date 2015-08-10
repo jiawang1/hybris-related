@@ -5,7 +5,10 @@ $(function(){
 	checkApproveStatus();
 	
 	function checkApproveStatus(){
-		var fieldsNeedApprove = $("#fieldsNeedApprove").val().split(",");
+		
+
+		if($("#fieldsNeedApprove").length === 0 || $("#approveStatus").length === 0)return;
+		var fieldsNeedApprove = $needApprove.val().split(",");
 		/* show * at the front of the need approve fields */
 //		jQuery.each(fieldsNeedApprove, function(index, value) {
 //		       console.log(this);
