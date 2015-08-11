@@ -28,3 +28,5 @@ UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];title[lang=$lang]
  ;;searchEmpty;"无结果"
  ;;storefinderPage;"店铺搜索器"
  ;;updatePassword;"更新忘记的密码"
+ ;;security;"安全服务"
+ ;;identify;"认证信息"
