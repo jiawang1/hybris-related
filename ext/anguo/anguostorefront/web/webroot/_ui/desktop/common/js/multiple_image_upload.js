@@ -3,7 +3,7 @@
  */
 $(document).ready(function(){
 	var settings = {
-	    url: "/anguostorefront/fileUpload",
+	    url: "/fileUpload",
 	    method: "POST",
 	    fileName: "uploadFiles",
 	    multiple: true,

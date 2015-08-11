@@ -11,7 +11,7 @@
  *
  *  
  */
-package tasly.anguo.core;
+package com.tasly.anguo.core;
 
 import de.hybris.platform.europe1.jalo.PriceRow;
 import de.hybris.platform.jalo.order.price.PriceInformation;

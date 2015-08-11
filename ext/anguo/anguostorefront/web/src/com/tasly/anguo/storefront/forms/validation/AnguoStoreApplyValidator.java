@@ -42,10 +42,11 @@ public class AnguoStoreApplyValidator implements Validator
 			errors.rejectValue("name", "storeapply.name.invalid");
 		}
 
-		String logoName = storeApply.getLogo().getName();
-		if (!StringUtils.isEmpty(logoName))
+		
+		if (storeApply.getLogo() != null
+				&& !StringUtils.isEmpty(storeApply.getLogo().getName()))
 		{
-
+			String logoName = storeApply.getLogo().getName();
 			String t_ext = logoName.substring(logoName.lastIndexOf(".") + 1);
 			boolean isAllow = false;
 			for (String s : allowedExt)

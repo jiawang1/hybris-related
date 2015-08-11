@@ -98,3 +98,7 @@ INSERT_UPDATE ServicelayerJob;code[unique=true];springId[unique=true]
 # Deactivate Frontend Restriction on category by default for perfomance purposes
 UPDATE SearchRestriction;code[unique=true];active[default=false]
 ;Frontend_RestrictedCategory
+
+# add ToByAction by Jinli for AM-257
+INSERT_UPDATE ApplicableCmsActionsTypeForCmsComponent;target(code)[unique=true];source(code)[unique=true];
+;JspIncludeComponent;ToBuyAction;

@@ -188,6 +188,15 @@
             </targetElement>
         </relation>
    <!-- add for anguostore and product end -->
+        <relation code="SCNavigationComponent2CMSNavigationNodeRelation" generate="true" localized="false" autocreate="true">
+            <description></description>
+            <sourceElement type="SellerCenterNavigationComponent" qualifier="sellerCenterNavigationComponent" cardinality="one">
+                <modifiers read="true" write="true" optional="true" search="true"/>
+            </sourceElement>
+            <targetElement type="CMSNavigationNode" qualifier="navigationNode" cardinality="many">
+                <modifiers read="true" write="true" optional="true" search="true"/>
+            </targetElement>
+        </relation>   
 	<!-- relation for anguostore end -->		
 	</relations>
 	
@@ -761,8 +770,36 @@
 		
 				</attributes>
 			</itemtype>
+			<itemtype code="SellerCenterNavigationComponent" autocreate="true"
+				generate="true" extends="SimpleCMSComponent"
+				jaloclass="de.hybris.platform.acceleratorcms.jalo.components.SellerCenterNavigationComponent">
+				<description>It represents seller center navigation bar component that contains cms navigation node.</description>
+				<attributes>
+					<attribute qualifier="title" type="localized:java.lang.String">
+						<persistence type="property" />
+						<modifiers />
+						<description>Localized title of the component.</description>
+					</attribute>
+					<attribute type="java.lang.String" qualifier="styleClass">
+						<persistence type="property" />
+						<modifiers />
+						<description>CSS style class of this bar component.</description>
+					</attribute>
+				</attributes>
+			</itemtype>
 		</typegroup>
 		
 
-	</itemtypes>
+        <!-- type for anguostore start -->
+        <!-- add by Jinli for AM-257 start -->
+        <typegroup name="CMS Actions">
+            <itemtype code="ToBuyAction"
+                      extends="SimpleCMSAction" autocreate="true" generate="true">
+            </itemtype>
+        </typegroup>
+        <!-- type for anguostore end -->
+        <!-- add by Jinli for AM-257 end -->
+
+	
+</itemtypes>
 </items>

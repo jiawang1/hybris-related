@@ -15,10 +15,11 @@ $catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[defa
 
 $passwordEncoding=md5
 $defaultPassword=password
+$status=status(code)[default='UNIDENTIFIED']
 $setPassword=@password[translator=de.hybris.platform.impex.jalo.translators.ConvertPlaintextToEncodedUserPasswordTranslator][default='$passwordEncoding:$defaultPassword']
-INSERT_UPDATE PersonalAccount;groups(uid);uid[unique=true];name;$setPassword;customerId;idCard;idName;identified;
-;"customergroup";"buyer";"buyer";;"buyer@test.com";;;true;
-INSERT_UPDATE EnterpriseAccount;groups(uid)     ;uid[unique=true]  ;name      ;$setPassword;customerId;identified;
-							   ;"customergroup" ;"seller"          ;"seller"  ;            ;          ;true;
+INSERT_UPDATE PersonalAccount;groups(uid);uid[unique=true];name;$setPassword;customerId;idCard;idName;$status;
+;"customergroup";"buyer";"buyer";;"buyer@test.com";;;;
+INSERT_UPDATE EnterpriseAccount;groups(uid)     ;uid[unique=true]  ;name      ;$setPassword;customerId;$status;
+							   ;"customergroup" ;"seller"          ;"seller"  ;            ;          ;;
 
 

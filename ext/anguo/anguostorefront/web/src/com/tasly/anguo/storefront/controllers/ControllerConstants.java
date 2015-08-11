@@ -98,6 +98,7 @@ public interface ControllerConstants
 				String IdCardIdentify = "pages/customerIdentify/idCardIdentify";
 				String AccountNumberIdentify = "pages/customerIdentify/accountNumberIdentify";
 				String EnterpriseIdentify = "pages/customerIdentify/enterpriseIdentify";
+				String EnterpriseIdentifySuccess = "pages/customerIdentify/enterpriseIdentifySuccess";
 			}
 
 			interface Checkout

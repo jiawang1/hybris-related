@@ -22,10 +22,11 @@ import de.hybris.platform.servicelayer.model.ModelService;
 import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.platform.util.Config;
 
-public class DefaultCustomerIdentifyFacade implements CustomerIdentifyFacade{
-	
-	private static final Logger LOG = Logger.getLogger(DefaultCustomerIdentifyFacade.class);
-	
+public class DefaultCustomerIdentifyFacade implements CustomerIdentifyFacade {
+
+	private static final Logger LOG = Logger
+			.getLogger(DefaultCustomerIdentifyFacade.class);
+
 	@Resource
 	private ModelService modelService;
 	@Resource
@@ -34,77 +35,72 @@ public class DefaultCustomerIdentifyFacade implements CustomerIdentifyFacade{
 	private UserService userService;
 	@Resource
 	private CMSSiteService cmsSiteService;
-	
+
 	@Resource
 	private CustomerIdentifyFacade customerIdentifyFacade;
-	
+
 	private Converter<MediaModel, ImageData> imageConverter;
-	
+
 	private final String LICENSE_FOLDER = "LICENSE";
-	
+
 	/**
 	 * upload enterprise licenses image
+	 * 
 	 * @param file
 	 * @return
-	 * @throws Exception 
+	 * @throws Exception
 	 */
-	public ImageData uploadEnterpriseLiceneses(final MultipartFile file) throws Exception {
-		try{
+	public ImageData uploadEnterpriseLiceneses(final MultipartFile file)
+			throws Exception {
+		try {
 			final MediaModel mediaModel = createMedia(file);
 			final ImageData imageData = imageConverter.convert(mediaModel);
 			imageData.setCode(mediaModel.getCode());
 			imageData.setName(file.getOriginalFilename());
 			return imageData;
-		}catch(Exception e){
+		} catch (Exception e) {
 			throw e;
 		}
-		
+
 	}
-	
-	private MediaFolderModel createMediaFoler() throws Exception{
+
+	private MediaFolderModel createMediaFoler() throws Exception {
 		MediaFolderModel folder = null;
-		try
-		{
+		try {
 			folder = mediaService.getFolder(LICENSE_FOLDER);
-			if(folder == null) {
-				folder = modelService.create(MediaFolderModel.class);
-				folder.setQualifier(LICENSE_FOLDER);
-				folder.setPath(LICENSE_FOLDER);
-				modelService.save(folder);
-				setSubfoldersDepthForFolder(folder, Integer.valueOf(4));
-			}
-		}
-		catch (Exception e)
-		{
-			LOG.error(e.getMessage());
-			throw e;
+		} catch (Exception e) {
+			folder = modelService.create(MediaFolderModel.class);
+			folder.setQualifier(LICENSE_FOLDER);
+			folder.setPath(LICENSE_FOLDER);
+			modelService.save(folder);
+			setSubfoldersDepthForFolder(folder, Integer.valueOf(4));
 		}
 		return folder;
 	}
-	
 
-	private void setSubfoldersDepthForFolder(final MediaFolderModel folder, final Integer hashingDepth)
-	{
-		Config.setParameter("media.folder." + folder.getQualifier() + ".hashing.depth",
+	private void setSubfoldersDepthForFolder(final MediaFolderModel folder,
+			final Integer hashingDepth) {
+		Config.setParameter("media.folder." + folder.getQualifier()
+				+ ".hashing.depth",
 				hashingDepth == null ? null : hashingDepth.toString());
 	}
-	
+
 	private MediaModel createMedia(MultipartFile file) throws Exception {
-		try
-		{
+		try {
 			final MediaModel mediaModel = modelService.create(MediaModel.class);
 			mediaModel.setCode(UUID.randomUUID().toString());
 			mediaModel.setRealFileName(file.getOriginalFilename());
-			mediaModel.setAltText(StringUtils.substring(file.getOriginalFilename(), 0,StringUtils.lastIndexOf(file.getOriginalFilename(), ".")));
+			mediaModel.setAltText(StringUtils.substring(
+					file.getOriginalFilename(), 0,
+					StringUtils.lastIndexOf(file.getOriginalFilename(), ".")));
 			mediaModel.setFolder(createMediaFoler());
 			mediaModel.setMime("image/jpeg");
-			mediaModel.setCatalogVersion(cmsSiteService.getCurrentSite().getDefaultCatalog().getActiveCatalogVersion());
+			mediaModel.setCatalogVersion(cmsSiteService.getCurrentSite()
+					.getDefaultCatalog().getActiveCatalogVersion());
 			modelService.save(mediaModel);
 			mediaService.setStreamForMedia(mediaModel, file.getInputStream());
 			return mediaModel;
-		}
-		catch (MediaIOException | IllegalArgumentException | IOException e)
-		{
+		} catch (MediaIOException | IllegalArgumentException | IOException e) {
 			LOG.error(e.getMessage());
 			throw e;
 		}
@@ -118,12 +114,12 @@ public class DefaultCustomerIdentifyFacade implements CustomerIdentifyFacade{
 	}
 
 	/**
-	 * @param imageConverter the imageConverter to set
+	 * @param imageConverter
+	 *            the imageConverter to set
 	 */
-	public void setImageConverter(Converter<MediaModel, ImageData> imageConverter) {
+	public void setImageConverter(
+			Converter<MediaModel, ImageData> imageConverter) {
 		this.imageConverter = imageConverter;
 	}
-	
-	
-	
+
 }
