@@ -1,0 +1,3 @@
+安国项目环境配置模版
+localextentions.xml来自develop
+properties来自develop并回被properties目录覆盖
