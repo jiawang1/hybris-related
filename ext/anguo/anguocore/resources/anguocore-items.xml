@@ -761,6 +761,31 @@
 		
 				</attributes>
 			</itemtype>
+			<itemtype code="SellerCenterNavigationComponent" autocreate="true"
+				generate="true" extends="SimpleCMSComponent"
+				jaloclass="de.hybris.platform.acceleratorcms.jalo.components.SellerCenterNavigationComponent">
+				<description>It represents seller center navigation bar component that contains cms navigation node.</description>
+				<attributes>
+		
+					<attribute qualifier="title" type="localized:java.lang.String">
+						<persistence type="property" />
+						<modifiers />
+						<description>Localized title of the component.</description>
+					</attribute>
+					<attribute type="java.lang.String" qualifier="styleClass">
+						<persistence type="property" />
+						<modifiers />
+						<description>CSS style class of this bar component.</description>
+					</attribute>
+		
+					<attribute type="CMSNavigationNode" qualifier="navigationNode">
+						<persistence type="property" />
+						<modifiers />
+						<description>The cms navigation node of this navigation component.</description>
+					</attribute>
+		
+				</attributes>
+			</itemtype>
 		</typegroup>
 		
 
