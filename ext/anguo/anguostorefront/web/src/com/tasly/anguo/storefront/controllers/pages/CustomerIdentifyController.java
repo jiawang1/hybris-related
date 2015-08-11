@@ -2,7 +2,9 @@ package com.tasly.anguo.storefront.controllers.pages;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
@@ -32,6 +34,7 @@ import com.tasly.anguo.storefront.forms.validation.AccountNumberValidator;
 import com.tasly.anguo.storefront.forms.validation.EnterpriseAccountValidator;
 import com.tasly.anguo.storefront.forms.validation.IdCardValidator;
 
+import de.hybris.platform.acceleratorstorefrontcommons.annotations.RequireHardLogIn;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractSearchPageController;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
@@ -78,6 +81,7 @@ public class CustomerIdentifyController extends AbstractSearchPageController {
 	 * @throws CMSItemNotFoundException
 	 */
 	@RequestMapping(method = RequestMethod.GET)
+	@RequireHardLogIn
 	public String customerIdentify(final Model model) throws CMSItemNotFoundException
 	{
 		String userType = sessionService.getCurrentSession().getAttribute("userType");
@@ -97,6 +101,7 @@ public class CustomerIdentifyController extends AbstractSearchPageController {
 	 * @throws CMSItemNotFoundException
 	 */
 	@RequestMapping(value="/identifyIdCard", method = RequestMethod.POST)
+	@RequireHardLogIn
 	public String identifyIdCard(final PersonalIdentifyForm form, final BindingResult bindingResult, final Model model,
 			final HttpServletRequest request, final HttpServletResponse response,final RedirectAttributes redirectModel) throws CMSItemNotFoundException
 	{
@@ -124,6 +129,7 @@ public class CustomerIdentifyController extends AbstractSearchPageController {
 	 * @throws CMSItemNotFoundException
 	 */
 	@RequestMapping(value="/identifyAccountNumber", method = RequestMethod.POST)
+	@RequireHardLogIn
 	public String identifyAccountNumber(final PersonalIdentifyForm form, final BindingResult bindingResult, final Model model,
 			final HttpServletRequest request, final HttpServletResponse response,final RedirectAttributes redirectModel) throws CMSItemNotFoundException
 	{
@@ -153,10 +159,12 @@ public class CustomerIdentifyController extends AbstractSearchPageController {
 	 * @throws CMSItemNotFoundException
 	 */
 	@RequestMapping(value="identifyEnterprise", method = RequestMethod.POST)
+	@RequireHardLogIn
 	public String identifyEnterprise(final EnterpriseIdentifyForm form, final BindingResult bindingResult, final Model model,
 			final HttpServletRequest request, final HttpServletResponse response,final RedirectAttributes redirectModel) throws CMSItemNotFoundException
 	{
 		enterpriseAccountValidator.validate(form, bindingResult);
+		setMediaUrls(form);
 		if (bindingResult.hasErrors())
 		{
 			model.addAttribute(form);
@@ -164,7 +172,7 @@ public class CustomerIdentifyController extends AbstractSearchPageController {
 			return ControllerConstants.Views.Pages.CustomerIdentify.EnterpriseIdentify;
 		}
 		updateEnterpriseAccountInfo(form);
-	    return ControllerConstants.Views.Pages.CustomerIdentify.EnterpriseIdentify;
+	    return ControllerConstants.Views.Pages.CustomerIdentify.EnterpriseIdentifySuccess;
 	}
 	
 	private void updateEnterpriseAccountInfo(final EnterpriseIdentifyForm form) {
@@ -177,16 +185,29 @@ public class CustomerIdentifyController extends AbstractSearchPageController {
 		}
 		user.setStatus(CustomerStatus.AUDITING);
 		user.setCompanyName(form.getCompanyName());
+		user.setRegisteredNo(Long.valueOf(form.getRegisteredNo()));
 		user.setPaymentInfos(getPaymentInfo(form));
 		user.setMedias(getLicenses(form));
 		modelService.save(user);
+		modelService.refresh(user);
+	}
+	
+	private void setMediaUrls(final EnterpriseIdentifyForm form) {
+		String[] licenses = form.getLicenses();
+		Map<String, String> licenseUrls = new HashMap<String, String>();
+		for (String code : licenses) {
+			MediaModel media = mediaService.getMedia(code); 
+			licenseUrls.put(media.getURL(),media.getAltText());
+		}
+		form.setLicenseUrls(licenseUrls);
 	}
 	
 	private Set<MediaModel> getLicenses(final EnterpriseIdentifyForm form) {
 		Set<MediaModel> medias = new HashSet<MediaModel>();
 		String[] licenses = form.getLicenses();
 		for (String code : licenses) {
-			medias.add(mediaService.getMedia(code));
+			MediaModel media = mediaService.getMedia(code); 
+			medias.add(media);
 		}
 		return medias;
 	}

@@ -23,6 +23,7 @@
 <form:form method="post" commandName="enterpriseIdentifyForm" action="${contextPath }/identify/identifyEnterprise">
 <input type="hidden" id="CSRFToken" value="${CSRFToken}"/>
 <formElement:formInputBox idKey="companyName" labelKey="identify.companyName" path="companyName" inputCSS="text" mandatory="true"/>
+<formElement:formInputBox idKey="registeredNo" labelKey="identify.registeredNo" path="registeredNo" inputCSS="text" mandatory="true"/>
 <formElement:formInputBox idKey="bank" labelKey="identify.bank" path="bank" inputCSS="text" mandatory="true"/>
 <formElement:formInputBox idKey="accountNumber" labelKey="identify.accountNumber" path="accountNumber" inputCSS="text" mandatory="true"/>
 <formElement:formInputBox idKey="legalRepr" labelKey="identify.legalRepr" path="legalRepr" inputCSS="text" mandatory="true"/>
@@ -32,6 +33,29 @@
 	<div id="docfileuploader">Upload</div>
 			<div class="clearDiv"></div>
 			<div class="uploadedFiles" >
+			<c:if test="${ not empty enterpriseIdentifyForm.licenseUrls }">
+						<table>
+							<tbody>
+								<c:forEach items="${enterpriseIdentifyForm.licenseUrls}" var="item">
+									<tr>
+										<td class="filePath">
+											<a target="_blank" href="${item.key}">${item.value}</a>
+										</td>
+										<td class="fileAction"><button type="button"><spring:theme code="text.delete"></spring:theme></button></td>
+									</tr>
+								</c:forEach>
+							</tbody>
+						</table>
+				</c:if>
+				<c:if test="${ not empty enterpriseIdentifyForm.licenses }">
+						<table>
+							<tbody>
+								<c:forEach items="${enterpriseIdentifyForm.licenses}" var="mediaCode">
+										<input id='licenses' name='licenses' type="hidden" value='${mediaCode}'>
+								</c:forEach>
+							</tbody>
+						</table>
+				</c:if>
 			</div>	
 <div id="licensesDiv" style="display:none;"></div>
 <div id="errorMsg" style="color:red;display:none;"></div>

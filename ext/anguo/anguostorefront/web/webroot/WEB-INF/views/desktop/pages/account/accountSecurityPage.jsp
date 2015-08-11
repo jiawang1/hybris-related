@@ -5,3 +5,21 @@
 <div class="headline">
 	<spring:theme code="text.account.security" text="Security"/>
 </div>
+<table class="account-profile-data">
+	<tr>
+		<td><spring:theme code="profile.title" text="Title"/>: </td>
+		<td>${fn:escapeXml(title.name)}</td>
+	</tr>
+	<tr>
+		<td><spring:theme code="profile.firstName" text="First name"/>: </td>
+		<td>${fn:escapeXml(customerData.firstName)}</td>
+	</tr>
+	<tr>
+		<td><spring:theme code="profile.lastName" text="Last name"/>: </td>
+		<td>${fn:escapeXml(customerData.lastName)}</td>
+	</tr>
+	<tr>
+		<td><spring:theme code="profile.email" text="E-mail"/>: </td>
+		<td>${fn:escapeXml(customerData.displayUid)}</td>
+	</tr>
+</table>
