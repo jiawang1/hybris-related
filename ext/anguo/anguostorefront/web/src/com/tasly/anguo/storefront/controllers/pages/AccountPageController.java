@@ -110,6 +110,8 @@ public class AccountPageController extends AbstractSearchPageController
 	// CMS Pages
 	private static final String ACCOUNT_CMS_PAGE = "account";
 	private static final String PROFILE_CMS_PAGE = "profile";
+	private static final String SECURITY_CMS_PAGE = "security";
+	private static final String IDENTIFY_CMS_PAGE = "identify";
 	private static final String UPDATE_PASSWORD_CMS_PAGE = "updatePassword";
 	private static final String UPDATE_PROFILE_CMS_PAGE = "update-profile";
 	private static final String UPDATE_EMAIL_CMS_PAGE = "update-email";
@@ -400,6 +402,29 @@ public class AccountPageController extends AbstractSearchPageController
 		storeCmsPageInModel(model, getContentPageForLabelOrId(PROFILE_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(PROFILE_CMS_PAGE));
 		model.addAttribute("breadcrumbs", accountBreadcrumbBuilder.getBreadcrumbs("text.account.profile"));
+		model.addAttribute("metaRobots", "noindex,nofollow");
+		return getViewForPage(model);
+	}
+	
+	
+	@RequestMapping(value = "/security", method = RequestMethod.GET)
+	@RequireHardLogIn
+	public String security(final Model model) throws CMSItemNotFoundException
+	{
+		storeCmsPageInModel(model, getContentPageForLabelOrId(SECURITY_CMS_PAGE));
+		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(SECURITY_CMS_PAGE));
+		model.addAttribute("breadcrumbs", accountBreadcrumbBuilder.getBreadcrumbs("text.account.security"));
+		model.addAttribute("metaRobots", "noindex,nofollow");
+		return getViewForPage(model);
+	}
+	
+	@RequestMapping(value = "/identify", method = RequestMethod.GET)
+	@RequireHardLogIn
+	public String identify(final Model model) throws CMSItemNotFoundException
+	{
+		storeCmsPageInModel(model, getContentPageForLabelOrId(IDENTIFY_CMS_PAGE));
+		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(IDENTIFY_CMS_PAGE));
+		model.addAttribute("breadcrumbs", accountBreadcrumbBuilder.getBreadcrumbs("text.account.identify"));
 		model.addAttribute("metaRobots", "noindex,nofollow");
 		return getViewForPage(model);
 	}

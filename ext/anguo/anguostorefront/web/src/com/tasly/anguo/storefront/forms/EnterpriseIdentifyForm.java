@@ -1,13 +1,48 @@
 package com.tasly.anguo.storefront.forms;
 
+import java.util.Map;
 
-public class EnterpriseIdentifyForm  extends AccountIdentifyForm{
+public class EnterpriseIdentifyForm extends AccountIdentifyForm {
 
 	private String companyName;
+
+	private String registeredNo;
 
 	private String legalRepr;
 
 	private String[] licenses;
+
+	private Map<String, String> licenseUrls;
+
+	/**
+	 * @return the licenseUrls
+	 */
+	public Map<String, String> getLicenseUrls() {
+		return licenseUrls;
+	}
+
+	/**
+	 * @param licenseUrls
+	 *            the licenseUrls to set
+	 */
+	public void setLicenseUrls(Map<String, String> licenseUrls) {
+		this.licenseUrls = licenseUrls;
+	}
+
+	/**
+	 * @return the registeredNo
+	 */
+	public String getRegisteredNo() {
+		return registeredNo;
+	}
+
+	/**
+	 * @param registeredNo
+	 *            the registeredNo to set
+	 */
+	public void setRegisteredNo(String registeredNo) {
+		this.registeredNo = registeredNo;
+	}
 
 	/**
 	 * @return the companyName
@@ -47,11 +82,11 @@ public class EnterpriseIdentifyForm  extends AccountIdentifyForm{
 	}
 
 	/**
-	 * @param licenses the licenses to set
+	 * @param licenses
+	 *            the licenses to set
 	 */
 	public void setLicenses(String[] licenses) {
 		this.licenses = licenses;
 	}
-
 
 }

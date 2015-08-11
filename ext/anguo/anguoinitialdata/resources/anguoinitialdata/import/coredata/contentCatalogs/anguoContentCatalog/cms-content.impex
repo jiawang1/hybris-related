@@ -32,8 +32,8 @@ INSERT_UPDATE PageTemplate;$contentCV[unique=true];uid[unique=true];name;fronten
 ;;MultiStepCheckoutSummaryPageTemplate;Multi Step Checkout Summary Page Template;;ContentPage;
 
 ;;ContentPage1Template;Content Page 1 Template;layout/contentLayout1Page;ContentPage
-;;CompanyPageTemplate;Company Page Template;account/accountLayoutPage;ContentPage;false;
-;;AccountPageTemplate;Account Page Template;account/accountLayoutPage;ContentPage;false;
+;;CompanyPageTemplate;Company Page Template;account/accountLayoutPage;ContentPage;true;
+;;AccountPageTemplate;Account Page Template;account/accountLayoutPage;ContentPage;true;
 #An guo buyer center page template
 ;;BuyerCenterPageTemplate;Buyer Center Page Template;buyercenter/buyercenterLayoutPage;ContentPage
 #An guo buyer center page template end
@@ -989,6 +989,8 @@ INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTe
 ;;search;Search Results Page;SearchResultsListPageTemplate;search
 ;;account;Account Page;AccountPageTemplate;account
 ;;profile;Profile Page;AccountPageTemplate;profile
+;;security;Security Page;AccountPageTemplate;security
+;;identify;Identify Page;AccountPageTemplate;identify
 ;;address-book;Address Book Page;AccountPageTemplate;address-book
 ;;add-edit-address;Add Edit Address Page;AccountPageTemplate;add-edit-address
 ;;payment-details;Payment Details Page;AccountPageTemplate;payment-details

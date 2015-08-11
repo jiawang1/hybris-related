@@ -10,7 +10,7 @@ function addSingleFile(obj, data, fieldName, hideName) {
 	$(obj).parent().find("div[class=uploadedFiles]").empty();
 	var $table= $("<table></table>"); 
 	var $tr= $("<tr></tr>"); 
-	var $td1 = $("<td class='fileName'>1. " + fieldName + "</td>"); 
+//	var $td1 = $("<td class='fileName'>1. " + fieldName + "</td>"); 
 	var $td2 = $("<td class='filePath'></td>");
 	var $a1 = $("<a target='_blank' href='"+data.media.url+"'>"+data.media.altText+"</q>");
 	$td2.append($a1);
@@ -18,7 +18,7 @@ function addSingleFile(obj, data, fieldName, hideName) {
 	$td2.append($hide);
 	var $td3 = $("<td class='fileAction'><button type='button'>删除</button></td>"); 
 	$td3.on('click', removeFile);
-	$tr.append($td1);
+//	$tr.append($td1);
 	$tr.append($td2);
 	$tr.append($td3);
 	$table.append($tr);
@@ -34,13 +34,13 @@ function addMultiFile(obj, data) {
 	}else{
 		var $table= $div.children("table"); 
 		var $tr= $("<tr></tr>"); 
-		var $td1 = $("<td class='fileName'>" + ($table.children("tbody").children("tr").length+1) + ". " + data.media.name + "</td>"); 
+//		var $td1 = $("<td class='fileName'>" + ($table.children("tbody").children("tr").length+1) + ". " + data.media.name + "</td>"); 
 		var $td2 = $("<td class='filePath'></td>"); 
 		var $a1 = $("<a target='_blank' href='"+data.media.url+"'>"+data.media.altText+"</q>");
 		$td2.append($a1);
 		var $td3 = $("<td class='fileAction'><button type='button'>删除</button></td>"); 
 		$td3.on('click', removeFile);
-		$tr.append($td1);
+//		$tr.append($td1);
 		$tr.append($td2);
 		$tr.append($td3);
 		$table.append($tr);

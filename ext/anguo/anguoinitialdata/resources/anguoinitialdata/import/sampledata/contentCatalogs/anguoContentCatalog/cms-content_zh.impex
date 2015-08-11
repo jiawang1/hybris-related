@@ -3,6 +3,10 @@ $contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCata
 $picture=media(code, $contentCV);
 $siteResource=jar:com.tasly.anguo.initialdata.setup.InitialDataSystemSetup&/anguoinitialdata/import/sampledata/contentCatalogs/$contentCatalog
 
+
+# Language
+$lang=zh
+
 # Language
 $lang=zh
 
@@ -1796,5 +1800,17 @@ UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang=z
 ;;HomepageTextComponent12;"<b>山药</b><p>￥35元/千克<br/>产品规格：光条/统片/毛条/选片<br/>安国数字中药都</p>"
 
 
-
+UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang=$lang]
+;;AccountAddressBookLink;"地址簿"
+;;AccountHomeLink;"我的帐户"
+;;AccountSecurityLink;"安全服务"
+;;AccountIdentifyLink;"认证信息"
+;;AccountManageAddressLink;"管理送货地址"
+;;AccountManagePaymentDetailsLink;"管理付款详细信息"
+;;AccountOrderHistoryLink;"订单历史记录"
+;;AccountPaymentDetailsLink;"付款详细信息"
+;;AccountPersonalDetailsLink;"更新个人详细信息"
+;;AccountProfileLink;"个人资料"
+;;AccountUpdatePasswordLink;"更改密码"
+;;AccountViewOrderHistoryLink;"查看订单历史记录"
  

@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
@@ -7,10 +6,10 @@
 <%@ taglib prefix="common" tagdir="/WEB-INF/tags/desktop/common" %>
 <%@ taglib prefix="breadcrumb" tagdir="/WEB-INF/tags/desktop/nav/breadcrumb" %>
 <%@ taglib prefix="compressible" tagdir="/WEB-INF/tags/desktop/template/compressible"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
 <title>Enterprise Information Identify</title>
 <link href="${commonResourcePath}/css/uploadfile.css" type="text/css" rel="stylesheet" />
 <compressible:js />
@@ -21,9 +20,10 @@
         <common:globalMessages/>
     </div>
 <div class="form_field-elements js-recaptcha-captchaaddon">
-<form:form method="post" commandName="enterpriseIdentifyForm" action="${contextPath }/identify/identifyEnterprise" enctype="multipart/form-data">
+<form:form method="post" commandName="enterpriseIdentifyForm" action="${contextPath }/identify/identifyEnterprise">
 <input type="hidden" id="CSRFToken" value="${CSRFToken}"/>
 <formElement:formInputBox idKey="companyName" labelKey="identify.companyName" path="companyName" inputCSS="text" mandatory="true"/>
+<formElement:formInputBox idKey="registeredNo" labelKey="identify.registeredNo" path="registeredNo" inputCSS="text" mandatory="true"/>
 <formElement:formInputBox idKey="bank" labelKey="identify.bank" path="bank" inputCSS="text" mandatory="true"/>
 <formElement:formInputBox idKey="accountNumber" labelKey="identify.accountNumber" path="accountNumber" inputCSS="text" mandatory="true"/>
 <formElement:formInputBox idKey="legalRepr" labelKey="identify.legalRepr" path="legalRepr" inputCSS="text" mandatory="true"/>
@@ -33,9 +33,26 @@
 	<div id="docfileuploader">Upload</div>
 			<div class="clearDiv"></div>
 			<div class="uploadedFiles" >
-				<c:if test="${ not empty headOfficeDetailForm.uploadedDocuments }">
+			<c:if test="${ not empty enterpriseIdentifyForm.licenseUrls }">
 						<table>
 							<tbody>
+								<c:forEach items="${enterpriseIdentifyForm.licenseUrls}" var="item">
+									<tr>
+										<td class="filePath">
+											<a target="_blank" href="${item.key}">${item.value}</a>
+										</td>
+										<td class="fileAction"><button type="button"><spring:theme code="text.delete"></spring:theme></button></td>
+									</tr>
+								</c:forEach>
+							</tbody>
+						</table>
+				</c:if>
+				<c:if test="${ not empty enterpriseIdentifyForm.licenses }">
+						<table>
+							<tbody>
+								<c:forEach items="${enterpriseIdentifyForm.licenses}" var="mediaCode">
+										<input id='licenses' name='licenses' type="hidden" value='${mediaCode}'>
+								</c:forEach>
 							</tbody>
 						</table>
 				</c:if>

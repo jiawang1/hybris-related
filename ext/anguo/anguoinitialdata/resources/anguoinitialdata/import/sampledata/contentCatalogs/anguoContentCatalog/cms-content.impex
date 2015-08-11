@@ -112,10 +112,9 @@ INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;url
 ;;AccountViewQuotesLink;My Quotes Link;/my-account/my-quotes;AccountViewQuotesLink;AccountViewQuotesLink
 ;;AccountOrderHistoryLink;Order History Link;/my-account/orders;AccountOrderHistoryLink;AccountOrderHistoryLink
 ;;AccountViewOrderHistoryLink;View Order History Link;/my-account/orders;AccountViewOrderHistoryLink;AccountViewOrderHistoryLink
-;;AccountMyReplenishmentOrdersLink;My Replenishment Orders Link;/my-account/my-replenishment;AccountMyReplenishmentOrdersLink;AccountMyReplenishmentOrdersLink
-;;AccountApprovalDashboardLink;Approval Dashboard Link;/my-account/approval-dashboard;AccountApprovalDashboardLink;AccountApprovalDashboardLink
 ;;AccountViewApprovalDashboardLink;View Approval Dashboard Link;/my-account/approval-dashboard;AccountViewApprovalDashboardLink;AccountViewApprovalDashboardLink
-
+;;AccountSecurityLink;Security Link;/my-account/security;AccountSecurityLink;AccountSecurityLink
+;;AccountIdentifyLink;Identify Link;/my-account/identify;AccountIdentifyLink;AccountIdentifyLink
 
 
 # CMS Link Components - Header Links
@@ -203,6 +202,14 @@ INSERT_UPDATE SearchBoxComponent;$contentCV[unique=true];uid[unique=true];name;&
 INSERT_UPDATE LanguageCurrencyComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef
 ;;LangCurrencyComponent;Language and Currency Component;LangCurrencyComponent
 
+
+INSERT_UPDATE AccountNavigationComponent;$contentCV[unique=true];uid[unique=true];name;navigationNode(&nodeRef);styleClass;&componentRef
+;;AccountLeftNavigationComponent;Account Left Navigation Component;AccountLeftNavNode;;AccountLeftNavigationComponent
+;;AccountProfileNavigationComponent;Account Profile Navigation Component;AccountProfileNavNode;;AccountProfileNavigationComponent
+;;AccountAddressBookNavigationComponent;Account Address Book NavigationComponent;AccountAddressBookNavNode;;AccountAddressBookNavigationComponent
+;;AccountPaymentDetailsNavigationComponent;Account Payment Details Navigation Component;AccountPaymentDetailsNavNode;;AccountPaymentDetailsNavigationComponent
+;;AccountOrderHistoryNavigationComponent;Account Order History Navigation Component;AccountOrderHistoryNavNode;;AccountOrderHistoryNavigationComponent
+
 # Content Slots
 INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(&componentRef)
 ;;SiteLogoSlot;SiteLogoComponent
@@ -225,8 +232,8 @@ INSERT_UPDATE CMSCategoryRestriction;$contentCV[unique=true];uid[unique=true];na
 # CMS User Group Restrictions
 #INSERT_UPDATE CMSUserGroupRestriction;$contentCV[unique=true];uid[unique=true];name;userGroups(uid);includeSubgroups;components(&componentRef)
 #;;MyCompanyLinkAdminGroupRestriction;My Company Link Admin Group Restriction;b2badmingroup;true;MyCompanyBarComponent,MyCompanyLink
-#;;MyAccountLinkCustomerGroupRestriction;My Account Link Customer Group Restriction;b2bcustomergroup;true;AccountAddressBookLink,AccountPaymentDetailsLink,AccountMyQuotesLink,AccountOrderHistoryLink,AccountMyReplenishmentOrdersLink,AccountAddressBookNavigationComponent, AccountPaymentDetailsNavigationComponent, AccountMyQuotesNavigationComponent, AccountOrderHistoryNavigationComponent
-#;;MyAccountLinkApproverGroupRestriction;My Account Link Approver Group Restriction;b2bapprovergroup;true;AccountApprovalDashboardLink, AccountApprovalDashboardNavigationComponent
+#;;MyAccountLinkCustomerGroupRestriction;My Account Link Customer Group Restriction;b2bcustomergroup;true;AccountAddressBookLink,AccountPaymentDetailsLink,AccountMyQuotesLink,AccountOrderHistoryLink,AccountAddressBookNavigationComponent, AccountPaymentDetailsNavigationComponent, AccountMyQuotesNavigationComponent, AccountOrderHistoryNavigationComponent
+#;;MyAccountLinkApproverGroupRestriction;My Account Link Approver Group Restriction;b2bapprovergroup;true;AccountApprovalDashboardNavigationComponent
 
 
 # CMS Navigation Nodes #
@@ -270,12 +277,12 @@ INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;pa
 
 # CMS Navigation Nodes - My Account
 INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;parent(uid, $contentCV);links(&linkRef);&nodeRef
-;AccountLeftNavNode;;Account Left Nav;SiteRootNode;AccountHomeLink,AccountProfileLink,AccountAddressBookLink,AccountPaymentDetailsLink,AccountMyQuotesLink,AccountOrderHistoryLink,AccountMyReplenishmentOrdersLink,AccountApprovalDashboardLink;AccountLeftNavNode
+;AccountLeftNavNode;;Account Left Nav;SiteRootNode;AccountHomeLink,AccountProfileLink,AccountSecurityLink,AccountIdentifyLink,AccountAddressBookLink,AccountPaymentDetailsLink,AccountMyQuotesLink,AccountOrderHistoryLink;AccountLeftNavNode
 ;AccountProfileNavNode;;Profile Nav Node;SiteRootNode;AccountUpdateProfileLink, AccountUpdatePasswordLink;AccountProfileNavNode
 ;AccountAddressBookNavNode;;Address Book Nav Node;SiteRootNode;AccountManageAddressBookLink;AccountAddressBookNavNode
 ;AccountPaymentDetailsNavNode;;Payment Details Nav Node;SiteRootNode;AccountManagePaymentDetailsLink;AccountPaymentDetailsNavNode
 ;AccountMyQuotesNavNode;;My Quotes Nav Node;SiteRootNode;AccountViewQuotesLink;AccountMyQuotesNavNode
-;AccountOrderHistoryNavNode;;Order History Nav Node;SiteRootNode;AccountViewOrderHistoryLink, AccountMyReplenishmentOrdersLink;AccountOrderHistoryNavNode
+;AccountOrderHistoryNavNode;;Order History Nav Node;SiteRootNode;AccountViewOrderHistoryLink;AccountOrderHistoryNavNode
 ;AccountApprovalDashboardNavNode;;Approval Dashboard Nav Node;SiteRootNode;AccountViewApprovalDashboardLink;AccountApprovalDashboardNavNode
 
 # An Guo CMS Navigation Nodes - Buyer Center
@@ -285,7 +292,8 @@ INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;pa
 
 # An Guo CMS Navigation Nodes - Seller Center
 ;SellerCenterStoreCreationNavNode;;SellerCenterStoreCreation;SiteRootNode;SellerCenterStoreCreationLink;SellerCenterStoreCreationNavNode
-
+;AccountSecurityNavNode;;Security Nav Node;SiteRootNode;;AccountSecurityNavNode
+;AccountIdentifyNavNode;;Identify Nav Node;SiteRootNode;;AccountIdentifyNavNode
 # Navigation Bar Component
 INSERT_UPDATE NavigationBarComponent;$contentCV[unique=true];uid[unique=true];name;wrapAfter;link(uid, $contentCV);styleClass;navigationNode(&nodeRef);dropDownLayout(code)[default=AUTO];&componentRef
 ;;PowerDrillsBarComponent;Power Drills Bar Component;10;PowerDrillsCategoryLink;;PowerDrillsNavNode;;PowerDrillsBarComponent
@@ -325,7 +333,8 @@ INSERT_UPDATE BuyerCenterNavigationComponent;$contentCV[unique=true];uid[unique=
 # Navigation Bar Component - Seller Center
 INSERT_UPDATE SellerCenterNavigationComponent;$contentCV[unique=true];uid[unique=true];name;navigationNode(&nodeRef);styleClass;&componentRef
 ;;SellerCenterLeftNavigationComponent;Seller Center Left Navigation Component;SellerCenterStoreCreationNavNode;;SellerCenterLeftNavigationComponent
-
+;;AccountSecurityNavigationComponent;Account Security Navigation Component;AccountSecurityNavNode;;AccountSecurityNavigationComponent
+;;AccountIdentifyNavigationComponent;Account Identify Navigation Component;AccountIdentifyNavNode;;AccountIdentifyNavigationComponent
 
 # Account Navigation Bar Component - My Company
 INSERT_UPDATE AccountNavigationCollectionComponent;$contentCV[unique=true];uid[unique=true];name;components(uid, $contentCV);&componentRef
@@ -333,7 +342,7 @@ INSERT_UPDATE AccountNavigationCollectionComponent;$contentCV[unique=true];uid[u
 
 # Account Navigation Bar Component - My Account
 INSERT_UPDATE AccountNavigationCollectionComponent;$contentCV[unique=true];uid[unique=true];name;components(uid, $contentCV);&componentRef
-;;AccountHomepageComponent;Account Homepage Component;AccountProfileNavigationComponent, AccountAddressBookNavigationComponent, AccountPaymentDetailsNavigationComponent, AccountMyQuotesNavigationComponent, AccountOrderHistoryNavigationComponent, AccountApprovalDashboardNavigationComponent;AccountHomepageComponent
+;;AccountHomepageComponent;Account Homepage Component;AccountProfileNavigationComponent,AccountSecurityNavigationComponent,AccountIdentifyNavigationComponent,AccountAddressBookNavigationComponent, AccountPaymentDetailsNavigationComponent, AccountMyQuotesNavigationComponent, AccountOrderHistoryNavigationComponent, AccountApprovalDashboardNavigationComponent;AccountHomepageComponent
 
 
 # Preview Image for use in the CMS Cockpit for special ContentPages
@@ -594,6 +603,8 @@ INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];positi
 ;;SideContent-Account;SideContent;my-account;SideContent-Account;;;
 ;;SideContent-AccountHome;SideContent;account;SideContent-Account;;;
 ;;SideContent-Profile;SideContent;profile;SideContent-Account;;;
+;;SideContent-Security;SideContent;security;SideContent-Account;;;
+;;SideContent-Identify;SideContent;identify;SideContent-Account;;;
 ;;SideContent-AddressBook;SideContent;address-book;SideContent-Account;;;
 ;;SideContent-AddressBookEdit;SideContent;add-edit-address;SideContent-Account;;;
 ;;SideContent-PaymentDetails;SideContent;payment-details;SideContent-Account;;;
@@ -607,6 +618,18 @@ INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];positi
 ;;SideContent-UserGroups;SideContent;manageUsergroups;SideContent-Company;;;
 ;;SideContent-UnitApprovers;SideContent;manageUnitApprovers;SideContent-Company;;;
 
+
+
+
+
+
+
+
+
+
+
+
+################################################################
 
 
 
@@ -1419,10 +1442,8 @@ INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];positi
 ;;Section2A-Homepage;Section2A;;Section2ASlot-Homepage
 ;;Section2B-Homepage;Section2B;;Section2BSlot-Homepage
 
-
 INSERT_UPDATE JspIncludeComponent;$contentCV[unique=true];uid[unique=true];name;page;actions(uid,$contentCV);&componentRef
 ;;NewCustomerLoginComponent;New Customer Login Component;accountNewCustomerLogin.jsp;;NewCustomerLoginComponent
-
 
 ### Customer Login
 INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef);;;
@@ -1431,6 +1452,26 @@ INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;c
 INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='login'];contentSlot(uid,$contentCV)[unique=true];;;
 ;;RightContentSlot-login;RightContentSlot;;RightContentSlot-login;;;
 
+
+INSERT_UPDATE JspIncludeComponent;$contentCV[unique=true];uid[unique=true];name;page;actions(uid,$contentCV);&componentRef
+;;AccountProfileComponent;Account Profile Component;accountProfilePage.jsp;;AccountProfileComponent
+;;AccountSecurityComponent;Account Security Component;accountSecurityPage.jsp;;AccountSecurityComponent
+;;AccountIdentifyComponent;Account Identify Component;accountIdentifyPage.jsp;;AccountIdentifyComponent
+
+# ContentSlot
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef);;;
+;;SideContent-profile;Side Content Slot for My Account Profile;true;AccountLeftNavigationComponent;;;
+;;BodyContent-profile;Body Content Slot for My Account Profile;true;AccountProfileComponent;;;
+;;BodyContent-security;Body Content Slot for My Account Security;true;AccountSecurityComponent;;;
+;;SideContent-security;Side Content Slot for My Account Security;true;AccountLeftNavigationComponent;;;
+;;BodyContent-identify;Body Content Slot for My Account Identify;true;AccountIdentifyComponent;;;
+;;SideContent-identify;Side Content Slot for My Account Identify;true;AccountLeftNavigationComponent;;;
+
+# ContentSlotForPage
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='profile'];contentSlot(uid,$contentCV)[unique=true];;;
+;;BodyContent-profile;BodyContent;;BodyContent-profile;;;
+;;BodyContent-security;BodyContent;security;BodyContent-security;;;
+;;BodyContent-identify;BodyContent;identify;BodyContent-identify;;;
 
 
 # An guo buyer center ContentSlotForPage start
@@ -1454,5 +1495,28 @@ INSERT_UPDATE ToBuyAction;$contentCV[unique=true];uid[unique=true];url;name;rest
 # add ToByAction in ProductAddToCartComponent by Jinli for AM-257
 INSERT_UPDATE ProductAddToCartComponent;$contentCV[unique=true];uid[unique=true];name;actions(&actionRef);&componentRef
 ;;AddToCart;Product Add To Cart;ToBuyAction;AddToCart
+
+################################################### Store Related Component Start #####################################################
+
+INSERT_UPDATE StoreHeaderCMSComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef
+;;StoreHeaderCMSComponent;Store Header CMS Component;StoreHeaderCMSComponent
+
+INSERT_UPDATE SearchInStoreComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef
+;;SearchInStoreComponent;Search In Store Component;SearchInStoreComponent
+
+INSERT_UPDATE ProductRefinementComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef
+;;RefinementFacetComponent;Product Refinement Facet Component;RefinementFacetComponent
+
+INSERT_UPDATE ProductGridComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef
+;;ProductGridComponent;Product Grid Component;ProductGridComponent
+
+# Content Slots
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(&componentRef)
+;;ProductLeftRefinements;RefinementFacetComponent
+;;StoreStandardHomeHeaderSlot;StoreHeaderCMSComponent
+;;SearchInStoreSlot;SearchInStoreComponent
+;;ProductGridSlot;ProductGridComponent
+
+################################################### Store Related Component End   #####################################################
 
 

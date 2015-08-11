@@ -12,4 +12,5 @@ public interface CustomerIdentifyFacade {
 	 * @return
 	 */
 	public ImageData uploadEnterpriseLiceneses(final MultipartFile uploadFile)  throws Exception;
+	
 }
