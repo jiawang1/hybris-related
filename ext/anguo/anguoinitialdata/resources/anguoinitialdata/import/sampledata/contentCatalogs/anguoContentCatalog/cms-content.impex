@@ -556,6 +556,8 @@ INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];positi
 ;;SideContent-Account;SideContent;my-account;SideContent-Account;;;
 ;;SideContent-AccountHome;SideContent;account;SideContent-Account;;;
 ;;SideContent-Profile;SideContent;profile;SideContent-Account;;;
+;;SideContent-Security;SideContent;security;SideContent-Account;;;
+;;SideContent-Identify;SideContent;identify;SideContent-Account;;;
 ;;SideContent-AddressBook;SideContent;address-book;SideContent-Account;;;
 ;;SideContent-AddressBookEdit;SideContent;add-edit-address;SideContent-Account;;;
 ;;SideContent-PaymentDetails;SideContent;payment-details;SideContent-Account;;;

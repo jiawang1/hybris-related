@@ -1802,6 +1802,7 @@ UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang=$
 ;;AccountAddressBookLink;"地址簿"
 ;;AccountHomeLink;"我的帐户"
 ;;AccountSecurityLink;"安全服务"
+;;AccountIdentifyLink;"认证信息"
 ;;AccountManageAddressLink;"管理送货地址"
 ;;AccountManagePaymentDetailsLink;"管理付款详细信息"
 ;;AccountOrderHistoryLink;"订单历史记录"
