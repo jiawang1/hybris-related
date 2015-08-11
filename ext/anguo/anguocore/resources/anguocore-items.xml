@@ -188,6 +188,15 @@
             </targetElement>
         </relation>
    <!-- add for anguostore and product end -->
+        <relation code="SCNavigationComponent2CMSNavigationNodeRelation" generate="true" localized="false" autocreate="true">
+            <description></description>
+            <sourceElement type="SellerCenterNavigationComponent" qualifier="sellerCenterNavigationComponent" cardinality="one">
+                <modifiers read="true" write="true" optional="true" search="true"/>
+            </sourceElement>
+            <targetElement type="CMSNavigationNode" qualifier="navigationNode" cardinality="many">
+                <modifiers read="true" write="true" optional="true" search="true"/>
+            </targetElement>
+        </relation>   
 	<!-- relation for anguostore end -->		
 	</relations>
 	
@@ -766,7 +775,6 @@
 				jaloclass="de.hybris.platform.acceleratorcms.jalo.components.SellerCenterNavigationComponent">
 				<description>It represents seller center navigation bar component that contains cms navigation node.</description>
 				<attributes>
-		
 					<attribute qualifier="title" type="localized:java.lang.String">
 						<persistence type="property" />
 						<modifiers />
@@ -777,13 +785,6 @@
 						<modifiers />
 						<description>CSS style class of this bar component.</description>
 					</attribute>
-		
-					<attribute type="CMSNavigationNode" qualifier="navigationNode">
-						<persistence type="property" />
-						<modifiers />
-						<description>The cms navigation node of this navigation component.</description>
-					</attribute>
-		
 				</attributes>
 			</itemtype>
 		</typegroup>
