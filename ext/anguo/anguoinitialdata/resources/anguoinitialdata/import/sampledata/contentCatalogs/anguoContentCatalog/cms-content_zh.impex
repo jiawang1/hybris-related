@@ -53,6 +53,7 @@ UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang=z
  ;;ReleaseRightLink;"发布中药材"
 #An guo start
  ;;BuyerCenterOrderManagementLink;"买家订单管理"
+ ;;SellerCenterStoreCreationLink;"卖家店铺申请／修改信息"
 #An guo end
 
 # Lightbox Banner for Mini Cart (banner is not localizable so we must create a separate banner per language)
@@ -105,6 +106,7 @@ UPDATE CMSNavigationNode;$contentCV[unique=true];uid[unique=true];title[lang=zh]
  ;;SiteRootNode;"站点根目录"
 #An guo navigation start
  ;;BuyerCenterOrderManagementNavNode;"买家订单管理"
+ ;;SellerCenterStoreCreationNavNode;"卖家店铺申请／修改信息"
 #An guo navigation end
 
 # Powertools Terms and Conditions Page

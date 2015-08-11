@@ -38,6 +38,9 @@ INSERT_UPDATE PageTemplate;$contentCV[unique=true];uid[unique=true];name;fronten
 ;;BuyerCenterPageTemplate;Buyer Center Page Template;buyercenter/buyercenterLayoutPage;ContentPage
 #An guo buyer center page template end
 
+#seller center
+;;SellerCenterPageTemplate;Seller Center Page Template;sellercenter/sellercenterLayoutPage;ContentPage
+
 # Templates without a frontendTemplateName
 ;;CartPageTemplate;Cart Page Template;;ContentPage
 ;;LoginPageTemplate;Login Page Template;;ContentPage
@@ -943,6 +946,19 @@ INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];po
 
 #An guo contentslots buyer center page template start
 INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='BuyerCenterPageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;SiteLogo-BuyerCenterPage;SiteLogo;;SiteLogoSlot;true
+;;HomepageLink-BuyerCenterPage;HomepageNavLink;;HomepageNavLinkSlot;true
+;;NavigationBar-BuyerCenterPage;NavigationBar;;NavigationBarSlot;true
+;;MiniCart-BuyerCenterPage;MiniCart;;MiniCartSlot;true
+;;Footer-BuyerCenterPage;Footer;;FooterSlot;true
+;;HeaderLinks-BuyerCenterPage;HeaderLinks;;HeaderLinksSlot;true
+;;SearchBox-BuyerCenterPage;SearchBox;;SearchBoxSlot;true
+;;TopHeaderSlot-BuyerCenterPage;TopHeaderSlot;;TopHeaderSlot;true
+;;BottomHeaderSlot-BuyerCenterPage;BottomHeaderSlot;;BottomHeaderSlot;true
+#An guo contentslots buyer center page template end
+
+#seller center
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='SellerCenterPageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
 ;;SiteLogo-SellerCenterPage;SiteLogo;;SiteLogoSlot;true
 ;;HomepageLink-SellerCenterPage;HomepageNavLink;;HomepageNavLinkSlot;true
 ;;NavigationBar-SellerCenterPage;NavigationBar;;NavigationBarSlot;true
@@ -952,8 +968,6 @@ INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];po
 ;;SearchBox-SellerCenterPage;SearchBox;;SearchBoxSlot;true
 ;;TopHeaderSlot-SellerCenterPage;TopHeaderSlot;;TopHeaderSlot;true
 ;;BottomHeaderSlot-SellerCenterPage;BottomHeaderSlot;;BottomHeaderSlot;true
-#An guo contentslots buyer center page template end
-
 
 # Create Content Pages
 
@@ -1077,4 +1091,6 @@ INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTe
 ;;buyercenterordermanage;Order Manage Page For Buyer Center;BuyerCenterPageTemplate;buyercenterordermanage
 #An guo buyer center page end
 
-
+#seller center
+;;sellercenter;Seller Center Page;SellerCenterPageTemplate;sellercenter
+;;sellercenterstorecreation;Store Creation Page For Seller Center;SellerCenterPageTemplate;sellercenterstorecreation

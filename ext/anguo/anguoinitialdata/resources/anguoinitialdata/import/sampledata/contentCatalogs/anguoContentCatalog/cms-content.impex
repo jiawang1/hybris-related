@@ -130,6 +130,8 @@ INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;url
 INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;&linkRef;&componentRef;target(code)[default='sameWindow']
 ;;BuyerCenterOrderManagementLink;Buyer Center Order Management Link;/anguo-buyercenter/orders;BuyerCenterOrderManagementLink;BuyerCenterOrderManagementLink;;;;
 
+# An guo CMS Link Components - Seller Center
+;;SellerCenterStoreCreationLink;Seller Center Store Creation Link;/anguo-sellercenter/show-anguostore-manage;SellerCenterStoreCreationLink;SellerCenterStoreCreationLink;;;;
 
 # CMS User Group Restrictions
 #INSERT_UPDATE CMSUserGroupRestriction;$contentCV[unique=true];uid[unique=true];name;userGroups(uid);includeSubgroups;components(&componentRef)
@@ -281,6 +283,9 @@ INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;pa
 ;BuyerCenterOrderManagementNavNode;;BuyerCenterOrderManagement;SiteRootNode;BuyerCenterOrderManagementLink;BuyerCenterOrderManagementNavNode
 # An Guo CMS Navigation Nodes - Buyer Center End
 
+# An Guo CMS Navigation Nodes - Seller Center
+;SellerCenterStoreCreationNavNode;;SellerCenterStoreCreation;SiteRootNode;SellerCenterStoreCreationLink;SellerCenterStoreCreationNavNode
+
 # Navigation Bar Component
 INSERT_UPDATE NavigationBarComponent;$contentCV[unique=true];uid[unique=true];name;wrapAfter;link(uid, $contentCV);styleClass;navigationNode(&nodeRef);dropDownLayout(code)[default=AUTO];&componentRef
 ;;PowerDrillsBarComponent;Power Drills Bar Component;10;PowerDrillsCategoryLink;;PowerDrillsNavNode;;PowerDrillsBarComponent
@@ -317,6 +322,9 @@ INSERT_UPDATE AccountNavigationComponent;$contentCV[unique=true];uid[unique=true
 INSERT_UPDATE BuyerCenterNavigationComponent;$contentCV[unique=true];uid[unique=true];name;navigationNode(&nodeRef);styleClass;&componentRef
 ;;BuyerCenterLeftNavigationComponent;Buyer Center Left Navigation Component;BuyerCenterOrderManagementNavNode;;BuyerCenterLeftNavigationComponent
 
+# Navigation Bar Component - Seller Center
+INSERT_UPDATE SellerCenterNavigationComponent;$contentCV[unique=true];uid[unique=true];name;navigationNode(&nodeRef);styleClass;&componentRef
+;;SellerCenterLeftNavigationComponent;Seller Center Left Navigation Component;SellerCenterStoreCreationNavNode;;SellerCenterLeftNavigationComponent
 
 
 # Account Navigation Bar Component - My Company
@@ -554,16 +562,23 @@ INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;c
 
 INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef);;;
 ;;SideContent-BuyerCenter;Side Content Slot for Buyer Center Homepage;true;BuyerCenterLeftNavigationComponent;;;
+#Seller Center
+;;SideContent-SellerCenter;Side Content Slot for Seller Center Homepage;true;SellerCenterLeftNavigationComponent;;;
 
 ###### Buyer Center Order Manage Page #######
 
 INSERT_UPDATE JspIncludeComponent;$contentCV[unique=true];uid[unique=true];name;page;actions(uid,$contentCV);&componentRef
 ;;BuyerCenterOrderManagementComponent;Buyer Center Order Management Component;anguoOrderHistoryPage.jsp;;BuyerCenterOrderManagementComponent
+###### Seller Center Store Creation Page #######
+;;SellerCenterStoreCreationComponent;Seller Center Store Creation Component;anguoStoreApplyPage.jsp;;SellerCenterStoreCreationComponent
 
 # ContentSlot
 INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef);;;
 ;;SideContent-buyerCenterOM;Side Content Slot for Buyer Center Order Management;true;BuyerCenterLeftNavigationComponent;;;
 ;;BodyContent-buyerCenterOM;Body Content Slot for Buyer Center Order Management;true;BuyerCenterOrderManagementComponent;;;
+## Seller Center Store Creation
+;;SideContent-sellerCenterSC;Side Content Slot for Seller Center Store Creation;true;SellerCenterLeftNavigationComponent;;;
+;;BodyContent-sellerCenterSC;Body Content Slot for Seller Center Store Creation;true;SellerCenterStoreCreationComponent;;;
 
 ################################################################
 
@@ -1419,14 +1434,18 @@ INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];positi
 
 
 # An guo buyer center ContentSlotForPage start
-INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='buyercenter'];contentSlot(uid,$contentCV)[unique=true];;;
-;;SideContent-BuyerCenter;SideContent;;SideContent-BuyerCenter;;;
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true];contentSlot(uid,$contentCV)[unique=true];;;
+;;SideContent-BuyerCenter;SideContent;buyercenter;SideContent-BuyerCenter;;;
+#Seller Center
+;;SideContent-SellerCenter;SideContent;sellercenter;SideContent-SellerCenter;;;
 
-
-INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='buyercenterordermanage'];contentSlot(uid,$contentCV)[unique=true];;;
-;;SideContent-buyerCenterOM;SideContent;;SideContent-buyerCenterOM;;;
-;;BodyContent-buyerCenterOM;BodyContent;;BodyContent-buyerCenterOM;;;
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true];contentSlot(uid,$contentCV)[unique=true];;;
+;;SideContent-buyerCenterOM;SideContent;buyercenterordermanage;SideContent-buyerCenterOM;;;
+;;BodyContent-buyerCenterOM;BodyContent;buyercenterordermanage;BodyContent-buyerCenterOM;;;
 # An guo buyer center ContentSlotForPage end
+#Seller Center
+;;SideContent-sellerCenterSC;SideContent;sellercenterstorecreation;SideContent-sellerCenterSC;;;
+;;BodyContent-sellerCenterSC;BodyContent;sellercenterstorecreation;BodyContent-sellerCenterSC;;;
 
 # add ToBuyAction by Jinli for AM-257
 INSERT_UPDATE ToBuyAction;$contentCV[unique=true];uid[unique=true];url;name;restrictions(uid,$contentCV);&actionRef
